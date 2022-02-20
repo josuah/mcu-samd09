@@ -13,7 +13,7 @@ SDK_CPPFLAGS = -I${SDK}
 all: firmware.elf firmware.asm
 
 clean:
-	rm -f *.o *.asm *.elf *.map *.hex *.bin *.uf2
+	rm -f *.o ${SDK}/*.o *.asm *.elf *.map *.hex *.bin *.uf2
 
 ocd:
 	${OPENOCD}
