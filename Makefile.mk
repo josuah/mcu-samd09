@@ -1,3 +1,11 @@
+OBJCOPY = arm-none-eabi-objcopy
+OBJDUMP = arm-none-eabi-objdump
+CC = arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -msoft-float --specs=nosys.specs
+AR = arm-none-eabi-ar
+GDB = arm-none-eabi-gdb
+OPENOCD = openocd -c 'set CPUTAPID 0x0bc11477' -f interface/stlink.cfg -f target/at91samdXX.cfg
+
+SDK_OBJ = ${SDK}/init.o
 SDK_CFLAGS = -ffunction-sections -fdata-sections
 SDK_LDFLAGS = -T${SDK}/script.ld -nostartfiles -static -Wl,--gc-sections
 SDK_CPPFLAGS = -I${SDK}
@@ -11,7 +19,7 @@ ocd:
 	${OPENOCD}
 
 gdb:
-	gdb -s ${SDK}/script.gdb
+	${GDB} -x ${SDK}/script.gdb
 
 firmware.elf: ${SDK_OBJ} ${OBJ}
 	${CC} ${SDK_LDFLAGS} ${LDFLAGS} -o $@ ${SDK_OBJ} ${OBJ}
