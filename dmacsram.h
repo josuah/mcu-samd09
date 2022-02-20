@@ -5,7 +5,7 @@
 struct zmcu_dmacsram {
 
 	/* 0x00: Block Transfer Control */
-	uint32_t volatile BTCTRL;
+	uint16_t volatile BTCTRL;
 #define DMACSRAM_BTCTRL_STEPSIZE(x)			((x) << 13)
 #define DMACSRAM_BTCTRL_STEPSEL			(1u << 12)
 #define DMACSRAM_BTCTRL_DSTINC			(1u << 11)
@@ -16,7 +16,7 @@ struct zmcu_dmacsram {
 #define DMACSRAM_BTCTRL_VALID			(1u << 0)
 
 	/* 0x02: Block Transfer Count */
-	uint32_t volatile BTCNT;
+	uint16_t volatile BTCNT;
 #define DMACSRAM_BTCNT_BTCNT(x)			((x) << 0)
 
 	/* 0x04: Transfer Source Address */

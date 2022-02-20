@@ -32,26 +32,26 @@ struct zmcu_i2c {
 	uint8_t volatile RESERVED22[0x14-0x08];
 
 	/* 0x14: */
-	uint32_t volatile INTENCLR;
+	uint16_t volatile INTENCLR;
 #define I2C_INTENCLR_DRDY			(1u << 2)
 #define I2C_INTENCLR_AMATCH			(1u << 1)
 #define I2C_INTENCLR_PREC			(1u << 0)
 
 	/* 0x16: */
-	uint32_t volatile INTENSET;
+	uint16_t volatile INTENSET;
 #define I2C_INTENSET_ERROR			(1u << 7)
 #define I2C_INTENSET_DRDY			(1u << 2)
 #define I2C_INTENSET_AMATCH			(1u << 1)
 #define I2C_INTENSET_PREC			(1u << 0)
 
 	/* 0x18: Interrupt Flag Status and Clear */
-	uint32_t volatile INTFLAG;
+	uint16_t volatile INTFLAG;
 #define I2C_INTFLAG_DRDY			(1u << 2)
 #define I2C_INTFLAG_AMATCH			(1u << 1)
 #define I2C_INTFLAG_PREC			(1u << 0)
 
 	/* 0x1A: Status */
-	uint32_t volatile STATUS;
+	uint16_t volatile STATUS;
 #define I2C_STATUS_HS				(1u << 10)
 #define I2C_STATUS_SEXTTOUT			(1u << 9)
 #define I2C_STATUS_CLKHOLD			(1u << 7)

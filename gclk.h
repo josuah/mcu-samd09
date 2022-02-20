@@ -7,15 +7,15 @@
 struct zmcu_gclk {
 
 	/* 0x00: Control */
-	uint32_t volatile CTRL;
+	uint8_t volatile CTRL;
 #define GCLK_CTRL_SWRST				(1u << 0)
 
 	/* 0x01: Status */
-	uint32_t volatile STATUS;
+	uint8_t volatile STATUS;
 #define GCLK_STATUS_SYNCBUSY			(1u << 7)
 
 	/* 0x02: Generic Clock Control */
-	uint32_t volatile CLKCTRL;
+	uint16_t volatile CLKCTRL;
 #define GCLK_CLKCTRL_WRTLOCK			(1u << 15)
 #define GCLK_CLKCTRL_CLKEN			(1u << 14)
 #define GCLK_CLKCTRL_GEN(x)			((x) << 8)

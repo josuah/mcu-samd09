@@ -38,20 +38,20 @@ struct zmcu_usart {
 	uint8_t volatile RESERVED14[0x0C-0x08];
 
 	/* 0x0C: Baud */
-	uint32_t volatile BAUD;
+	uint16_t volatile BAUD;
 #define USART_BAUD_BAUD(x)			((x) << 0)
 #define USART_BAUD_FP(x)			((x) << 13)
 #define USART_BAUD_BAUD(x)			((x) << 0)
 
 	/* 0x0E: Receive Pulse Length Register */
-	uint32_t volatile RXPL;
+	uint8_t volatile RXPL;
 #define USART_RXPL_RXPL(x)			((x) << 0)
 
-	/* 0x12 */
-	uint8_t volatile RESERVED15[0x14-0x12];
+	/* 0x0F */
+	uint8_t volatile RESERVED15[0x14-0x0F];
 
 	/* 0x14: */
-	uint32_t volatile INTENCLR;
+	uint16_t volatile INTENCLR;
 #define USART_INTENCLR_RXBRK			(1u << 5)
 #define USART_INTENCLR_CTSIC			(1u << 4)
 #define USART_INTENCLR_RXS			(1u << 3)
@@ -60,7 +60,7 @@ struct zmcu_usart {
 #define USART_INTENCLR_DRE			(1u << 0)
 
 	/* 0x16: */
-	uint32_t volatile INTENSET;
+	uint16_t volatile INTENSET;
 #define USART_INTENSET_ERROR			(1u << 7)
 #define USART_INTENSET_CTSIC			(1u << 4)
 #define USART_INTENSET_RXS			(1u << 3)
@@ -68,7 +68,7 @@ struct zmcu_usart {
 #define USART_INTENSET_DRE			(1u << 0)
 
 	/* 0x18: Interrupt Flag Status and Clear */
-	uint32_t volatile INTFLAG;
+	uint16_t volatile INTFLAG;
 #define USART_INTFLAG_RXBRK			(1u << 5)
 #define USART_INTFLAG_CTSIC			(1u << 4)
 #define USART_INTFLAG_RXS			(1u << 3)
@@ -77,7 +77,7 @@ struct zmcu_usart {
 #define USART_INTFLAG_DRE			(1u << 0)
 
 	/* 0x1A: Status */
-	uint32_t volatile STATUS;
+	uint16_t volatile STATUS;
 #define USART_STATUS_COLL			(1u << 5)
 #define USART_STATUS_ISF			(1u << 4)
 #define USART_STATUS_CTS			(1u << 3)
@@ -94,14 +94,14 @@ struct zmcu_usart {
 	uint8_t volatile RESERVED16[0x28-0x20];
 
 	/* 0x28: Data */
-	uint32_t volatile DATA;
+	uint16_t volatile DATA;
 #define USART_DATA_DATA(x)			((x) << 0)
 
-	/* 0x2C */
-	uint8_t volatile RESERVED17[0x30-0x2C];
+	/* 0x2A */
+	uint8_t volatile RESERVED17[0x30-0x2A];
 
 	/* 0x30: Debug Control */
-	uint32_t volatile DBGCTRL;
+	uint8_t volatile DBGCTRL;
 #define USART_DBGCTRL_DBGSTOP			(1u << 0)
 
 };

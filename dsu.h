@@ -7,7 +7,7 @@
 struct zmcu_dsu {
 
 	/* 0x00: Control */
-	uint32_t volatile CTRL;
+	uint8_t volatile CTRL;
 #define DSU_CTRL_SMSA				(1u << 7)
 #define DSU_CTRL_ARR				(1u << 6)
 #define DSU_CTRL_CE				(1u << 4)
@@ -16,7 +16,7 @@ struct zmcu_dsu {
 #define DSU_CTRL_SWRST				(1u << 0)
 
 	/* 0x01: Status A */
-	uint32_t volatile STATUSA;
+	uint8_t volatile STATUSA;
 #define DSU_STATUSA_PERR			(1u << 4)
 #define DSU_STATUSA_FAIL			(1u << 3)
 #define DSU_STATUSA_BERR			(1u << 2)
@@ -24,7 +24,7 @@ struct zmcu_dsu {
 #define DSU_STATUSA_DONE			(1u << 0)
 
 	/* 0x02: Status B */
-	uint32_t volatile STATUSB;
+	uint8_t volatile STATUSB;
 #define DSU_STATUSB_HPE				(1u << 4)
 #define DSU_STATUSB_DCCDx(x)			((x) << 2)
 #define DSU_STATUSB_DBGPRES			(1u << 1)

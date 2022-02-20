@@ -101,7 +101,7 @@ struct zmcu_dmac {
 	uint8_t volatile RESERVED10[0x3F-0x3C];
 
 	/* 0x3F: Channel ID */
-	uint32_t volatile CHID;
+	uint8_t volatile CHID;
 #define DMAC_CHID_ID(x)				((x) << 0)
 
 	/* 0x40: Channel Control A */
@@ -123,25 +123,25 @@ struct zmcu_dmac {
 	uint8_t volatile RESERVED11[0x4C-0x48];
 
 	/* 0x4C: Channel Interrupt Enable Clear */
-	uint32_t volatile CHINTENCLR;
+	uint8_t volatile CHINTENCLR;
 #define DMAC_CHINTENCLR_SUSP			(1u << 2)
 #define DMAC_CHINTENCLR_TCMPL			(1u << 1)
 #define DMAC_CHINTENCLR_TERR			(1u << 0)
 
 	/* 0x4D: Channel Interrupt Enable Set */
-	uint32_t volatile CHINTENSET;
+	uint8_t volatile CHINTENSET;
 #define DMAC_CHINTENSET_SUSP			(1u << 2)
 #define DMAC_CHINTENSET_TCMPL			(1u << 1)
 #define DMAC_CHINTENSET_TERR			(1u << 0)
 
 	/* 0x4E: Channel Interrupt Flag Status and Clear */
-	uint32_t volatile CHINTFLAG;
+	uint8_t volatile CHINTFLAG;
 #define DMAC_CHINTFLAG_SUSP			(1u << 2)
 #define DMAC_CHINTFLAG_TCMPL			(1u << 1)
 #define DMAC_CHINTFLAG_TERR			(1u << 0)
 
 	/* 0x4F: Channel Status */
-	uint32_t volatile CHSTATUS;
+	uint8_t volatile CHSTATUS;
 #define DMAC_CHSTATUS_FERR			(1u << 2)
 #define DMAC_CHSTATUS_BUSY			(1u << 1)
 #define DMAC_CHSTATUS_PEND			(1u << 0)

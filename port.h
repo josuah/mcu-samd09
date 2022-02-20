@@ -52,18 +52,18 @@ struct zmcu_port {
 	uint8_t volatile RESERVED12[0x30-0x2C];
 
 	/* 0x30: Peripheral Multiplexing n */
-	uint32_t volatile PMUXnm;
-#define PORT_PMUXnm_PMUXO(x)			((x) << 4)
-#define PORT_PMUXnm_PMUXE(x)			((x) << 0)
+	uint8_t volatile PMUX[16];
+#define PORT_PMUX_O(x)				((x) << 4)
+#define PORT_PMUX_E(x)				((x) << 0)
 
 	/* 0x34 */
 	uint8_t volatile RESERVED13[0x40-0x34];
 
 	/* 0x40: Pin Configuration n */
-	uint32_t volatile PINCFGnm;
-#define PORT_PINCFGnm_DRVSTR			(1u << 6)
-#define PORT_PINCFGnm_PULLEN			(1u << 2)
-#define PORT_PINCFGnm_INEN			(1u << 1)
-#define PORT_PINCFGnm_PMUXEN			(1u << 0)
+	uint8_t volatile PINCFG[16];
+#define PORT_PINCFG_DRVSTR			(1u << 6)
+#define PORT_PINCFG_PULLEN			(1u << 2)
+#define PORT_PINCFG_INEN			(1u << 1)
+#define PORT_PINCFG_PMUXEN			(1u << 0)
 
 };

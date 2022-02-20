@@ -42,13 +42,13 @@ struct zmcu_spi {
 	uint8_t volatile RESERVED19[0x14-0x10];
 
 	/* 0x14: */
-	uint32_t volatile INTENCLR;
+	uint16_t volatile INTENCLR;
 #define SPI_INTENCLR_RXC			(1u << 2)
 #define SPI_INTENCLR_TXC			(1u << 1)
 #define SPI_INTENCLR_DRE			(1u << 0)
 
 	/* 0x16: */
-	uint32_t volatile INTENSET;
+	uint16_t volatile INTENSET;
 #define SPI_INTENSET_ERROR			(1u << 7)
 #define SPI_INTENSET_SSL			(1u << 3)
 #define SPI_INTENSET_RXC			(1u << 2)
@@ -56,7 +56,7 @@ struct zmcu_spi {
 #define SPI_INTENSET_DRE			(1u << 0)
 
 	/* 0x18: Interrupt Flag Status and Clear */
-	uint32_t volatile INTFLAG;
+	uint16_t volatile INTFLAG;
 #define SPI_INTFLAG_ERROR			(1u << 7)
 #define SPI_INTFLAG_SSL				(1u << 3)
 #define SPI_INTFLAG_RXC				(1u << 2)
@@ -64,7 +64,7 @@ struct zmcu_spi {
 #define SPI_INTFLAG_DRE				(1u << 0)
 
 	/* 0x1A: Status */
-	uint32_t volatile STATUS;
+	uint16_t volatile STATUS;
 #define SPI_STATUS_BUFOVF			(1u << 2)
 
 	/* 0x1C: Synchronization Busy */
@@ -80,12 +80,12 @@ struct zmcu_spi {
 #define SPI_ADDR_ADDRMASK(x)			((x) << 16)
 #define SPI_ADDR_ADDR(x)			((x) << 0)
 
-	/* 0x28: Data */
+	/* 0x16: Data */
 	uint32_t volatile DATA;
 #define SPI_DATA_DATA(x)			((x) << 0)
 
-	/* 0x2C */
-	uint8_t volatile RESERVED21[0x30-0x2C];
+	/* 0x2A */
+	uint8_t volatile RESERVED21[0x30-0x2A];
 
 	/* 0x30: Debug Control */
 	uint32_t volatile DBGCTRL;
