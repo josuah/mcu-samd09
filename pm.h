@@ -20,7 +20,7 @@ struct zmcu_pm {
 #define PM_EXTCTRL_SETDIS			(1u << 0)
 
 	/* 0x06 */
-	uint32_t volatile RESERVED5[(0x08-0x06)/4];
+	uint8_t volatile RESERVED5[0x08-0x06];
 
 	/* 0x08: CPU Clock Select */
 	uint32_t volatile CPUSEL;
@@ -39,7 +39,7 @@ struct zmcu_pm {
 #define PM_APBCSEL_APBCDIV(x)			((x) << 0)
 
 	/* 0x0F */
-	uint32_t volatile RESERVED6[(0x14-0x0F)/4];
+	uint8_t volatile RESERVED6[0x14-0x0F];
 
 	/* 0x14: AHB Mask */
 	uint32_t volatile AHBMASK;
@@ -79,7 +79,7 @@ struct zmcu_pm {
 #define PM_APBCMASK_PAC2			(1u << 0)
 
 	/* 0x24 */
-	uint32_t volatile RESERVED7[(0x34-0x24)/4];
+	uint8_t volatile RESERVED7[0x34-0x24];
 
 	/* 0x34: Interrupt Enable Clear */
 	uint32_t volatile INTENCLR;

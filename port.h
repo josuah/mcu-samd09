@@ -7,47 +7,37 @@
 struct zmcu_port {
 
 	/* 0x00: Data Direction */
-	uint32_t volatile DIRn;
-#define PORT_DIRn_DIR(x)			((x) << 0)
+	uint32_t volatile DIR;
 
 	/* 0x04: Data Direction Clear */
-	uint32_t volatile DIRCLRn;
-#define PORT_DIRCLRn_DIRCLR(x)			((x) << 0)
+	uint32_t volatile DIRCLR;
 
 	/* 0x08: Data Direction Set */
-	uint32_t volatile DIRSETn;
-#define PORT_DIRSETn_DIRSET(x)			((x) << 0)
+	uint32_t volatile DIRSET;
 
 	/* 0x0C: Data Direction Toggle */
-	uint32_t volatile DIRTGLn;
-#define PORT_DIRTGLn_DIRTGL(x)			((x) << 0)
+	uint32_t volatile DIRTGL;
 
 	/* 0x10: Data Output Value */
-	uint32_t volatile OUTn;
-#define PORT_OUTn_OUT(x)			((x) << 0)
+	uint32_t volatile OUT;
 
 	/* 0x14: Data Output Value Clear */
-	uint32_t volatile OUTCLRn;
-#define PORT_OUTCLRn_OUTCLR(x)			((x) << 0)
+	uint32_t volatile OUTCLR;
 
 	/* 0x18: Data Output Value Set */
-	uint32_t volatile OUTSETn;
-#define PORT_OUTSETn_OUTSET(x)			((x) << 0)
+	uint32_t volatile OUTSET;
 
 	/* 0x1C: Data Output Value Toggle */
-	uint32_t volatile OUTTGLn;
-#define PORT_OUTTGLn_OUTTGL(x)			((x) << 0)
+	uint32_t volatile OUTTGL;
 
 	/* 0x20: Data Input Value */
-	uint32_t volatile INn;
-#define PORT_INn_IN(x)				((x) << 0)
+	uint32_t volatile IN;
 
 	/* 0x24: Control */
-	uint32_t volatile CTRLn;
-#define PORT_CTRLn_SAMPLING(x)			((x) << 0)
+	uint32_t volatile CTRL;
 
 	/* 0x28: Write Configuration */
-	uint32_t volatile WRCONFIGn;
+	uint32_t volatile WRCONFIG;
 #define PORT_WRCONFIGn_HWSEL			(1u << 31)
 #define PORT_WRCONFIGn_WRPINCFG			(1u << 30)
 #define PORT_WRCONFIGn_WRPMUX			(1u << 28)
@@ -67,7 +57,7 @@ struct zmcu_port {
 #define PORT_PMUXnm_PMUXE(x)			((x) << 0)
 
 	/* 0x34 */
-	uint32_t volatile RESERVED13[(0x40-0x34)/4];
+	uint8_t volatile RESERVED13[0x40-0x34];
 
 	/* 0x40: Pin Configuration n */
 	uint32_t volatile PINCFGnm;

@@ -7,23 +7,23 @@
 struct zmcu_adc {
 
 	/* 0x00: Control A */
-	uint32_t volatile CTRLA;
+	uint8_t volatile CTRLA;
 #define ADC_CTRLA_RUNSTDBY			(1u << 2)
 #define ADC_CTRLA_ENABLE			(1u << 1)
 #define ADC_CTRLA_SWRST				(1u << 0)
 
 	/* 0x01: Reference Control */
-	uint32_t volatile REFCTRL;
+	uint8_t volatile REFCTRL;
 #define ADC_REFCTRL_REFCOMP			(1u << 7)
 #define ADC_REFCTRL_REFSEL(x)			((x) << 0)
 
 	/* 0x02: Average Control */
-	uint32_t volatile AVGCTRL;
+	uint8_t volatile AVGCTRL;
 #define ADC_AVGCTRL_ADJRES(x)			((x) << 4)
 #define ADC_AVGCTRL_SAMPLENUM(x)		((x) << 0)
 
 	/* 0x03: Sampling Time Control */
-	uint32_t volatile SAMPCTRL;
+	uint8_t volatile SAMPCTRL;
 #define ADC_SAMPCTRL_SAMPLEN(x)			((x) << 0)
 
 	/* 0x04: Control B */
@@ -53,39 +53,39 @@ struct zmcu_adc {
 #define ADC_INPUTCTRL_MUXPOS(x)			((x) << 0)
 
 	/* 0x14: Event Control */
-	uint32_t volatile EVCTRL;
+	uint16_t volatile EVCTRL;
 #define ADC_EVCTRL_WINMONEO			(1u << 5)
 #define ADC_EVCTRL_RESRDYEO			(1u << 4)
 #define ADC_EVCTRL_SYNCEI			(1u << 1)
 #define ADC_EVCTRL_STARTEI			(1u << 0)
 
 	/* 0x16: Interrupt Enable Clear */
-	uint32_t volatile INTENCLR;
+	uint8_t volatile INTENCLR;
 #define ADC_INTENCLR_SYNCRDY			(1u << 3)
 #define ADC_INTENCLR_WINMON			(1u << 2)
 #define ADC_INTENCLR_OVERRUN			(1u << 1)
 #define ADC_INTENCLR_RESRDY			(1u << 0)
 
 	/* 0x17: Interrupt Enable Set */
-	uint32_t volatile INTENSET;
+	uint8_t volatile INTENSET;
 #define ADC_INTENSET_SYNCRDY			(1u << 3)
 #define ADC_INTENSET_WINMON			(1u << 2)
 #define ADC_INTENSET_OVERRUN			(1u << 1)
 #define ADC_INTENSET_RESRDY			(1u << 0)
 
 	/* 0x18: Interrupt Flag Status and Clear */
-	uint32_t volatile INTFLAG;
+	uint8_t volatile INTFLAG;
 #define ADC_INTFLAG_SYNCRDY			(1u << 3)
 #define ADC_INTFLAG_WINMON			(1u << 2)
 #define ADC_INTFLAG_OVERRUN			(1u << 1)
 #define ADC_INTFLAG_RESRDY			(1u << 0)
 
 	/* 0x19: Status */
-	uint32_t volatile STATUS;
+	uint8_t volatile STATUS;
 #define ADC_STATUS_SYNCBUSY			(1u << 7)
 
 	/* 0x1A: Result */
-	uint32_t volatile RESULT;
+	uint16_t volatile RESULT;
 #define ADC_RESULT_RESULT(x)			((x) << 0)
 
 	/* 0x1C: Window Monitor Lower Threshold */
@@ -97,20 +97,20 @@ struct zmcu_adc {
 #define ADC_WINUT_WINUT(x)			((x) << 0)
 
 	/* 0x24: Gain Correction */
-	uint32_t volatile GAINCORR;
+	uint16_t volatile GAINCORR;
 #define ADC_GAINCORR_GAINCORR(x)		((x) << 0)
 
 	/* 0x26: Offset Correction */
-	uint32_t volatile OFFSETCORR;
+	uint16_t volatile OFFSETCORR;
 #define ADC_OFFSETCORR_OFFSETCORR(x)		((x) << 0)
 
 	/* 0x28: Calibration */
-	uint32_t volatile CALIB;
+	uint16_t volatile CALIB;
 #define ADC_CALIB_BIAS_CAL(x)			((x) << 8)
 #define ADC_CALIB_LINEARITY_CAL(x)		((x) << 0)
 
 	/* 0x2A: Debug Control */
-	uint32_t volatile DBGCTRL;
+	uint8_t volatile DBGCTRL;
 #define ADC_DBGCTRL_DBGRUN			(1u << 0)
 
 };

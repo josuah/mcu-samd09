@@ -29,7 +29,7 @@ struct zmcu_i2c {
 #define I2C_CTRLB_SMEN				(1u << 8)
 
 	/* 0x08 */
-	uint32_t volatile RESERVED22[(0x14-0x08)/4];
+	uint8_t volatile RESERVED22[0x14-0x08];
 
 	/* 0x14: */
 	uint32_t volatile INTENCLR;
@@ -172,7 +172,7 @@ struct zmcu_i2c {
 #define I2C_DATA_DATA(x)			((x) << 0)
 
 	/* 0x1C */
-	uint32_t volatile RESERVED27[(0x30-0x1C)/4];
+	uint8_t volatile RESERVED27[0x30-0x1C];
 
 	/* 0x30: Debug Control */
 	uint32_t volatile DBGCTRL;

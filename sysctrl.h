@@ -165,7 +165,7 @@ struct zmcu_sysctrl {
 #define SYSCTRL_BOD33_ENABLE			(1u << 1)
 
 	/* 0x38 */
-	uint32_t volatile RESERVED8[(0x40-0x38)/4];
+	uint8_t volatile RESERVED8[0x40-0x38];
 
 	/* 0x40: Voltage References System (VREF) Control */
 	uint32_t volatile VREF;

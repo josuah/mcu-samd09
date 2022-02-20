@@ -60,14 +60,14 @@ struct zmcu_dsu {
 #define DSU_DID_DEVSEL(x)			((x) << 0)
 
 	/* 0x1C */
-	uint32_t volatile RESERVED1[(0xF0-0x1C)/4];
+	uint8_t volatile RESERVED1[0xF0-0x1C];
 
 	/* 0xF0: Device Configuration */
 	uint32_t volatile DCFGn;
 #define DSU_DCFGn_DCFG(x)			((x) << 0)
 
 	/* 0xF4 */
-	uint32_t volatile RESERVED2[(0x1000-0xF4)/4];
+	uint8_t volatile RESERVED2[0x1000-0xF4];
 
 	/* 0x1000: Coresight ROM Table Entry n */
 	uint32_t volatile ENTRYn;
@@ -83,7 +83,7 @@ struct zmcu_dsu {
 #define DSU_END_END(x)				((x) << 0)
 
 	/* 0x100C */
-	uint32_t volatile RESERVED4[(0x1FCC-0x100C)/4];
+	uint8_t volatile RESERVED4[0x1FCC-0x100C];
 
 	/* 0x1FCC: Coresight ROM Table Memory Type */
 	uint32_t volatile MEMTYPE;

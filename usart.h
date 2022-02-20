@@ -48,7 +48,7 @@ struct zmcu_usart {
 #define USART_RXPL_RXPL(x)			((x) << 0)
 
 	/* 0x12 */
-	uint32_t volatile RESERVED15[(0x14-0x12)/4];
+	uint8_t volatile RESERVED15[0x14-0x12];
 
 	/* 0x14: */
 	uint32_t volatile INTENCLR;
@@ -91,7 +91,7 @@ struct zmcu_usart {
 #define USART_SYNCBUSY_SWRST			(1u << 0)
 
 	/* 0x20 */
-	uint32_t volatile RESERVED16[(0x28-0x20)/4];
+	uint8_t volatile RESERVED16[0x28-0x20];
 
 	/* 0x28: Data */
 	uint32_t volatile DATA;

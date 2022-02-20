@@ -7,14 +7,14 @@
 struct zmcu_dmac {
 
 	/* 0x00: Control */
-	uint32_t volatile CTRL;
+	uint16_t volatile CTRL;
 #define DMAC_CTRL_LVLENx(x)			((x) << 8)
 #define DMAC_CTRL_CRCENABLE			(1u << 2)
 #define DMAC_CTRL_DMAENABLE			(1u << 1)
 #define DMAC_CTRL_SWRST				(1u << 0)
 
 	/* 0x02: CRC Control */
-	uint32_t volatile CRCCTRL;
+	uint16_t volatile CRCCTRL;
 #define DMAC_CRCCTRL_CRCSRC(x)			((x) << 8)
 #define DMAC_CRCCTRL_CRCPOLY(x)			((x) << 2)
 #define DMAC_CRCCTRL_CRCBEATSIZE(x)		((x) << 0)
@@ -28,16 +28,16 @@ struct zmcu_dmac {
 #define DMAC_CRCCHKSUM_CRCCHKSUM(x)		((x) << 0)
 
 	/* 0x0C: CRC Status */
-	uint32_t volatile CRCSTATUS;
+	uint8_t volatile CRCSTATUS;
 #define DMAC_CRCSTATUS_CRCZERO			(1u << 1)
 #define DMAC_CRCSTATUS_CRCBUSY			(1u << 0)
 
 	/* 0x0D: Debug Control */
-	uint32_t volatile DBGCTRL;
+	uint8_t volatile DBGCTRL;
 #define DMAC_DBGCTRL_DBGRUN			(1u << 0)
 
 	/* 0x0E: QOS Control */
-	uint32_t volatile QOSCTRL;
+	uint16_t volatile QOSCTRL;
 #define DMAC_QOSCTRL_DQOS(x)			((x) << 4)
 #define DMAC_QOSCTRL_FQOS(x)			((x) << 2)
 #define DMAC_QOSCTRL_WRBQOS(x)			((x) << 0)
@@ -58,7 +58,7 @@ struct zmcu_dmac {
 #define DMAC_PRICTRL0_LVLPRI0(x)		((x) << 0)
 
 	/* 0x18 */
-	uint32_t volatile RESERVED9[(0x20-0x18)/4];
+	uint8_t volatile RESERVED9[0x20-0x18];
 
 	/* 0x20: Interrupt Pending */
 	uint32_t volatile INTPEND;
@@ -98,7 +98,7 @@ struct zmcu_dmac {
 #define DMAC_WRBADDR_WRBADDR(x)			((x) << 0)
 
 	/* 0x3C */
-	uint32_t volatile RESERVED10[(0x3F-0x3C)/4];
+	uint8_t volatile RESERVED10[0x3F-0x3C];
 
 	/* 0x3F: Channel ID */
 	uint32_t volatile CHID;
