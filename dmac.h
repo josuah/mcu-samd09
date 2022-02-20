@@ -120,7 +120,7 @@ struct zmcu_dmac {
 #define DMAC_CHCTRLB_EVACT(x)			((x) << 0)
 
 	/* 0x48 */
-	uint32_t volatile RESERVED11;
+	uint8_t volatile RESERVED11[0x4C-0x48];
 
 	/* 0x4C: Channel Interrupt Enable Clear */
 	uint32_t volatile CHINTENCLR;

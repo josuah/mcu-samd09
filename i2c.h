@@ -68,7 +68,7 @@ struct zmcu_i2c {
 #define I2C_SYNCBUSY_SWRST			(1u << 0)
 
 	/* 0x20 */
-	uint32_t volatile RESERVED23;
+	uint8_t volatile RESERVED23[0x24-0x20];
 
 	/* 0x24: Address */
 	uint32_t volatile ADDR;
@@ -106,7 +106,7 @@ struct zmcu_i2c {
 #define I2C_CTRLB_SMEN				(1u << 8)
 
 	/* 0x08 */
-	uint32_t volatile RESERVED24;
+	uint8_t volatile RESERVED24[0x0C-0x08];
 
 	/* 0x0C: Baud Rate */
 	uint32_t volatile BAUD;
@@ -116,7 +116,7 @@ struct zmcu_i2c {
 #define I2C_BAUD_BAUD(x)			((x) << 0)
 
 	/* 0x10 */
-	uint32_t volatile RESERVED25;
+	uint8_t volatile RESERVED25[0x14-0x10];
 
 	/* 0x14: */
 	uint32_t volatile INTENCLR;
@@ -152,7 +152,7 @@ struct zmcu_i2c {
 #define I2C_SYNCBUSY_SWRST			(1u << 0)
 
 	/* 0x20 */
-	uint32_t volatile RESERVED26;
+	uint8_t volatile RESERVED26[0x24-0x20];
 
 	/* 0x24: Address */
 	uint32_t volatile ADDR;

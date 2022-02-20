@@ -32,14 +32,14 @@ struct zmcu_spi {
 #define SPI_CTRLB_CHSIZE(x)			((x) << 0)
 
 	/* 0x08 */
-	uint32_t volatile RESERVED18;
+	uint8_t volatile RESERVED18[0x0C-0x08];
 
 	/* 0x0C: Baud Rate */
 	uint32_t volatile BAUD;
 #define SPI_BAUD_BAUD(x)			((x) << 0)
 
 	/* 0x10 */
-	uint32_t volatile RESERVED19;
+	uint8_t volatile RESERVED19[0x14-0x10];
 
 	/* 0x14: */
 	uint32_t volatile INTENCLR;
@@ -73,7 +73,7 @@ struct zmcu_spi {
 #define SPI_SYNCBUSY_SWRST			(1u << 0)
 
 	/* 0x20 */
-	uint32_t volatile RESERVED20;
+	uint8_t volatile RESERVED20[0x24-0x20];
 
 	/* 0x24: Address */
 	uint32_t volatile ADDR;
@@ -85,7 +85,7 @@ struct zmcu_spi {
 #define SPI_DATA_DATA(x)			((x) << 0)
 
 	/* 0x2C */
-	uint32_t volatile RESERVED21;
+	uint8_t volatile RESERVED21[0x30-0x2C];
 
 	/* 0x30: Debug Control */
 	uint32_t volatile DBGCTRL;

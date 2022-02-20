@@ -35,7 +35,7 @@ struct zmcu_usart {
 #define USART_CTRLB_CHSIZE(x)			((x) << 0)
 
 	/* 0x08 */
-	uint32_t volatile RESERVED14;
+	uint8_t volatile RESERVED14[0x0C-0x08];
 
 	/* 0x0C: Baud */
 	uint32_t volatile BAUD;
@@ -98,7 +98,7 @@ struct zmcu_usart {
 #define USART_DATA_DATA(x)			((x) << 0)
 
 	/* 0x2C */
-	uint32_t volatile RESERVED17;
+	uint8_t volatile RESERVED17[0x30-0x2C];
 
 	/* 0x30: Debug Control */
 	uint32_t volatile DBGCTRL;

@@ -49,7 +49,7 @@ struct zmcu_port {
 #define PORT_WRCONFIGn_PINMASK(x)		((x) << 0)
 
 	/* 0x2C */
-	uint32_t volatile RESERVED12;
+	uint8_t volatile RESERVED12[0x30-0x2C];
 
 	/* 0x30: Peripheral Multiplexing n */
 	uint32_t volatile PMUXnm;

@@ -48,7 +48,7 @@ struct zmcu_dsu {
 #define DSU_DCCn_DATA(x)			((x) << 0)
 
 	/* 0x14 */
-	uint32_t volatile RESERVED0;
+	uint8_t volatile RESERVED0[0x18-0x14];
 
 	/* 0x18: Device Identification */
 	uint32_t volatile DID;
@@ -76,7 +76,7 @@ struct zmcu_dsu {
 #define DSU_ENTRYn_EPRES			(1u << 0)
 
 	/* 0x1004 */
-	uint32_t volatile RESERVED3;
+	uint8_t volatile RESERVED3[0x1008-0x1004];
 
 	/* 0x1008: Coresight ROM Table End */
 	uint32_t volatile END;
