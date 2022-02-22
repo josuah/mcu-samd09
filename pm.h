@@ -14,32 +14,37 @@ struct zmcu_pm {
 	/* 0x01: Sleep Mode */
 	uint8_t volatile SLEEP;
 #define PM_SLEEP_IDLE(x)			((x) << 0)
+#define PM_SLEEP_IDLE_MASK			PM_SLEEP_IDLE(B00000011)
 
 	/* 0x02: External Reset Controller */
 	uint8_t volatile EXTCTRL;
 #define PM_EXTCTRL_SETDIS			(1u << 0)
 
-	/* 0x06 */
-	uint8_t volatile RESERVED0[0x08-0x06];
+	/* 0x03 */
+	uint8_t volatile RESERVED0[0x08-0x03];
 
 	/* 0x08: CPU Clock Select */
 	uint8_t volatile CPUSEL;
 #define PM_CPUSEL_CPUDIV(x)			((x) << 0)
+#define PM_CPUSEL_CPUDIV_MASK			PM_CPUSEL_CPUDIV(B00000111)
 
 	/* 0x09: APBA Clock Select */
 	uint8_t volatile APBASEL;
 #define PM_APBASEL_APBADIV(x)			((x) << 0)
+#define PM_APBASEL_APBADIV_MASK			PM_APBASEL_APBADIV(B00000111)
 
 	/* 0x0A: APBB Clock Select */
 	uint8_t volatile APBBSEL;
 #define PM_APBBSEL_APBBDIV(x)			((x) << 0)
+#define PM_APBBSEL_APBBDIV_MASK			PM_APBBSEL_APBBDIV(B00000111)
 
 	/* 0x0B: APBC Clock Select */
 	uint8_t volatile APBCSEL;
 #define PM_APBCSEL_APBCDIV(x)			((x) << 0)
+#define PM_APBCSEL_APBCDIV_MASK			PM_APBCSEL_APBCDIV(B00000111)
 
-	/* 0x0F */
-	uint8_t volatile RESERVED1[0x14-0x0F];
+	/* 0x0C */
+	uint8_t volatile RESERVED1[0x14-0x0C];
 
 	/* 0x14: AHB Mask */
 	uint32_t volatile AHBMASK;
@@ -69,7 +74,7 @@ struct zmcu_pm {
 #define PM_APBBMASK_PAC1			(1u << 0)
 
 	/* 0x20: APBC Mask */
-	uint32_t volatile APBCMASK;
+	uint8_t volatile APBCMASK;
 #define PM_APBCMASK_ADC				(1u << 8)
 #define PM_APBCMASK_TC2				(1u << 7)
 #define PM_APBCMASK_TC1				(1u << 6)
@@ -78,8 +83,8 @@ struct zmcu_pm {
 #define PM_APBCMASK_EVSYS			(1u << 1)
 #define PM_APBCMASK_PAC2			(1u << 0)
 
-	/* 0x24 */
-	uint8_t volatile RESERVED2[0x34-0x24];
+	/* 0x21 */
+	uint8_t volatile RESERVED2[0x34-0x21];
 
 	/* 0x34: Interrupt Enable Clear */
 	uint8_t volatile INTENCLR;
@@ -109,3 +114,4 @@ struct zmcu_pm {
 #define PM_RCAUSE_POR				(1u << 0)
 
 };
+

@@ -19,6 +19,7 @@ struct zmcu_eic {
 	uint8_t volatile NMICTRL;
 #define EIC_NMICTRL_NMIFILTEN			(1u << 3)
 #define EIC_NMICTRL_NMISENSE(x)			((x) << 0)
+#define EIC_NMICTRL_NMISENSE_MASK		EIC_NMICTRL_NMISENSE(B00000111)
 
 	/* 0x03: Non-Maskable Interrupt Flag Status and Clear */
 	uint8_t volatile NMIFLAG;
@@ -27,24 +28,30 @@ struct zmcu_eic {
 	/* 0x04: Event Control */
 	uint32_t volatile EVCTRL;
 #define EIC_EVCTRL_EXTINTEOx(x)			((x) << 0)
+#define EIC_EVCTRL_EXTINTEOx_MASK		EIC_EVCTRL_EXTINTEOx(B11111111)
 
 	/* 0x08: Interrupt Enable Clear */
 	uint32_t volatile INTENCLR;
 #define EIC_INTENCLR_EXTINTx(x)			((x) << 0)
+#define EIC_INTENCLR_EXTINTx_MASK		EIC_INTENCLR_EXTINTx(B11111111)
 
 	/* 0x0C: Interrupt Enable Set */
 	uint32_t volatile INTENSET;
 #define EIC_INTENSET_EXTINTx(x)			((x) << 0)
+#define EIC_INTENSET_EXTINTx_MASK		EIC_INTENSET_EXTINTx(B11111111)
 
 	/* 0x10: Interrupt Flag Status and Clear */
 	uint32_t volatile INTFLAG;
 #define EIC_INTFLAG_EXTINTx(x)			((x) << 0)
+#define EIC_INTFLAG_EXTINTx_MASK		EIC_INTFLAG_EXTINTx(B11111111)
 
 	/* 0x14: Wake-Up Enable */
 	uint32_t volatile WAKEUP;
 #define EIC_WAKEUP_WAKEUPENx(x)			((x) << 0)
+#define EIC_WAKEUP_WAKEUPENx_MASK		EIC_WAKEUP_WAKEUPENx(B11111111)
 
 	/* 0x18: Configuration n */
 	uint32_t volatile CONFIG;
 
 };
+

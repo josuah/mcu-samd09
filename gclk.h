@@ -22,7 +22,9 @@ struct zmcu_gclk {
 #define GCLK_CLKCTRL_WRTLOCK			(1u << 15)
 #define GCLK_CLKCTRL_CLKEN			(1u << 14)
 #define GCLK_CLKCTRL_GEN(x)			((x) << 8)
+#define GCLK_CLKCTRL_GEN_MASK			GCLK_CLKCTRL_GEN(B00001111)
 #define GCLK_CLKCTRL_ID(x)			((x) << 0)
+#define GCLK_CLKCTRL_ID_MASK			GCLK_CLKCTRL_ID(B00111111)
 #define GCLK_CLKCTRL_ID_MASK			GCLK_CLKCTRL_ID(B00111111)
 #define GCLK_CLKCTRL_ID_DFLL48M_REF		0x00
 #define GCLK_CLKCTRL_ID_DPLL			0x01
@@ -55,6 +57,7 @@ struct zmcu_gclk {
 #define GCLK_GENCTRL_GENEN			(1u << 16)
 #define GCLK_GENCTRL_SRC(x)			((x) << 8)
 #define GCLK_GENCTRL_SRC_MASK			GCLK_GENCTRL_SRC(B00011111)
+#define GCLK_GENCTRL_SRC_MASK			GCLK_GENCTRL_SRC(B00011111)
 #define GCLK_GENCTRL_SRC_XOSC			0x00
 #define GCLK_GENCTRL_SRC_GCLKIN			0x01
 #define GCLK_GENCTRL_SRC_GCLKGEN1		0x02
@@ -65,10 +68,13 @@ struct zmcu_gclk {
 #define GCLK_GENCTRL_SRC_DFLL48M		0x07
 #define GCLK_GENCTRL_SRC_FDPLL96M		0x08
 #define GCLK_GENCTRL_ID(x)			((x) << 0)
+#define GCLK_GENCTRL_ID_MASK			GCLK_GENCTRL_ID(B00001111)
 
 	/* 0x08: Generic Clock Generator Division */
 	uint32_t volatile GENDIV;
 #define GCLK_GENDIV_DIV(x)			((x) << 8)
+#define GCLK_GENDIV_DIV_MASK			GCLK_GENDIV_DIV(0xFFFF)
 #define GCLK_GENDIV_ID(x)			((x) << 0)
+#define GCLK_GENDIV_ID_MASK			GCLK_GENDIV_ID(B00001111)
 
 };
