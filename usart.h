@@ -16,7 +16,12 @@ struct zmcu_usart {
 #define USART_CTRLA_FORM(x)			((x) << 24)
 #define USART_CTRLA_SAMPA(x)			((x) << 22)
 #define USART_CTRLA_RXPO(x)			((x) << 20)
+#define USART_CTRLA_RXPO_MASK			USART_CTRAL_RXPO(B00000011)
 #define USART_CTRLA_TXPO(x)			((x) << 16)
+#define USART_CTRLA_TXPO_MASK			USART_CTRLA_TXPO(B00000011)
+#define USART_CTRLA_TXPO_TX0_CK1		0x0
+#define USART_CTRLA_TXPO_TX2_CK3		0x1
+#define USART_CTRLA_TXPO_TX0_RTS2_CTS3		0x2
 #define USART_CTRLA_SAMPR(x)			((x) << 13)
 #define USART_CTRLA_IBON			(1u << 8)
 #define USART_CTRLA_RUNSTDBY			(1u << 7)

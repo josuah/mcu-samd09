@@ -54,6 +54,15 @@ struct zmcu_port {
 	/* 0x30: Peripheral Multiplexing, use PMUX[pin/2] */
 	uint8_t volatile PMUX[16];
 #define PORT_PMUX(pin, x)			((x) << ((pin) & 1) * 4)
+#define PORT_PMUX_MASK(pin)			PORT_PMUX((pin), B00001111)
+#define PORT_PMUX_FN_A				0
+#define PORT_PMUX_FN_B				1
+#define PORT_PMUX_FN_C				2
+#define PORT_PMUX_FN_D				3
+#define PORT_PMUX_FN_E				4
+#define PORT_PMUX_FN_F				5
+#define PORT_PMUX_FN_G				6
+#define PORT_PMUX_FN_H				7
 
 	/* 0x34 */
 	uint8_t volatile RESERVED13[0x40-0x34];
