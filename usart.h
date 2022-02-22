@@ -122,4 +122,3 @@ struct zmcu_usart {
 #define USART_DBGCTRL_DBGSTOP			(1u << 0)
 
 };
-

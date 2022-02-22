@@ -49,4 +49,3 @@ struct zmcu_wdt {
 #define WDT_CLEAR_CLEAR_MASK			WDT_CLEAR_CLEAR(B11111111)
 
 };
-

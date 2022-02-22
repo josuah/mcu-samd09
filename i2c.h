@@ -226,4 +226,3 @@ struct zmcu_i2c_master {
 #define I2CM_DBGCTRL_DBGSTOP			(1u << 0)
 
 };
-

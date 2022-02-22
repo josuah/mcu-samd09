@@ -54,4 +54,3 @@ struct zmcu_eic {
 	uint32_t volatile CONFIG;
 
 };
-

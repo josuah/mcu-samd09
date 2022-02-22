@@ -114,4 +114,3 @@ struct zmcu_pm {
 #define PM_RCAUSE_POR				(1u << 0)
 
 };
-

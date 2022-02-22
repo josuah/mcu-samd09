@@ -134,4 +134,3 @@ struct zmcu_tc {
 #define TC_CCx_CC(x)				((x) << 0)
 
 };
-

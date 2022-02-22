@@ -63,4 +63,3 @@ struct zmcu_evsys {
 #define EVSYS_INTFLAG_OVRx_MASK			EVSYS_INTFLAG_OVRx(B00111111)
 
 };
-
