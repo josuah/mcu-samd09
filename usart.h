@@ -18,6 +18,10 @@ struct zmcu_usart {
 #define USART_CTRLA_SAMPA_MASK			USART_CTRLA_SAMPA(B00000011)
 #define USART_CTRLA_RXPO(x)			((x) << 20)
 #define USART_CTRLA_RXPO_MASK			USART_CTRLA_RXPO(B00000011)
+#define USART_CTRLA_RXPO_RX0			0x0
+#define USART_CTRLA_RXPO_RX1			0x1
+#define USART_CTRLA_RXPO_RX2			0x2
+#define USART_CTRLA_RXPO_RX3			0x3
 #define USART_CTRLA_TXPO(x)			((x) << 16)
 #define USART_CTRLA_TXPO_MASK			USART_CTRLA_TXPO(B00000011)
 #define USART_CTRLA_TXPO_TX0_CK1		0x0
@@ -109,6 +113,7 @@ struct zmcu_usart {
 
 	/* 0x1C: Synchronization Busy */
 	uint32_t volatile SYNCBUSY;
+#define USART_SYNCBUSY_CTRLB			(1u << 2)
 #define USART_SYNCBUSY_ENABLE			(1u << 1)
 #define USART_SYNCBUSY_SWRST			(1u << 0)
 
