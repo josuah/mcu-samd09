@@ -60,7 +60,7 @@ main(void)
 	  | GCLK_CLKCTRL_GEN(GCLK_GENID_GCLKGEN0)
 	  | GCLK_CLKCTRL_ID(GCLK_CLKID_SERCOM0_CORE);
 
-	while (GCLK->STATUS & GCLK_STATUS_SYNCBUSY);
+	while (GCLK->STATUS.SYNCBUSY);
 
 	/* wake-up the USART */
 	PM->APBCMASK |= PM_APBCMASK_SERCOM0;
@@ -84,7 +84,13 @@ main(void)
 	USART0->CTRLB = USART_CTRLB_RXEN | USART_CTRLB_TXEN;
 	while (USART0->SYNCBUSY & USART_SYNCBUSY_CTRLB);
 
-	for (;;) USART0->DATA = '.';
+	for (;;) {
+		USART0->DATA = '.';
+		port_pin_set(LED);
+		for (uint32_t volatile i = 0; i < 0xFFFF; i++);
+		port_pin_clear(LED);
+		for (uint32_t volatile i = 0; i < 0xFFFF; i++);
+	}
 
 	return 0;
 }

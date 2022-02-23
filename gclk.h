@@ -7,12 +7,15 @@
 struct zmcu_gclk {
 
 	/* 0x00: Control */
-	uint8_t volatile CTRL;
-#define GCLK_CTRL_SWRST				(1u << 0)
+	struct zmcu_gclk_ctrl {
+		uint8_t volatile SWRST:1;	/* 0 */
+	} CTRL;
 
 	/* 0x01: Status */
-	uint8_t volatile STATUS;
-#define GCLK_STATUS_SYNCBUSY			(1u << 7)
+	struct zmcu_gclk_status {
+		uint8_t :7;
+		uint8_t volatile SYNCBUSY:1;	/* 7 */
+	} STATUS;
 
         /* CLK* registers are clock destinations, bound to an
          * existing peripheral, such as a SERCOM or RTC */

@@ -42,7 +42,6 @@ struct zmcu_port {
 #define PORT_WRCONFIG_WRPINCFG			(1u << 30)
 #define PORT_WRCONFIG_WRPMUX			(1u << 28)
 #define PORT_WRCONFIG_PMUX(x)			((x) << 24)
-#define PORT_WRCONFIG_PMUX_MASK			PORT_WRCONFIG_PMUX(B00001111)
 #define PORT_WRCONFIG_DRVSTR			(1u << 22)
 #define PORT_WRCONFIG_PULLEN			(1u << 18)
 #define PORT_WRCONFIG_INEN			(1u << 17)
