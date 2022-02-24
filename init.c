@@ -1,3 +1,5 @@
+#include <stddef.h>
+#include <stdint.h>
 #include "main.h"
 
 extern int main(void);

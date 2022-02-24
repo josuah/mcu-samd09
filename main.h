@@ -1,7 +1,3 @@
-#include <stddef.h>
-#include <stdint.h>
-#include <binary.h>
-
 #define BITMASK32(o)            ((o) == 31 ? 0xFFFFFFFF : (1u << (o) + 1) - 1)
 #define BITMASK(fld)            (BITMASK32(fld##_Msb) - BITMASK32(fld##_Lsb))
 #define BIT(fld, val)		(fld##_##val << fld##_Lsb)
