@@ -1,7 +1,6 @@
 /* generated from SVD file, then edited by hand */
 
 
-
 #define ADC ((struct zmcu_adc *)0x42002000)
 
 /* Analog Digital Converter */
@@ -1997,11 +1996,7 @@ struct zmcu_port {
 };
 
 
-#define RTC ((struct zmcu_rtc *)0x40001400)
-
-/* Real-Time Counter */
-struct zmcu_rtc {
-
+#define RTC_MODE0 ((struct zmcu_rtc_mode0 *)0x40001400)
 
 /* RTC: Real-Time Counter: 32-bit Counter with Single 32-bit Compare */
 struct zmcu_rtc_mode0 {
@@ -2136,6 +2131,8 @@ struct zmcu_rtc_mode0 {
 
 };
 
+
+#define RTC_MODE1 ((struct zmcu_rtc_mode1 *)0x40001400)
 
 /* RTC: Real-Time Counter: 16-bit Counter with Two 16-bit Compares */
 struct zmcu_rtc_mode1 {
@@ -2285,6 +2282,8 @@ struct zmcu_rtc_mode1 {
 
 };
 
+
+#define RTC_MODE2 ((struct zmcu_rtc_mode2 *)0x40001400)
 
 /* RTC: Real-Time Counter: Clock/Calendar with Alarm */
 struct zmcu_rtc_mode2 {
@@ -2469,9 +2468,12 @@ struct zmcu_rtc_mode2 {
 };
 
 
-#define SERCOM0 ((struct zmcu_sercom *)0x42000800)
-#define SERCOM1 ((struct zmcu_sercom *)0x42000C00)
+#define SERCOM0_BASE 0x42000800
+#define SERCOM1_BASE 0x42000C00
 
+
+#define I2CM0 ((struct zmcu_i2cm *)SERCOM0_BASE)
+#define I2CM1 ((struct zmcu_i2cm *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface 0: I2C Master Mode */
 struct zmcu_i2cm {
@@ -2648,6 +2650,9 @@ struct zmcu_i2cm {
 };
 
 
+#define I2CS0 ((struct zmcu_i2cs *)SERCOM0_BASE)
+#define I2CS1 ((struct zmcu_i2cs *)SERCOM1_BASE)
+
 /* SERCOM: Serial Communication Interface 0: I2C Slave Mode */
 struct zmcu_i2cs {
 
@@ -2797,6 +2802,9 @@ struct zmcu_i2cs {
 
 };
 
+
+#define SPIS0 ((struct zmcu_spi *)SERCOM0_BASE)
+#define SPIS1 ((struct zmcu_spi *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface 0: SPI Mode */
 struct zmcu_spi {
@@ -2955,6 +2963,9 @@ struct zmcu_spi {
 
 };
 
+
+#define USART0 ((struct zmcu_usart *)SERCOM0_BASE)
+#define USART1 ((struct zmcu_usart *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface 0: USART Mode */
 struct zmcu_usart {
@@ -3595,12 +3606,11 @@ struct zmcu_sysctrl {
 };
 
 
-#define TC1 ((struct zmcu_tc *)0x42001800)
-#define TC2 ((struct zmcu_ *)0x42001C00)
+#define TC1_BASE 0x42001800
+#define TC2_BASE 0x42001C00
 
-/* Basic Timer Counter 1 */
-struct zmcu_tc {
-
+#define TC1_COUNT8 ((struct zmcu_tc_count8 *)TC1_BASE)
+#define TC2_COUNT8 ((struct zmcu_tc_count8 *)TC2_BASE)
 
 /* TC: Basic Timer Counter 1: 8-bit Counter Mode */
 struct zmcu_tc_count8 {
@@ -3799,6 +3809,9 @@ struct zmcu_tc_count8 {
 };
 
 
+#define TC1_COUNT16 ((struct zmcu_tc_count16 *)TC1_BASE)
+#define TC2_COUNT16 ((struct zmcu_tc_count16 *)TC2_BASE)
+
 /* TC: Basic Timer Counter 1: 16-bit Counter Mode */
 struct zmcu_tc_count16 {
 
@@ -3986,6 +3999,9 @@ struct zmcu_tc_count16 {
 
 };
 
+
+#define TC1_COUNT32 ((struct zmcu_tc_count32 *)TC1_BASE)
+#define TC2_COUNT32 ((struct zmcu_tc_count32 *)TC2_BASE)
 
 /* TC: Basic Timer Counter 1: 32-bit Counter Mode */
 struct zmcu_tc_count32 {
