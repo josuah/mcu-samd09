@@ -1958,40 +1958,40 @@ struct zmcu_port {
 	uint8_t volatile RESERVED0[0x30-0x2C];
 
 	/* 0x30: Peripheral Multiplexing n - Group 0 */
-	uint8_t volatile PMUX0_[16];
+	uint8_t volatile PMUX[16];
 	/* Peripheral Multiplexing Even */
-#define PORT_PMUX0__PMUXE_Lsb			0u
-#define PORT_PMUX0__PMUXE_Msb			3u
-#define PORT_PMUX0__PMUXE_A			0x0
-#define PORT_PMUX0__PMUXE_B			0x1
-#define PORT_PMUX0__PMUXE_C			0x2
-#define PORT_PMUX0__PMUXE_D			0x3
-#define PORT_PMUX0__PMUXE_E			0x4
-#define PORT_PMUX0__PMUXE_F			0x5
-#define PORT_PMUX0__PMUXE_G			0x6
-#define PORT_PMUX0__PMUXE_H			0x7
+#define PORT_PMUX_PMUXE_Lsb			0u
+#define PORT_PMUX_PMUXE_Msb			3u
+#define PORT_PMUX_PMUXE_A			0x0
+#define PORT_PMUX_PMUXE_B			0x1
+#define PORT_PMUX_PMUXE_C			0x2
+#define PORT_PMUX_PMUXE_D			0x3
+#define PORT_PMUX_PMUXE_E			0x4
+#define PORT_PMUX_PMUXE_F			0x5
+#define PORT_PMUX_PMUXE_G			0x6
+#define PORT_PMUX_PMUXE_H			0x7
 	/* Peripheral Multiplexing Odd */
-#define PORT_PMUX0__PMUXO_Lsb			4u
-#define PORT_PMUX0__PMUXO_Msb			7u
-#define PORT_PMUX0__PMUXO_A			0x0
-#define PORT_PMUX0__PMUXO_B			0x1
-#define PORT_PMUX0__PMUXO_C			0x2
-#define PORT_PMUX0__PMUXO_D			0x3
-#define PORT_PMUX0__PMUXO_E			0x4
-#define PORT_PMUX0__PMUXO_F			0x5
-#define PORT_PMUX0__PMUXO_G			0x6
-#define PORT_PMUX0__PMUXO_H			0x7
+#define PORT_PMUX_PMUXO_Lsb			4u
+#define PORT_PMUX_PMUXO_Msb			7u
+#define PORT_PMUX_PMUXO_A			0x0
+#define PORT_PMUX_PMUXO_B			0x1
+#define PORT_PMUX_PMUXO_C			0x2
+#define PORT_PMUX_PMUXO_D			0x3
+#define PORT_PMUX_PMUXO_E			0x4
+#define PORT_PMUX_PMUXO_F			0x5
+#define PORT_PMUX_PMUXO_G			0x6
+#define PORT_PMUX_PMUXO_H			0x7
 
-	/* 0x40: Pin Configuration n - Group 0 */
-	uint8_t volatile PINCFG0_[32];
+	/* 0x40: Pin Configuration n */
+	uint8_t volatile PINCFG[16];
 	/* Peripheral Multiplexer Enable */
-#define PORT_PINCFG0__PMUXEN			0u
+#define PORT_PINCFG_PMUXEN			0u
 	/* Input Enable */
-#define PORT_PINCFG0__INEN			1u
+#define PORT_PINCFG_INEN			1u
 	/* Pull Enable */
-#define PORT_PINCFG0__PULLEN			2u
+#define PORT_PINCFG_PULLEN			2u
 	/* Output Driver Strength Selection */
-#define PORT_PINCFG0__DRVSTR			6u
+#define PORT_PINCFG_DRVSTR			6u
 
 };
 
@@ -2995,9 +2995,16 @@ struct zmcu_usart {
 	/* Transmit Data Pinout */
 #define USART_CTRLA_TXPO_Lsb			16u
 #define USART_CTRLA_TXPO_Msb			17u
+#define USART_CTRLA_TXPO_TX0_CK1		0x0
+#define USART_CTRLA_TXPO_TX2_CK3		0x1
+#define USART_CTRLA_TXPO_TX0_RTS2_CTS3		0x2
 	/* Receive Data Pinout */
 #define USART_CTRLA_RXPO_Lsb			20u
 #define USART_CTRLA_RXPO_Msb			21u
+#define USART_CTRLA_RXPO_RX0			0x0
+#define USART_CTRLA_RXPO_RX1			0x1
+#define USART_CTRLA_RXPO_RX2			0x2
+#define USART_CTRLA_RXPO_RX3			0x3
 	/* Sample Adjustment */
 #define USART_CTRLA_SAMPA_Lsb			22u
 #define USART_CTRLA_SAMPA_Msb			23u

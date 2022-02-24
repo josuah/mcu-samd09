@@ -1,9 +1,7 @@
-#include <main.h>
-#include <port.h>
-#include <usart.h>
-#include <gclk.h>
-#include <pm.h>
-#include <sysctrl.h>
+#include <stddef.h>
+#include <stdint.h>
+#include "main.h"
+#include "registers.h"
 
 #define LED		27
 #define USART_TX	4
@@ -13,7 +11,7 @@
 void
 port_mode_output(uint8_t pin)
 {
-	PORT->DIRSET = 1 << pin;
+	PORT->DIRSET = BIT(pin);
 }
 
 void
@@ -22,7 +20,7 @@ port_mode_periph(uint8_t pin, uint8_t fn)
 	uint32_t reg;
 
 	/* open access to the pad to peripherals */
-	PORT->PINCFG[pin] |= PORT_PINCFG_PMUXEN;
+	PORT->PINCFG[pin] |= BIT(PORT_PINCFG_PMUXEN);
 
 	/* associate the pin to the chosen module */
 	reg = PORT->PMUX[pin/2] & ~PORT_PMUX_MASK(pin);
@@ -32,13 +30,13 @@ port_mode_periph(uint8_t pin, uint8_t fn)
 void
 port_pin_set(uint8_t pin)
 {
-	PORT->OUTSET = 1 << pin;
+	PORT->OUTSET = BIT(pin);
 }
 
 void
 port_pin_clear(uint8_t pin)
 {
-	PORT->OUTCLR = 1 << pin;
+	PORT->OUTCLR = BIT(pin);
 }
 
 int
@@ -48,41 +46,38 @@ main(void)
 
 	port_mode_output(LED);
 
-	GCLK->GENCTRL = GCLK_GENCTRL_ID(GCLK_GENID_GCLKGEN4)
-	  | GCLK_GENCTRL_SRC(GCLK_GENCTRL_SRC_OSCULP32K)
-	  | GCLK_GENCTRL_OE;
+	GCLK->GENCTRL = BITS(GCLK_GENCTRL_ID,GCLKGEN4)
+	  | BITS(GCLK_GENCTRL_SRC,OSCULP32K)
+	  | BIT(GCLK_GENCTRL_OE);
 
 	port_mode_periph(USART_TX, PORT_PMUX_SERCOM);
 	port_mode_periph(USART_RX, PORT_PMUX_SERCOM);
 
 	/* use the default clock already running for USART0 */
-	GCLK->CLKCTRL = GCLK_CLKCTRL_CLKEN
-	  | GCLK_CLKCTRL_GEN(GCLK_GENID_GCLKGEN0)
-	  | GCLK_CLKCTRL_ID(GCLK_CLKID_SERCOM0_CORE);
+	GCLK->CLKCTRL = BIT(GCLK_CLKCTRL_CLKEN)
+	  | BITS(GCLK_CLKCTRL_GEN,GCLKGEN0)
+	  | BITS(GCLK_CLKCTRL_ID,SERCOM0_CORE);
 
-	while (GCLK->STATUS.SYNCBUSY);
+	while (BITREAD(GCLK, STATUS, SYNCBUSY));
 
 	/* wake-up the USART */
-	PM->APBCMASK |= PM_APBCMASK_SERCOM0;
+	PM->APBCMASK |= BIT(PM_APBCMASK_SERCOM0);
 
 	/* setup SERCOM0 for use with USART */
-	reg = USART0->CTRLA & ~USART_CTRLA_MODE_MASK;
-	USART0->CTRLA = reg 
-	  | USART_CTRLA_MODE(USART_CTRLA_MODE_INTERNAL_CLK)
-	  | USART_CTRLA_ENABLE;
+	USART0->CTRLA = BITWRITE(USART0->CTRLA, USART_CTRLA_MODE,CLK);
+	USART0->CTRLA |= BIT(USART_CTRLA_ENABLE);
 	while (USART0->SYNCBUSY & USART_SYNCBUSY_ENABLE);
 
 	/* assign the TX pin to USART_TX */
-	reg = USART0->CTRLA & ~USART_CTRLA_TXPO_MASK;
-	USART0->CTRLA = reg | USART_CTRLA_TXPO(USART_CTRLA_TXPO_TX2_CK3);
+	BITWRITE(USART0->CTRLA, USART_CTRLA_TXPO,TX2_CK3);
 
 	/* assign the RX pin to USART_RX */
-	reg = USART0->CTRLA & ~USART_CTRLA_RXPO_MASK;
-	USART0->CTRLA = reg | USART_CTRLA_RXPO(USART_CTRLA_RXPO_RX0);
+	BITWRITE(USART0->CTRLA, USART_CTRLA_RXPO,RX0);
 
 	/* enable the receiver and transmitter */
-	USART0->CTRLB = USART_CTRLB_RXEN | USART_CTRLB_TXEN;
-	while (USART0->SYNCBUSY & USART_SYNCBUSY_CTRLB);
+	USART0->CTRLB |= BIT(USART_CTRLB_RXEN) | BIT(USART_CTRLB_TXEN);
+
+	while (USART0->SYNCBUSY & BIT(USART_SYNCBUSY_CTRLB));
 
 	for (;;) {
 		USART0->DATA = '.';
