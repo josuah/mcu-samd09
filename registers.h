@@ -1262,12 +1262,12 @@ struct zmcu_gclk {
 	/* Generic Clock Generator */
 #define GCLK_CLKCTRL_GEN_Lsb			8u
 #define GCLK_CLKCTRL_GEN_Msb			11u
-#define GCLK_CLKCTRL_GEN_GCLK0			0x0
-#define GCLK_CLKCTRL_GEN_GCLK1			0x1
-#define GCLK_CLKCTRL_GEN_GCLK2			0x2
-#define GCLK_CLKCTRL_GEN_GCLK3			0x3
-#define GCLK_CLKCTRL_GEN_GCLK4			0x4
-#define GCLK_CLKCTRL_GEN_GCLK5			0x5
+#define GCLK_CLKCTRL_GEN_GCLKGEN0		0x0
+#define GCLK_CLKCTRL_GEN_GCLKGEN1		0x1
+#define GCLK_CLKCTRL_GEN_GCLKGEN2		0x2
+#define GCLK_CLKCTRL_GEN_GCLKGEN3		0x3
+#define GCLK_CLKCTRL_GEN_GCLKGEN4		0x4
+#define GCLK_CLKCTRL_GEN_GCLKGEN5		0x5
 	/* Clock Enable */
 #define GCLK_CLKCTRL_CLKEN			14u
 	/* Write Lock */
@@ -1278,6 +1278,12 @@ struct zmcu_gclk {
 	/* Generic Clock Generator Selection */
 #define GCLK_GENCTRL_ID_Lsb			0u
 #define GCLK_GENCTRL_ID_Msb			3u
+#define GCLK_GENCTRL_ID_GCLKGEN0		0x0
+#define GCLK_GENCTRL_ID_GCLKGEN1		0x1
+#define GCLK_GENCTRL_ID_GCLKGEN2		0x2
+#define GCLK_GENCTRL_ID_GCLKGEN3		0x3
+#define GCLK_GENCTRL_ID_GCLKGEN4		0x4
+#define GCLK_GENCTRL_ID_GCLKGEN5		0x5
 	/* Source Select */
 #define GCLK_GENCTRL_SRC_Lsb			8u
 #define GCLK_GENCTRL_SRC_Msb			12u
@@ -1959,28 +1965,26 @@ struct zmcu_port {
 
 	/* 0x30: Peripheral Multiplexing n - Group 0 */
 	uint8_t volatile PMUX[16];
-	/* Peripheral Multiplexing Even */
-#define PORT_PMUX_PMUXE_Lsb			0u
-#define PORT_PMUX_PMUXE_Msb			3u
-#define PORT_PMUX_PMUXE_A			0x0
-#define PORT_PMUX_PMUXE_B			0x1
-#define PORT_PMUX_PMUXE_C			0x2
-#define PORT_PMUX_PMUXE_D			0x3
-#define PORT_PMUX_PMUXE_E			0x4
-#define PORT_PMUX_PMUXE_F			0x5
-#define PORT_PMUX_PMUXE_G			0x6
-#define PORT_PMUX_PMUXE_H			0x7
-	/* Peripheral Multiplexing Odd */
-#define PORT_PMUX_PMUXO_Lsb			4u
-#define PORT_PMUX_PMUXO_Msb			7u
-#define PORT_PMUX_PMUXO_A			0x0
-#define PORT_PMUX_PMUXO_B			0x1
-#define PORT_PMUX_PMUXO_C			0x2
-#define PORT_PMUX_PMUXO_D			0x3
-#define PORT_PMUX_PMUXO_E			0x4
-#define PORT_PMUX_PMUXO_F			0x5
-#define PORT_PMUX_PMUXO_G			0x6
-#define PORT_PMUX_PMUXO_H			0x7
+#define PORT_PMUX(pin, x)			((x) << (pin) % 2)
+	/* Peripheral Multiplexing */
+#define PORT_PMUX_Lsb				0u
+#define PORT_PMUX_Msb				3u
+#define PORT_PMUX_A				0x0
+#define PORT_PMUX_EIC				0x0
+#define PORT_PMUX_B				0x1
+#define PORT_PMUX_REF				0x1
+#define PORT_PMUX_C				0x2
+#define PORT_PMUX_ADC				0x2
+#define PORT_PMUX_D				0x3
+#define PORT_PMUX_SERCOM			0x3
+#define PORT_PMUX_E				0x4
+#define PORT_PMUX_SERCOM_ALT			0x4
+#define PORT_PMUX_F				0x5
+#define PORT_PMUX_TC				0x5
+#define PORT_PMUX_G				0x6
+#define PORT_PMUX_COM				0x6
+#define PORT_PMUX_H				0x7
+#define PORT_PMUX_GCLK				0x7
 
 	/* 0x40: Pin Configuration n */
 	uint8_t volatile PINCFG[16];
