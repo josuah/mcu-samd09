@@ -21,6 +21,7 @@ init_usart(void)
 
 	usart_mode_internal_async(USART0);
 	usart_set_pinout(USART0, USART_CTRLA_RXPO_RX3, USART_CTRLA_TXPO_TX0_CK1);
+	__asm__("bkpt");
 	usart_set_frame_size(USART0, 8);
 	usart_set_baud_rate(USART0, 9600);
 	usart_enable(USART0);

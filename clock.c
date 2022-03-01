@@ -58,7 +58,6 @@ clock_generator_get_rate_hz(uint8_t genid)
 	clock_rate_hz = clock_source_get_rate_hz(clock_generator_get_source(genid));
 	clock_div_num = clock_generator_get_div(genid);
 
-	/* lldiv to avoid a bug with libgcc not in thumb mode */
 	return clock_rate_hz / clock_div_num;
 }
 
@@ -83,7 +82,7 @@ clock_set_generator(uint8_t clkid, uint8_t genid)
 	GCLK->CLKCTRL = BIT(GCLK_CLKCTRL_CLKEN)
 	  | genid << GCLK_CLKCTRL_GEN_lsb
 	  | clkid << GCLK_CLKCTRL_ID_lsb
-	  | GCLK_CLKCTRL_CLKEN;
+	  | BIT(GCLK_CLKCTRL_CLKEN);
 
 	while (GCLK->STATUS & BIT(GCLK_STATUS_SYNCBUSY));
 }

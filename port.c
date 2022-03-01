@@ -24,16 +24,14 @@ port_mode_periph(uint8_t pin, uint8_t fn)
 void
 port_mode_periph_input(uint8_t pin, uint8_t fn)
 {
-	PORT->DIRSET = 1 << pin;
-
+	PORT->DIRSET = BIT(pin);
 	port_mode_periph(pin, fn);
 }
 
 void
 port_mode_periph_output(uint8_t pin, uint8_t fn)
 {
-	PORT->DIRCLR = 1 << pin;
-
+	PORT->DIRCLR = BIT(pin);
 	port_mode_periph(pin, fn);
 }
 
