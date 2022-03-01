@@ -11,12 +11,11 @@
 int
 main(void)
 {
-	port_mode_output(LED);
+	port_mode_gpio_output(LED);
+	port_mode_periph_output(USART_TX, PORT_PMUX_SERCOM);
+	port_mode_periph_input(USART_RX, PORT_PMUX_SERCOM);
 
 	clock_set_generator(GCLK_CLKCTRL_ID_SERCOM0_CORE, 0);
-
-	port_mode_periph_out(USART_TX, PORT_PMUX_SERCOM);
-	port_mode_periph_in(USART_RX, PORT_PMUX_SERCOM);
 
 	usart_mode_internal_async(USART0);
 	usart_set_frame_size(USART0, 8);

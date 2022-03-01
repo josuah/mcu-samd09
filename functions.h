@@ -13,25 +13,19 @@ void clock_set_generator(uint8_t clkid, uint8_t genid);
 /* port */
 
 /* set the port to ouput mode like GPIO */
-void port_mode_output(uint8_t pin);
+void port_mode_gpio_output(uint8_t pin);
 
 /* set `pin` for peripheral use in input mode */
-void port_mode_periph_in(uint8_t pin, uint8_t fn);
+void port_mode_periph_input(uint8_t pin, uint8_t fn);
 
 /* set `pin` for peripheral use in output mode */
-void port_mode_periph_out(uint8_t pin, uint8_t fn);
+void port_mode_periph_output(uint8_t pin, uint8_t fn);
 
 /* set `pin` electric value to up */
 void port_pin_set(uint8_t pin);
 
 /* set `pin` electric value to down */
 void port_pin_clear(uint8_t pin);
-
-/* set `pin` up, must have been configured as port_mode_output() */
-void port_pin_set(uint8_t pin);
-
-/* set `pin` down, must have been configured as port_mode_output() */
-void port_pin_set(uint8_t pin);
 
 
 /* usart */

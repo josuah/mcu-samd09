@@ -3,7 +3,7 @@
 #include "registers.h"
 
 void
-port_mode_output(uint8_t pin)
+port_mode_gpio_output(uint8_t pin)
 {
 	PORT->DIRSET = BIT(pin);
 }
@@ -22,7 +22,7 @@ port_mode_periph(uint8_t pin, uint8_t fn)
 }
 
 void
-port_mode_periph_in(uint8_t pin, uint8_t fn)
+port_mode_periph_input(uint8_t pin, uint8_t fn)
 {
 	PORT->DIRSET = 1 << pin;
 
@@ -30,7 +30,7 @@ port_mode_periph_in(uint8_t pin, uint8_t fn)
 }
 
 void
-port_mode_periph_out(uint8_t pin, uint8_t fn)
+port_mode_periph_output(uint8_t pin, uint8_t fn)
 {
 	PORT->DIRCLR = 1 << pin;
 
