@@ -14,10 +14,10 @@ init_usart(void)
 
 	power_on_sercom0();
 
+	clock_set_generator(GCLK_CLKCTRL_ID_SERCOM0_CORE, GCLK_GENCTRL_ID_GCLKGEN0);
+
 	//GCLK->GENCTRL |= GCLK_GENCTRL_GENEN | GCLK_GENCTRL_OE;
 	//port_mode_periph_output(8, PORT_PMUX_GCLK);
-
-	clock_set_generator(GCLK_CLKCTRL_ID_SERCOM0_CORE, GCLK_GENCTRL_ID_GCLKGEN0);
 
 	usart_mode_internal_async(USART0);
 	usart_set_pinout(USART0, USART_CTRLA_RXPO_RX3, USART_CTRLA_TXPO_TX0_CK1);
