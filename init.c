@@ -1,5 +1,4 @@
-#include <stddef.h>
-#include <stdint.h>
+#include "libc.h"
 #include "main.h"
 
 extern int main(void);
@@ -46,7 +45,6 @@ __reset_handler(void)
 {
 	volatile char *src, *dst;
 
-	/* fill initialised and uninitialised variables */
 	src = &__data_load_start;
 	for (dst = &__data_start; dst < &__data_end; *dst++ = *src++);
 	for (dst = &__bss_start; dst < &__bss_end; *dst++ = 0);
