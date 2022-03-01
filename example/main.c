@@ -4,12 +4,12 @@
 #include "functions.h"
 
 #define USART_RX3	5
-#define USART_TX0	6
+#define USART_TX2	6
 
 void
 init_usart(void)
 {
-	port_mode_periph_output(USART_TX0, PORT_PMUX_SERCOM);
+	port_mode_periph_output(USART_TX2, PORT_PMUX_SERCOM);
 	port_mode_periph_input(USART_RX3, PORT_PMUX_SERCOM);
 
 	power_on_sercom0();
@@ -20,8 +20,7 @@ init_usart(void)
 	//port_mode_periph_output(8, PORT_PMUX_GCLK);
 
 	usart_mode_internal_async(USART0);
-	usart_set_pinout(USART0, USART_CTRLA_RXPO_RX3, USART_CTRLA_TXPO_TX0_CK1);
-	__asm__("bkpt");
+	usart_set_pinout(USART0, USART_CTRLA_RXPO_RX3, USART_CTRLA_TXPO_TX2_CK3);
 	usart_set_frame_size(USART0, 8);
 	usart_set_baud_rate(USART0, 9600);
 	usart_enable(USART0);
