@@ -51,15 +51,13 @@ usart_mode_internal_async(struct zmcu_usart *usart)
 }
 
 void
-usart_set_pinout(struct zmcu_usart *usart, uint8_t rxpo, uint8_t txpo)
+usart_set_pinout(struct zmcu_usart *usart, uint8_t txpo, uint8_t rxpo)
 {
-	/* assign the RX pin to USART_RX */
-	usart->CTRLA = (usart->CTRLA & ~BITMASK(USART_CTRLA_RXPO))
-	  | rxpo << USART_CTRLA_RXPO_lsb;
-
-	/* assign the TX pin to USART_TX */
 	usart->CTRLA = (usart->CTRLA & ~BITMASK(USART_CTRLA_TXPO))
 	  | txpo << USART_CTRLA_TXPO_lsb;
+
+	usart->CTRLA = (usart->CTRLA & ~BITMASK(USART_CTRLA_RXPO))
+	  | rxpo << USART_CTRLA_RXPO_lsb;
 }
 
 void

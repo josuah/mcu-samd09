@@ -1971,7 +1971,7 @@ struct zmcu_port {
 
 	/* 0x30: Peripheral Multiplexing n - Group 0 */
 	uint8_t volatile PMUX[16];
-#define PORT_PMUX(pin, x)			((x) << (pin) % 2)
+#define PORT_PMUX(pin, x)			((x) << ((pin) % 2))
 	/* Peripheral Multiplexing */
 #define PORT_PMUX_lsb				0u
 #define PORT_PMUX_msb				3u
@@ -1979,14 +1979,14 @@ struct zmcu_port {
 #define PORT_PMUX_EIC				0x0
 #define PORT_PMUX_B				0x1
 #define PORT_PMUX_REF				0x1
-#define PORT_PMUX_C				0x2
 #define PORT_PMUX_ADC				0x2
+#define PORT_PMUX_C				0x2
+#define PORT_PMUX_SERCOM			0x2
 #define PORT_PMUX_D				0x3
-#define PORT_PMUX_SERCOM			0x3
+#define PORT_PMUX_SERCOM_ALT			0x3
 #define PORT_PMUX_E				0x4
-#define PORT_PMUX_SERCOM_ALT			0x4
+#define PORT_PMUX_TC				0x4
 #define PORT_PMUX_F				0x5
-#define PORT_PMUX_TC				0x5
 #define PORT_PMUX_G				0x6
 #define PORT_PMUX_COM				0x6
 #define PORT_PMUX_H				0x7

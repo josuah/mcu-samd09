@@ -4,7 +4,7 @@
 #include "functions.h"
 
 #define USART_RX3	5
-#define USART_TX2	6
+#define USART_TX2	4
 
 void
 init_usart(void)
@@ -20,7 +20,7 @@ init_usart(void)
 	//port_mode_periph_output(8, PORT_PMUX_GCLK);
 
 	usart_mode_internal_async(USART0);
-	usart_set_pinout(USART0, USART_CTRLA_RXPO_RX3, USART_CTRLA_TXPO_TX2_CK3);
+	usart_set_pinout(USART0, USART_CTRLA_TXPO_TX2_CK3, USART_CTRLA_RXPO_RX3);
 	usart_set_frame_size(USART0, 8);
 	usart_set_baud_rate(USART0, 9600);
 	usart_enable(USART0);
