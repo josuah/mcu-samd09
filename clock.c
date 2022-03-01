@@ -65,9 +65,9 @@ clock_generator_get_rate_hz(uint8_t genid)
 static inline uint8_t
 clock_get_generator(uint8_t clkid)
 {
-	uint8_t *CLKCTRL = (void *)&GCLK->CLKCTRL;
+	uint8_t *clkctrl = (void *)&GCLK->CLKCTRL;
 
-	CLKCTRL[0] = clkid;
+	*clkctrl = clkid;
 	return BITREAD(GCLK->CLKCTRL, GCLK_CLKCTRL_GEN);
 }
 
@@ -82,7 +82,8 @@ clock_set_generator(uint8_t clkid, uint8_t genid)
 {
 	GCLK->CLKCTRL = BIT(GCLK_CLKCTRL_CLKEN)
 	  | genid << GCLK_CLKCTRL_GEN_lsb
-	  | clkid << GCLK_CLKCTRL_ID_lsb;
+	  | clkid << GCLK_CLKCTRL_ID_lsb
+	  | GCLK_CLKCTRL_CLKEN;
 
 	while (GCLK->STATUS & BIT(GCLK_STATUS_SYNCBUSY));
 }

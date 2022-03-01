@@ -39,8 +39,15 @@ void usart_set_frame_size(struct zmcu_usart *usart, uint8_t bits);
 /* set `usart` baud rate by reading the current clock rate */
 void usart_set_baud_rate(struct zmcu_usart *usart, uint32_t baud_hz);
 
+/* select the pinout within the pad for `usart`, for RX and TX */
+void usart_set_pinout(struct zmcu_usart *usart, uint8_t rxpo, uint8_t txpo);
+
 /* enable the usart, to call last before sending data */
 void usart_enable(struct zmcu_usart *usart);
 
 /* transmit one byte over the already configured usart */
 void usart_send_byte(struct zmcu_usart *usart, uint8_t byte);
+
+
+/* power */
+void power_on_sercom0(void);
