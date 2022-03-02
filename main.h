@@ -1,9 +1,8 @@
-#define BITMASK32(o)		(o == 31 ? 0xFFFFFFFF : (1u << (o + 1)) - 1)
-#define BITMASK(fld)		(BITMASK32(fld##_msb) - BITMASK32(fld##_lsb))
-#define BITS(fld, val)		(fld##_##val << fld##_lsb)
-#define BIT(fld)		(1u << fld)
-#define BITREAD(reg, fld)	((reg & BITMASK32(fld##_msb)) >> fld##_lsb)
-#define BITWRITE(reg, fld, val)	(reg = (reg & ~BITMASK(fld)) | BITS(fld, val))
+#define MASK32(o)		(o == 31 ? 0xFFFFFFFF : (1u << (o + 1)) - 1)
+#define MASK(fld)		(MASK32(fld##_msb) ^ MASK32(fld##_lsb - 1))
+#define BIT(fld)		(1u << (fld))
+#define BITS(fld, val)		((uint32_t)(val) << fld##_lsb)
+#define FIELD(reg, fld)		(((reg) & MASK32(fld##_msb)) >> fld##_lsb)
 
 /* halt the execution */
 void __stop_program(void);

@@ -1,6 +1,7 @@
 #include "libc.h"
 #include "main.h"
 #include "registers.h"
+#include "functions.h"
 
 void
 port_mode_gpio_output(uint8_t pin)
@@ -17,7 +18,7 @@ port_mode_periph(uint8_t pin, uint8_t fn)
 	PORT->PINCFG[pin] |= BIT(PORT_PINCFG_PMUXEN);
 
 	/* associate the pin to the chosen module */
-	reg = PORT->PMUX[pin/2] & PORT_PMUX(pin, BITMASK(PORT_PMUX));
+	reg = PORT->PMUX[pin/2] & PORT_PMUX(pin, MASK(PORT_PMUX));
 	PORT->PMUX[pin/2] = reg | PORT_PMUX(pin, fn);
 }
 

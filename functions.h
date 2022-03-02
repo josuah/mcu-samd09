@@ -2,12 +2,17 @@
 
 /* clock */
 
-/* give the clock-rate for selected clock ID (GCLK_CLKCTRL_ID_*)
- * after looking-up the right clock generator, and divisors */
+/* give the clock-rate for selected clock socket `clkid` */ 
 uint32_t clock_get_rate_hz(uint8_t clkid);
 
-/* plug a clock generator `genid` to a clock socket `clkid` */
-void clock_set_generator(uint8_t clkid, uint8_t genid);
+/* init a clock generator `genid`, plugging it a source `srcid` divided by `div` */
+void clock_generator_init(uint8_t genid, uint8_t srcid, uint16_t div);
+
+/* init a clock socket `clkid`, plugging it a clock generator `genid` */
+void clock_init(uint8_t clkid, uint8_t genid);
+
+/* output the signal of clock `genid` to an external pin directly */
+void clock_generator_enable_output(uint8_t genid);
 
 
 /* port */
@@ -37,10 +42,13 @@ void usart_mode_internal_async(struct zmcu_usart *usart);
 void usart_set_frame_size(struct zmcu_usart *usart, uint8_t bits);
 
 /* set `usart` baud rate by reading the current clock rate */
-void usart_set_baud_rate(struct zmcu_usart *usart, uint32_t baud_hz);
+void usart_set_baud_rate(struct zmcu_usart *usart, uint16_t baud_hz);
 
-/* select the pinout within the pad for `usart`, for TX and RX */
-void usart_set_pinout(struct zmcu_usart *usart, uint8_t txpo, uint8_t rxpo);
+/* select the pinout within the pad for `usart`, for TX */
+void usart_set_pinout_tx(struct zmcu_usart *usart, uint8_t txpo);
+
+/* select the pinout within the pad for `usart`, for RX */
+void usart_set_pinout_rx(struct zmcu_usart *usart, uint8_t rxpo);
 
 /* enable the usart, to call last before sending data */
 void usart_enable(struct zmcu_usart *usart);
@@ -51,3 +59,7 @@ void usart_send_byte(struct zmcu_usart *usart, uint8_t byte);
 
 /* power */
 void power_on_sercom0(void);
+
+
+/* sysctrl */
+void sysctrl_osc8m_enable(void);

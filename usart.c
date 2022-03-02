@@ -15,9 +15,9 @@ usart_get_clock_rate_hz(struct zmcu_usart *usart)
 }
 
 static inline uint8_t
-usart_get_sample_num(struct zmcu_usart *usart)
+usart_get_sample_rate(struct zmcu_usart *usart)
 {
-	switch (BITREAD(usart->CTRLA, USART_CTRLA_SAMPR)) {
+	switch (FIELD(usart->CTRLA, USART_CTRLA_SAMPR)) {
 	case USART_CTRLA_SAMPR_16_ARITHMETIC:
 	case USART_CTRLA_SAMPR_16_FRACTIONAL:
 		return 16;
@@ -32,47 +32,45 @@ usart_get_sample_num(struct zmcu_usart *usart)
 }
 
 void
-usart_set_baud_rate(struct zmcu_usart *usart, uint32_t baud_hz)
+usart_set_baud_rate(struct zmcu_usart *usart, uint16_t baud_hz)
 {
-	uint8_t samples = usart_get_sample_num(usart);
+	uint8_t samples = usart_get_sample_rate(usart);
 	uint32_t clock_hz = usart_get_clock_rate_hz(usart);
 
-	usart->BAUD = 0x10000 - 0x10000 * samples / clock_hz * baud_hz;
+	/* usart->BAUD = 0x10000 * (1 - samples * (baud_hz / clock_hz)); */
+	usart->BAUD = 0x10000 - 0x10000 * baud_hz / clock_hz * samples ;
 }
 
 void
 usart_mode_internal_async(struct zmcu_usart *usart)
 {
 	/* setup SERCOMn for use with USART with internal clock */
-	BITWRITE(usart->CTRLA, USART_CTRLA_MODE, USART_INT_CLK);
+	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_MODE))
+	  | BITS(USART_CTRLA_MODE, USART_CTRLA_MODE_USART_INT_CLK);
 
 	/* setup SERCOMn for use with USART in asynchronous mode */
 	usart->CTRLA &= ~BIT(USART_CTRLA_CMODE);
 }
 
 void
-usart_set_pinout(struct zmcu_usart *usart, uint8_t txpo, uint8_t rxpo)
+usart_set_pinout_tx(struct zmcu_usart *usart, uint8_t txpo)
 {
-	usart->CTRLA = (usart->CTRLA & ~BITMASK(USART_CTRLA_TXPO))
-	  | txpo << USART_CTRLA_TXPO_lsb;
+	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_TXPO))
+	  | BITS(USART_CTRLA_TXPO, txpo);
+}
 
-	usart->CTRLA = (usart->CTRLA & ~BITMASK(USART_CTRLA_RXPO))
-	  | rxpo << USART_CTRLA_RXPO_lsb;
+void
+usart_set_pinout_rx(struct zmcu_usart *usart, uint8_t rxpo)
+{
+	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_RXPO))
+	  | BITS(USART_CTRLA_RXPO, rxpo);
 }
 
 void
 usart_set_frame_size(struct zmcu_usart *usart, uint8_t bits)
 {
-	switch (bits) {
-	case 8:
-		BITWRITE(usart->CTRLB, USART_CTRLB_CHSIZE, 8BITS);
-		break;
-	case 9:
-		BITWRITE(usart->CTRLB, USART_CTRLB_CHSIZE, 9BITS);
-		break;
-	default:
-		__stop_program();
-	}
+	usart->CTRLB = (usart->CTRLB & ~MASK(USART_CTRLB_CHSIZE))
+	  | BITS(USART_CTRLB_CHSIZE, bits % 8);
 }
 
 void
@@ -91,5 +89,5 @@ void
 usart_send_byte(struct zmcu_usart *usart, uint8_t byte)
 {
 	usart->DATA = byte;
-	while (usart->SYNCBUSY & BIT(USART_SYNCBUSY_CTRLB));
+	while (usart->SYNCBUSY & USART_SYNCBUSY_ENABLE);
 }
