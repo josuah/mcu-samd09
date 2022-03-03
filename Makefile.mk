@@ -12,7 +12,8 @@ SDK_OBJ = ${SDK}/libc.o ${SDK}/init.o ${SDK}/arm32_aeabi_divmod.o \
         ${SDK}/port.o ${SDK}/power.o ${SDK}/clock.o ${SDK}/usart.o \
         ${SDK}/sercom.o
 SDK_CFLAGS = -ffunction-sections -fdata-sections
-SDK_LDFLAGS = -T${SDK}/script.ld -nostartfiles -nostdlib -static -Wl,--gc-sections
+SDK_LDFLAGS = -Wl,-Map=firmware.map -Wl,--gc-sections -T${SDK}/script.ld \
+	-nostartfiles -nostdlib -static
 SDK_CPPFLAGS = -I${SDK}
 SDK_ASFLAGS = -I${SDK}
 

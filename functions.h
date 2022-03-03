@@ -20,17 +20,17 @@ void irq_usart0(void); /* indirect */
 
 /* clock */
 
-/* give the clock-rate for selected clock socket `clkid` */ 
+/* give the clock-rate for selected clock channel `clkid` */ 
 uint32_t clock_get_rate_hz(uint8_t clkid);
 
 /* init a clock generator `genid`, plugging it a source `srcid` divided by `div` */
 void clock_generator_init(uint8_t genid, uint8_t srcid, uint16_t div);
 
-/* init a clock socket `clkid`, plugging it a clock generator `genid` */
-void clock_init(uint8_t clkid, uint8_t genid);
-
 /* output the signal of clock `genid` to an external pin directly */
 void clock_generator_enable_output(uint8_t genid);
+
+/* init a clock channel `clkid`, plugging it a clock generator `genid` */
+void clock_init(uint8_t clkid, uint8_t genid);
 
 
 /* port */
