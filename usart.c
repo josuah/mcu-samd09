@@ -1,5 +1,4 @@
 #include "libc.h"
-#include "main.h"
 #include "registers.h"
 #include "functions.h"
 
@@ -123,4 +122,10 @@ void
 usart_send_byte(struct zmcu_usart *usart, uint8_t byte)
 {
 	usart->DATA = byte;
+}
+
+void
+irq_usart0(void)
+{
+	port_pin_set(27);
 }

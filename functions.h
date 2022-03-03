@@ -1,3 +1,21 @@
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+
+/* macros */
+#define MASK32(o)		(o == 31 ? 0xFFFFFFFF : (1u << (o + 1)) - 1)
+#define MASK(fld)		(MASK32(fld##_msb) ^ MASK32(fld##_lsb - 1))
+#define BIT(fld)		(1u << (fld))
+#define BITS(fld, val)		((val) << fld##_lsb)
+#define FIELD(reg, fld)		(((reg) & MASK32(fld##_msb)) >> fld##_lsb)
+
+/* halt the execution */
+void __stop_program(void);
+
+/* interrupts */
+void irq_sercom0(void);
+void irq_usart0(void); /* indirect */
+
+
 
 
 /* clock */
@@ -79,3 +97,4 @@ void power_on_sercom0(void);
 /* sysctrl */
 void sysctrl_osc8m_enable(void);
 
+#endif

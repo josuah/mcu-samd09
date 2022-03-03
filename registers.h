@@ -2482,10 +2482,29 @@ struct zmcu_rtc_mode2 {
 #define SERCOM1_BASE 0x42000C00
 
 
+#define SERCOM0 ((struct zmcu_sercom *)SERCOM0_BASE)
+#define SERCOM1 ((struct zmcu_sercom *)SERCOM1_BASE)
+
+/* SERCOM: Serial Communication Interface */
+struct zmcu_sercom {
+	/* 0x00: SERCOM Control A */
+	uint32_t volatile CTRLA;
+	/* Operating Mode */
+#define SERCOM_CTRLA_MODE_lsb			2u
+#define SERCOM_CTRLA_MODE_msb			4u
+#define SERCOM_CTRLA_MODE_USART_EXT_CLK		0x0
+#define SERCOM_CTRLA_MODE_USART_INT_CLK		0x1
+#define SERCOM_CTRLA_MODE_SPI_SLAVE		0x2
+#define SERCOM_CTRLA_MODE_SPI_MASTER		0x3
+#define SERCOM_CTRLA_MODE_I2C_SLAVE		0x4
+#define SERCOM_CTRLA_MODE_I2C_MASTER		0x5
+};
+
+
 #define I2CM0 ((struct zmcu_i2cm *)SERCOM0_BASE)
 #define I2CM1 ((struct zmcu_i2cm *)SERCOM1_BASE)
 
-/* SERCOM: Serial Communication Interface 0: I2C Master Mode */
+/* SERCOM: Serial Communication Interface: I2C Master Mode */
 struct zmcu_i2cm {
 
 	/* 0x00: I2CM Control A */

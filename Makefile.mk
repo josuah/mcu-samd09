@@ -9,7 +9,8 @@ GDB = arm-none-eabi-gdb
 OPENOCD = openocd -c 'set CPUTAPID 0x0bc11477' -f interface/stlink.cfg -f target/at91samdXX.cfg
 
 SDK_OBJ = ${SDK}/libc.o ${SDK}/init.o ${SDK}/arm32_aeabi_divmod.o \
-	${SDK}/port.o ${SDK}/power.o ${SDK}/clock.o ${SDK}/usart.o
+        ${SDK}/port.o ${SDK}/power.o ${SDK}/clock.o ${SDK}/usart.o \
+        ${SDK}/sercom.o
 SDK_CFLAGS = -ffunction-sections -fdata-sections
 SDK_LDFLAGS = -T${SDK}/script.ld -nostartfiles -nostdlib -static -Wl,--gc-sections
 SDK_CPPFLAGS = -I${SDK}

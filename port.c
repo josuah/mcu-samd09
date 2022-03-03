@@ -1,5 +1,4 @@
 #include "libc.h"
-#include "main.h"
 #include "registers.h"
 #include "functions.h"
 

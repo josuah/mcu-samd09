@@ -1,5 +1,4 @@
 #include "libc.h"
-#include "main.h"
 #include "registers.h"
 #include "functions.h"
 
@@ -67,7 +66,6 @@ main(void)
 		usart_send_byte(USART0, '!');
 		usart_send_byte(USART0, '\r');
 		usart_send_byte(USART0, '\n');
-		port_pin_set(LED);
 	}
 
 	return 0;
