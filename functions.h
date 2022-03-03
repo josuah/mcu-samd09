@@ -54,40 +54,40 @@ void port_pin_clear(uint8_t pin);
 /* usart */
 
 /* set `usart` to UART mode with internal clock rate and a clock pin */
-void usart_set_internal_async(struct zmcu_usart *usart);
+void usart_set_internal_async(struct sdk_usart *usart);
 
 /* set `usart` number of data bits per frame (either 8 or 9) */
-void usart_set_data_bits(struct zmcu_usart *usart, uint8_t bits);
+void usart_set_data_bits(struct sdk_usart *usart, uint8_t bits);
 
 /* set `usart` baud rate by reading the current clock rate */
-void usart_set_baud_rate(struct zmcu_usart *usart, uint16_t baud_hz);
+void usart_set_baud_rate(struct sdk_usart *usart, uint16_t baud_hz);
 
 /* set `usart` pinout within the pad for TX */
-void usart_set_pinout_tx(struct zmcu_usart *usart, uint8_t txpo);
+void usart_set_pinout_tx(struct sdk_usart *usart, uint8_t txpo);
 
 /* set `usart` pinout within the pad for RX */
-void usart_set_pinout_rx(struct zmcu_usart *usart, uint8_t rxpo);
+void usart_set_pinout_rx(struct sdk_usart *usart, uint8_t rxpo);
 
 /* set `usart` number of stop bits (1 or 2) */
-void usart_set_stop_bits(struct zmcu_usart *usart, uint8_t bits);
+void usart_set_stop_bits(struct sdk_usart *usart, uint8_t bits);
 
 /* set `usart` to parity mode with "odd" parity */
-void usart_set_parity_odd(struct zmcu_usart *usart);
+void usart_set_parity_odd(struct sdk_usart *usart);
 
 /* set `usart` to parity mode with "even" parity */
-void usart_set_parity_even(struct zmcu_usart *usart);
+void usart_set_parity_even(struct sdk_usart *usart);
 
 /* set `usart` data order to MSB first */
-void usart_set_most_significant_bit_first(struct zmcu_usart *usart);
+void usart_set_most_significant_bit_first(struct sdk_usart *usart);
 
 /* set `usart` data order to LSB first */
-void usart_set_least_significant_bit_first(struct zmcu_usart *usart);
+void usart_set_least_significant_bit_first(struct sdk_usart *usart);
 
 /* enable the usart, to call last before sending data */
-void usart_enable(struct zmcu_usart *usart);
+void usart_enable(struct sdk_usart *usart);
 
 /* transmit one byte over the already configured usart */
-void usart_send_byte(struct zmcu_usart *usart, uint8_t byte);
+void usart_send_byte(struct sdk_usart *usart, uint8_t byte);
 
 
 /* power */

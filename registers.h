@@ -1,10 +1,10 @@
 /* generated from SVD file, then edited by hand */
 
 
-#define ADC ((struct zmcu_adc *)0x42002000)
+#define ADC ((struct sdk_adc *)0x42002000)
 
 /* Analog Digital Converter */
-struct zmcu_adc {
+struct sdk_adc {
 
 	/* 0x00: Control A */
 	uint8_t volatile CTRLA;
@@ -273,10 +273,10 @@ struct zmcu_adc {
 };
 
 
-#define DMAC ((struct zmcu_dmac *)0x41004800)
+#define DMAC ((struct sdk_dmac *)0x41004800)
 
 /* Direct Memory Access Controller */
-struct zmcu_dmac {
+struct sdk_dmac {
 
 	/* 0x00: Control */
 	uint16_t volatile CTRL;
@@ -604,10 +604,10 @@ struct zmcu_dmac {
 };
 
 
-#define DSU ((struct zmcu_dsu *)0x41002000)
+#define DSU ((struct sdk_dsu *)0x41002000)
 
 /* Device Service Unit */
-struct zmcu_dsu {
+struct sdk_dsu {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -831,10 +831,10 @@ struct zmcu_dsu {
 };
 
 
-#define EIC ((struct zmcu_eic *)0x40001800)
+#define EIC ((struct sdk_eic *)0x40001800)
 
 /* External Interrupt Controller */
-struct zmcu_eic {
+struct sdk_eic {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -1056,10 +1056,10 @@ struct zmcu_eic {
 };
 
 
-#define EVSYS ((struct zmcu_evsys *)0x42000400)
+#define EVSYS ((struct sdk_evsys *)0x42000400)
 
 /* Event System Interface */
-struct zmcu_evsys {
+struct sdk_evsys {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -1219,10 +1219,10 @@ struct zmcu_evsys {
 };
 
 
-#define GCLK ((struct zmcu_gclk *)0x40000C00)
+#define GCLK ((struct sdk_gclk *)0x40000C00)
 
 /* Generic Clock Generator */
-struct zmcu_gclk {
+struct sdk_gclk {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -1327,10 +1327,10 @@ struct zmcu_gclk {
 };
 
 
-#define HMATRIX ((struct zmcu_hmatrixb *)0x41007000)
+#define HMATRIX ((struct sdk_hmatrixb *)0x41007000)
 
 /* HSB Matrix */
-struct zmcu_hmatrixb {
+struct sdk_hmatrixb {
 
 	/* 0x0C */
 	uint8_t volatile RESERVED0[0x80-0x0C];
@@ -1398,10 +1398,10 @@ struct zmcu_hmatrixb {
 };
 
 
-#define MTB ((struct zmcu_mtb *)0x41006000)
+#define MTB ((struct sdk_mtb *)0x41006000)
 
 /* Cortex-M0+ Micro-Trace Buffer */
-struct zmcu_mtb {
+struct sdk_mtb {
 
 	/* 0x00: MTB Position */
 	uint32_t volatile POSITION;
@@ -1520,10 +1520,10 @@ struct zmcu_mtb {
 };
 
 
-#define NVMCTRL ((struct zmcu_nvmctrl *)0x41004000)
+#define NVMCTRL ((struct sdk_nvmctrl *)0x41004000)
 
 /* Non-Volatile Memory Controller */
-struct zmcu_nvmctrl {
+struct sdk_nvmctrl {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -1656,12 +1656,12 @@ struct zmcu_nvmctrl {
 };
 
 
-#define PAC0 ((struct zmcu_pac *)0x40000000)
-#define PAC1 ((struct zmcu_pac *)0x41000000)
-#define PAC2 ((struct zmcu_pac *)0x42000000)
+#define PAC0 ((struct sdk_pac *)0x40000000)
+#define PAC1 ((struct sdk_pac *)0x41000000)
+#define PAC2 ((struct sdk_pac *)0x42000000)
 
 /* Peripheral Access Controller 0 */
-struct zmcu_pac {
+struct sdk_pac {
 
 	/* 0x00: Write Protection Clear */
 	uint32_t volatile WPCLR;
@@ -1678,10 +1678,10 @@ struct zmcu_pac {
 };
 
 
-#define PM ((struct zmcu_pm *)0x40000400)
+#define PM ((struct sdk_pm *)0x40000400)
 
 /* Power Manager */
-struct zmcu_pm {
+struct sdk_pm {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -1877,11 +1877,11 @@ struct zmcu_pm {
 };
 
 
-#define PORT ((struct zmcu_port *)0x41004400)
-#define PORT_IOBUS ((struct zmcu_port_iobus *)0x60000000)
+#define PORT ((struct sdk_port *)0x41004400)
+#define PORT_IOBUS ((struct sdk_port_iobus *)0x60000000)
 
 /* Port Module */
-struct zmcu_port {
+struct sdk_port {
 
 	/* 0x00: Data Direction */
 	uint32_t volatile DIR;
@@ -2006,10 +2006,10 @@ struct zmcu_port {
 };
 
 
-#define RTC_MODE0 ((struct zmcu_rtc_mode0 *)0x40001400)
+#define RTC_MODE0 ((struct sdk_rtc_mode0 *)0x40001400)
 
 /* RTC: Real-Time Counter: 32-bit Counter with Single 32-bit Compare */
-struct zmcu_rtc_mode0 {
+struct sdk_rtc_mode0 {
 
 	/* 0x00: MODE0 Control */
 	uint16_t volatile CTRL;
@@ -2142,10 +2142,10 @@ struct zmcu_rtc_mode0 {
 };
 
 
-#define RTC_MODE1 ((struct zmcu_rtc_mode1 *)0x40001400)
+#define RTC_MODE1 ((struct sdk_rtc_mode1 *)0x40001400)
 
 /* RTC: Real-Time Counter: 16-bit Counter with Two 16-bit Compares */
-struct zmcu_rtc_mode1 {
+struct sdk_rtc_mode1 {
 
 	/* 0x00: MODE1 Control */
 	uint16_t volatile CTRL;
@@ -2293,10 +2293,10 @@ struct zmcu_rtc_mode1 {
 };
 
 
-#define RTC_MODE2 ((struct zmcu_rtc_mode2 *)0x40001400)
+#define RTC_MODE2 ((struct sdk_rtc_mode2 *)0x40001400)
 
 /* RTC: Real-Time Counter: Clock/Calendar with Alarm */
-struct zmcu_rtc_mode2 {
+struct sdk_rtc_mode2 {
 
 	/* 0x00: MODE2 Control */
 	uint16_t volatile CTRL;
@@ -2482,11 +2482,11 @@ struct zmcu_rtc_mode2 {
 #define SERCOM1_BASE 0x42000C00
 
 
-#define SERCOM0 ((struct zmcu_sercom *)SERCOM0_BASE)
-#define SERCOM1 ((struct zmcu_sercom *)SERCOM1_BASE)
+#define SERCOM0 ((struct sdk_sercom *)SERCOM0_BASE)
+#define SERCOM1 ((struct sdk_sercom *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface */
-struct zmcu_sercom {
+struct sdk_sercom {
 	/* 0x00: SERCOM Control A */
 	uint32_t volatile CTRLA;
 	/* Operating Mode */
@@ -2501,11 +2501,11 @@ struct zmcu_sercom {
 };
 
 
-#define I2CM0 ((struct zmcu_i2cm *)SERCOM0_BASE)
-#define I2CM1 ((struct zmcu_i2cm *)SERCOM1_BASE)
+#define I2CM0 ((struct sdk_i2cm *)SERCOM0_BASE)
+#define I2CM1 ((struct sdk_i2cm *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface: I2C Master Mode */
-struct zmcu_i2cm {
+struct sdk_i2cm {
 
 	/* 0x00: I2CM Control A */
 	uint32_t volatile CTRLA;
@@ -2679,11 +2679,11 @@ struct zmcu_i2cm {
 };
 
 
-#define I2CS0 ((struct zmcu_i2cs *)SERCOM0_BASE)
-#define I2CS1 ((struct zmcu_i2cs *)SERCOM1_BASE)
+#define I2CS0 ((struct sdk_i2cs *)SERCOM0_BASE)
+#define I2CS1 ((struct sdk_i2cs *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface 0: I2C Slave Mode */
-struct zmcu_i2cs {
+struct sdk_i2cs {
 
 	/* 0x00: I2CS Control A */
 	uint32_t volatile CTRLA;
@@ -2832,11 +2832,11 @@ struct zmcu_i2cs {
 };
 
 
-#define SPIS0 ((struct zmcu_spi *)SERCOM0_BASE)
-#define SPIS1 ((struct zmcu_spi *)SERCOM1_BASE)
+#define SPIS0 ((struct sdk_spi *)SERCOM0_BASE)
+#define SPIS1 ((struct sdk_spi *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface 0: SPI Mode */
-struct zmcu_spi {
+struct sdk_spi {
 
 	/* 0x00: SPI Control A */
 	uint32_t volatile CTRLA;
@@ -2993,11 +2993,11 @@ struct zmcu_spi {
 };
 
 
-#define USART0 ((struct zmcu_usart *)SERCOM0_BASE)
-#define USART1 ((struct zmcu_usart *)SERCOM1_BASE)
+#define USART0 ((struct sdk_usart *)SERCOM0_BASE)
+#define USART1 ((struct sdk_usart *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface 0: USART Mode */
-struct zmcu_usart {
+struct sdk_usart {
 
 	/* 0x00: USART Control A */
 	uint32_t volatile CTRLA;
@@ -3208,10 +3208,10 @@ struct zmcu_usart {
 };
 
 
-#define SYSCTRL ((struct zmcu_sysctrl *)0x40000800)
+#define SYSCTRL ((struct sdk_sysctrl *)0x40000800)
 
 /* System Control */
-struct zmcu_sysctrl {
+struct sdk_sysctrl {
 
 	/* 0x00: Interrupt Enable Clear */
 	uint32_t volatile INTENCLR;
@@ -3640,11 +3640,11 @@ struct zmcu_sysctrl {
 #define TC1_BASE 0x42001800
 #define TC2_BASE 0x42001C00
 
-#define TC1_COUNT8 ((struct zmcu_tc_count8 *)TC1_BASE)
-#define TC2_COUNT8 ((struct zmcu_tc_count8 *)TC2_BASE)
+#define TC1_COUNT8 ((struct sdk_tc_count8 *)TC1_BASE)
+#define TC2_COUNT8 ((struct sdk_tc_count8 *)TC2_BASE)
 
 /* TC: Basic Timer Counter 1: 8-bit Counter Mode */
-struct zmcu_tc_count8 {
+struct sdk_tc_count8 {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -3840,11 +3840,11 @@ struct zmcu_tc_count8 {
 };
 
 
-#define TC1_COUNT16 ((struct zmcu_tc_count16 *)TC1_BASE)
-#define TC2_COUNT16 ((struct zmcu_tc_count16 *)TC2_BASE)
+#define TC1_COUNT16 ((struct sdk_tc_count16 *)TC1_BASE)
+#define TC2_COUNT16 ((struct sdk_tc_count16 *)TC2_BASE)
 
 /* TC: Basic Timer Counter 1: 16-bit Counter Mode */
-struct zmcu_tc_count16 {
+struct sdk_tc_count16 {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -4031,11 +4031,11 @@ struct zmcu_tc_count16 {
 };
 
 
-#define TC1_COUNT32 ((struct zmcu_tc_count32 *)TC1_BASE)
-#define TC2_COUNT32 ((struct zmcu_tc_count32 *)TC2_BASE)
+#define TC1_COUNT32 ((struct sdk_tc_count32 *)TC1_BASE)
+#define TC2_COUNT32 ((struct sdk_tc_count32 *)TC2_BASE)
 
 /* TC: Basic Timer Counter 1: 32-bit Counter Mode */
-struct zmcu_tc_count32 {
+struct sdk_tc_count32 {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -4222,10 +4222,10 @@ struct zmcu_tc_count32 {
 };
 
 
-#define WDT ((struct zmcu_wdt *)0x40001000)
+#define WDT ((struct sdk_wdt *)0x40001000)
 
 /* Watchdog Timer */
-struct zmcu_wdt {
+struct sdk_wdt {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;

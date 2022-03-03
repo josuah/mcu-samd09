@@ -45,10 +45,6 @@ main(void)
 	init_led();
 	init_usart();
 
-// at 1200 baud, limit at 2400/2401
-// at 800 baud: limit at 1800/1801
-// at 600 baud: limit at 1200/1201
-
 	for (;;) {
 		for (uint32_t volatile i = 0; i < 0x10000; i++);
 

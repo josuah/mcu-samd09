@@ -1,19 +1,17 @@
 OBJCOPY = arm-none-eabi-objcopy
 OBJDUMP = arm-none-eabi-objdump
-CC = arm-none-eabi-gcc -mthumb -mcpu=cortex-m0plus -msoft-float -S
-LD = arm-none-eabi-gcc -mthumb -mcpu=cortex-m0plus -msoft-float
-AS = arm-none-eabi-as -mthumb
-AR = arm-none-eabi-ar
 CPP = arm-none-eabi-cpp
+CC = arm-none-eabi-gcc -mthumb -mcpu=cortex-m0plus -msoft-float
+AS = arm-none-eabi-as -mthumb
+LD = arm-none-eabi-ld
+AR = arm-none-eabi-ar
 GDB = arm-none-eabi-gdb
 OPENOCD = openocd -c 'set CPUTAPID 0x0bc11477' -f interface/stlink.cfg -f target/at91samdXX.cfg
-
 SDK_OBJ = ${SDK}/libc.o ${SDK}/init.o ${SDK}/arm32_aeabi_divmod.o \
         ${SDK}/port.o ${SDK}/power.o ${SDK}/clock.o ${SDK}/usart.o \
         ${SDK}/sercom.o
 SDK_CFLAGS = -ffunction-sections -fdata-sections
-SDK_LDFLAGS = -Wl,-Map=firmware.map -Wl,--gc-sections -T${SDK}/script.ld \
-	-nostartfiles -nostdlib -static
+SDK_LDFLAGS = -Map=firmware.map --gc-sections -T${SDK}/script.ld -nostdlib -static
 SDK_CPPFLAGS = -I${SDK}
 SDK_ASFLAGS = -I${SDK}
 
@@ -49,7 +47,7 @@ flash.openocd: firmware.hex
 .S.o:
 
 .c.s:
-	${CC} ${SDK_CPPFLAGS} ${CPPFLAGS} ${SDK_CFLAGS} ${CFLAGS} -c -o $@ $<
+	${CC} ${SDK_CPPFLAGS} ${CPPFLAGS} ${SDK_CFLAGS} ${CFLAGS} -S -o $@ $<
 
 .S.s:
 	${CPP} ${SDK_CPPFLAGS} ${CPPFLAGS} -o $@ $<
