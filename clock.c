@@ -10,7 +10,6 @@ clock_source_get_rate_hz(uint8_t srcid)
 {
 	switch (srcid) {
 	case GCLK_GENCTRL_SRC_XOSC:
-		port_pin_set(27);
 		break; // TODO
 	case GCLK_GENCTRL_SRC_GCLKIN:
 		break; // TODO
@@ -35,12 +34,6 @@ clock_source_get_rate_hz(uint8_t srcid)
 static inline uint8_t
 clock_generator_get_source(uint8_t genid)
 {
-	uint32_t reg;
-
-	*(uint8_t *)&GCLK->GENCTRL = (uint8_t)4;
-	reg = GCLK->GENCTRL;
-	if (((reg >> GCLK_GENCTRL_SRC_lsb) & 0xF) == 6)
-		port_pin_set(27);
 	*(uint8_t *)&GCLK->GENCTRL = genid;
 	return FIELD(GCLK->GENCTRL, GCLK_GENCTRL_SRC);
 }

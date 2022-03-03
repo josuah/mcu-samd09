@@ -15,29 +15,29 @@ init_usart(void)
 	power_on_sercom0();
 	SYSCTRL->OSC8M |= SYSCTRL_OSC8M_ENABLE;
 
-	clock_generator_init(GCLK_GENCTRL_ID_GCLKGEN4, GCLK_GENCTRL_SRC_OSC8M, 0x1);
+	clock_generator_init(GCLK_GENCTRL_ID_GCLKGEN4, GCLK_GENCTRL_SRC_OSC8M, 1);
 	clock_init(GCLK_CLKCTRL_ID_SERCOM0_CORE, GCLK_GENCTRL_ID_GCLKGEN4);
 
-	port_mode_periph_output(GCLK4_IO, PORT_PMUX_GCLK);
+	port_set_periph_output(GCLK4_IO, PORT_PMUX_GCLK);
 	clock_generator_enable_output(GCLK_GENCTRL_ID_GCLKGEN4);
 
-	usart_mode_internal_async(USART0);
+	usart_set_internal_async(USART0);
 
-	port_mode_periph_input(USART0_RX, PORT_PMUX_SERCOM);
+	usart_set_least_significant_bit_first(USART0);
+	port_set_periph_input(USART0_RX, PORT_PMUX_SERCOM);
 	usart_set_pinout_rx(USART0, USART_CTRLA_RXPO_RX3);
 
-	port_mode_periph_output(USART0_TX, PORT_PMUX_SERCOM);
+	port_set_periph_output(USART0_TX, PORT_PMUX_SERCOM);
 	usart_set_pinout_tx(USART0, USART_CTRLA_TXPO_TX0_CK1);
 
-	usart_set_frame_size(USART0, 8);
-	usart_set_baud_rate(USART0, 120);
+	usart_set_baud_rate(USART0, 8000);
 	usart_enable(USART0);
 }
 
 void
 init_led(void)
 {
-	port_mode_gpio_output(LED);
+	port_set_gpio_output(LED);
 }
 
 int
@@ -46,8 +46,40 @@ main(void)
 	init_led();
 	init_usart();
 
+// at 1200 baud, limit at 2400/2401
+// at 800 baud: limit at 1800/1801
+// at 600 baud: limit at 1200/1201
+
+	port_pin_set(LED);
 	for (;;) {
-		usart_send_byte(USART0, 0x3F);
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'h');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'e');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'l');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'l');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'o');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, ' ');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'w');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'o');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'r');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'l');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, 'd');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, '!');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, '\r');
+		for (uint32_t volatile i = 0; i < 0x400; i++);
+		usart_send_byte(USART0, '\n');
 	}
 
 	return 0;

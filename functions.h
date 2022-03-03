@@ -18,13 +18,13 @@ void clock_generator_enable_output(uint8_t genid);
 /* port */
 
 /* set the port to ouput mode like GPIO */
-void port_mode_gpio_output(uint8_t pin);
+void port_set_gpio_output(uint8_t pin);
 
 /* set `pin` for peripheral use in input mode */
-void port_mode_periph_input(uint8_t pin, uint8_t fn);
+void port_set_periph_input(uint8_t pin, uint8_t fn);
 
 /* set `pin` for peripheral use in output mode */
-void port_mode_periph_output(uint8_t pin, uint8_t fn);
+void port_set_periph_output(uint8_t pin, uint8_t fn);
 
 /* set `pin` electric value to up */
 void port_pin_set(uint8_t pin);
@@ -35,20 +35,35 @@ void port_pin_clear(uint8_t pin);
 
 /* usart */
 
-/* set a SERCOM to USART mode with internal clock rate, without a clock pin */
-void usart_mode_internal_async(struct zmcu_usart *usart);
+/* set `usart` to UART mode with internal clock rate and a clock pin */
+void usart_set_internal_async(struct zmcu_usart *usart);
 
-/* set either 8 or 9 bits per byte */
-void usart_set_frame_size(struct zmcu_usart *usart, uint8_t bits);
+/* set `usart` number of data bits per frame (either 8 or 9) */
+void usart_set_data_bits(struct zmcu_usart *usart, uint8_t bits);
 
 /* set `usart` baud rate by reading the current clock rate */
 void usart_set_baud_rate(struct zmcu_usart *usart, uint16_t baud_hz);
 
-/* select the pinout within the pad for `usart`, for TX */
+/* set `usart` pinout within the pad for TX */
 void usart_set_pinout_tx(struct zmcu_usart *usart, uint8_t txpo);
 
-/* select the pinout within the pad for `usart`, for RX */
+/* set `usart` pinout within the pad for RX */
 void usart_set_pinout_rx(struct zmcu_usart *usart, uint8_t rxpo);
+
+/* set `usart` number of stop bits (1 or 2) */
+void usart_set_stop_bits(struct zmcu_usart *usart, uint8_t bits);
+
+/* set `usart` to parity mode with "odd" parity */
+void usart_set_parity_odd(struct zmcu_usart *usart);
+
+/* set `usart` to parity mode with "even" parity */
+void usart_set_parity_even(struct zmcu_usart *usart);
+
+/* set `usart` data order to MSB first */
+void usart_set_most_significant_bit_first(struct zmcu_usart *usart);
+
+/* set `usart` data order to LSB first */
+void usart_set_least_significant_bit_first(struct zmcu_usart *usart);
 
 /* enable the usart, to call last before sending data */
 void usart_enable(struct zmcu_usart *usart);
@@ -63,3 +78,4 @@ void power_on_sercom0(void);
 
 /* sysctrl */
 void sysctrl_osc8m_enable(void);
+

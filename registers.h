@@ -3026,6 +3026,10 @@ struct zmcu_usart {
 	/* Frame Format */
 #define USART_CTRLA_FORM_lsb			24u
 #define USART_CTRLA_FORM_msb			27u
+#define USART_CTRLA_FORM_NORMAL_NOPARITY	0x0
+#define USART_CTRLA_FORM_NORMAL_PARITY		0x1
+#define USART_CTRLA_FORM_AUTOBAUD_NOPARITY	0x2
+#define USART_CTRLA_FORM_AUTOBAUD_PARITY	0x3
 	/* Communication Mode */
 #define USART_CTRLA_CMODE			28u
 	/* Clock Polarity */
@@ -3063,24 +3067,14 @@ struct zmcu_usart {
 
 	/* 0x0C: USART Baud Rate */
 	uint16_t volatile BAUD;
-	/* Baud Rate Value */
-#define USART_BAUD_BAUD_lsb			0u
-#define USART_BAUD_BAUD_msb			15u
-	/* Baud Rate Value */
-#define USART_BAUD_FRAC_MODE_BAUD_lsb		0u
-#define USART_BAUD_FRAC_MODE_BAUD_msb		12u
+#define USART_BAUD_lsb				0u
+#define USART_BAUD_msb				15u
+	/* integer part */
+#define USART_BAUD_IP_lsb			0u
+#define USART_BAUD_IP_msb			12u
 	/* Fractional Part */
-#define USART_BAUD_FRAC_MODE_FP_lsb		13u
-#define USART_BAUD_FRAC_MODE_FP_msb		15u
-	/* Baud Rate Value */
-#define USART_BAUD_FRACFP_MODE_BAUD_lsb		0u
-#define USART_BAUD_FRACFP_MODE_BAUD_msb		12u
-	/* Fractional Part */
-#define USART_BAUD_FRACFP_MODE_FP_lsb		13u
-#define USART_BAUD_FRACFP_MODE_FP_msb		15u
-	/* Baud Rate Value */
-#define USART_BAUD_USARTFP_MODE_BAUD_lsb	0u
-#define USART_BAUD_USARTFP_MODE_BAUD_msb	15u
+#define USART_BAUD_FP_lsb			13u
+#define USART_BAUD_FP_msb			15u
 
 	/* 0x0E: USART Receive Pulse Length */
 	uint8_t volatile RXPL;

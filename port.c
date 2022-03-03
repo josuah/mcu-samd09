@@ -4,13 +4,13 @@
 #include "functions.h"
 
 void
-port_mode_gpio_output(uint8_t pin)
+port_set_gpio_output(uint8_t pin)
 {
 	PORT->DIRSET = BIT(pin);
 }
 
 static inline void
-port_mode_periph(uint8_t pin, uint8_t fn)
+port_set_periph(uint8_t pin, uint8_t fn)
 {
 	uint32_t reg;
 
@@ -23,17 +23,17 @@ port_mode_periph(uint8_t pin, uint8_t fn)
 }
 
 void
-port_mode_periph_input(uint8_t pin, uint8_t fn)
+port_set_periph_input(uint8_t pin, uint8_t fn)
 {
 	PORT->DIRSET = BIT(pin);
-	port_mode_periph(pin, fn);
+	port_set_periph(pin, fn);
 }
 
 void
-port_mode_periph_output(uint8_t pin, uint8_t fn)
+port_set_periph_output(uint8_t pin, uint8_t fn)
 {
 	PORT->DIRCLR = BIT(pin);
-	port_mode_periph(pin, fn);
+	port_set_periph(pin, fn);
 }
 
 void

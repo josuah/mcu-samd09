@@ -13,6 +13,7 @@ SDK_OBJ = ${SDK}/libc.o ${SDK}/init.o ${SDK}/arm32_aeabi_divmod.o \
 SDK_CFLAGS = -ffunction-sections -fdata-sections
 SDK_LDFLAGS = -T${SDK}/script.ld -nostartfiles -nostdlib -static -Wl,--gc-sections
 SDK_CPPFLAGS = -I${SDK}
+SDK_ASFLAGS = -I${SDK}
 
 all: firmware.elf firmware.asm
 
@@ -43,12 +44,13 @@ flash.openocd: firmware.hex
 .SUFFIXES: .c .s .S .o .elf .bin .asm .hex .uf2
 
 .c.o:
+.S.o:
 
 .c.s:
 	${CC} ${SDK_CPPFLAGS} ${CPPFLAGS} ${SDK_CFLAGS} ${CFLAGS} -c -o $@ $<
 
-.S.o:
-	${AS} ${SDK_CPPFLAGS} ${CPPFLAGS} ${SDK_ASFLAGS} ${ASFLAGS} -o $@ $<
+.S.s:
+	${CPP} ${SDK_CPPFLAGS} ${CPPFLAGS} -o $@ $<
 
 .s.o:
 	${AS} ${SDK_CPPFLAGS} ${CPPFLAGS} ${SDK_ASFLAGS} ${ASFLAGS} -c -o $@ $<
