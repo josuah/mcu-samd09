@@ -50,36 +50,24 @@ main(void)
 // at 800 baud: limit at 1800/1801
 // at 600 baud: limit at 1200/1201
 
-	port_pin_set(LED);
 	for (;;) {
-		for (uint32_t volatile i = 0; i < 0x400; i++);
+		for (uint32_t volatile i = 0; i < 0x10000; i++);
+
 		usart_send_byte(USART0, 'h');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'e');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'l');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'l');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'o');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, ' ');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'w');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'o');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'r');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'l');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, 'd');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, '!');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, '\r');
-		for (uint32_t volatile i = 0; i < 0x400; i++);
 		usart_send_byte(USART0, '\n');
+		port_pin_set(LED);
 	}
 
 	return 0;

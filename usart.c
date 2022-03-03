@@ -18,17 +18,14 @@ void
 usart_set_baud_rate(struct zmcu_usart *usart, uint16_t baud_hz)
 {
 	uint32_t clock_hz = usart_get_clock_rate_hz(usart);
-	uint32_t baud_x8;
 
 	/* set to fractionnal mode baud rate calculation for better accuracy */
 	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_SAMPR))
 	  | BITS(USART_CTRLA_SAMPR, USART_CTRLA_SAMPR_16_FRACTIONAL);
 
-	/* baud_x8 = clock_hz * 8 / 16 / baud_hz */
-	baud_x8 = clock_hz / 2 / baud_hz;
 	usart->BAUD = 0
-	  | BITS(USART_BAUD_IP, baud_x8 / 8)
-	  | BITS(USART_BAUD_FP, baud_x8 % 8);
+	  | BITS(USART_BAUD_IP, clock_hz / 16 / baud_hz / 8)
+	  | BITS(USART_BAUD_FP, clock_hz / 16 / baud_hz % 8);
 }
 
 void
@@ -126,5 +123,4 @@ void
 usart_send_byte(struct zmcu_usart *usart, uint8_t byte)
 {
 	usart->DATA = byte;
-	while (usart->SYNCBUSY & USART_SYNCBUSY_ENABLE);
 }
