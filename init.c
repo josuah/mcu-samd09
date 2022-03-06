@@ -23,27 +23,28 @@ void (*__vectors[])(void) = {
 	&__stop_program,		/* 0x28 -6 Reserved */
 	&__stop_program,		/* 0x2C -5 ARM SVCall */
 	&__stop_program,		/* 0x30 -4 ARM DebugMonitor */
-	&__stop_program,		/* 0x34 -2 ARM PendSV */
-	&__stop_program,		/* 0x38 -1 ARM SysTick */
-	&__stop_program,		/* 0x3C #0 PM */
-	&__stop_program,		/* 0x40 #1 SYSCTRL */
-	&__stop_program,		/* 0x44 #2 WDT */
-	&__stop_program,		/* 0x48 #3 RTC */
-	&__stop_program,		/* 0x4C #4 EIC */
-	&__stop_program,		/* 0x50 #5 NVMCTRL */
-	&__stop_program,		/* 0x54 #6 DMAC */
-	&__stop_program,		/* 0x58 #7 Reserved */
-	&__stop_program,		/* 0x5C #8 EVSYS */
-	&irq_sercom0,			/* 0x60 #9 SERCOM0 */
-	&__stop_program,		/* 0x64 #10 SERCOM1 */
-	&__stop_program,		/* 0x68 #11 Reserved */
-	&__stop_program,		/* 0x6C #12 Reserved */
-	&__stop_program,		/* 0x70 #13 Reserved */
-	&__stop_program,		/* 0x74 #14 Reserved */
-	&__stop_program,		/* 0x78 #15 Reserved */
-	&__stop_program,		/* 0x7C #16 Reserved */
-	&__stop_program,		/* 0x80 #17 Reserved */
-	&__stop_program,		/* 0x84 #18 Reserved */
+	&__stop_program,		/* 0x34 -3 Reserved */
+	&__stop_program,		/* 0x38 -2 ARM PendSV */
+	&__stop_program,		/* 0x3C -1 ARM SysTick */
+	&__stop_program,		/* 0x40 #0 PM */
+	&__stop_program,		/* 0x44 #1 SYSCTRL */
+	&__stop_program,		/* 0x48 #2 WDT */
+	&__stop_program,		/* 0x4C #3 RTC */
+	&__stop_program,		/* 0x50 #4 EIC */
+	&__stop_program,		/* 0x54 #5 NVMCTRL */
+	&__stop_program,		/* 0x58 #6 DMAC */
+	&__stop_program,		/* 0x5C #7 Reserved */
+	&__stop_program,		/* 0x60 #8 EVSYS */
+	&interrupt_sercom0,		/* 0x64 #9 SERCOM0 */
+	&interrupt_sercom1,		/* 0x68 #10 SERCOM1 */
+	&__stop_program,		/* 0x6C #11 Reserved */
+	&__stop_program,		/* 0x70 #12 Reserved */
+	&__stop_program,		/* 0x74 #13 TC1 */
+	&__stop_program,		/* 0x78 #14 TC2 */
+	&__stop_program,		/* 0x7C #15 ADC */
+	&__stop_program,		/* 0x80 #16 Reserved */
+	&__stop_program,		/* 0x84 #17 Reserved */
+	&__stop_program,		/* 0x88 #18 Reserved */
 };
 
 void

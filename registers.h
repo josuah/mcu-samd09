@@ -5,13 +5,13 @@
 
 struct sdk_nvic {
 
-	/* 0x00: Interrupt Set-Enable Register */
+	/* 0x00: Interrupt Set Enable Register */
 	uint32_t volatile ISER;
 
 	/* 0x04 */
 	uint8_t volatile RESERVED1[0x80-0x04];
 
-	/* 0x80: Interrupt Clear-Enable Register */
+	/* 0x80: Interrupt Clear Enable Register */
 	uint32_t volatile ICER;
 
 	/* 0x84 */

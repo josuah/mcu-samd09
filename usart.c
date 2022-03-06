@@ -2,14 +2,29 @@
 #include "registers.h"
 #include "functions.h"
 
+static struct sdk_usart_buffer {
+	uint8_t *mem;
+	size_t len;
+	uint8_t volatile done;
+} usart_rx[2], usart_tx[2];
+
+static inline uint8_t
+usart_number(struct sdk_usart *usart)
+{
+	return (usart == USART0) ? 0 : (usart == USART1) ? 1 : 0xFF;
+}
+
 static inline uint32_t
 usart_get_clock_rate_hz(struct sdk_usart *usart)
 {
-	if (usart == USART0)
+	switch (usart_number(usart)) {
+	case 0:
 		return clock_get_rate_hz(GCLK_CLKCTRL_ID_SERCOM0_CORE);
-	if (usart == USART1)
+	case 1:
 		return clock_get_rate_hz(GCLK_CLKCTRL_ID_SERCOM1_CORE);
-	__stop_program();
+	default:
+		__stop_program();
+	}
 	return 0;
 }
 
@@ -119,22 +134,113 @@ usart_enable(struct sdk_usart *usart)
 }
 
 void
-usart_send_byte(struct sdk_usart *usart, uint8_t byte)
+usart_tx_queue(struct sdk_usart *usart, uint8_t const *mem, size_t len)
 {
-	usart->DATA = byte;
+	struct sdk_usart_buffer *tx = &usart_tx[usart_number(usart)];
+
+	tx->done = 0;
+	tx->mem = (uint8_t *)mem;
+	tx->len = len;
+
+	usart->INTENSET = BIT(USART_INTENSET_DRE);
+	NVIC->ISER = BIT(9 + usart_number(usart));
 }
 
 void
-usart_enable_interrupts(struct sdk_usart *usart)
+usart_tx_wait(struct sdk_usart *usart)
 {
-	if (usart == USART0)
-		NVIC->ISER = BIT(9);
-	if (usart == USART1)
-		NVIC->ISER = BIT(10);
+	struct sdk_usart_buffer *tx = &usart_tx[usart_number(usart)];
+
+	while (!tx->done);
 }
 
 void
-irq_usart0(void)
+usart_rx_queue(struct sdk_usart *usart, uint8_t *mem, size_t len)
 {
-	port_pin_set(27);
+	struct sdk_usart_buffer *rx = &usart_rx[usart_number(usart)];
+
+	rx->done = 0;
+	rx->mem = mem;
+	rx->len = len;
+
+	usart->INTENSET = BIT(USART_INTENSET_RXC);
+}
+
+static inline void
+usart_interrupt_tx_data_register_empty(struct sdk_usart *usart)
+{
+	struct sdk_usart_buffer *tx = &usart_tx[usart_number(usart)];
+
+	if (tx->len == 0) {
+		usart->INTENCLR = BIT(USART_INTENSET_DRE);
+		usart->INTENSET = BIT(USART_INTENSET_TXC);
+	} else {
+		usart->DATA = *tx->mem++;
+		tx->len--;
+	}
+}
+
+static inline void
+usart_interrupt_tx_complete(struct sdk_usart *usart)
+{
+	struct sdk_usart_buffer *tx = &usart_tx[usart_number(usart)];
+
+	if (tx->len == 0) {
+		usart->INTENCLR = BIT(USART_INTENSET_TXC);
+		tx->done = 1;
+	}
+}
+
+static inline void
+usart_interrupt_rx_complete(struct sdk_usart *usart)
+{
+	struct sdk_usart_buffer *rx = &usart_rx[usart_number(usart)];
+
+}
+
+static inline void
+usart_interrupt_rx_start(struct sdk_usart *usart)
+{
+	struct sdk_usart_buffer *rx = &usart_rx[usart_number(usart)];
+
+}
+
+static inline void
+usart_interrupt_rx_clear_to_send(struct sdk_usart *usart)
+{
+	struct sdk_usart_buffer *rx = &usart_rx[usart_number(usart)];
+
+}
+
+static inline void
+usart_interrupt_rx_break(struct sdk_usart *usart)
+{
+	struct sdk_usart_buffer *rx = &usart_rx[usart_number(usart)];
+
+}
+
+static inline void
+usart_interrupt_error(struct sdk_usart *usart)
+{
+}
+
+void
+usart_interrupt(struct sdk_usart *usart)
+{
+	uint32_t reg = usart->INTFLAG;
+
+	if (reg & BIT(USART_INTFLAG_DRE))
+		usart_interrupt_tx_data_register_empty(usart);
+	if (reg & BIT(USART_INTFLAG_TXC))
+		usart_interrupt_tx_complete(usart);
+	if (reg & BIT(USART_INTFLAG_RXC))
+		usart_interrupt_rx_complete(usart);
+	if (reg & BIT(USART_INTFLAG_RXS))
+		usart_interrupt_rx_start(usart);
+	if (reg & BIT(USART_INTFLAG_CTSIC))
+		usart_interrupt_rx_clear_to_send(usart);
+	if (reg & BIT(USART_INTFLAG_RXBRK))
+		usart_interrupt_rx_break(usart);
+	if (reg & BIT(USART_INTFLAG_ERROR))
+		usart_interrupt_error(usart);
 }

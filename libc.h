@@ -15,6 +15,7 @@ typedef unsigned int size_t;
 typedef signed int ssize_t;
 
 void *memset(void *mem, int val, size_t sz);
+size_t strlen(char *str);
 
 
 /* <stdint.h> */

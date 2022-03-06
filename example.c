@@ -29,9 +29,8 @@ init_usart(void)
 	port_set_periph_output(USART0_TX, PORT_PMUX_SERCOM);
 	usart_set_pinout_tx(USART0, USART_CTRLA_TXPO_TX0_CK1);
 
-	usart_set_baud_rate(USART0, 8000);
+	usart_set_baud_rate(USART0, 9600);
 	usart_enable(USART0);
-	usart_enable_interrupts(USART0);
 }
 
 void
@@ -43,29 +42,16 @@ init_led(void)
 int
 main(void)
 {
+	char *str = "hello world\r\n";
+
 	init_led();
 	init_usart();
 
 	for (;;) {
-		for (uint32_t volatile i = 0; i < 0x8000; i++);
-		usart_send_byte(USART0, 'h');
-		usart_send_byte(USART0, 'e');
-		usart_send_byte(USART0, 'l');
-		usart_send_byte(USART0, 'l');
-		usart_send_byte(USART0, 'o');
-		usart_send_byte(USART0, ' ');
-		usart_send_byte(USART0, 'w');
-		usart_send_byte(USART0, 'o');
-		usart_send_byte(USART0, 'r');
-		usart_send_byte(USART0, 'l');
-		usart_send_byte(USART0, 'd');
-		usart_send_byte(USART0, '!');
-		usart_send_byte(USART0, '\r');
-		usart_send_byte(USART0, '\n');
-
-		if (NVIC->ISPR & BIT(9))
-			port_pin_set(27);
+		usart_tx_queue(USART0, (uint8_t *)str, strlen(str));
+		usart_tx_wait(USART0);
+		port_pin_set(LED);
+		port_pin_clear(LED);
 	}
-
 	return 0;
 }
