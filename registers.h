@@ -1285,7 +1285,7 @@ struct sdk_gclk {
 #define GCLK_CLKCTRL_ID_EVSYS_3			0xA
 #define GCLK_CLKCTRL_ID_EVSYS_4			0xB
 #define GCLK_CLKCTRL_ID_EVSYS_5			0xC
-#define GCLK_CLKCTRL_ID_SERCOMX_SLOW		0xD
+#define GCLK_CLKCTRL_ID_SERCOM_SLOW		0xD
 #define GCLK_CLKCTRL_ID_SERCOM0_CORE		0xE
 #define GCLK_CLKCTRL_ID_SERCOM1_CORE		0xF
 #define GCLK_CLKCTRL_ID_SERCOM2_CORE		0x10
@@ -2550,12 +2550,6 @@ struct sdk_i2cm {
 	/* Operating Mode */
 #define I2CM_CTRLA_MODE_lsb			2u
 #define I2CM_CTRLA_MODE_msb			4u
-#define I2CM_CTRLA_MODE_USART_EXT_CLK		0x0
-#define I2CM_CTRLA_MODE_USART_INT_CLK		0x1
-#define I2CM_CTRLA_MODE_SPI_SLAVE		0x2
-#define I2CM_CTRLA_MODE_SPI_MASTER		0x3
-#define I2CM_CTRLA_MODE_I2C_SLAVE		0x4
-#define I2CM_CTRLA_MODE_I2C_MASTER		0x5
 	/* Run in Standby */
 #define I2CM_CTRLA_RUNSTDBY			7u
 	/* Pin Usage */
@@ -2607,6 +2601,7 @@ struct sdk_i2cm {
 	/* High Speed Baud Rate Value Low */
 #define I2CM_BAUD_HSBAUDLOW_lsb			24u
 #define I2CM_BAUD_HSBAUDLOW_msb			31u
+
 
 	/* 0x10 */
 	uint8_t volatile RESERVED1[0x14-0x10];
@@ -2728,12 +2723,6 @@ struct sdk_i2cs {
 	/* Operating Mode */
 #define I2CS_CTRLA_MODE_lsb			2u
 #define I2CS_CTRLA_MODE_msb			4u
-#define I2CS_CTRLA_MODE_USART_EXT_CLK		0x0
-#define I2CS_CTRLA_MODE_USART_INT_CLK		0x1
-#define I2CS_CTRLA_MODE_SPI_SLAVE		0x2
-#define I2CS_CTRLA_MODE_SPI_MASTER		0x3
-#define I2CS_CTRLA_MODE_I2C_SLAVE		0x4
-#define I2CS_CTRLA_MODE_I2C_MASTER		0x5
 	/* Run during Standby */
 #define I2CS_CTRLA_RUNSTDBY			7u
 	/* Pin Usage */
@@ -2881,12 +2870,6 @@ struct sdk_spi {
 	/* Operating Mode */
 #define SPI_CTRLA_MODE_lsb			2u
 #define SPI_CTRLA_MODE_msb			4u
-#define SPI_CTRLA_MODE_USART_EXT_CLK		0x0
-#define SPI_CTRLA_MODE_USART_INT_CLK		0x1
-#define SPI_CTRLA_MODE_SPI_SLAVE		0x2
-#define SPI_CTRLA_MODE_SPI_MASTER		0x3
-#define SPI_CTRLA_MODE_I2C_SLAVE		0x4
-#define SPI_CTRLA_MODE_I2C_MASTER		0x5
 	/* Run during Standby */
 #define SPI_CTRLA_RUNSTDBY			7u
 	/* Immediate Buffer Overflow Notification */
@@ -3042,12 +3025,6 @@ struct sdk_usart {
 	/* Operating Mode */
 #define USART_CTRLA_MODE_lsb			2u
 #define USART_CTRLA_MODE_msb			4u
-#define USART_CTRLA_MODE_USART_EXT_CLK		0x0
-#define USART_CTRLA_MODE_USART_INT_CLK		0x1
-#define USART_CTRLA_MODE_SPI_SLAVE		0x2
-#define USART_CTRLA_MODE_SPI_MASTER		0x3
-#define USART_CTRLA_MODE_I2C_SLAVE		0x4
-#define USART_CTRLA_MODE_I2C_MASTER		0x5
 	/* Run during Standby */
 #define USART_CTRLA_RUNSTDBY			7u
 	/* Immediate Buffer Overflow Notification */
@@ -3689,9 +3666,7 @@ struct sdk_tc_count8 {
 	/* TC Mode */
 #define TC_COUNT8_CTRLA_MODE_lsb		2u
 #define TC_COUNT8_CTRLA_MODE_msb		3u
-#define TC_COUNT8_CTRLA_MODE_COUNT16		0x0
 #define TC_COUNT8_CTRLA_MODE_COUNT8		0x1
-#define TC_COUNT8_CTRLA_MODE_COUNT32		0x2
 	/* Waveform Generation Operation */
 #define TC_COUNT8_CTRLA_WAVEGEN_lsb		5u
 #define TC_COUNT8_CTRLA_WAVEGEN_msb		6u
@@ -3890,8 +3865,6 @@ struct sdk_tc_count16 {
 #define TC_COUNT16_CTRLA_MODE_lsb		2u
 #define TC_COUNT16_CTRLA_MODE_msb		3u
 #define TC_COUNT16_CTRLA_MODE_COUNT16		0x0
-#define TC_COUNT16_CTRLA_MODE_COUNT8		0x1
-#define TC_COUNT16_CTRLA_MODE_COUNT32		0x2
 	/* Waveform Generation Operation */
 #define TC_COUNT16_CTRLA_WAVEGEN_lsb		5u
 #define TC_COUNT16_CTRLA_WAVEGEN_msb		6u
@@ -4080,8 +4053,6 @@ struct sdk_tc_count32 {
 	/* TC Mode */
 #define TC_COUNT32_CTRLA_MODE_lsb		2u
 #define TC_COUNT32_CTRLA_MODE_msb		3u
-#define TC_COUNT32_CTRLA_MODE_COUNT16		0x0
-#define TC_COUNT32_CTRLA_MODE_COUNT8		0x1
 #define TC_COUNT32_CTRLA_MODE_COUNT32		0x2
 	/* Waveform Generation Operation */
 #define TC_COUNT32_CTRLA_WAVEGEN_lsb		5u

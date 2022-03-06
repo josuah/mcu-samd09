@@ -37,28 +37,52 @@ void clock_init(uint8_t clkid, uint8_t genid);
 void port_set_gpio_output(uint8_t pin);
 
 /* set `pin` for peripheral use in input mode */
-void port_set_periph_input(uint8_t pin, uint8_t fn);
+void port_set_peripheral_input(uint8_t pin, uint8_t pmux);
 
 /* set `pin` for peripheral use in output mode */
-void port_set_periph_output(uint8_t pin, uint8_t fn);
+void port_set_peripheral_output(uint8_t pin, uint8_t pmux);
 
 /* set `pin` electric value to up */
-void port_pin_set(uint8_t pin);
+void port_set_pin_up(uint8_t pin);
 
 /* set `pin` electric value to down */
-void port_pin_clear(uint8_t pin);
+void port_set_pin_down(uint8_t pin);
+
+/* set `pin` with an internal pull-up resistor */
+void port_set_pull_up(uint8_t pin);
+
+/* set `pin` with an internal pull-down resistor */
+void port_set_pull_down(uint8_t pin);
+
+
+/* sercom */
+
+/* convert a pointer to a sercom base address into a ID number */
+uint8_t sercom_get_number(void *sercom);
+
+/* return the clock rate for the already configured `sercom` */
+uint32_t sercom_get_clock_rate_hz(void *sercom);
+
+/* set `sercom` to be an I2C peripheral in master mode */
+void sercom_set_mode_i2c_master(struct sdk_sercom *sercom);
+
+/* set `sercom` to be an USART peripheral with internal clock */
+void sercom_set_mode_usart_internal(struct sdk_sercom *sercom);
 
 
 /* usart */
 
-/* set `usart` to UART mode with internal clock rate and a clock pin */
-void usart_set_internal_async(struct sdk_usart *usart);
+/* set `usart` to not use any clock pin */
+void usart_set_asynchronous(struct sdk_usart *usart);
+
+/* set `usart` to use an extra clock pin */
+void usart_set_synchronous(struct sdk_usart *usart);
 
 /* set `usart` number of data bits per frame (either 8 or 9) */
 void usart_set_data_bits(struct sdk_usart *usart, uint8_t bits);
 
-/* set `usart` baud rate by reading the current clock rate */
-void usart_set_baud_rate(struct sdk_usart *usart, uint16_t baud_hz);
+/* set `usart` baud rate to `baud_hz`, reading its SERCOM clock rate */
+void usart_set_baud_rate(struct sdk_usart *usart, uint32_t baud_hz);
 
 /* set `usart` pinout within the pad for TX */
 void usart_set_pinout_tx(struct sdk_usart *usart, uint8_t txpo);
@@ -97,11 +121,30 @@ void usart_rx_queue(struct sdk_usart *usart, uint8_t *buf, size_t len);
 void usart_interrupt(struct sdk_usart *usart);
 
 
+/* i2c in master mode */
+
+/* set `i2cm` baud rate to `baud_hz`, reading its SERCOM clock rate */
+void i2cm_set_baud_rate(struct sdk_i2cm *i2cm, uint32_t baud_hz);
+
+/* set `i2cm` to I2C Master mode */
+void i2cm_set_master(struct sdk_i2cm *i2cm);
+
+/* enable `i2cm` after it was configured */
+void i2cm_enable(struct sdk_i2cm *i2cm);
+
+
 /* power */
+
+/* power-on/off each module */
 void power_on_sercom0(void);
+void power_on_sercom1(void);
+void power_on_osc8m(void);
 
 
 /* sysctrl */
+
+/* power-on the high-speed (8 MHz) internal oscillator */
 void sysctrl_osc8m_enable(void);
+
 
 #endif
