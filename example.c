@@ -31,6 +31,7 @@ init_usart(void)
 
 	usart_set_baud_rate(USART0, 8000);
 	usart_enable(USART0);
+	usart_enable_interrupts(USART0);
 }
 
 void
@@ -46,8 +47,7 @@ main(void)
 	init_usart();
 
 	for (;;) {
-		for (uint32_t volatile i = 0; i < 0x10000; i++);
-
+		for (uint32_t volatile i = 0; i < 0x8000; i++);
 		usart_send_byte(USART0, 'h');
 		usart_send_byte(USART0, 'e');
 		usart_send_byte(USART0, 'l');
@@ -62,6 +62,9 @@ main(void)
 		usart_send_byte(USART0, '!');
 		usart_send_byte(USART0, '\r');
 		usart_send_byte(USART0, '\n');
+
+		if (NVIC->ISPR & BIT(9))
+			port_pin_set(27);
 	}
 
 	return 0;

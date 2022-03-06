@@ -13,9 +13,7 @@ void __stop_program(void);
 
 /* interrupts */
 void irq_sercom0(void);
-void irq_usart0(void); /* indirect */
-
-
+void irq_usart0(void); /* from irq_sercom0 */
 
 
 /* clock */
@@ -88,6 +86,9 @@ void usart_enable(struct sdk_usart *usart);
 
 /* transmit one byte over the already configured usart */
 void usart_send_byte(struct sdk_usart *usart, uint8_t byte);
+
+/* set `usart` to trigger interrupts */
+void usart_enable_interrupts(struct sdk_usart *usart);
 
 
 /* power */

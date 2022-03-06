@@ -125,6 +125,15 @@ usart_send_byte(struct sdk_usart *usart, uint8_t byte)
 }
 
 void
+usart_enable_interrupts(struct sdk_usart *usart)
+{
+	if (usart == USART0)
+		NVIC->ISER = BIT(9);
+	if (usart == USART1)
+		NVIC->ISER = BIT(10);
+}
+
+void
 irq_usart0(void)
 {
 	port_pin_set(27);

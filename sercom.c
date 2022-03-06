@@ -5,6 +5,8 @@
 void
 irq_sercom0(void)
 {
+	port_pin_set(27);
+
 	switch (FIELD(SERCOM0->CTRLA, SERCOM_CTRLA_MODE)) {
 	case SERCOM_CTRLA_MODE_USART_EXT_CLK:
 	case SERCOM_CTRLA_MODE_USART_INT_CLK:
