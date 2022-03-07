@@ -2569,6 +2569,10 @@ struct sdk_i2cm {
 	/* Inactive Time-Out */
 #define I2CM_CTRLA_INACTOUT_lsb			28u
 #define I2CM_CTRLA_INACTOUT_msb			29u
+#define I2CM_CTRLA_INACTOUT_DIS			0x0
+#define I2CM_CTRLA_INACTOUT_55US		0x1
+#define I2CM_CTRLA_INACTOUT_105US		0x2
+#define I2CM_CTRLA_INACTOUT_205US		0x3
 	/* SCL Low Timeout Enable */
 #define I2CM_CTRLA_LOWTOUTEN			30u
 
@@ -2581,6 +2585,9 @@ struct sdk_i2cm {
 	/* Command */
 #define I2CM_CTRLB_CMD_lsb			16u
 #define I2CM_CTRLB_CMD_msb			17u
+#define I2CM_CTRLB_CMD_ACK_START		0x1
+#define I2CM_CTRLB_CMD_ACK_READ			0x2
+#define I2CM_CTRLB_CMD_ACK_STOP			0x3
 	/* Acknowledge Action */
 #define I2CM_CTRLB_ACKACT			18u
 
@@ -2653,6 +2660,10 @@ struct sdk_i2cm {
 	/* Bus State */
 #define I2CM_STATUS_BUSSTATE_lsb		4u
 #define I2CM_STATUS_BUSSTATE_msb		5u
+#define I2CM_STATUS_BUSSTATE_UNKNOWN		0x0
+#define I2CM_STATUS_BUSSTATE_IDLE		0x1
+#define I2CM_STATUS_BUSSTATE_OWNER		0x2
+#define I2CM_STATUS_BUSSTATE_BUSY		0x3
 	/* SCL Low Timeout */
 #define I2CM_STATUS_LOWTOUT			6u
 	/* Clock Hold */

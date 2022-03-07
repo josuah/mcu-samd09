@@ -1,19 +1,13 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
-
-/* macros */
-#define MASK32(o)		(o == 31 ? 0xFFFFFFFF : (1u << (o + 1)) - 1)
-#define MASK(fld)		(MASK32(fld##_msb) ^ MASK32(fld##_lsb - 1))
+#define FF(o)			(0xFFFFFFFFu >> (31 - (o)))
+#define MASK(fld)		(FF(fld##_msb) ^ FF(fld##_lsb) ^ BIT(fld##_lsb))
 #define BIT(fld)		(1u << (fld))
 #define BITS(fld, val)		((val) << fld##_lsb)
-#define FIELD(reg, fld)		(((reg) & MASK32(fld##_msb)) >> fld##_lsb)
+#define FIELD(reg, fld)		(((reg) & FF(fld##_msb)) >> fld##_lsb)
 
 /* halt the execution */
 void __stop_program(void);
-
-/* interrupts */
-void interrupt_sercom0(void);
-void interrupt_sercom1(void);
 
 
 /* clock */
@@ -58,7 +52,7 @@ void port_set_pull_down(uint8_t pin);
 /* sercom */
 
 /* convert a pointer to a sercom base address into a ID number */
-uint8_t sercom_get_number(void *sercom);
+uint8_t sercom_get_id(void *sercom);
 
 /* return the clock rate for the already configured `sercom` */
 uint32_t sercom_get_clock_rate_hz(void *sercom);
@@ -68,6 +62,9 @@ void sercom_set_mode_i2c_master(struct sdk_sercom *sercom);
 
 /* set `sercom` to be an USART peripheral with internal clock */
 void sercom_set_mode_usart_internal(struct sdk_sercom *sercom);
+
+/* set `sercom`'s interrupts on */
+void sercom_enable_interrupts(void *sercom);
 
 
 /* usart */
@@ -132,6 +129,8 @@ void i2cm_set_master(struct sdk_i2cm *i2cm);
 /* enable `i2cm` after it was configured */
 void i2cm_enable(struct sdk_i2cm *i2cm);
 
+/* receive `i2cm` interrupt from SERCOM0 or SERCOM1 */
+void i2cm_interrupt(struct sdk_i2cm *i2cm);
 
 /* power */
 

@@ -15,32 +15,32 @@ usart_set_baud_rate(struct sdk_usart *usart, uint32_t baud_hz)
 
 	/* set to fractionnal mode baud rate calculation for better accuracy */
 	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_SAMPR))
-	  | BITS(USART_CTRLA_SAMPR, USART_CTRLA_SAMPR_16_FRACTIONAL);
+	 | BITS(USART_CTRLA_SAMPR, USART_CTRLA_SAMPR_16_FRACTIONAL);
 
 	usart->BAUD = 0
-	  | BITS(USART_BAUD_IP, clock_hz / 16 / baud_hz / 8)
-	  | BITS(USART_BAUD_FP, clock_hz / 16 / baud_hz % 8);
+	 | BITS(USART_BAUD_IP, clock_hz / 16 / baud_hz / 8)
+	 | BITS(USART_BAUD_FP, clock_hz / 16 / baud_hz % 8);
 }
 
 void
 usart_set_pinout_tx(struct sdk_usart *usart, uint8_t txpo)
 {
 	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_TXPO))
-	  | BITS(USART_CTRLA_TXPO, txpo);
+	 | BITS(USART_CTRLA_TXPO, txpo);
 }
 
 void
 usart_set_pinout_rx(struct sdk_usart *usart, uint8_t rxpo)
 {
 	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_RXPO))
-	  | BITS(USART_CTRLA_RXPO, rxpo);
+	 | BITS(USART_CTRLA_RXPO, rxpo);
 }
 
 void
 usart_set_data_bits(struct sdk_usart *usart, uint8_t bits)
 {
 	usart->CTRLB = (usart->CTRLB & ~MASK(USART_CTRLB_CHSIZE))
-	  | BITS(USART_CTRLB_CHSIZE, bits % 8);
+	 | BITS(USART_CTRLB_CHSIZE, bits % 8);
 }
 
 void
@@ -59,7 +59,7 @@ static inline void
 usart_set_parity(struct sdk_usart *usart)
 {
 	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_FORM))
-	  | BITS(USART_CTRLA_FORM, USART_CTRLA_FORM_NORMAL_PARITY);
+	 | BITS(USART_CTRLA_FORM, USART_CTRLA_FORM_NORMAL_PARITY);
 }
 
 void
@@ -117,20 +117,20 @@ usart_enable(struct sdk_usart *usart)
 void
 usart_tx_queue(struct sdk_usart *usart, uint8_t const *mem, size_t len)
 {
-	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	tx->done = 0;
 	tx->mem = (uint8_t *)mem;
 	tx->len = len;
 
 	usart->INTENSET = BIT(USART_INTENSET_DRE);
-	NVIC->ISER = BIT(9 + sercom_get_number(usart));
+	NVIC->ISER = BIT(9 + sercom_get_id(usart));
 }
 
 void
 usart_tx_wait(struct sdk_usart *usart)
 {
-	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	while (!tx->done);
 }
@@ -138,7 +138,7 @@ usart_tx_wait(struct sdk_usart *usart)
 void
 usart_rx_queue(struct sdk_usart *usart, uint8_t *mem, size_t len)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	rx->done = 0;
 	rx->mem = mem;
@@ -150,7 +150,7 @@ usart_rx_queue(struct sdk_usart *usart, uint8_t *mem, size_t len)
 static inline void
 usart_interrupt_tx_data_register_empty(struct sdk_usart *usart)
 {
-	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	if (tx->len == 0) {
 		usart->INTENCLR = BIT(USART_INTENSET_DRE);
@@ -164,7 +164,7 @@ usart_interrupt_tx_data_register_empty(struct sdk_usart *usart)
 static inline void
 usart_interrupt_tx_complete(struct sdk_usart *usart)
 {
-	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	if (tx->len == 0) {
 		usart->INTENCLR = BIT(USART_INTENSET_TXC);
@@ -175,7 +175,7 @@ usart_interrupt_tx_complete(struct sdk_usart *usart)
 static inline void
 usart_interrupt_rx_complete(struct sdk_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	(void)rx;
 }
@@ -183,7 +183,7 @@ usart_interrupt_rx_complete(struct sdk_usart *usart)
 static inline void
 usart_interrupt_rx_start(struct sdk_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	(void)rx;
 }
@@ -191,7 +191,7 @@ usart_interrupt_rx_start(struct sdk_usart *usart)
 static inline void
 usart_interrupt_rx_clear_to_send(struct sdk_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	(void)rx;
 }
@@ -199,7 +199,7 @@ usart_interrupt_rx_clear_to_send(struct sdk_usart *usart)
 static inline void
 usart_interrupt_rx_break(struct sdk_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_number(usart)];
+	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	(void)rx;
 }

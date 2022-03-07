@@ -13,19 +13,19 @@ clock_source_get_rate_hz(uint8_t srcid)
 	case GCLK_GENCTRL_SRC_GCLKIN:
 		break; // TODO
 	case GCLK_GENCTRL_SRC_GCLKGEN1:
-	       return clock_generator_get_rate_hz(1);
+		return clock_generator_get_rate_hz(1);
 	case GCLK_GENCTRL_SRC_OSCULP32K:
-	       return 32000;
+		return 32000;
 	case GCLK_GENCTRL_SRC_OSC32K:
-	       return 32000;
+		return 32000;
 	case GCLK_GENCTRL_SRC_XOSC32K:
-	       return 32000;
+		return 32000;
 	case GCLK_GENCTRL_SRC_OSC8M:
-	       return 8000000;
+		return 8000000;
 	case GCLK_GENCTRL_SRC_DFLL48M:
-	       return 48000000;
+		return 48000000;
 	case GCLK_GENCTRL_SRC_DPLL96M:
-	       return 96000000;
+		return 96000000;
 	}
 	return 0;
 }
@@ -48,7 +48,7 @@ static inline uint32_t
 clock_generator_get_rate_hz(uint8_t genid)
 {
 	return clock_source_get_rate_hz(clock_generator_get_source(genid))
-	  / clock_generator_get_div(genid);
+	 / clock_generator_get_div(genid);
 }
 
 static inline uint8_t
@@ -68,12 +68,12 @@ void
 clock_generator_init(uint8_t genid, uint8_t srcid, uint16_t div)
 {
 	GCLK->GENDIV = 0
-	  | BITS(GCLK_GENDIV_ID, genid)
-	  | BITS(GCLK_GENDIV_DIV, div);
+	 | BITS(GCLK_GENDIV_ID, genid)
+	 | BITS(GCLK_GENDIV_DIV, div);
 	GCLK->GENCTRL = 0
-	  | BITS(GCLK_GENCTRL_ID, genid)
-	  | BITS(GCLK_GENCTRL_SRC, srcid)
-	  | BIT(GCLK_GENCTRL_GENEN);
+	 | BITS(GCLK_GENCTRL_ID, genid)
+	 | BITS(GCLK_GENCTRL_SRC, srcid)
+	 | BIT(GCLK_GENCTRL_GENEN);
 	while (GCLK->STATUS & BIT(GCLK_STATUS_SYNCBUSY));
 }
 
@@ -81,8 +81,8 @@ void
 clock_generator_enable_output(uint8_t genid)
 {
 	GCLK->GENCTRL = (GCLK->GENCTRL & ~MASK(GCLK_GENCTRL_ID))
-	  | BITS(GCLK_GENCTRL_ID, genid)
-	  | BIT(GCLK_GENCTRL_OE);
+	 | BITS(GCLK_GENCTRL_ID, genid)
+	 | BIT(GCLK_GENCTRL_OE);
 	while (GCLK->STATUS & BIT(GCLK_STATUS_SYNCBUSY));
 }
 
@@ -90,8 +90,8 @@ void
 clock_init(uint8_t clkid, uint8_t genid)
 {
 	GCLK->CLKCTRL = 0
-	  | BITS(GCLK_CLKCTRL_ID, clkid)
-	  | BITS(GCLK_CLKCTRL_GEN, genid)
-	  | BIT(GCLK_CLKCTRL_CLKEN);
+	 | BITS(GCLK_CLKCTRL_ID, clkid)
+	 | BITS(GCLK_CLKCTRL_GEN, genid)
+	 | BIT(GCLK_CLKCTRL_CLKEN);
 	while (GCLK->STATUS & BIT(GCLK_STATUS_SYNCBUSY));
 }
