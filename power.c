@@ -21,3 +21,9 @@ power_on_osc8m(void)
 {
 	SYSCTRL->OSC8M |= SYSCTRL_OSC8M_ENABLE;
 }
+
+void
+power_on_dfll48m(void)
+{
+	SYSCTRL->OSC8M |= SYSCTRL_DFLLCTRL_ENABLE;
+}

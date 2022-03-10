@@ -9,102 +9,27 @@ static struct sdk_usart_buffer {
 } usart_rx[2], usart_tx[2];
 
 void
-usart_set_baud_rate(struct sdk_usart *usart, uint32_t baud_hz)
+usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo)
 {
-	uint32_t clock_hz = sercom_get_clock_rate_hz(usart);
+	uint32_t clock_hz = sercom_get_clock_hz(usart);
 
-	/* set to fractionnal mode baud rate calculation for better accuracy */
-	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_SAMPR))
-	 | BITS(USART_CTRLA_SAMPR, USART_CTRLA_SAMPR_16_FRACTIONAL);
+	usart->CTRLA = 0
+	/* asynchronous usart with internal clock */
+	 | BITS_(USART_CTRLA_MODE, USART_INT_CLK)
+	/* most common way to use usart: least significant bit first */
+	 | BIT(USART_CTRLA_DORD)
+	/* set to fractionnal baud rate for better accuracy */
+	 | BITS_(USART_CTRLA_SAMPR, 16_FRACTIONAL)
+	/* pinout mapping for the `tx` pin */
+	 | BITS(USART_CTRLA_TXPO, txpo)
+	/* pinout mapping for the `rx` pin */
+	 | BITS(USART_CTRLA_RXPO, rxpo);
 
+	/* set the baud rate integer part (IP) and fractional part (FP) */
 	usart->BAUD = 0
 	 | BITS(USART_BAUD_IP, clock_hz / 16 / baud_hz / 8)
 	 | BITS(USART_BAUD_FP, clock_hz / 16 / baud_hz % 8);
-}
 
-void
-usart_set_pinout_tx(struct sdk_usart *usart, uint8_t txpo)
-{
-	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_TXPO))
-	 | BITS(USART_CTRLA_TXPO, txpo);
-}
-
-void
-usart_set_pinout_rx(struct sdk_usart *usart, uint8_t rxpo)
-{
-	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_RXPO))
-	 | BITS(USART_CTRLA_RXPO, rxpo);
-}
-
-void
-usart_set_data_bits(struct sdk_usart *usart, uint8_t bits)
-{
-	usart->CTRLB = (usart->CTRLB & ~MASK(USART_CTRLB_CHSIZE))
-	 | BITS(USART_CTRLB_CHSIZE, bits % 8);
-}
-
-void
-usart_set_asynchronous(struct sdk_usart *usart)
-{
-	usart->CTRLA &= ~BIT(USART_CTRLA_CMODE);
-}
-
-void
-usart_set_synchronous(struct sdk_usart *usart)
-{
-	usart->CTRLA |= BIT(USART_CTRLA_CMODE);
-}
-
-static inline void
-usart_set_parity(struct sdk_usart *usart)
-{
-	usart->CTRLA = (usart->CTRLA & ~MASK(USART_CTRLA_FORM))
-	 | BITS(USART_CTRLA_FORM, USART_CTRLA_FORM_NORMAL_PARITY);
-}
-
-void
-usart_set_parity_odd(struct sdk_usart *usart)
-{
-	usart_set_parity(usart);
-	usart->CTRLB |= BIT(USART_CTRLB_PMODE);
-}
-
-void
-usart_set_parity_even(struct sdk_usart *usart)
-{
-	usart_set_parity(usart);
-	usart->CTRLB &= ~BIT(USART_CTRLB_PMODE);
-}
-
-void
-usart_set_stop_bits(struct sdk_usart *usart, uint8_t bits)
-{
-	switch (bits) {
-	case 1:
-		usart->CTRLB &= ~BIT(USART_CTRLB_SBMODE);
-		return;
-	case 2:
-		usart->CTRLB |= BIT(USART_CTRLB_SBMODE);
-		return;
-	}
-	__stop_program();
-}
-
-void
-usart_set_most_significant_bit_first(struct sdk_usart *usart)
-{
-	usart->CTRLA &= ~BIT(USART_CTRLA_DORD);
-}
-
-void
-usart_set_least_significant_bit_first(struct sdk_usart *usart)
-{
-	usart->CTRLA |= BIT(USART_CTRLA_DORD);
-}
-
-void
-usart_enable(struct sdk_usart *usart)
-{
 	/* enable the receiver and transmitter */
 	usart->CTRLB |= BIT(USART_CTRLB_RXEN) | BIT(USART_CTRLB_TXEN);
 	while (usart->SYNCBUSY & BIT(USART_SYNCBUSY_CTRLB));

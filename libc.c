@@ -3,8 +3,16 @@
 void *
 memset(void *mem, int val, size_t sz)
 {
-	for (char *cp = mem; sz > 0; sz--, cp++)
-		*cp = val;
+	for (char *mp = mem; sz > 0; sz--, mp++)
+		*mp = val;
+	return mem;
+}
+
+void *
+memcpy(void *mem, void const *src, size_t sz)
+{
+	for (char *mp = mem, *sp = (char *)src; sz > 0; mp++, sp++)
+		*mp = *sp;
 	return mem;
 }
 

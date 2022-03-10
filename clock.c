@@ -2,10 +2,10 @@
 #include "registers.h"
 #include "functions.h"
 
-static inline uint32_t clock_generator_get_rate_hz(uint8_t genid);
+static inline uint32_t clock_get_generator_hz(uint8_t genid);
 
 static inline uint32_t
-clock_source_get_rate_hz(uint8_t srcid)
+clock_source_get_hz(uint8_t srcid)
 {
 	switch (srcid) {
 	case GCLK_GENCTRL_SRC_XOSC:
@@ -13,7 +13,7 @@ clock_source_get_rate_hz(uint8_t srcid)
 	case GCLK_GENCTRL_SRC_GCLKIN:
 		break; // TODO
 	case GCLK_GENCTRL_SRC_GCLKGEN1:
-		return clock_generator_get_rate_hz(1);
+		return clock_get_generator_hz(1);
 	case GCLK_GENCTRL_SRC_OSCULP32K:
 		return 32000;
 	case GCLK_GENCTRL_SRC_OSC32K:
@@ -31,24 +31,24 @@ clock_source_get_rate_hz(uint8_t srcid)
 }
 
 static inline uint8_t
-clock_generator_get_source(uint8_t genid)
+clock_get_generator_source(uint8_t genid)
 {
 	*(uint8_t *)&GCLK->GENCTRL = genid;
 	return FIELD(GCLK->GENCTRL, GCLK_GENCTRL_SRC);
 }
 
 static inline uint8_t
-clock_generator_get_div(uint8_t genid)
+clock_get_generator_div(uint8_t genid)
 {
 	*(uint8_t *)&GCLK->GENDIV = genid;
 	return FIELD(GCLK->GENDIV, GCLK_GENDIV_DIV);
 }
 
 static inline uint32_t
-clock_generator_get_rate_hz(uint8_t genid)
+clock_get_generator_hz(uint8_t genid)
 {
-	return clock_source_get_rate_hz(clock_generator_get_source(genid))
-	 / clock_generator_get_div(genid);
+	return clock_source_get_hz(clock_get_generator_source(genid))
+	 / clock_get_generator_div(genid);
 }
 
 static inline uint8_t
@@ -59,13 +59,13 @@ clock_get_generator(uint8_t clkid)
 }
 
 uint32_t
-clock_get_rate_hz(uint8_t clkid)
+clock_get_hz(uint8_t clkid)
 {
-	return clock_generator_get_rate_hz(clock_get_generator(clkid));
+	return clock_get_generator_hz(clock_get_generator(clkid));
 }
 
 void
-clock_generator_init(uint8_t genid, uint8_t srcid, uint16_t div)
+clock_init_generator(uint8_t genid, uint8_t srcid, uint16_t div)
 {
 	GCLK->GENDIV = 0
 	 | BITS(GCLK_GENDIV_ID, genid)
@@ -78,7 +78,7 @@ clock_generator_init(uint8_t genid, uint8_t srcid, uint16_t div)
 }
 
 void
-clock_generator_enable_output(uint8_t genid)
+clock_enable_generator_output(uint8_t genid)
 {
 	GCLK->GENCTRL = (GCLK->GENCTRL & ~MASK(GCLK_GENCTRL_ID))
 	 | BITS(GCLK_GENCTRL_ID, genid)

@@ -1,5 +1,8 @@
 /* generated from SVD file, then edited by hand */
 
+#define SERCOM0_BASE 0x42000800
+#define SERCOM1_BASE 0x42000C00
+
 
 #define NVIC ((struct sdk_nvic *)0xE000E100)
 
@@ -9,25 +12,25 @@ struct sdk_nvic {
 	uint32_t volatile ISER;
 
 	/* 0x04 */
-	uint8_t volatile RESERVED1[0x80-0x04];
+	uint8_t RESERVED1[0x80-0x04];
 
 	/* 0x80: Interrupt Clear Enable Register */
 	uint32_t volatile ICER;
 
 	/* 0x84 */
-	uint8_t volatile RESERVED2[0x100-0x84];
+	uint8_t RESERVED2[0x100-0x84];
 
 	/* 0x100: Interrupt Set-Pending Register */
 	uint32_t volatile ISPR;
 
 	/* 0x104 */
-	uint8_t volatile RESERVED3[0x180-0x104];
+	uint8_t RESERVED3[0x180-0x104];
 
 	/* 0x180: Interrupt Clear-Pending Register */
 	uint32_t volatile ICPR;
 
 	/* 0x184 */
-	uint8_t volatile RESERVED4[0x300-0x184];
+	uint8_t RESERVED4[0x300-0x184];
 
 	/* 0x300: Interrupt Priority Registers */
 	uint32_t volatile IPR[8];
@@ -118,7 +121,7 @@ struct sdk_adc {
 #define ADC_CTRLB_PRESCALER_DIV512		0x7
 
 	/* 0x06 */
-	uint8_t volatile RESERVED0[0x08-0x06];
+	uint8_t RESERVED0[0x08-0x06];
 
 	/* 0x08: Window Monitor Control */
 	uint8_t volatile WINCTRL;
@@ -132,7 +135,7 @@ struct sdk_adc {
 #define ADC_WINCTRL_WINMODE_MODE4		0x4
 
 	/* 0x09 */
-	uint8_t volatile RESERVED1[0x0C-0x09];
+	uint8_t RESERVED1[0x0C-0x09];
 
 	/* 0x0C: Software Trigger */
 	uint8_t volatile SWTRIG;
@@ -142,7 +145,7 @@ struct sdk_adc {
 #define ADC_SWTRIG_START			1u
 
 	/* 0x0D */
-	uint8_t volatile RESERVED2[0x10-0x0D];
+	uint8_t RESERVED2[0x10-0x0D];
 
 	/* 0x10: Input Control */
 	uint32_t volatile INPUTCTRL;
@@ -214,7 +217,7 @@ struct sdk_adc {
 #define ADC_EVCTRL_WINMONEO			5u
 
 	/* 0x15 */
-	uint8_t volatile RESERVED3[0x16-0x15];
+	uint8_t RESERVED3[0x16-0x15];
 
 	/* 0x16: Interrupt Enable Clear */
 	uint8_t volatile INTENCLR;
@@ -267,7 +270,7 @@ struct sdk_adc {
 #define ADC_WINLT_WINLT_msb			15u
 
 	/* 0x1E */
-	uint8_t volatile RESERVED4[0x20-0x1E];
+	uint8_t RESERVED4[0x20-0x1E];
 
 	/* 0x20: Window Monitor Upper Threshold */
 	uint16_t volatile WINUT;
@@ -276,7 +279,7 @@ struct sdk_adc {
 #define ADC_WINUT_WINUT_msb			15u
 
 	/* 0x22 */
-	uint8_t volatile RESERVED5[0x24-0x22];
+	uint8_t RESERVED5[0x24-0x22];
 
 	/* 0x24: Gain Correction */
 	uint16_t volatile GAINCORR;
@@ -397,7 +400,7 @@ struct sdk_dmac {
 #define DMAC_QOSCTRL_DQOS_HIGH			0x3
 
 	/* 0x0F */
-	uint8_t volatile RESERVED0[0x10-0x0F];
+	uint8_t RESERVED0[0x10-0x0F];
 
 	/* 0x10: Software Trigger Control */
 	uint32_t volatile SWTRIGCTRL;
@@ -438,7 +441,7 @@ struct sdk_dmac {
 #define DMAC_PRICTRL0_RRLVLEN3			31u
 
 	/* 0x18 */
-	uint8_t volatile RESERVED1[0x20-0x18];
+	uint8_t RESERVED1[0x20-0x18];
 
 	/* 0x20: Interrupt Pending */
 	uint16_t volatile INTPEND;
@@ -459,7 +462,7 @@ struct sdk_dmac {
 #define DMAC_INTPEND_PEND			15u
 
 	/* 0x22 */
-	uint8_t volatile RESERVED2[0x24-0x22];
+	uint8_t RESERVED2[0x24-0x22];
 
 	/* 0x24: Interrupt Status */
 	uint32_t volatile const INTSTATUS;
@@ -538,7 +541,7 @@ struct sdk_dmac {
 #define DMAC_WRBADDR_WRBADDR_msb		31u
 
 	/* 0x3C */
-	uint8_t volatile RESERVED3[0x3F-0x3C];
+	uint8_t RESERVED3[0x3F-0x3C];
 
 	/* 0x3F: Channel ID */
 	uint8_t volatile CHID;
@@ -554,7 +557,7 @@ struct sdk_dmac {
 #define DMAC_CHCTRLA_ENABLE			1u
 
 	/* 0x41 */
-	uint8_t volatile RESERVED4[0x44-0x41];
+	uint8_t RESERVED4[0x44-0x41];
 
 	/* 0x44: Channel Control B */
 	uint32_t volatile CHCTRLB;
@@ -597,7 +600,7 @@ struct sdk_dmac {
 #define DMAC_CHCTRLB_CMD_RESUME			0x2
 
 	/* 0x48 */
-	uint8_t volatile RESERVED5[0x4C-0x48];
+	uint8_t RESERVED5[0x4C-0x48];
 
 	/* 0x4C: Channel Interrupt Enable Clear */
 	uint8_t volatile CHINTENCLR;
@@ -685,7 +688,7 @@ struct sdk_dsu {
 #define DSU_STATUSB_HPE				4u
 
 	/* 0x03 */
-	uint8_t volatile RESERVED0[0x04-0x03];
+	uint8_t RESERVED0[0x04-0x03];
 
 	/* 0x04: Address */
 	uint32_t volatile ADDR;
@@ -744,7 +747,7 @@ struct sdk_dsu {
 #define DSU_DID_PROCESSOR_3			0x3
 
 	/* 0x1C */
-	uint8_t volatile RESERVED1[0xF0-0x1C];
+	uint8_t RESERVED1[0xF0-0x1C];
 
 	/* 0xF0: Device Configuration */
 	uint32_t volatile DCFG[2];
@@ -753,7 +756,7 @@ struct sdk_dsu {
 #define DSU_DCFG_DCFG_msb			31u
 
 	/* 0x130 */
-	uint8_t volatile RESERVED2[0x1000-0x130];
+	uint8_t RESERVED2[0x1000-0x130];
 
 	/* 0x1000: CoreSight ROM Table Entry 0 */
 	uint32_t volatile const ENTRY0;
@@ -775,7 +778,7 @@ struct sdk_dsu {
 #define DSU_END_END_msb				31u
 
 	/* 0x100C */
-	uint8_t volatile RESERVED3[0x1FCC-0x100C];
+	uint8_t RESERVED3[0x1FCC-0x100C];
 
 	/* 0x1FCC: CoreSight ROM Table Memory Type */
 	uint32_t volatile const MEMTYPE;
@@ -1103,7 +1106,7 @@ struct sdk_evsys {
 #define EVSYS_CTRL_GCLKREQ			4u
 
 	/* 0x01 */
-	uint8_t volatile RESERVED0[0x04-0x01];
+	uint8_t RESERVED0[0x04-0x01];
 
 	/* 0x04: Channel */
 	uint32_t volatile CHANNEL;
@@ -1140,7 +1143,7 @@ struct sdk_evsys {
 #define EVSYS_USER_CHANNEL_0			0x0
 
 	/* 0x0A */
-	uint8_t volatile RESERVED1[0x0C-0x0A];
+	uint8_t RESERVED1[0x0C-0x0A];
 
 	/* 0x0C: Channel Status */
 	uint32_t volatile const CHSTATUS;
@@ -1367,7 +1370,7 @@ struct sdk_gclk {
 struct sdk_hmatrixb {
 
 	/* 0x0C */
-	uint8_t volatile RESERVED0[0x80-0x0C];
+	uint8_t RESERVED0[0x80-0x0C];
 
 	/* 0x80: Priority A for Slave */
 	uint64_t volatile PRAS[16];
@@ -1477,13 +1480,13 @@ struct sdk_mtb {
 	uint32_t volatile const BASE;
 
 	/* 0x10 */
-	uint8_t volatile RESERVED0[0xF00-0x10];
+	uint8_t RESERVED0[0xF00-0x10];
 
 	/* 0xF00: MTB Integration Mode Control */
 	uint32_t volatile ITCTRL;
 
 	/* 0xF04 */
-	uint8_t volatile RESERVED1[0xFA0-0xF04];
+	uint8_t RESERVED1[0xFA0-0xF04];
 
 	/* 0xFA0: MTB Claim Set */
 	uint32_t volatile CLAIMSET;
@@ -1492,7 +1495,7 @@ struct sdk_mtb {
 	uint32_t volatile CLAIMCLR;
 
 	/* 0xFA8 */
-	uint8_t volatile RESERVED2[0xFB0-0xFA8];
+	uint8_t RESERVED2[0xFB0-0xFA8];
 
 	/* 0xFB0: MTB Lock Access */
 	uint32_t volatile LOCKACCESS;
@@ -1507,7 +1510,7 @@ struct sdk_mtb {
 	uint32_t volatile const DEVARCH;
 
 	/* 0xFC0 */
-	uint8_t volatile RESERVED3[0xFC8-0xFC0];
+	uint8_t RESERVED3[0xFC8-0xFC0];
 
 	/* 0xFC8: MTB Device Configuration */
 	uint32_t volatile const DEVID;
@@ -1583,7 +1586,7 @@ struct sdk_nvmctrl {
 #define NVMCTRL_CTRLA_CMDEX_KEY			0xA5
 
 	/* 0x02 */
-	uint8_t volatile RESERVED0[0x04-0x02];
+	uint8_t RESERVED0[0x04-0x02];
 
 	/* 0x04: Control B */
 	uint32_t volatile CTRLB;
@@ -1635,7 +1638,7 @@ struct sdk_nvmctrl {
 #define NVMCTRL_INTENCLR_ERROR			1u
 
 	/* 0x0D */
-	uint8_t volatile RESERVED1[0x10-0x0D];
+	uint8_t RESERVED1[0x10-0x0D];
 
 	/* 0x10: Interrupt Enable Set */
 	uint8_t volatile INTENSET;
@@ -1645,7 +1648,7 @@ struct sdk_nvmctrl {
 #define NVMCTRL_INTENSET_ERROR			1u
 
 	/* 0x11 */
-	uint8_t volatile RESERVED2[0x14-0x11];
+	uint8_t RESERVED2[0x14-0x11];
 
 	/* 0x14: Interrupt Flag Status and Clear */
 	uint8_t volatile INTFLAG;
@@ -1655,7 +1658,7 @@ struct sdk_nvmctrl {
 #define NVMCTRL_INTFLAG_ERROR			1u
 
 	/* 0x15 */
-	uint8_t volatile RESERVED3[0x18-0x15];
+	uint8_t RESERVED3[0x18-0x15];
 
 	/* 0x18: Status */
 	uint16_t volatile STATUS;
@@ -1673,7 +1676,7 @@ struct sdk_nvmctrl {
 #define NVMCTRL_STATUS_SB			8u
 
 	/* 0x1A */
-	uint8_t volatile RESERVED4[0x1C-0x1A];
+	uint8_t RESERVED4[0x1C-0x1A];
 
 	/* 0x1C: Address */
 	uint32_t volatile ADDR;
@@ -1739,7 +1742,7 @@ struct sdk_pm {
 #define PM_EXTCTRL_SETDIS			0u
 
 	/* 0x03 */
-	uint8_t volatile RESERVED0[0x08-0x03];
+	uint8_t RESERVED0[0x08-0x03];
 
 	/* 0x08: CPU Clock Select */
 	uint8_t volatile CPUSEL;
@@ -1798,7 +1801,7 @@ struct sdk_pm {
 #define PM_APBCSEL_APBCDIV_DIV128		0x7
 
 	/* 0x0C */
-	uint8_t volatile RESERVED1[0x14-0x0C];
+	uint8_t RESERVED1[0x14-0x0C];
 
 	/* 0x14: AHB Mask */
 	uint32_t volatile AHBMASK;
@@ -1867,7 +1870,7 @@ struct sdk_pm {
 #define PM_APBCMASK_PTC				11u
 
 	/* 0x24 */
-	uint8_t volatile RESERVED2[0x34-0x24];
+	uint8_t RESERVED2[0x34-0x24];
 
 	/* 0x34: Interrupt Enable Clear */
 	uint8_t volatile INTENCLR;
@@ -1891,7 +1894,7 @@ struct sdk_pm {
 #define PM_INTFLAG_CFD				1u
 
 	/* 0x37 */
-	uint8_t volatile RESERVED3[0x38-0x37];
+	uint8_t RESERVED3[0x38-0x37];
 
 	/* 0x38: Reset Cause */
 	uint8_t volatile const RCAUSE;
@@ -2001,7 +2004,7 @@ struct sdk_port {
 #define PORT_WRCONFIG_HWSEL			31u
 
 	/* 0x2C */
-	uint8_t volatile RESERVED0[0x30-0x2C];
+	uint8_t RESERVED0[0x30-0x2C];
 
 	/* 0x30: Peripheral Multiplexing n - Group 0 */
 	uint8_t volatile PMUX[16];
@@ -2135,7 +2138,7 @@ struct sdk_rtc_mode0 {
 #define RTC_MODE0_INTFLAG_OVF			7u
 
 	/* 0x09 */
-	uint8_t volatile RESERVED0[0x0A-0x09];
+	uint8_t RESERVED0[0x0A-0x09];
 
 	/* 0x0A: Status */
 	uint8_t volatile STATUS;
@@ -2156,7 +2159,7 @@ struct sdk_rtc_mode0 {
 #define RTC_MODE0_FREQCORR_SIGN			7u
 
 	/* 0x0D */
-	uint8_t volatile RESERVED1[0x10-0x0D];
+	uint8_t RESERVED1[0x10-0x0D];
 
 	/* 0x10: MODE0 Counter Value */
 	uint32_t volatile COUNT;
@@ -2165,7 +2168,7 @@ struct sdk_rtc_mode0 {
 #define RTC_MODE0_COUNT_COUNT_msb		31u
 
 	/* 0x14 */
-	uint8_t volatile RESERVED2[0x18-0x14];
+	uint8_t RESERVED2[0x18-0x14];
 
 	/* 0x18: MODE0 Compare n Value */
 	uint32_t volatile COMP;
@@ -2277,7 +2280,7 @@ struct sdk_rtc_mode1 {
 #define RTC_MODE1_INTFLAG_OVF			7u
 
 	/* 0x09 */
-	uint8_t volatile RESERVED3[0x0A-0x09];
+	uint8_t RESERVED3[0x0A-0x09];
 
 	/* 0x0A: Status */
 	uint8_t volatile STATUS;
@@ -2298,7 +2301,7 @@ struct sdk_rtc_mode1 {
 #define RTC_MODE1_FREQCORR_SIGN			7u
 
 	/* 0x0D */
-	uint8_t volatile RESERVED4[0x10-0x0D];
+	uint8_t RESERVED4[0x10-0x0D];
 
 	/* 0x10: MODE1 Counter Value */
 	uint16_t volatile COUNT;
@@ -2307,7 +2310,7 @@ struct sdk_rtc_mode1 {
 #define RTC_MODE1_COUNT_COUNT_msb		15u
 
 	/* 0x12 */
-	uint8_t volatile RESERVED5[0x14-0x12];
+	uint8_t RESERVED5[0x14-0x12];
 
 	/* 0x14: MODE1 Counter Period */
 	uint16_t volatile PER;
@@ -2316,7 +2319,7 @@ struct sdk_rtc_mode1 {
 #define RTC_MODE1_PER_PER_msb			15u
 
 	/* 0x16 */
-	uint8_t volatile RESERVED6[0x18-0x16];
+	uint8_t RESERVED6[0x18-0x16];
 
 	/* 0x18: MODE1 Compare n Value */
 	uint16_t volatile COMP[2];
@@ -2424,7 +2427,7 @@ struct sdk_rtc_mode2 {
 #define RTC_MODE2_INTFLAG_OVF			7u
 
 	/* 0x09 */
-	uint8_t volatile RESERVED7[0x0A-0x09];
+	uint8_t RESERVED7[0x0A-0x09];
 
 	/* 0x0A: Status */
 	uint8_t volatile STATUS;
@@ -2445,7 +2448,7 @@ struct sdk_rtc_mode2 {
 #define RTC_MODE2_FREQCORR_SIGN			7u
 
 	/* 0x0D */
-	uint8_t volatile RESERVED8[0x10-0x0D];
+	uint8_t RESERVED8[0x10-0x0D];
 
 	/* 0x10: MODE2 Clock Value */
 	uint32_t volatile CLOCK;
@@ -2471,7 +2474,7 @@ struct sdk_rtc_mode2 {
 #define RTC_MODE2_CLOCK_YEAR_msb		31u
 
 	/* 0x14 */
-	uint8_t volatile RESERVED9[0x18-0x14];
+	uint8_t RESERVED9[0x18-0x14];
 
 	/* 0x18: MODE2 Alarm n Value */
 	uint32_t volatile ALARM;
@@ -2512,10 +2515,6 @@ struct sdk_rtc_mode2 {
 };
 
 
-#define SERCOM0_BASE 0x42000800
-#define SERCOM1_BASE 0x42000C00
-
-
 #define SERCOM0 ((struct sdk_sercom *)SERCOM0_BASE)
 #define SERCOM1 ((struct sdk_sercom *)SERCOM1_BASE)
 
@@ -2550,6 +2549,7 @@ struct sdk_i2cm {
 	/* Operating Mode */
 #define I2CM_CTRLA_MODE_lsb			2u
 #define I2CM_CTRLA_MODE_msb			4u
+#define I2CM_CTRLA_MODE_I2C_MASTER		0x5
 	/* Run in Standby */
 #define I2CM_CTRLA_RUNSTDBY			7u
 	/* Pin Usage */
@@ -2557,6 +2557,10 @@ struct sdk_i2cm {
 	/* SDA Hold Time */
 #define I2CM_CTRLA_SDAHOLD_lsb			20u
 #define I2CM_CTRLA_SDAHOLD_msb			21u
+#define I2CM_CTRLA_SDAHOLD_DIS			0x0
+#define I2CM_CTRLA_SDAHOLD_75_NS		0x1
+#define I2CM_CTRLA_SDAHOLD_450_NS		0x2
+#define I2CM_CTRLA_SDAHOLD_600_NS		0x3
 	/* Master SCL Low Extend Timeout */
 #define I2CM_CTRLA_MEXTTOEN			22u
 	/* Slave SCL Low Extend Timeout */
@@ -2564,15 +2568,18 @@ struct sdk_i2cm {
 	/* Transfer Speed */
 #define I2CM_CTRLA_SPEED_lsb			24u
 #define I2CM_CTRLA_SPEED_msb			25u
+#define I2CM_CTRLA_SPEED_400_KHZ_MAX		0x0
+#define I2CM_CTRLA_SPEED_1000_KHZ_MAX		0x1
+#define I2CM_CTRLA_SPEED_3400_KHZ_MAX		0x2
 	/* SCL Clock Stretch Mode */
 #define I2CM_CTRLA_SCLSM			27u
 	/* Inactive Time-Out */
 #define I2CM_CTRLA_INACTOUT_lsb			28u
 #define I2CM_CTRLA_INACTOUT_msb			29u
 #define I2CM_CTRLA_INACTOUT_DIS			0x0
-#define I2CM_CTRLA_INACTOUT_55US		0x1
-#define I2CM_CTRLA_INACTOUT_105US		0x2
-#define I2CM_CTRLA_INACTOUT_205US		0x3
+#define I2CM_CTRLA_INACTOUT_55_US		0x1
+#define I2CM_CTRLA_INACTOUT_105_US		0x2
+#define I2CM_CTRLA_INACTOUT_205_US		0x3
 	/* SCL Low Timeout Enable */
 #define I2CM_CTRLA_LOWTOUTEN			30u
 
@@ -2592,7 +2599,7 @@ struct sdk_i2cm {
 #define I2CM_CTRLB_ACKACT			18u
 
 	/* 0x08 */
-	uint8_t volatile RESERVED0[0x0C-0x08];
+	uint8_t RESERVED0[0x0C-0x08];
 
 	/* 0x0C: I2CM Baud Rate */
 	uint32_t volatile BAUD;
@@ -2611,7 +2618,7 @@ struct sdk_i2cm {
 
 
 	/* 0x10 */
-	uint8_t volatile RESERVED1[0x14-0x10];
+	uint8_t RESERVED1[0x14-0x10];
 
 	/* 0x14: I2CM Interrupt Enable Clear */
 	uint8_t volatile INTENCLR;
@@ -2623,7 +2630,7 @@ struct sdk_i2cm {
 #define I2CM_INTENCLR_ERROR			7u
 
 	/* 0x15 */
-	uint8_t volatile RESERVED2[0x16-0x15];
+	uint8_t RESERVED2[0x16-0x15];
 
 	/* 0x16: I2CM Interrupt Enable Set */
 	uint8_t volatile INTENSET;
@@ -2635,7 +2642,7 @@ struct sdk_i2cm {
 #define I2CM_INTENSET_ERROR			7u
 
 	/* 0x17 */
-	uint8_t volatile RESERVED3[0x18-0x17];
+	uint8_t RESERVED3[0x18-0x17];
 
 	/* 0x18: I2CM Interrupt Flag Status and Clear */
 	uint8_t volatile INTFLAG;
@@ -2647,7 +2654,7 @@ struct sdk_i2cm {
 #define I2CM_INTFLAG_ERROR			7u
 
 	/* 0x19 */
-	uint8_t volatile RESERVED4[0x1A-0x19];
+	uint8_t RESERVED4[0x1A-0x19];
 
 	/* 0x1A: I2CM Status */
 	uint16_t volatile STATUS;
@@ -2685,7 +2692,7 @@ struct sdk_i2cm {
 #define I2CM_SYNCBUSY_SYSOP			2u
 
 	/* 0x20 */
-	uint8_t volatile RESERVED5[0x24-0x20];
+	uint8_t RESERVED5[0x24-0x20];
 
 	/* 0x24: I2CM Address */
 	uint32_t volatile ADDR;
@@ -2709,7 +2716,7 @@ struct sdk_i2cm {
 #define I2CM_DATA_DATA_msb			7u
 
 	/* 0x29 */
-	uint8_t volatile RESERVED6[0x30-0x29];
+	uint8_t RESERVED6[0x30-0x29];
 
 	/* 0x30: I2CM Debug Control */
 	uint8_t volatile DBGCTRL;
@@ -2734,6 +2741,7 @@ struct sdk_i2cs {
 	/* Operating Mode */
 #define I2CS_CTRLA_MODE_lsb			2u
 #define I2CS_CTRLA_MODE_msb			4u
+#define I2CS_CTRLA_MODE_I2C_SLAVE		0x4
 	/* Run during Standby */
 #define I2CS_CTRLA_RUNSTDBY			7u
 	/* Pin Usage */
@@ -2741,11 +2749,18 @@ struct sdk_i2cs {
 	/* SDA Hold Time */
 #define I2CS_CTRLA_SDAHOLD_lsb			20u
 #define I2CS_CTRLA_SDAHOLD_msb			21u
+#define I2CS_CTRLA_SDAHOLD_DIS			0x0
+#define I2CS_CTRLA_SDAHOLD_75NS			0x1
+#define I2CS_CTRLA_SDAHOLD_450NS		0x2
+#define I2CS_CTRLA_SDAHOLD_600NS		0x3
 	/* Slave SCL Low Extend Timeout */
 #define I2CS_CTRLA_SEXTTOEN			23u
 	/* Transfer Speed */
 #define I2CS_CTRLA_SPEED_lsb			24u
 #define I2CS_CTRLA_SPEED_msb			25u
+#define I2CS_CTRLA_SPEED_400_KHZ_MAX		0x0
+#define I2CS_CTRLA_SPEED_1000_KHZ_MAX		0x1
+#define I2CS_CTRLA_SPEED_3400_KHZ_MAX		0x2
 	/* SCL Clock Stretch Mode */
 #define I2CS_CTRLA_SCLSM			27u
 	/* SCL Low Timeout Enable */
@@ -2769,7 +2784,7 @@ struct sdk_i2cs {
 #define I2CS_CTRLB_ACKACT			18u
 
 	/* 0x08 */
-	uint8_t volatile RESERVED7[0x14-0x08];
+	uint8_t RESERVED7[0x14-0x08];
 
 	/* 0x14: I2CS Interrupt Enable Clear */
 	uint8_t volatile INTENCLR;
@@ -2783,7 +2798,7 @@ struct sdk_i2cs {
 #define I2CS_INTENCLR_ERROR			7u
 
 	/* 0x15 */
-	uint8_t volatile RESERVED8[0x16-0x15];
+	uint8_t RESERVED8[0x16-0x15];
 
 	/* 0x16: I2CS Interrupt Enable Set */
 	uint8_t volatile INTENSET;
@@ -2797,7 +2812,7 @@ struct sdk_i2cs {
 #define I2CS_INTENSET_ERROR			7u
 
 	/* 0x17 */
-	uint8_t volatile RESERVED9[0x18-0x17];
+	uint8_t RESERVED9[0x18-0x17];
 
 	/* 0x18: I2CS Interrupt Flag Status and Clear */
 	uint8_t volatile INTFLAG;
@@ -2811,7 +2826,7 @@ struct sdk_i2cs {
 #define I2CS_INTFLAG_ERROR			7u
 
 	/* 0x19 */
-	uint8_t volatile RESERVED10[0x1A-0x19];
+	uint8_t RESERVED10[0x1A-0x19];
 
 	/* 0x1A: I2CS Status */
 	uint16_t volatile STATUS;
@@ -2842,7 +2857,7 @@ struct sdk_i2cs {
 #define I2CS_SYNCBUSY_ENABLE			1u
 
 	/* 0x20 */
-	uint8_t volatile RESERVED11[0x24-0x20];
+	uint8_t RESERVED11[0x24-0x20];
 
 	/* 0x24: I2CS Address */
 	uint32_t volatile ADDR;
@@ -2881,6 +2896,8 @@ struct sdk_spi {
 	/* Operating Mode */
 #define SPI_CTRLA_MODE_lsb			2u
 #define SPI_CTRLA_MODE_msb			4u
+#define SPI_CTRLA_MODE_SPI_SLAVE		0x2
+#define SPI_CTRLA_MODE_SPI_MASTER		0x3
 	/* Run during Standby */
 #define SPI_CTRLA_RUNSTDBY			7u
 	/* Immediate Buffer Overflow Notification */
@@ -2919,7 +2936,7 @@ struct sdk_spi {
 #define SPI_CTRLB_RXEN				17u
 
 	/* 0x08 */
-	uint8_t volatile RESERVED12[0x0C-0x08];
+	uint8_t RESERVED12[0x0C-0x08];
 
 	/* 0x0C: SPI Baud Rate */
 	uint8_t volatile BAUD;
@@ -2928,7 +2945,7 @@ struct sdk_spi {
 #define SPI_BAUD_BAUD_msb			7u
 
 	/* 0x0D */
-	uint8_t volatile RESERVED13[0x14-0x0D];
+	uint8_t RESERVED13[0x14-0x0D];
 
 	/* 0x14: SPI Interrupt Enable Clear */
 	uint8_t volatile INTENCLR;
@@ -2944,7 +2961,7 @@ struct sdk_spi {
 #define SPI_INTENCLR_ERROR			7u
 
 	/* 0x15 */
-	uint8_t volatile RESERVED14[0x16-0x15];
+	uint8_t RESERVED14[0x16-0x15];
 
 	/* 0x16: SPI Interrupt Enable Set */
 	uint8_t volatile INTENSET;
@@ -2960,7 +2977,7 @@ struct sdk_spi {
 #define SPI_INTENSET_ERROR			7u
 
 	/* 0x17 */
-	uint8_t volatile RESERVED15[0x18-0x17];
+	uint8_t RESERVED15[0x18-0x17];
 
 	/* 0x18: SPI Interrupt Flag Status and Clear */
 	uint8_t volatile INTFLAG;
@@ -2976,7 +2993,7 @@ struct sdk_spi {
 #define SPI_INTFLAG_ERROR			7u
 
 	/* 0x19 */
-	uint8_t volatile RESERVED16[0x1A-0x19];
+	uint8_t RESERVED16[0x1A-0x19];
 
 	/* 0x1A: SPI Status */
 	uint16_t volatile STATUS;
@@ -2993,7 +3010,7 @@ struct sdk_spi {
 #define SPI_SYNCBUSY_CTRLB			2u
 
 	/* 0x20 */
-	uint8_t volatile RESERVED17[0x24-0x20];
+	uint8_t RESERVED17[0x24-0x20];
 
 	/* 0x24: SPI Address */
 	uint32_t volatile ADDR;
@@ -3011,7 +3028,7 @@ struct sdk_spi {
 #define SPI_DATA_DATA_msb			8u
 
 	/* 0x2C */
-	uint8_t volatile RESERVED18[0x30-0x2C];
+	uint8_t RESERVED18[0x30-0x2C];
 
 	/* 0x30: SPI Debug Control */
 	uint8_t volatile DBGCTRL;
@@ -3036,6 +3053,8 @@ struct sdk_usart {
 	/* Operating Mode */
 #define USART_CTRLA_MODE_lsb			2u
 #define USART_CTRLA_MODE_msb			4u
+#define USART_CTRLA_MODE_USART_EXT_CLK		0x0
+#define USART_CTRLA_MODE_USART_INT_CLK		0x1
 	/* Run during Standby */
 #define USART_CTRLA_RUNSTDBY			7u
 	/* Immediate Buffer Overflow Notification */
@@ -3104,7 +3123,7 @@ struct sdk_usart {
 #define USART_CTRLB_RXEN			17u
 
 	/* 0x08 */
-	uint8_t volatile RESERVED19[0x0C-0x08];
+	uint8_t RESERVED19[0x0C-0x08];
 
 	/* 0x0C: USART Baud Rate */
 	uint16_t volatile BAUD;
@@ -3124,7 +3143,7 @@ struct sdk_usart {
 #define USART_RXPL_RXPL_msb			7u
 
 	/* 0x0F */
-	uint8_t volatile RESERVED20[0x14-0x0F];
+	uint8_t RESERVED20[0x14-0x0F];
 
 	/* 0x14: USART Interrupt Enable Clear */
 	uint8_t volatile INTENCLR;
@@ -3144,7 +3163,7 @@ struct sdk_usart {
 #define USART_INTENCLR_ERROR			7u
 
 	/* 0x15 */
-	uint8_t volatile RESERVED21[0x16-0x15];
+	uint8_t RESERVED21[0x16-0x15];
 
 	/* 0x16: USART Interrupt Enable Set */
 	uint8_t volatile INTENSET;
@@ -3164,7 +3183,7 @@ struct sdk_usart {
 #define USART_INTENSET_ERROR			7u
 
 	/* 0x17 */
-	uint8_t volatile RESERVED22[0x18-0x17];
+	uint8_t RESERVED22[0x18-0x17];
 
 	/* 0x18: USART Interrupt Flag Status and Clear */
 	uint8_t volatile INTFLAG;
@@ -3184,7 +3203,7 @@ struct sdk_usart {
 #define USART_INTFLAG_ERROR			7u
 
 	/* 0x19 */
-	uint8_t volatile RESERVED23[0x1A-0x19];
+	uint8_t RESERVED23[0x1A-0x19];
 
 	/* 0x1A: USART Status */
 	uint16_t volatile STATUS;
@@ -3211,7 +3230,7 @@ struct sdk_usart {
 #define USART_SYNCBUSY_CTRLB			2u
 
 	/* 0x20 */
-	uint8_t volatile RESERVED24[0x28-0x20];
+	uint8_t RESERVED24[0x28-0x20];
 
 	/* 0x28: USART Data */
 	uint16_t volatile DATA;
@@ -3220,7 +3239,7 @@ struct sdk_usart {
 #define USART_DATA_DATA_msb			8u
 
 	/* 0x2A */
-	uint8_t volatile RESERVED25[0x30-0x2A];
+	uint8_t RESERVED25[0x30-0x2A];
 
 	/* 0x30: USART Debug Control */
 	uint8_t volatile DBGCTRL;
@@ -3392,7 +3411,7 @@ struct sdk_sysctrl {
 #define SYSCTRL_XOSC_STARTUP_msb		15u
 
 	/* 0x12 */
-	uint8_t volatile RESERVED0[0x14-0x12];
+	uint8_t RESERVED0[0x14-0x12];
 
 	/* 0x14: 32kHz External Crystal Oscillator (XOSC32K) Control */
 	uint16_t volatile XOSC32K;
@@ -3417,7 +3436,7 @@ struct sdk_sysctrl {
 #define SYSCTRL_XOSC32K_WRTLOCK			12u
 
 	/* 0x16 */
-	uint8_t volatile RESERVED1[0x18-0x16];
+	uint8_t RESERVED1[0x18-0x16];
 
 	/* 0x18: 32kHz Internal Oscillator (OSC32K) Control */
 	uint32_t volatile OSC32K;
@@ -3449,7 +3468,7 @@ struct sdk_sysctrl {
 #define SYSCTRL_OSCULP32K_WRTLOCK		7u
 
 	/* 0x1D */
-	uint8_t volatile RESERVED2[0x20-0x1D];
+	uint8_t RESERVED2[0x20-0x1D];
 
 	/* 0x20: 8MHz Internal Oscillator (OSC8M) Control */
 	uint32_t volatile OSC8M;
@@ -3503,7 +3522,7 @@ struct sdk_sysctrl {
 #define SYSCTRL_DFLLCTRL_WAITLOCK		11u
 
 	/* 0x26 */
-	uint8_t volatile RESERVED3[0x28-0x26];
+	uint8_t RESERVED3[0x28-0x26];
 
 	/* 0x28: DFLL48M Value */
 	uint32_t volatile DFLLVAL;
@@ -3535,7 +3554,7 @@ struct sdk_sysctrl {
 #define SYSCTRL_DFLLSYNC_READREQ		7u
 
 	/* 0x31 */
-	uint8_t volatile RESERVED4[0x34-0x31];
+	uint8_t RESERVED4[0x34-0x31];
 
 	/* 0x34: 3.3V Brown-Out Detector (BOD33) Control */
 	uint32_t volatile BOD33;
@@ -3579,7 +3598,7 @@ struct sdk_sysctrl {
 #define SYSCTRL_BOD33_LEVEL_msb			21u
 
 	/* 0x38 */
-	uint8_t volatile RESERVED5[0x40-0x38];
+	uint8_t RESERVED5[0x40-0x38];
 
 	/* 0x40: Voltage References System (VREF) Control */
 	uint32_t volatile VREF;
@@ -3601,7 +3620,7 @@ struct sdk_sysctrl {
 #define SYSCTRL_DPLLCTRLA_ONDEMAND		7u
 
 	/* 0x45 */
-	uint8_t volatile RESERVED6[0x48-0x45];
+	uint8_t RESERVED6[0x48-0x45];
 
 	/* 0x48: DPLL Ratio Control */
 	uint32_t volatile DPLLRATIO;
@@ -3635,10 +3654,10 @@ struct sdk_sysctrl {
 #define SYSCTRL_DPLLCTRLB_LTIME_lsb		8u
 #define SYSCTRL_DPLLCTRLB_LTIME_msb		10u
 #define SYSCTRL_DPLLCTRLB_LTIME_NONE		0x0
-#define SYSCTRL_DPLLCTRLB_LTIME_8MS		0x4
-#define SYSCTRL_DPLLCTRLB_LTIME_9MS		0x5
-#define SYSCTRL_DPLLCTRLB_LTIME_10MS		0x6
-#define SYSCTRL_DPLLCTRLB_LTIME_11MS		0x7
+#define SYSCTRL_DPLLCTRLB_LTIME_8_MS		0x4
+#define SYSCTRL_DPLLCTRLB_LTIME_9_MS		0x5
+#define SYSCTRL_DPLLCTRLB_LTIME_10_MS		0x6
+#define SYSCTRL_DPLLCTRLB_LTIME_11_MS		0x7
 	/* Lock Bypass */
 #define SYSCTRL_DPLLCTRLB_LBYPASS		12u
 	/* Clock Divider */
@@ -3753,7 +3772,7 @@ struct sdk_tc_count8 {
 #define TC_COUNT8_CTRLC_CPTEN1			5u
 
 	/* 0x07 */
-	uint8_t volatile RESERVED0[0x08-0x07];
+	uint8_t RESERVED0[0x08-0x07];
 
 	/* 0x08: Debug Control */
 	uint8_t volatile DBGCTRL;
@@ -3761,7 +3780,7 @@ struct sdk_tc_count8 {
 #define TC_COUNT8_DBGCTRL_DBGRUN		0u
 
 	/* 0x09 */
-	uint8_t volatile RESERVED1[0x0A-0x09];
+	uint8_t RESERVED1[0x0A-0x09];
 
 	/* 0x0A: Event Control */
 	uint16_t volatile EVCTRL;
@@ -3840,7 +3859,7 @@ struct sdk_tc_count8 {
 #define TC_COUNT8_COUNT_COUNT_msb		7u
 
 	/* 0x11 */
-	uint8_t volatile RESERVED2[0x14-0x11];
+	uint8_t RESERVED2[0x14-0x11];
 
 	/* 0x14: COUNT8 Period Value */
 	uint8_t volatile PER;
@@ -3849,7 +3868,7 @@ struct sdk_tc_count8 {
 #define TC_COUNT8_PER_PER_msb			7u
 
 	/* 0x15 */
-	uint8_t volatile RESERVED3[0x18-0x15];
+	uint8_t RESERVED3[0x18-0x15];
 
 	/* 0x18: COUNT8 Compare/Capture */
 	uint8_t volatile CC[2];
@@ -3951,7 +3970,7 @@ struct sdk_tc_count16 {
 #define TC_COUNT16_CTRLC_CPTEN1			5u
 
 	/* 0x07 */
-	uint8_t volatile RESERVED4[0x08-0x07];
+	uint8_t RESERVED4[0x08-0x07];
 
 	/* 0x08: Debug Control */
 	uint8_t volatile DBGCTRL;
@@ -3959,7 +3978,7 @@ struct sdk_tc_count16 {
 #define TC_COUNT16_DBGCTRL_DBGRUN		0u
 
 	/* 0x09 */
-	uint8_t volatile RESERVED5[0x0A-0x09];
+	uint8_t RESERVED5[0x0A-0x09];
 
 	/* 0x0A: Event Control */
 	uint16_t volatile EVCTRL;
@@ -4038,7 +4057,7 @@ struct sdk_tc_count16 {
 #define TC_COUNT16_COUNT_COUNT_msb		15u
 
 	/* 0x12 */
-	uint8_t volatile RESERVED6[0x18-0x12];
+	uint8_t RESERVED6[0x18-0x12];
 
 	/* 0x18: COUNT16 Compare/Capture */
 	uint16_t volatile CC[2];
@@ -4140,7 +4159,7 @@ struct sdk_tc_count32 {
 #define TC_COUNT32_CTRLC_CPTEN1			5u
 
 	/* 0x07 */
-	uint8_t volatile RESERVED7[0x08-0x07];
+	uint8_t RESERVED7[0x08-0x07];
 
 	/* 0x08: Debug Control */
 	uint8_t volatile DBGCTRL;
@@ -4148,7 +4167,7 @@ struct sdk_tc_count32 {
 #define TC_COUNT32_DBGCTRL_DBGRUN		0u
 
 	/* 0x09 */
-	uint8_t volatile RESERVED8[0x0A-0x09];
+	uint8_t RESERVED8[0x0A-0x09];
 
 	/* 0x0A: Event Control */
 	uint16_t volatile EVCTRL;
@@ -4227,7 +4246,7 @@ struct sdk_tc_count32 {
 #define TC_COUNT32_COUNT_COUNT_msb		31u
 
 	/* 0x14 */
-	uint8_t volatile RESERVED9[0x18-0x14];
+	uint8_t RESERVED9[0x18-0x14];
 
 	/* 0x18: COUNT32 Compare/Capture */
 	uint32_t volatile CC[2];
@@ -4304,7 +4323,7 @@ struct sdk_wdt {
 #define WDT_EWCTRL_EWOFFSET_16K			0xB
 
 	/* 0x03 */
-	uint8_t volatile RESERVED0[0x04-0x03];
+	uint8_t RESERVED0[0x04-0x03];
 
 	/* 0x04: Interrupt Enable Clear */
 	uint8_t volatile INTENCLR;
