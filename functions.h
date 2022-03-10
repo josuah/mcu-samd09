@@ -81,7 +81,7 @@ void usart_interrupt(struct sdk_usart *usart);
 void i2cm_set_master(struct sdk_i2cm *i2cm);
 
 /* init `i2cm` after it was configured */
-void i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz);
+void i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t clk, uint8_t sda);
 
 /* receive `i2cm` interrupt from SERCOM0 or SERCOM1 */
 void i2cm_interrupt(struct sdk_i2cm *i2cm);

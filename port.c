@@ -11,14 +11,12 @@ port_set_gpio_output(uint8_t pin)
 void
 port_set_peripheral(uint8_t pin, uint8_t pmux)
 {
-	uint32_t reg;
-
 	/* open access to the pad to peripherals */
-	PORT->PINCFG[pin] |= BIT(PORT_PINCFG_PMUXEN) | BIT(PORT_PINCFG_PULLEN) | BIT(PORT_PINCFG_INEN) | BIT(PORT_PINCFG_DRVSTR);
+	PORT->PINCFG[pin] |= BIT(PORT_PINCFG_PMUXEN) | BIT(PORT_PINCFG_INEN) | BIT(PORT_PINCFG_DRVSTR);
 
 	/* associate the pin to the chosen module */
-	reg = PORT->PMUX[pin/2] & PORT_PMUX(pin, MASK(PORT_PMUX));
-	PORT->PMUX[pin/2] = reg | PORT_PMUX(pin, pmux);
+	PORT->PMUX[pin/2] = (PORT->PMUX[pin/2] & ~PORT_PMUX(pin, 0xFu))
+	 | PORT_PMUX(pin, pmux);
 }
 
 void

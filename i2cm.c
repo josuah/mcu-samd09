@@ -37,11 +37,31 @@ i2cm_blink(struct sdk_i2cm *i2cm)
 }
 
 void
-i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz)
+i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t scl, uint8_t sda)
 {
+	uint8_t pincfg;
+
 	/* the rising time of the clock has been ignored below, it varies
 	 * depending on the capacitance of the bus */
 	uint32_t baud = sercom_get_clock_hz(i2cm) / (baud_hz * 2) - 1;
+
+	pincfg = 0
+	/* enable peripheral multiplexing */
+	 | BIT(PORT_PINCFG_PMUXEN)
+	/* internal pull-up resistor on SCL pin */
+	 | BIT(PORT_PINCFG_PULLEN)
+	/* permit input to check for SCL pin stretching as common in I²C */
+	 | BIT(PORT_PINCFG_INEN)
+	/* increase driver strength a bit */
+	 | BIT(PORT_PINCFG_DRVSTR);
+	PORT->PINCFG[scl] = pincfg;
+	PORT->PINCFG[sda] = pincfg;
+
+	/* plug SCL and SDA pins to SERCOM */
+	PORT->PMUX[scl/2] = (PORT->PMUX[scl/2] & ~PORT_PMUX(scl, 0xFu))
+	 | PORT_PMUX(scl, PORT_PMUX_SERCOM);
+	PORT->PMUX[sda/2] = (PORT->PMUX[sda/2] & ~PORT_PMUX(sda, 0xFu))
+	 | PORT_PMUX(sda, PORT_PMUX_SERCOM);
 
 	i2cm->CTRLA = 0
 	/* time-out when SCL held low for too long */
@@ -59,8 +79,7 @@ i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz)
 	/* set SERCOM generic serial to I²C Master mode */
 	 | BITS_(I2CM_CTRLA_MODE, I2C_MASTER)
 	/* default for SDA pin hold time */
-	 | BITS_(I2CM_CTRLA_SDAHOLD, 450_NS)
-	 ;
+	 | BITS_(I2CM_CTRLA_SDAHOLD, 450_NS);
 
 //	i2cm->CTRLB = 0
 	/* this code only supports "smart mode" */
@@ -80,12 +99,12 @@ i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz)
 	/* interrupts for transaction errors */
 	 | BIT(I2CM_INTENSET_ERROR);
 
-	/* enable the I2C *after* it is configured (#27.6.2.1) */
+	/* enable the I²C *after* it is configured (#27.6.2.1) */
 	i2cm->CTRLA |= BIT(I2CM_CTRLA_ENABLE);
 	while (i2cm->SYNCBUSY & BIT(I2CM_SYNCBUSY_ENABLE));
 
-        /* we just started, we do not know in which state are the
-         * slave, but we guess and move from UNKNOWN to IDLE */
+	/* we just started, we do not know in which state are the
+	 * slave, but we guess and move from UNKNOWN to IDLE */
 	i2cm->STATUS = (i2cm->STATUS  & ~MASK(I2CM_STATUS_BUSSTATE))
 	 | BITS_(I2CM_STATUS_BUSSTATE, IDLE);
 	while (i2cm->SYNCBUSY & BIT(I2CM_SYNCBUSY_SYSOP));
@@ -96,10 +115,10 @@ i2cm_interrupt_error(struct sdk_i2cm *i2cm)
 {
 	volatile uint32_t reg;
 
-//	__asm__("bkpt");
+	port_set_pin_up(27);
 	reg = i2cm->STATUS;
-
 	(void)i2cm;
+	(void)reg;
 }
 
 static inline void
@@ -124,17 +143,14 @@ i2cm_interrupt(struct sdk_i2cm *i2cm)
 
 	if (reg & BIT(I2CM_INTFLAG_ERROR))
 		i2cm_interrupt_error(i2cm);
-	if (reg & BIT(I2CM_INTFLAG_MB))
+	else if (reg & BIT(I2CM_INTFLAG_MB))
 		i2cm_interrupt_master_on_bus(i2cm);
-	if (reg & BIT(I2CM_INTFLAG_SB))
+	else if (reg & BIT(I2CM_INTFLAG_SB))
 		i2cm_interrupt_slave_on_bus(i2cm);
 }
 
 void
 i2cm_try(struct sdk_i2cm *i2cm)
 {
-	if ((PORT->OUT & BIT(23)) == 0)
-		port_set_pin_up(27);
-
-	i2cm->ADDR = BITS(I2CM_ADDR_ADDR, (0x30 << 1) | 0);
+	i2cm->ADDR = BITS(I2CM_ADDR_ADDR, (0x1C << 1) | 0);
 }

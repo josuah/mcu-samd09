@@ -2008,7 +2008,7 @@ struct sdk_port {
 
 	/* 0x30: Peripheral Multiplexing n - Group 0 */
 	uint8_t volatile PMUX[16];
-#define PORT_PMUX(pin, x)			((x) << ((pin) % 2))
+#define PORT_PMUX(pin, x)			((x) << (pin) % 2 * 4)
 	/* Peripheral Multiplexing */
 #define PORT_PMUX_lsb				0u
 #define PORT_PMUX_msb				3u
