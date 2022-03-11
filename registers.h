@@ -2881,8 +2881,8 @@ struct sdk_i2cs {
 };
 
 
-#define SPIS0 ((struct sdk_spi *)SERCOM0_BASE)
-#define SPIS1 ((struct sdk_spi *)SERCOM1_BASE)
+#define SPI0 ((struct sdk_spi *)SERCOM0_BASE)
+#define SPI1 ((struct sdk_spi *)SERCOM1_BASE)
 
 /* SERCOM: Serial Communication Interface 0: SPI Mode */
 struct sdk_spi {
@@ -2905,12 +2905,22 @@ struct sdk_spi {
 	/* Data Out Pinout */
 #define SPI_CTRLA_DOPO_lsb			16u
 #define SPI_CTRLA_DOPO_msb			17u
+#define SPI_CTRLA_DOPO_MOSI0_SCK1_SS2		0x0
+#define SPI_CTRLA_DOPO_MOSI2_SCK3_SS1		0x1
+#define SPI_CTRLA_DOPO_MOSI3_SCK1_SS2		0x2
+#define SPI_CTRLA_DOPO_MOSI0_SCK3_SS1		0x3
 	/* Data In Pinout */
 #define SPI_CTRLA_DIPO_lsb			20u
 #define SPI_CTRLA_DIPO_msb			21u
+#define SPI_CTRLA_DIPO_MISO0			0x0
+#define SPI_CTRLA_DIPO_MISO1			0x1
+#define SPI_CTRLA_DIPO_MISO2			0x2
+#define SPI_CTRLA_DIPO_MISO3			0x3
 	/* Frame Format */
 #define SPI_CTRLA_FORM_lsb			24u
 #define SPI_CTRLA_FORM_msb			27u
+#define SPI_CTRLA_FORM_SPI			0x0
+#define SPI_CTRLA_FORM_SPI_ADDR			0x1
 	/* Clock Phase */
 #define SPI_CTRLA_CPHA				28u
 	/* Clock Polarity */
@@ -2923,6 +2933,8 @@ struct sdk_spi {
 	/* Character Size */
 #define SPI_CTRLB_CHSIZE_lsb			0u
 #define SPI_CTRLB_CHSIZE_msb			2u
+#define SPI_CTRLB_CHSIZE_8BIT			0x0
+#define SPI_CTRLB_CHSIZE_9BIT			0x1
 	/* Data Preload Enable */
 #define SPI_CTRLB_PLOADEN			6u
 	/* Slave Select Low Detect Enable */

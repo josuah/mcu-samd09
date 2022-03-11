@@ -8,48 +8,11 @@ static struct sdk_i2cm_ctx {
 	uint8_t volatile status;
 } i2cm_ctx[2];
 
-static void
-led(uint8_t duty_cycle_percent)
-{
-	for (uint32_t i = 0; i < 10; i++) {
-		for (uint8_t ii = 0; ii < duty_cycle_percent; ii++)
-			port_set_pin_up(27);
-		for (uint8_t ii = duty_cycle_percent; ii < 100; ii++)
-			port_set_pin_down(27);
-	}
-}
-
 void
-i2cm_blink(struct sdk_i2cm *i2cm)
-{
-	switch (FIELD(i2cm->STATUS, I2CM_STATUS_BUSSTATE)) {
-	case I2CM_STATUS_BUSSTATE_UNKNOWN:
-		led(100); led(0); led(0); led(0);
-		led(0); led(0); led(0); led(0);
-		break;
-	case I2CM_STATUS_BUSSTATE_IDLE:
-		led(1); led(1); led(1); led(1);
-		led(1); led(1); led(1); led(1);
-		break;
-	case I2CM_STATUS_BUSSTATE_OWNER:
-		led(55); led(50); led(50); led(50);
-		led(55); led(50); led(50); led(50);
-		break;
-	case I2CM_STATUS_BUSSTATE_BUSY:
-		led(70); led(80); led(90); led(100);
-		led(90); led(80); led(70); led(60);
-		break;
-	}
-}
-
-void
-i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t scl, uint8_t sda)
+i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t pin_scl, uint8_t pin_sda)
 {
 	uint8_t pincfg;
-
-	/* the rising time of the clock has been ignored below, it varies
-	 * depending on the capacitance of the bus */
-	uint32_t baud = sercom_get_clock_hz(i2cm) / (baud_hz * 2) - 1;
+	uint32_t baud;
 
 	pincfg = 0
 	/* enable peripheral multiplexing */
@@ -60,14 +23,14 @@ i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t scl, uint8_t sda)
 	 | BIT(PORT_PINCFG_INEN)
 	/* increase driver strength a bit */
 	 | BIT(PORT_PINCFG_DRVSTR);
-	PORT->PINCFG[scl] = pincfg;
-	PORT->PINCFG[sda] = pincfg;
+	PORT->PINCFG[pin_scl] = pincfg;
+	PORT->PINCFG[pin_sda] = pincfg;
 
 	/* plug SCL and SDA pins to SERCOM */
-	PORT->PMUX[scl/2] = (PORT->PMUX[scl/2] & ~PORT_PMUX(scl, 0xFu))
-	 | PORT_PMUX(scl, PORT_PMUX_SERCOM);
-	PORT->PMUX[sda/2] = (PORT->PMUX[sda/2] & ~PORT_PMUX(sda, 0xFu))
-	 | PORT_PMUX(sda, PORT_PMUX_SERCOM);
+	PORT->PMUX[pin_scl/2] = (PORT->PMUX[pin_scl/2] & ~PORT_PMUX(pin_scl, 0xFu))
+	 | PORT_PMUX(pin_scl, PORT_PMUX_SERCOM);
+	PORT->PMUX[pin_sda/2] = (PORT->PMUX[pin_sda/2] & ~PORT_PMUX(pin_sda, 0xFu))
+	 | PORT_PMUX(pin_sda, PORT_PMUX_SERCOM);
 
 	i2cm->CTRLA = 0
 	/* time-out when SCL held low for too long */
@@ -87,9 +50,13 @@ i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t scl, uint8_t sda)
 	/* default for SDA pin hold time */
 	 | BITS(I2CM_CTRLA_SDAHOLD, I2CM_CTRLA_SDAHOLD_450_NS);
 
-//	i2cm->CTRLB = 0
+	i2cm->CTRLB = 0
 	/* this code only supports "smart mode" */
-//	 | BIT(I2CM_CTRLB_SMEN);
+	 | BIT(I2CM_CTRLB_SMEN);
+
+	/* the rising time of the clock has been ignored below, it varies
+	 * depending on the capacitance of the bus */
+	baud = sercom_get_clock_hz(sercom_get_id(i2cm)) / (baud_hz * 2) - 1;
 
 	i2cm->BAUD = 0
 	/* set the baud rate for high-speed mode */
@@ -105,7 +72,7 @@ i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t scl, uint8_t sda)
 	/* interrupts for transaction errors */
 	 | BIT(I2CM_INTENSET_ERROR);
 
-	/* enable the I²C *after* it is configured (#27.6.2.1) */
+	/* enable I²C *after* it is configured (#27.6.2.1) */
 	i2cm->CTRLA |= BIT(I2CM_CTRLA_ENABLE);
 	while (i2cm->SYNCBUSY & BIT(I2CM_SYNCBUSY_ENABLE));
 

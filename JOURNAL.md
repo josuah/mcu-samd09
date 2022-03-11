@@ -144,3 +144,11 @@ Flushing data to the screen seems to be slow, and I did not really
 check reading data from the bus, but the core of the implementation
 is there and works. I can place pixels on the screen using an
 existing driver that was working with an ATmega328P.
+
+Now getting SPI to work. Going step by step through the datasheet,
+taking model on the existing SERCOM drivers, and it actually got
+me a clock and data output on first try! 6 days for I2C, 6 hours
+for SPI? But fixing I2C also fixed common code.
+
+Better fix these early on then. Refactoring can help with shortening
+the delays after all...

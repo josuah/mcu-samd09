@@ -11,7 +11,7 @@ static struct sdk_usart_buffer {
 void
 usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo)
 {
-	uint32_t clock_hz = sercom_get_clock_hz(usart);
+	uint32_t clock_hz = sercom_get_clock_hz(sercom_get_id(usart));
 
 	usart->CTRLA = 0
 	/* asynchronous usart with internal clock */
