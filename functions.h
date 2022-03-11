@@ -4,7 +4,6 @@
 #define MASK(fld)		(FF(fld##_msb) ^ FF(fld##_lsb) ^ BIT(fld##_lsb))
 #define BIT(fld)		(1u << (fld))
 #define BITS(fld, val)		((val) << fld##_lsb)
-#define BITS_(fld, val)		BITS(fld, fld##_##val)
 #define FIELD(reg, fld)		(((reg) & FF(fld##_msb)) >> fld##_lsb)
 
 /* CLOCK */
@@ -55,24 +54,24 @@ uint8_t sercom_get_id(void *sercom);
 /* return the clock rate for the already configured `sercom` */
 uint32_t sercom_get_clock_hz(void *sercom);
 
-/* set `sercom`'s interrupts on */
-void sercom_enable_interrupts(uint8_t sercom_id);
-
 /* USART */
 
 /* init the usart, to call last before sending data */
 void usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo);
 
-/* transmit one byte over `usart` */
-void usart_tx_queue(struct sdk_usart *usart, uint8_t const *buf, size_t len);
+/* queue a transmission of `buf` of size `sz` over `usart` TX pin */
+void usart_queue_tx(struct sdk_usart *usart, uint8_t const *buf, size_t sz);
+
+/* queue a reception to `buf` of size `sz` over `usart` RX pin */
+void usart_queue_rx(struct sdk_usart *usart, uint8_t *buf, size_t sz);
 
 /* wait for `usart` transmission to complete */
-void usart_tx_wait(struct sdk_usart *usart);
+void usart_wait_tx(struct sdk_usart *usart);
 
-/* receive one byte over `usart` */
-void usart_rx_queue(struct sdk_usart *usart, uint8_t *buf, size_t len);
+/* wait for `usart` reception to complete */
+void usart_wait_rx(struct sdk_usart *usart);
 
-/* interrupt coming from SERCOM0 or SERCOM1 */
+/* interrupt coming from a generic SERCOM interface */
 void usart_interrupt(struct sdk_usart *usart);
 
 /* I2CM */
@@ -86,11 +85,14 @@ void i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t clk, uint8_t sda
 /* receive `i2cm` interrupt from SERCOM0 or SERCOM1 */
 void i2cm_interrupt(struct sdk_i2cm *i2cm);
 
-/* blink with a pattern depending on `i2cm`'s bus status */
-void i2cm_blink(struct sdk_i2cm *i2cm);
+/* queue a transmission of `buf` of size `sz` to `addr` over `i2cm` */
+void i2cm_queue_tx(struct sdk_i2cm *i2cm, uint8_t addr, uint8_t const *mem, size_t sz);
 
-/* endlessly try, this is the way */
-void i2cm_try(struct sdk_i2cm *i2cm);
+/* queue a transmission of `buf` of size `sz` to `addr` over `i2cm` */
+void i2cm_queue_rx(struct sdk_i2cm *i2cm, uint8_t addr, uint8_t *mem, size_t sz);
+
+/* wait for `i2cm` to complete transmission or reception */
+int i2cm_wait(struct sdk_i2cm *i2cm);
 
 /* POWER */
 
@@ -99,7 +101,6 @@ void power_on_sercom0(void);
 void power_on_sercom1(void);
 void power_on_osc8m(void);
 void power_on_dfll48m(void);
-
 
 /* SYSCTRL */
 

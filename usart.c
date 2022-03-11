@@ -4,8 +4,8 @@
 
 static struct sdk_usart_buffer {
 	uint8_t *mem;
-	size_t len;
-	uint8_t volatile done;
+	size_t sz;
+	int volatile done;
 } usart_rx[2], usart_tx[2];
 
 void
@@ -15,11 +15,11 @@ usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo
 
 	usart->CTRLA = 0
 	/* asynchronous usart with internal clock */
-	 | BITS_(USART_CTRLA_MODE, USART_INT_CLK)
+	 | BITS(USART_CTRLA_MODE, USART_CTRLA_MODE_USART_INT_CLK)
 	/* most common way to use usart: least significant bit first */
 	 | BIT(USART_CTRLA_DORD)
 	/* set to fractionnal baud rate for better accuracy */
-	 | BITS_(USART_CTRLA_SAMPR, 16_FRACTIONAL)
+	 | BITS(USART_CTRLA_SAMPR, USART_CTRLA_SAMPR_16_FRACTIONAL)
 	/* pinout mapping for the `tx` pin */
 	 | BITS(USART_CTRLA_TXPO, txpo)
 	/* pinout mapping for the `rx` pin */
@@ -40,20 +40,20 @@ usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo
 }
 
 void
-usart_tx_queue(struct sdk_usart *usart, uint8_t const *mem, size_t len)
+usart_queue_tx(struct sdk_usart *usart, uint8_t const *mem, size_t sz)
 {
 	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	tx->done = 0;
 	tx->mem = (uint8_t *)mem;
-	tx->len = len;
+	tx->sz = sz;
 
 	usart->INTENSET = BIT(USART_INTENSET_DRE);
 	NVIC->ISER = BIT(9 + sercom_get_id(usart));
 }
 
 void
-usart_tx_wait(struct sdk_usart *usart)
+usart_wait_tx(struct sdk_usart *usart)
 {
 	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
@@ -61,15 +61,23 @@ usart_tx_wait(struct sdk_usart *usart)
 }
 
 void
-usart_rx_queue(struct sdk_usart *usart, uint8_t *mem, size_t len)
+usart_queue_rx(struct sdk_usart *usart, uint8_t *mem, size_t sz)
 {
 	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	rx->done = 0;
 	rx->mem = mem;
-	rx->len = len;
+	rx->sz = sz;
 
 	usart->INTENSET = BIT(USART_INTENSET_RXC);
+}
+
+void
+usart_wait_rx(struct sdk_usart *usart)
+{
+	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
+
+	while (!rx->done);
 }
 
 static inline void
@@ -77,12 +85,12 @@ usart_interrupt_tx_data_register_empty(struct sdk_usart *usart)
 {
 	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
-	if (tx->len == 0) {
+	if (tx->sz == 0) {
 		usart->INTENCLR = BIT(USART_INTENSET_DRE);
 		usart->INTENSET = BIT(USART_INTENSET_TXC);
 	} else {
 		usart->DATA = *tx->mem++;
-		tx->len--;
+		tx->sz--;
 	}
 }
 
@@ -91,7 +99,7 @@ usart_interrupt_tx_complete(struct sdk_usart *usart)
 {
 	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
-	if (tx->len == 0) {
+	if (tx->sz == 0) {
 		usart->INTENCLR = BIT(USART_INTENSET_TXC);
 		tx->done = 1;
 	}

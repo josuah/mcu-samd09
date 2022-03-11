@@ -21,9 +21,3 @@ sercom_get_clock_hz(void *sercom)
 	}
 	return 0;
 }
-
-void
-sercom_enable_interrupts(uint8_t sercom_id)
-{
-	NVIC->ISER = BIT(9 + sercom_id);
-}

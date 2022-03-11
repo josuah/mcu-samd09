@@ -2,6 +2,12 @@
 #include "registers.h"
 #include "functions.h"
 
+static struct sdk_i2cm_ctx {
+	uint8_t *buf;
+	size_t sz;
+	uint8_t volatile status;
+} i2cm_ctx[2];
+
 static void
 led(uint8_t duty_cycle_percent)
 {
@@ -67,7 +73,7 @@ i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t scl, uint8_t sda)
 	/* time-out when SCL held low for too long */
 	 | BIT(I2CM_CTRLA_LOWTOUTEN)
 	/* default for inactivity time-out */
-	 | BITS_(I2CM_CTRLA_INACTOUT, 205_US)
+	 | BITS(I2CM_CTRLA_INACTOUT, I2CM_CTRLA_INACTOUT_205_US)
 	/* allow SCL pin to be stretched by the slave */
 	 | BIT(I2CM_CTRLA_SCLSM)
 	/* time-out and reset ourself when a slave stretches SCL for 25ms */
@@ -75,11 +81,11 @@ i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t scl, uint8_t sda)
 	/* time-out and reset ourself when a slave stretches SCL for 10ms */
 	 | BIT(I2CM_CTRLA_MEXTTOEN)
 	/* default speed mode to standard speed */
-	 | BITS_(I2CM_CTRLA_SPEED, 400_KHZ_MAX)
+	 | BITS(I2CM_CTRLA_SPEED, I2CM_CTRLA_SPEED_400_KHZ_MAX)
 	/* set SERCOM generic serial to I²C Master mode */
-	 | BITS_(I2CM_CTRLA_MODE, I2C_MASTER)
+	 | BITS(I2CM_CTRLA_MODE, I2CM_CTRLA_MODE_I2C_MASTER)
 	/* default for SDA pin hold time */
-	 | BITS_(I2CM_CTRLA_SDAHOLD, 450_NS);
+	 | BITS(I2CM_CTRLA_SDAHOLD, I2CM_CTRLA_SDAHOLD_450_NS);
 
 //	i2cm->CTRLB = 0
 	/* this code only supports "smart mode" */
@@ -106,51 +112,98 @@ i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t scl, uint8_t sda)
 	/* we just started, we do not know in which state are the
 	 * slave, but we guess and move from UNKNOWN to IDLE */
 	i2cm->STATUS = (i2cm->STATUS  & ~MASK(I2CM_STATUS_BUSSTATE))
-	 | BITS_(I2CM_STATUS_BUSSTATE, IDLE);
+	 | BITS(I2CM_STATUS_BUSSTATE, I2CM_STATUS_BUSSTATE_IDLE);
 	while (i2cm->SYNCBUSY & BIT(I2CM_SYNCBUSY_SYSOP));
+
+	/* interrupt will be triggered as soon as I2CM->ADDR is written */
+	NVIC->ISER = BIT(9 + sercom_get_id(i2cm));
 }
 
 static inline void
-i2cm_interrupt_error(struct sdk_i2cm *i2cm)
+i2cm_interrupt_error(struct sdk_i2cm *i2cm, struct sdk_i2cm_ctx *ctx)
 {
-	volatile uint32_t reg;
-
-	port_set_pin_up(27);
-	reg = i2cm->STATUS;
-	(void)i2cm;
-	(void)reg;
-}
-
-static inline void
-i2cm_interrupt_master_on_bus(struct sdk_i2cm *i2cm)
-{
-	if (i2cm->STATUS & BIT(I2CM_STATUS_RXNACK)) {
+	if (FIELD(i2cm->STATUS, I2CM_STATUS_BUSSTATE)
+	 == I2CM_STATUS_BUSSTATE_BUSY) {
+		i2cm->CTRLB &= ~BIT(I2CM_CTRLB_ACKACT);
+		i2cm->CTRLB = (i2cm->CTRLB & ~MASK(I2CM_CTRLB_CMD))
+		 | BITS(I2CM_CTRLB_CMD, I2CM_CTRLB_CMD_ACK_STOP);
 	}
-	if (i2cm->STATUS & BIT(I2CM_STATUS_ARBLOST)) {
+	ctx->status = -1;
+}
+
+static inline void
+i2cm_interrupt_master_on_bus(struct sdk_i2cm *i2cm, struct sdk_i2cm_ctx *ctx)
+{
+	if (ctx->sz == 0) {
+		i2cm->CTRLB = (i2cm->CTRLB & ~MASK(I2CM_CTRLB_CMD))
+		 | BITS(I2CM_CTRLB_CMD, I2CM_CTRLB_CMD_ACK_STOP);
+		ctx->status = 0;
+	} else {
+		i2cm->DATA = *ctx->buf++;
+		ctx->sz--;
 	}
 }
 
 static inline void
-i2cm_interrupt_slave_on_bus(struct sdk_i2cm *i2cm)
+i2cm_interrupt_slave_on_bus(struct sdk_i2cm *i2cm, struct sdk_i2cm_ctx *ctx)
 {
-	(void)i2cm;
+	if (ctx->sz == 0) {
+		i2cm->CTRLB &= ~BIT(I2CM_CTRLB_ACKACT);
+		i2cm->CTRLB = (i2cm->CTRLB & ~MASK(I2CM_CTRLB_CMD))
+		 | BITS(I2CM_CTRLB_CMD, I2CM_CTRLB_CMD_ACK_STOP);
+		ctx->status = 0;
+	} else {
+		*ctx->buf++ = i2cm->DATA;
+		ctx->sz--;
+	}
 }
 
 void
 i2cm_interrupt(struct sdk_i2cm *i2cm)
 {
+	struct sdk_i2cm_ctx *ctx = &i2cm_ctx[sercom_get_id(i2cm)];
 	uint8_t reg = i2cm->INTFLAG;
 
 	if (reg & BIT(I2CM_INTFLAG_ERROR))
-		i2cm_interrupt_error(i2cm);
+		i2cm_interrupt_error(i2cm, ctx);
 	else if (reg & BIT(I2CM_INTFLAG_MB))
-		i2cm_interrupt_master_on_bus(i2cm);
+		i2cm_interrupt_master_on_bus(i2cm, ctx);
 	else if (reg & BIT(I2CM_INTFLAG_SB))
-		i2cm_interrupt_slave_on_bus(i2cm);
+		i2cm_interrupt_slave_on_bus(i2cm, ctx);
+}
+
+static inline void
+i2cm_queue(struct sdk_i2cm *i2cm, uint8_t addr, uint8_t *buf, size_t sz, uint8_t rw)
+{
+	struct sdk_i2cm_ctx *ctx = &i2cm_ctx[sercom_get_id(i2cm)];
+
+	ctx->status = 1;
+	ctx->buf = buf;
+	ctx->sz = sz;
+
+        /* this starts to send the address immediately */
+	i2cm->ADDR = BITS(I2CM_ADDR_ADDR, (addr << 1) | rw);
+
+	/* that's it, the rest happens in interrupts */
 }
 
 void
-i2cm_try(struct sdk_i2cm *i2cm)
+i2cm_queue_tx(struct sdk_i2cm *i2cm, uint8_t addr, uint8_t const *buf, size_t sz)
 {
-	i2cm->ADDR = BITS(I2CM_ADDR_ADDR, (0x1C << 1) | 0);
+	i2cm_queue(i2cm, addr, (uint8_t *)buf, sz, 0);
+}
+
+void
+i2cm_queue_rx(struct sdk_i2cm *i2cm, uint8_t addr, uint8_t *buf, size_t sz)
+{
+	i2cm_queue(i2cm, addr, buf, sz, 1);
+}
+
+int
+i2cm_wait(struct sdk_i2cm *i2cm)
+{
+	struct sdk_i2cm_ctx *ctx = &i2cm_ctx[sercom_get_id(i2cm)];
+
+	while (ctx->status > 0);
+	return ctx->status;
 }

@@ -2,7 +2,6 @@
 #include "registers.h"
 #include "functions.h"
 
-#define LED		27
 #define USART0_RX	17
 #define USART0_TX	22
 
@@ -11,7 +10,6 @@ main(void)
 {
 	char *str = "hello world\r\n";
 
-	port_set_gpio_output(LED);
 	port_set_peripheral_input(USART0_RX, PORT_PMUX_SERCOM);
 	port_set_peripheral_output(USART0_TX, PORT_PMUX_SERCOM);
 
@@ -25,8 +23,6 @@ main(void)
 	for (;;) {
 		usart_tx_queue(USART0, (uint8_t *)str, strlen(str));
 		usart_tx_wait(USART0);
-		port_set_pin_up(LED);
-		port_set_pin_down(LED);
 	}
 
 	return 0;

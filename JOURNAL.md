@@ -129,4 +129,18 @@ on trigger? Oh yes I can! Logic analizer acquired!
 I can clearly see the signal of both the SCL and SDA pins showing
 up on the oscilloscope. We did it. Taking a break, see you later.
 
-*"Fish, Silent Cruise" playing on the background as end credits*
+*"Fish, Silent Cruise" playing on the background.*
+
+From that, I could get an answer from an SSD1306 screen. Let's
+keep going.
+
+Day 5
+-----
+The SSD1306 screen was reactiing to the writes, but I was never
+sending a stop condition. That is done through the I2CM.CTRLB.CMD
+field, in either read, or write.
+
+Flushing data to the screen seems to be slow, and I did not really
+check reading data from the bus, but the core of the implementation
+is there and works. I can place pixels on the screen using an
+existing driver that was working with an ATmega328P.
