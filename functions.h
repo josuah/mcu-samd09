@@ -2,10 +2,10 @@
 #define FUNCTIONS_H
 
 #define FF(o)			(0xFFFFFFFFu >> (31 - (o)))
-#define MASK(fld)		(FF(fld##_msb) ^ FF(fld##_lsb) ^ BIT(fld##_lsb))
+#define MASK(fld)		(FF(fld##_Msb) ^ FF(fld##_Lsb) ^ BIT(fld##_Lsb))
 #define BIT(fld)		(1u << (fld))
-#define BITS(fld, val)		((val) << fld##_lsb)
-#define FIELD(reg, fld)		(((reg) & FF(fld##_msb)) >> fld##_lsb)
+#define BITS(fld, val)		((val) << fld##_Lsb)
+#define FIELD(reg, fld)		(((reg) & FF(fld##_Msb)) >> fld##_Lsb)
 
 /*** USART ***/
 

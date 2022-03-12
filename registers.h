@@ -55,8 +55,8 @@ struct sdk_adc {
 	/* 0x01: Reference Control */
 	uint8_t volatile REFCTRL;
 	/* Reference Selection */
-#define ADC_REFCTRL_REFSEL_lsb			0u
-#define ADC_REFCTRL_REFSEL_msb			3u
+#define ADC_REFCTRL_REFSEL_Lsb			0u
+#define ADC_REFCTRL_REFSEL_Msb			3u
 #define ADC_REFCTRL_REFSEL_INT1V		0x0
 #define ADC_REFCTRL_REFSEL_INTVCC0		0x1
 #define ADC_REFCTRL_REFSEL_INTVCC1		0x2
@@ -68,8 +68,8 @@ struct sdk_adc {
 	/* 0x02: Average Control */
 	uint8_t volatile AVGCTRL;
 	/* Number of Samples to be Collected */
-#define ADC_AVGCTRL_SAMPLENUM_lsb		0u
-#define ADC_AVGCTRL_SAMPLENUM_msb		3u
+#define ADC_AVGCTRL_SAMPLENUM_Lsb		0u
+#define ADC_AVGCTRL_SAMPLENUM_Msb		3u
 #define ADC_AVGCTRL_SAMPLENUM_1			0x0
 #define ADC_AVGCTRL_SAMPLENUM_2			0x1
 #define ADC_AVGCTRL_SAMPLENUM_4			0x2
@@ -82,14 +82,14 @@ struct sdk_adc {
 #define ADC_AVGCTRL_SAMPLENUM_512		0x9
 #define ADC_AVGCTRL_SAMPLENUM_1024		0xA
 	/* Adjusting Result / Division Coefficient */
-#define ADC_AVGCTRL_ADJRES_lsb			4u
-#define ADC_AVGCTRL_ADJRES_msb			6u
+#define ADC_AVGCTRL_ADJRES_Lsb			4u
+#define ADC_AVGCTRL_ADJRES_Msb			6u
 
 	/* 0x03: Sampling Time Control */
 	uint8_t volatile SAMPCTRL;
 	/* Sampling Time Length */
-#define ADC_SAMPCTRL_SAMPLEN_lsb		0u
-#define ADC_SAMPCTRL_SAMPLEN_msb		5u
+#define ADC_SAMPCTRL_SAMPLEN_Lsb		0u
+#define ADC_SAMPCTRL_SAMPLEN_Msb		5u
 
 	/* 0x04: Control B */
 	uint16_t volatile CTRLB;
@@ -102,15 +102,15 @@ struct sdk_adc {
 	/* Digital Correction Logic Enabled */
 #define ADC_CTRLB_CORREN			3u
 	/* Conversion Result Resolution */
-#define ADC_CTRLB_RESSEL_lsb			4u
-#define ADC_CTRLB_RESSEL_msb			5u
+#define ADC_CTRLB_RESSEL_Lsb			4u
+#define ADC_CTRLB_RESSEL_Msb			5u
 #define ADC_CTRLB_RESSEL_12BIT			0x0
 #define ADC_CTRLB_RESSEL_16BIT			0x1
 #define ADC_CTRLB_RESSEL_10BIT			0x2
 #define ADC_CTRLB_RESSEL_8BIT			0x3
 	/* Prescaler Configuration */
-#define ADC_CTRLB_PRESCALER_lsb			8u
-#define ADC_CTRLB_PRESCALER_msb			10u
+#define ADC_CTRLB_PRESCALER_Lsb			8u
+#define ADC_CTRLB_PRESCALER_Msb			10u
 #define ADC_CTRLB_PRESCALER_DIV4		0x0
 #define ADC_CTRLB_PRESCALER_DIV8		0x1
 #define ADC_CTRLB_PRESCALER_DIV16		0x2
@@ -126,8 +126,8 @@ struct sdk_adc {
 	/* 0x08: Window Monitor Control */
 	uint8_t volatile WINCTRL;
 	/* Window Monitor Mode */
-#define ADC_WINCTRL_WINMODE_lsb			0u
-#define ADC_WINCTRL_WINMODE_msb			2u
+#define ADC_WINCTRL_WINMODE_Lsb			0u
+#define ADC_WINCTRL_WINMODE_Msb			2u
 #define ADC_WINCTRL_WINMODE_DISABLE		0x0
 #define ADC_WINCTRL_WINMODE_MODE1		0x1
 #define ADC_WINCTRL_WINMODE_MODE2		0x2
@@ -150,8 +150,8 @@ struct sdk_adc {
 	/* 0x10: Input Control */
 	uint32_t volatile INPUTCTRL;
 	/* Positive Mux Input Selection */
-#define ADC_INPUTCTRL_MUXPOS_lsb		0u
-#define ADC_INPUTCTRL_MUXPOS_msb		4u
+#define ADC_INPUTCTRL_MUXPOS_Lsb		0u
+#define ADC_INPUTCTRL_MUXPOS_Msb		4u
 #define ADC_INPUTCTRL_MUXPOS_PIN0		0x0
 #define ADC_INPUTCTRL_MUXPOS_PIN1		0x1
 #define ADC_INPUTCTRL_MUXPOS_PIN2		0x2
@@ -177,8 +177,8 @@ struct sdk_adc {
 #define ADC_INPUTCTRL_MUXPOS_SCALEDCOREVCC	0x1A
 #define ADC_INPUTCTRL_MUXPOS_SCALEDIOVCC	0x1B
 	/* Negative Mux Input Selection */
-#define ADC_INPUTCTRL_MUXNEG_lsb		8u
-#define ADC_INPUTCTRL_MUXNEG_msb		12u
+#define ADC_INPUTCTRL_MUXNEG_Lsb		8u
+#define ADC_INPUTCTRL_MUXNEG_Msb		12u
 #define ADC_INPUTCTRL_MUXNEG_PIN0		0x0
 #define ADC_INPUTCTRL_MUXNEG_PIN1		0x1
 #define ADC_INPUTCTRL_MUXNEG_PIN2		0x2
@@ -190,14 +190,14 @@ struct sdk_adc {
 #define ADC_INPUTCTRL_MUXNEG_GND		0x18
 #define ADC_INPUTCTRL_MUXNEG_IOGND		0x19
 	/* Number of Input Channels Included in Scan */
-#define ADC_INPUTCTRL_INPUTSCAN_lsb		16u
-#define ADC_INPUTCTRL_INPUTSCAN_msb		19u
+#define ADC_INPUTCTRL_INPUTSCAN_Lsb		16u
+#define ADC_INPUTCTRL_INPUTSCAN_Msb		19u
 	/* Positive Mux Setting Offset */
-#define ADC_INPUTCTRL_INPUTOFFSET_lsb		20u
-#define ADC_INPUTCTRL_INPUTOFFSET_msb		23u
+#define ADC_INPUTCTRL_INPUTOFFSET_Lsb		20u
+#define ADC_INPUTCTRL_INPUTOFFSET_Msb		23u
 	/* Gain Factor Selection */
-#define ADC_INPUTCTRL_GAIN_lsb			24u
-#define ADC_INPUTCTRL_GAIN_msb			27u
+#define ADC_INPUTCTRL_GAIN_Lsb			24u
+#define ADC_INPUTCTRL_GAIN_Msb			27u
 #define ADC_INPUTCTRL_GAIN_1X			0x0
 #define ADC_INPUTCTRL_GAIN_2X			0x1
 #define ADC_INPUTCTRL_GAIN_4X			0x2
@@ -260,14 +260,14 @@ struct sdk_adc {
 	/* 0x1A: Result */
 	uint16_t volatile const RESULT;
 	/* Result Conversion Value */
-#define ADC_RESULT_RESULT_lsb			0u
-#define ADC_RESULT_RESULT_msb			15u
+#define ADC_RESULT_RESULT_Lsb			0u
+#define ADC_RESULT_RESULT_Msb			15u
 
 	/* 0x1C: Window Monitor Lower Threshold */
 	uint16_t volatile WINLT;
 	/* Window Lower Threshold */
-#define ADC_WINLT_WINLT_lsb			0u
-#define ADC_WINLT_WINLT_msb			15u
+#define ADC_WINLT_WINLT_Lsb			0u
+#define ADC_WINLT_WINLT_Msb			15u
 
 	/* 0x1E */
 	uint8_t RESERVED4[0x20-0x1E];
@@ -275,8 +275,8 @@ struct sdk_adc {
 	/* 0x20: Window Monitor Upper Threshold */
 	uint16_t volatile WINUT;
 	/* Window Upper Threshold */
-#define ADC_WINUT_WINUT_lsb			0u
-#define ADC_WINUT_WINUT_msb			15u
+#define ADC_WINUT_WINUT_Lsb			0u
+#define ADC_WINUT_WINUT_Msb			15u
 
 	/* 0x22 */
 	uint8_t RESERVED5[0x24-0x22];
@@ -284,23 +284,23 @@ struct sdk_adc {
 	/* 0x24: Gain Correction */
 	uint16_t volatile GAINCORR;
 	/* Gain Correction Value */
-#define ADC_GAINCORR_GAINCORR_lsb		0u
-#define ADC_GAINCORR_GAINCORR_msb		11u
+#define ADC_GAINCORR_GAINCORR_Lsb		0u
+#define ADC_GAINCORR_GAINCORR_Msb		11u
 
 	/* 0x26: Offset Correction */
 	uint16_t volatile OFFSETCORR;
 	/* Offset Correction Value */
-#define ADC_OFFSETCORR_OFFSETCORR_lsb		0u
-#define ADC_OFFSETCORR_OFFSETCORR_msb		11u
+#define ADC_OFFSETCORR_OFFSETCORR_Lsb		0u
+#define ADC_OFFSETCORR_OFFSETCORR_Msb		11u
 
 	/* 0x28: Calibration */
 	uint16_t volatile CALIB;
 	/* Linearity Calibration Value */
-#define ADC_CALIB_LINEARITY_CAL_lsb		0u
-#define ADC_CALIB_LINEARITY_CAL_msb		7u
+#define ADC_CALIB_LINEARITY_CAL_Lsb		0u
+#define ADC_CALIB_LINEARITY_CAL_Msb		7u
 	/* Bias Calibration Value */
-#define ADC_CALIB_BIAS_CAL_lsb			8u
-#define ADC_CALIB_BIAS_CAL_msb			10u
+#define ADC_CALIB_BIAS_CAL_Lsb			8u
+#define ADC_CALIB_BIAS_CAL_Msb			10u
 
 	/* 0x2A: Debug Control */
 	uint8_t volatile DBGCTRL;
@@ -335,33 +335,33 @@ struct sdk_dmac {
 	/* 0x02: CRC Control */
 	uint16_t volatile CRCCTRL;
 	/* CRC Beat Size */
-#define DMAC_CRCCTRL_CRCBEATSIZE_lsb		0u
-#define DMAC_CRCCTRL_CRCBEATSIZE_msb		1u
+#define DMAC_CRCCTRL_CRCBEATSIZE_Lsb		0u
+#define DMAC_CRCCTRL_CRCBEATSIZE_Msb		1u
 #define DMAC_CRCCTRL_CRCBEATSIZE_BYTE		0x0
 #define DMAC_CRCCTRL_CRCBEATSIZE_HWORD		0x1
 #define DMAC_CRCCTRL_CRCBEATSIZE_WORD		0x2
 	/* CRC Polynomial Type */
-#define DMAC_CRCCTRL_CRCPOLY_lsb		2u
-#define DMAC_CRCCTRL_CRCPOLY_msb		3u
+#define DMAC_CRCCTRL_CRCPOLY_Lsb		2u
+#define DMAC_CRCCTRL_CRCPOLY_Msb		3u
 #define DMAC_CRCCTRL_CRCPOLY_CRC16		0x0
 #define DMAC_CRCCTRL_CRCPOLY_CRC32		0x1
 	/* CRC Input Source */
-#define DMAC_CRCCTRL_CRCSRC_lsb			8u
-#define DMAC_CRCCTRL_CRCSRC_msb			13u
+#define DMAC_CRCCTRL_CRCSRC_Lsb			8u
+#define DMAC_CRCCTRL_CRCSRC_Msb			13u
 #define DMAC_CRCCTRL_CRCSRC_NOACT		0x0
 #define DMAC_CRCCTRL_CRCSRC_IO			0x1
 
 	/* 0x04: CRC Data Input */
 	uint32_t volatile CRCDATAIN;
 	/* CRC Data Input */
-#define DMAC_CRCDATAIN_CRCDATAIN_lsb		0u
-#define DMAC_CRCDATAIN_CRCDATAIN_msb		31u
+#define DMAC_CRCDATAIN_CRCDATAIN_Lsb		0u
+#define DMAC_CRCDATAIN_CRCDATAIN_Msb		31u
 
 	/* 0x08: CRC Checksum */
 	uint32_t volatile CRCCHKSUM;
 	/* CRC Checksum */
-#define DMAC_CRCCHKSUM_CRCCHKSUM_lsb		0u
-#define DMAC_CRCCHKSUM_CRCCHKSUM_msb		31u
+#define DMAC_CRCCHKSUM_CRCCHKSUM_Lsb		0u
+#define DMAC_CRCCHKSUM_CRCCHKSUM_Msb		31u
 
 	/* 0x0C: CRC Status */
 	uint8_t volatile CRCSTATUS;
@@ -378,22 +378,22 @@ struct sdk_dmac {
 	/* 0x0E: QOS Control */
 	uint8_t volatile QOSCTRL;
 	/* Write-Back Quality of Service */
-#define DMAC_QOSCTRL_WRBQOS_lsb			0u
-#define DMAC_QOSCTRL_WRBQOS_msb			1u
+#define DMAC_QOSCTRL_WRBQOS_Lsb			0u
+#define DMAC_QOSCTRL_WRBQOS_Msb			1u
 #define DMAC_QOSCTRL_WRBQOS_DISABLE		0x0
 #define DMAC_QOSCTRL_WRBQOS_LOW			0x1
 #define DMAC_QOSCTRL_WRBQOS_MEDIUM		0x2
 #define DMAC_QOSCTRL_WRBQOS_HIGH		0x3
 	/* Fetch Quality of Service */
-#define DMAC_QOSCTRL_FQOS_lsb			2u
-#define DMAC_QOSCTRL_FQOS_msb			3u
+#define DMAC_QOSCTRL_FQOS_Lsb			2u
+#define DMAC_QOSCTRL_FQOS_Msb			3u
 #define DMAC_QOSCTRL_FQOS_DISABLE		0x0
 #define DMAC_QOSCTRL_FQOS_LOW			0x1
 #define DMAC_QOSCTRL_FQOS_MEDIUM		0x2
 #define DMAC_QOSCTRL_FQOS_HIGH			0x3
 	/* Data Transfer Quality of Service */
-#define DMAC_QOSCTRL_DQOS_lsb			4u
-#define DMAC_QOSCTRL_DQOS_msb			5u
+#define DMAC_QOSCTRL_DQOS_Lsb			4u
+#define DMAC_QOSCTRL_DQOS_Msb			5u
 #define DMAC_QOSCTRL_DQOS_DISABLE		0x0
 #define DMAC_QOSCTRL_DQOS_LOW			0x1
 #define DMAC_QOSCTRL_DQOS_MEDIUM		0x2
@@ -420,23 +420,23 @@ struct sdk_dmac {
 	/* 0x14: Priority Control 0 */
 	uint32_t volatile PRICTRL0;
 	/* Level 0 Channel Priority Number */
-#define DMAC_PRICTRL0_LVLPRI0_lsb		0u
-#define DMAC_PRICTRL0_LVLPRI0_msb		2u
+#define DMAC_PRICTRL0_LVLPRI0_Lsb		0u
+#define DMAC_PRICTRL0_LVLPRI0_Msb		2u
 	/* Level 0 Round-Robin Scheduling Enable */
 #define DMAC_PRICTRL0_RRLVLEN0			7u
 	/* Level 1 Channel Priority Number */
-#define DMAC_PRICTRL0_LVLPRI1_lsb		8u
-#define DMAC_PRICTRL0_LVLPRI1_msb		10u
+#define DMAC_PRICTRL0_LVLPRI1_Lsb		8u
+#define DMAC_PRICTRL0_LVLPRI1_Msb		10u
 	/* Level 1 Round-Robin Scheduling Enable */
 #define DMAC_PRICTRL0_RRLVLEN1			15u
 	/* Level 2 Channel Priority Number */
-#define DMAC_PRICTRL0_LVLPRI2_lsb		16u
-#define DMAC_PRICTRL0_LVLPRI2_msb		18u
+#define DMAC_PRICTRL0_LVLPRI2_Lsb		16u
+#define DMAC_PRICTRL0_LVLPRI2_Msb		18u
 	/* Level 2 Round-Robin Scheduling Enable */
 #define DMAC_PRICTRL0_RRLVLEN2			23u
 	/* Level 3 Channel Priority Number */
-#define DMAC_PRICTRL0_LVLPRI3_lsb		24u
-#define DMAC_PRICTRL0_LVLPRI3_msb		26u
+#define DMAC_PRICTRL0_LVLPRI3_Lsb		24u
+#define DMAC_PRICTRL0_LVLPRI3_Msb		26u
 	/* Level 3 Round-Robin Scheduling Enable */
 #define DMAC_PRICTRL0_RRLVLEN3			31u
 
@@ -446,8 +446,8 @@ struct sdk_dmac {
 	/* 0x20: Interrupt Pending */
 	uint16_t volatile INTPEND;
 	/* Channel ID */
-#define DMAC_INTPEND_ID_lsb			0u
-#define DMAC_INTPEND_ID_msb			2u
+#define DMAC_INTPEND_ID_Lsb			0u
+#define DMAC_INTPEND_ID_Msb			2u
 	/* Transfer Error */
 #define DMAC_INTPEND_TERR			8u
 	/* Transfer Complete */
@@ -520,25 +520,25 @@ struct sdk_dmac {
 	/* Level 3 Channel Trigger Request Executing */
 #define DMAC_ACTIVE_LVLEX3			3u
 	/* Active Channel ID */
-#define DMAC_ACTIVE_ID_lsb			8u
-#define DMAC_ACTIVE_ID_msb			12u
+#define DMAC_ACTIVE_ID_Lsb			8u
+#define DMAC_ACTIVE_ID_Msb			12u
 	/* Active Channel Busy */
 #define DMAC_ACTIVE_ABUSY			15u
 	/* Active Channel Block Transfer Count */
-#define DMAC_ACTIVE_BTCNT_lsb			16u
-#define DMAC_ACTIVE_BTCNT_msb			31u
+#define DMAC_ACTIVE_BTCNT_Lsb			16u
+#define DMAC_ACTIVE_BTCNT_Msb			31u
 
 	/* 0x34: Descriptor Memory Section Base Address */
 	uint32_t volatile BASEADDR;
 	/* Descriptor Memory Base Address */
-#define DMAC_BASEADDR_BASEADDR_lsb		0u
-#define DMAC_BASEADDR_BASEADDR_msb		31u
+#define DMAC_BASEADDR_BASEADDR_Lsb		0u
+#define DMAC_BASEADDR_BASEADDR_Msb		31u
 
 	/* 0x38: Write-Back Memory Section Base Address */
 	uint32_t volatile WRBADDR;
 	/* Write-Back Memory Base Address */
-#define DMAC_WRBADDR_WRBADDR_lsb		0u
-#define DMAC_WRBADDR_WRBADDR_msb		31u
+#define DMAC_WRBADDR_WRBADDR_Lsb		0u
+#define DMAC_WRBADDR_WRBADDR_Msb		31u
 
 	/* 0x3C */
 	uint8_t RESERVED3[0x3F-0x3C];
@@ -546,8 +546,8 @@ struct sdk_dmac {
 	/* 0x3F: Channel ID */
 	uint8_t volatile CHID;
 	/* Channel ID */
-#define DMAC_CHID_ID_lsb			0u
-#define DMAC_CHID_ID_msb			2u
+#define DMAC_CHID_ID_Lsb			0u
+#define DMAC_CHID_ID_Msb			2u
 
 	/* 0x40: Channel Control A */
 	uint8_t volatile CHCTRLA;
@@ -562,8 +562,8 @@ struct sdk_dmac {
 	/* 0x44: Channel Control B */
 	uint32_t volatile CHCTRLB;
 	/* Event Input Action */
-#define DMAC_CHCTRLB_EVACT_lsb			0u
-#define DMAC_CHCTRLB_EVACT_msb			2u
+#define DMAC_CHCTRLB_EVACT_Lsb			0u
+#define DMAC_CHCTRLB_EVACT_Msb			2u
 #define DMAC_CHCTRLB_EVACT_NOACT		0x0
 #define DMAC_CHCTRLB_EVACT_TRIG			0x1
 #define DMAC_CHCTRLB_EVACT_CTRIG		0x2
@@ -576,25 +576,25 @@ struct sdk_dmac {
 	/* Channel Event Output Enable */
 #define DMAC_CHCTRLB_EVOE			4u
 	/* Channel Arbitration Level */
-#define DMAC_CHCTRLB_LVL_lsb			5u
-#define DMAC_CHCTRLB_LVL_msb			6u
+#define DMAC_CHCTRLB_LVL_Lsb			5u
+#define DMAC_CHCTRLB_LVL_Msb			6u
 #define DMAC_CHCTRLB_LVL_LVL0			0x0
 #define DMAC_CHCTRLB_LVL_LVL1			0x1
 #define DMAC_CHCTRLB_LVL_LVL2			0x2
 #define DMAC_CHCTRLB_LVL_LVL3			0x3
 	/* Trigger Source */
-#define DMAC_CHCTRLB_TRIGSRC_lsb		8u
-#define DMAC_CHCTRLB_TRIGSRC_msb		12u
+#define DMAC_CHCTRLB_TRIGSRC_Lsb		8u
+#define DMAC_CHCTRLB_TRIGSRC_Msb		12u
 #define DMAC_CHCTRLB_TRIGSRC_DISABLE		0x0
 	/* Trigger Action */
-#define DMAC_CHCTRLB_TRIGACT_lsb		22u
-#define DMAC_CHCTRLB_TRIGACT_msb		23u
+#define DMAC_CHCTRLB_TRIGACT_Lsb		22u
+#define DMAC_CHCTRLB_TRIGACT_Msb		23u
 #define DMAC_CHCTRLB_TRIGACT_BLOCK		0x0
 #define DMAC_CHCTRLB_TRIGACT_BEAT		0x2
 #define DMAC_CHCTRLB_TRIGACT_TRANSACTION	0x3
 	/* Software Command */
-#define DMAC_CHCTRLB_CMD_lsb			24u
-#define DMAC_CHCTRLB_CMD_msb			25u
+#define DMAC_CHCTRLB_CMD_Lsb			24u
+#define DMAC_CHCTRLB_CMD_Msb			25u
 #define DMAC_CHCTRLB_CMD_NOACT			0x0
 #define DMAC_CHCTRLB_CMD_SUSPEND		0x1
 #define DMAC_CHCTRLB_CMD_RESUME			0x2
@@ -693,54 +693,54 @@ struct sdk_dsu {
 	/* 0x04: Address */
 	uint32_t volatile ADDR;
 	/* Access Mode */
-#define DSU_ADDR_AMOD_lsb			0u
-#define DSU_ADDR_AMOD_msb			1u
+#define DSU_ADDR_AMOD_Lsb			0u
+#define DSU_ADDR_AMOD_Msb			1u
 	/* Address */
-#define DSU_ADDR_ADDR_lsb			2u
-#define DSU_ADDR_ADDR_msb			31u
+#define DSU_ADDR_ADDR_Lsb			2u
+#define DSU_ADDR_ADDR_Msb			31u
 
 	/* 0x08: Length */
 	uint32_t volatile LENGTH;
 	/* Length */
-#define DSU_LENGTH_LENGTH_lsb			2u
-#define DSU_LENGTH_LENGTH_msb			31u
+#define DSU_LENGTH_LENGTH_Lsb			2u
+#define DSU_LENGTH_LENGTH_Msb			31u
 
 	/* 0x0C: Data */
 	uint32_t volatile DATA;
 	/* Data */
-#define DSU_DATA_DATA_lsb			0u
-#define DSU_DATA_DATA_msb			31u
+#define DSU_DATA_DATA_Lsb			0u
+#define DSU_DATA_DATA_Msb			31u
 
 	/* 0x10: Debug Communication Channel n */
 	uint32_t volatile DCC[2];
 	/* Data */
-#define DSU_DCC_DATA_lsb			0u
-#define DSU_DCC_DATA_msb			31u
+#define DSU_DCC_DATA_Lsb			0u
+#define DSU_DCC_DATA_Msb			31u
 
 	/* 0x18: Device Identification */
 	uint32_t volatile const DID;
 	/* Device Select */
-#define DSU_DID_DEVSEL_lsb			0u
-#define DSU_DID_DEVSEL_msb			7u
+#define DSU_DID_DEVSEL_Lsb			0u
+#define DSU_DID_DEVSEL_Msb			7u
 	/* Revision Number */
-#define DSU_DID_REVISION_lsb			8u
-#define DSU_DID_REVISION_msb			11u
+#define DSU_DID_REVISION_Lsb			8u
+#define DSU_DID_REVISION_Msb			11u
 	/* Die Number */
-#define DSU_DID_DIE_lsb				12u
-#define DSU_DID_DIE_msb				15u
+#define DSU_DID_DIE_Lsb				12u
+#define DSU_DID_DIE_Msb				15u
 	/* Series */
-#define DSU_DID_SERIES_lsb			16u
-#define DSU_DID_SERIES_msb			21u
+#define DSU_DID_SERIES_Lsb			16u
+#define DSU_DID_SERIES_Msb			21u
 #define DSU_DID_SERIES_0			0x0
 #define DSU_DID_SERIES_1			0x1
 	/* Family */
-#define DSU_DID_FAMILY_lsb			23u
-#define DSU_DID_FAMILY_msb			27u
+#define DSU_DID_FAMILY_Lsb			23u
+#define DSU_DID_FAMILY_Msb			27u
 #define DSU_DID_FAMILY_0			0x0
 #define DSU_DID_FAMILY_1			0x1
 	/* Processor */
-#define DSU_DID_PROCESSOR_lsb			28u
-#define DSU_DID_PROCESSOR_msb			31u
+#define DSU_DID_PROCESSOR_Lsb			28u
+#define DSU_DID_PROCESSOR_Msb			31u
 #define DSU_DID_PROCESSOR_0			0x0
 #define DSU_DID_PROCESSOR_1			0x1
 #define DSU_DID_PROCESSOR_2			0x2
@@ -752,8 +752,8 @@ struct sdk_dsu {
 	/* 0xF0: Device Configuration */
 	uint32_t volatile DCFG[2];
 	/* Device Configuration */
-#define DSU_DCFG_DCFG_lsb			0u
-#define DSU_DCFG_DCFG_msb			31u
+#define DSU_DCFG_DCFG_Lsb			0u
+#define DSU_DCFG_DCFG_Msb			31u
 
 	/* 0x130 */
 	uint8_t RESERVED2[0x1000-0x130];
@@ -765,8 +765,8 @@ struct sdk_dsu {
 	/* Format */
 #define DSU_ENTRY0_FMT				1u
 	/* Address Offset */
-#define DSU_ENTRY0_ADDOFF_lsb			12u
-#define DSU_ENTRY0_ADDOFF_msb			31u
+#define DSU_ENTRY0_ADDOFF_Lsb			12u
+#define DSU_ENTRY0_ADDOFF_Msb			31u
 
 	/* 0x1004: CoreSight ROM Table Entry 1 */
 	uint32_t volatile const ENTRY1;
@@ -774,8 +774,8 @@ struct sdk_dsu {
 	/* 0x1008: CoreSight ROM Table End */
 	uint32_t volatile const END;
 	/* End Marker */
-#define DSU_END_END_lsb				0u
-#define DSU_END_END_msb				31u
+#define DSU_END_END_Lsb				0u
+#define DSU_END_END_Msb				31u
 
 	/* 0x100C */
 	uint8_t RESERVED3[0x1FCC-0x100C];
@@ -788,11 +788,11 @@ struct sdk_dsu {
 	/* 0x1FD0: Peripheral Identification 4 */
 	uint32_t volatile const PID4;
 	/* JEP-106 Continuation Code */
-#define DSU_PID4_JEPCC_lsb			0u
-#define DSU_PID4_JEPCC_msb			3u
+#define DSU_PID4_JEPCC_Lsb			0u
+#define DSU_PID4_JEPCC_Msb			3u
 	/* 4KB count */
-#define DSU_PID4_FKBC_lsb			4u
-#define DSU_PID4_FKBC_msb			7u
+#define DSU_PID4_FKBC_Lsb			4u
+#define DSU_PID4_FKBC_Msb			7u
 
 	/* 0x1FD4: Peripheral Identification 5 */
 	uint32_t volatile const PID5;
@@ -806,64 +806,64 @@ struct sdk_dsu {
 	/* 0x1FE0: Peripheral Identification 0 */
 	uint32_t volatile const PID0;
 	/* Part Number Low */
-#define DSU_PID0_PARTNBL_lsb			0u
-#define DSU_PID0_PARTNBL_msb			7u
+#define DSU_PID0_PARTNBL_Lsb			0u
+#define DSU_PID0_PARTNBL_Msb			7u
 
 	/* 0x1FE4: Peripheral Identification 1 */
 	uint32_t volatile const PID1;
 	/* Part Number High */
-#define DSU_PID1_PARTNBH_lsb			0u
-#define DSU_PID1_PARTNBH_msb			3u
+#define DSU_PID1_PARTNBH_Lsb			0u
+#define DSU_PID1_PARTNBH_Msb			3u
 	/* Low part of the JEP-106 Identity Code */
-#define DSU_PID1_JEPIDCL_lsb			4u
-#define DSU_PID1_JEPIDCL_msb			7u
+#define DSU_PID1_JEPIDCL_Lsb			4u
+#define DSU_PID1_JEPIDCL_Msb			7u
 
 	/* 0x1FE8: Peripheral Identification 2 */
 	uint32_t volatile const PID2;
 	/* JEP-106 Identity Code High */
-#define DSU_PID2_JEPIDCH_lsb			0u
-#define DSU_PID2_JEPIDCH_msb			2u
+#define DSU_PID2_JEPIDCH_Lsb			0u
+#define DSU_PID2_JEPIDCH_Msb			2u
 	/* JEP-106 Identity Code is used */
 #define DSU_PID2_JEPU				3u
 	/* Revision Number */
-#define DSU_PID2_REVISION_lsb			4u
-#define DSU_PID2_REVISION_msb			7u
+#define DSU_PID2_REVISION_Lsb			4u
+#define DSU_PID2_REVISION_Msb			7u
 
 	/* 0x1FEC: Peripheral Identification 3 */
 	uint32_t volatile const PID3;
 	/* ARM CUSMOD */
-#define DSU_PID3_CUSMOD_lsb			0u
-#define DSU_PID3_CUSMOD_msb			3u
+#define DSU_PID3_CUSMOD_Lsb			0u
+#define DSU_PID3_CUSMOD_Msb			3u
 	/* Revision Number */
-#define DSU_PID3_REVAND_lsb			4u
-#define DSU_PID3_REVAND_msb			7u
+#define DSU_PID3_REVAND_Lsb			4u
+#define DSU_PID3_REVAND_Msb			7u
 
 	/* 0x1FF0: Component Identification 0 */
 	uint32_t volatile const CID0;
 	/* Preamble Byte 0 */
-#define DSU_CID0_PREAMBLEB0_lsb			0u
-#define DSU_CID0_PREAMBLEB0_msb			7u
+#define DSU_CID0_PREAMBLEB0_Lsb			0u
+#define DSU_CID0_PREAMBLEB0_Msb			7u
 
 	/* 0x1FF4: Component Identification 1 */
 	uint32_t volatile const CID1;
 	/* Preamble */
-#define DSU_CID1_PREAMBLE_lsb			0u
-#define DSU_CID1_PREAMBLE_msb			3u
+#define DSU_CID1_PREAMBLE_Lsb			0u
+#define DSU_CID1_PREAMBLE_Msb			3u
 	/* Component Class */
-#define DSU_CID1_CCLASS_lsb			4u
-#define DSU_CID1_CCLASS_msb			7u
+#define DSU_CID1_CCLASS_Lsb			4u
+#define DSU_CID1_CCLASS_Msb			7u
 
 	/* 0x1FF8: Component Identification 2 */
 	uint32_t volatile const CID2;
 	/* Preamble Byte 2 */
-#define DSU_CID2_PREAMBLEB2_lsb			0u
-#define DSU_CID2_PREAMBLEB2_msb			7u
+#define DSU_CID2_PREAMBLEB2_Lsb			0u
+#define DSU_CID2_PREAMBLEB2_Msb			7u
 
 	/* 0x1FFC: Component Identification 3 */
 	uint32_t volatile const CID3;
 	/* Preamble Byte 3 */
-#define DSU_CID3_PREAMBLEB3_lsb			0u
-#define DSU_CID3_PREAMBLEB3_msb			7u
+#define DSU_CID3_PREAMBLEB3_Lsb			0u
+#define DSU_CID3_PREAMBLEB3_Msb			7u
 
 };
 
@@ -888,8 +888,8 @@ struct sdk_eic {
 	/* 0x02: Non-Maskable Interrupt Control */
 	uint8_t volatile NMICTRL;
 	/* Non-Maskable Interrupt Sense */
-#define EIC_NMICTRL_NMISENSE_lsb		0u
-#define EIC_NMICTRL_NMISENSE_msb		2u
+#define EIC_NMICTRL_NMISENSE_Lsb		0u
+#define EIC_NMICTRL_NMISENSE_Msb		2u
 #define EIC_NMICTRL_NMISENSE_NONE		0x0
 #define EIC_NMICTRL_NMISENSE_RISE		0x1
 #define EIC_NMICTRL_NMISENSE_FALL		0x2
@@ -1002,8 +1002,8 @@ struct sdk_eic {
 	/* 0x18: Configuration n */
 	uint32_t volatile CONFIG;
 	/* Input Sense 0 Configuration */
-#define EIC_CONFIG_SENSE0_lsb			0u
-#define EIC_CONFIG_SENSE0_msb			2u
+#define EIC_CONFIG_SENSE0_Lsb			0u
+#define EIC_CONFIG_SENSE0_Msb			2u
 #define EIC_CONFIG_SENSE0_NONE			0x0
 #define EIC_CONFIG_SENSE0_RISE			0x1
 #define EIC_CONFIG_SENSE0_FALL			0x2
@@ -1013,8 +1013,8 @@ struct sdk_eic {
 	/* Filter 0 Enable */
 #define EIC_CONFIG_FILTEN0			3u
 	/* Input Sense 1 Configuration */
-#define EIC_CONFIG_SENSE1_lsb			4u
-#define EIC_CONFIG_SENSE1_msb			6u
+#define EIC_CONFIG_SENSE1_Lsb			4u
+#define EIC_CONFIG_SENSE1_Msb			6u
 #define EIC_CONFIG_SENSE1_NONE			0x0
 #define EIC_CONFIG_SENSE1_RISE			0x1
 #define EIC_CONFIG_SENSE1_FALL			0x2
@@ -1024,8 +1024,8 @@ struct sdk_eic {
 	/* Filter 1 Enable */
 #define EIC_CONFIG_FILTEN1			7u
 	/* Input Sense 2 Configuration */
-#define EIC_CONFIG_SENSE2_lsb			8u
-#define EIC_CONFIG_SENSE2_msb			10u
+#define EIC_CONFIG_SENSE2_Lsb			8u
+#define EIC_CONFIG_SENSE2_Msb			10u
 #define EIC_CONFIG_SENSE2_NONE			0x0
 #define EIC_CONFIG_SENSE2_RISE			0x1
 #define EIC_CONFIG_SENSE2_FALL			0x2
@@ -1035,8 +1035,8 @@ struct sdk_eic {
 	/* Filter 2 Enable */
 #define EIC_CONFIG_FILTEN2			11u
 	/* Input Sense 3 Configuration */
-#define EIC_CONFIG_SENSE3_lsb			12u
-#define EIC_CONFIG_SENSE3_msb			14u
+#define EIC_CONFIG_SENSE3_Lsb			12u
+#define EIC_CONFIG_SENSE3_Msb			14u
 #define EIC_CONFIG_SENSE3_NONE			0x0
 #define EIC_CONFIG_SENSE3_RISE			0x1
 #define EIC_CONFIG_SENSE3_FALL			0x2
@@ -1046,8 +1046,8 @@ struct sdk_eic {
 	/* Filter 3 Enable */
 #define EIC_CONFIG_FILTEN3			15u
 	/* Input Sense 4 Configuration */
-#define EIC_CONFIG_SENSE4_lsb			16u
-#define EIC_CONFIG_SENSE4_msb			18u
+#define EIC_CONFIG_SENSE4_Lsb			16u
+#define EIC_CONFIG_SENSE4_Msb			18u
 #define EIC_CONFIG_SENSE4_NONE			0x0
 #define EIC_CONFIG_SENSE4_RISE			0x1
 #define EIC_CONFIG_SENSE4_FALL			0x2
@@ -1057,8 +1057,8 @@ struct sdk_eic {
 	/* Filter 4 Enable */
 #define EIC_CONFIG_FILTEN4			19u
 	/* Input Sense 5 Configuration */
-#define EIC_CONFIG_SENSE5_lsb			20u
-#define EIC_CONFIG_SENSE5_msb			22u
+#define EIC_CONFIG_SENSE5_Lsb			20u
+#define EIC_CONFIG_SENSE5_Msb			22u
 #define EIC_CONFIG_SENSE5_NONE			0x0
 #define EIC_CONFIG_SENSE5_RISE			0x1
 #define EIC_CONFIG_SENSE5_FALL			0x2
@@ -1068,8 +1068,8 @@ struct sdk_eic {
 	/* Filter 5 Enable */
 #define EIC_CONFIG_FILTEN5			23u
 	/* Input Sense 6 Configuration */
-#define EIC_CONFIG_SENSE6_lsb			24u
-#define EIC_CONFIG_SENSE6_msb			26u
+#define EIC_CONFIG_SENSE6_Lsb			24u
+#define EIC_CONFIG_SENSE6_Msb			26u
 #define EIC_CONFIG_SENSE6_NONE			0x0
 #define EIC_CONFIG_SENSE6_RISE			0x1
 #define EIC_CONFIG_SENSE6_FALL			0x2
@@ -1079,8 +1079,8 @@ struct sdk_eic {
 	/* Filter 6 Enable */
 #define EIC_CONFIG_FILTEN6			27u
 	/* Input Sense 7 Configuration */
-#define EIC_CONFIG_SENSE7_lsb			28u
-#define EIC_CONFIG_SENSE7_msb			30u
+#define EIC_CONFIG_SENSE7_Lsb			28u
+#define EIC_CONFIG_SENSE7_Msb			30u
 #define EIC_CONFIG_SENSE7_NONE			0x0
 #define EIC_CONFIG_SENSE7_RISE			0x1
 #define EIC_CONFIG_SENSE7_FALL			0x2
@@ -1111,22 +1111,22 @@ struct sdk_evsys {
 	/* 0x04: Channel */
 	uint32_t volatile CHANNEL;
 	/* Channel Selection */
-#define EVSYS_CHANNEL_CHANNEL_lsb		0u
-#define EVSYS_CHANNEL_CHANNEL_msb		2u
+#define EVSYS_CHANNEL_CHANNEL_Lsb		0u
+#define EVSYS_CHANNEL_CHANNEL_Msb		2u
 	/* Software Event */
 #define EVSYS_CHANNEL_SWEVT			8u
 	/* Event Generator Selection */
-#define EVSYS_CHANNEL_EVGEN_lsb			16u
-#define EVSYS_CHANNEL_EVGEN_msb			21u
+#define EVSYS_CHANNEL_EVGEN_Lsb			16u
+#define EVSYS_CHANNEL_EVGEN_Msb			21u
 	/* Path Selection */
-#define EVSYS_CHANNEL_PATH_lsb			24u
-#define EVSYS_CHANNEL_PATH_msb			25u
+#define EVSYS_CHANNEL_PATH_Lsb			24u
+#define EVSYS_CHANNEL_PATH_Msb			25u
 #define EVSYS_CHANNEL_PATH_SYNCHRONOUS		0x0
 #define EVSYS_CHANNEL_PATH_RESYNCHRONIZED	0x1
 #define EVSYS_CHANNEL_PATH_ASYNCHRONOUS		0x2
 	/* Edge Detection Selection */
-#define EVSYS_CHANNEL_EDGSEL_lsb		26u
-#define EVSYS_CHANNEL_EDGSEL_msb		27u
+#define EVSYS_CHANNEL_EDGSEL_Lsb		26u
+#define EVSYS_CHANNEL_EDGSEL_Msb		27u
 #define EVSYS_CHANNEL_EDGSEL_NO_EVT_OUTPUT	0x0
 #define EVSYS_CHANNEL_EDGSEL_RISING_EDGE	0x1
 #define EVSYS_CHANNEL_EDGSEL_FALLING_EDGE	0x2
@@ -1135,11 +1135,11 @@ struct sdk_evsys {
 	/* 0x08: User Multiplexer */
 	uint16_t volatile USER;
 	/* User Multiplexer Selection */
-#define EVSYS_USER_USER_lsb			0u
-#define EVSYS_USER_USER_msb			4u
+#define EVSYS_USER_USER_Lsb			0u
+#define EVSYS_USER_USER_Msb			4u
 	/* Channel Event Selection */
-#define EVSYS_USER_CHANNEL_lsb			8u
-#define EVSYS_USER_CHANNEL_msb			11u
+#define EVSYS_USER_CHANNEL_Lsb			8u
+#define EVSYS_USER_CHANNEL_Msb			11u
 #define EVSYS_USER_CHANNEL_0			0x0
 
 	/* 0x0A */
@@ -1274,8 +1274,8 @@ struct sdk_gclk {
 	/* 0x02: Generic Clock Control */
 	uint16_t volatile CLKCTRL;
 	/* Generic Clock Selection ID */
-#define GCLK_CLKCTRL_ID_lsb			0u
-#define GCLK_CLKCTRL_ID_msb			5u
+#define GCLK_CLKCTRL_ID_Lsb			0u
+#define GCLK_CLKCTRL_ID_Msb			5u
 #define GCLK_CLKCTRL_ID_DFLL48			0x0
 #define GCLK_CLKCTRL_ID_FDPLL			0x1
 #define GCLK_CLKCTRL_ID_FDPLL32K		0x2
@@ -1297,8 +1297,8 @@ struct sdk_gclk {
 #define GCLK_CLKCTRL_ID_AC_DIG			0x14
 #define GCLK_CLKCTRL_ID_AC_ANA			0x15
 	/* Generic Clock Generator */
-#define GCLK_CLKCTRL_GEN_lsb			8u
-#define GCLK_CLKCTRL_GEN_msb			11u
+#define GCLK_CLKCTRL_GEN_Lsb			8u
+#define GCLK_CLKCTRL_GEN_Msb			11u
 #define GCLK_CLKCTRL_GEN_GCLKGEN0		0x0
 #define GCLK_CLKCTRL_GEN_GCLKGEN1		0x1
 #define GCLK_CLKCTRL_GEN_GCLKGEN2		0x2
@@ -1313,8 +1313,8 @@ struct sdk_gclk {
 	/* 0x04: Generic Clock Generator Control */
 	uint32_t volatile GENCTRL;
 	/* Generic Clock Generator Selection */
-#define GCLK_GENCTRL_ID_lsb			0u
-#define GCLK_GENCTRL_ID_msb			3u
+#define GCLK_GENCTRL_ID_Lsb			0u
+#define GCLK_GENCTRL_ID_Msb			3u
 #define GCLK_GENCTRL_ID_GCLKGEN0		0x0
 #define GCLK_GENCTRL_ID_GCLKGEN1		0x1
 #define GCLK_GENCTRL_ID_GCLKGEN2		0x2
@@ -1322,8 +1322,8 @@ struct sdk_gclk {
 #define GCLK_GENCTRL_ID_GCLKGEN4		0x4
 #define GCLK_GENCTRL_ID_GCLKGEN5		0x5
 	/* Source Select */
-#define GCLK_GENCTRL_SRC_lsb			8u
-#define GCLK_GENCTRL_SRC_msb			12u
+#define GCLK_GENCTRL_SRC_Lsb			8u
+#define GCLK_GENCTRL_SRC_Msb			12u
 #define GCLK_GENCTRL_SRC_XOSC			0x0
 #define GCLK_GENCTRL_SRC_GCLKIN			0x1
 #define GCLK_GENCTRL_SRC_GCLKGEN1		0x2
@@ -1349,8 +1349,8 @@ struct sdk_gclk {
 	/* 0x08: Generic Clock Generator Division */
 	uint32_t volatile GENDIV;
 	/* Generic Clock Generator Selection */
-#define GCLK_GENDIV_ID_lsb			0u
-#define GCLK_GENDIV_ID_msb			3u
+#define GCLK_GENDIV_ID_Lsb			0u
+#define GCLK_GENDIV_ID_Msb			3u
 #define GCLK_GENDIV_ID_GCLKGEN0			0x0
 #define GCLK_GENDIV_ID_GCLKGEN1			0x1
 #define GCLK_GENDIV_ID_GCLKGEN2			0x2
@@ -1358,8 +1358,8 @@ struct sdk_gclk {
 #define GCLK_GENDIV_ID_GCLKGEN4			0x4
 #define GCLK_GENDIV_ID_GCLKGEN5			0x5
 	/* Division Factor */
-#define GCLK_GENDIV_DIV_lsb			8u
-#define GCLK_GENDIV_DIV_msb			23u
+#define GCLK_GENDIV_DIV_Lsb			8u
+#define GCLK_GENDIV_DIV_Msb			23u
 
 };
 
@@ -1375,62 +1375,62 @@ struct sdk_hmatrixb {
 	/* 0x80: Priority A for Slave */
 	uint64_t volatile PRAS[16];
 	/* Master 0 Priority */
-#define HMATRIXB_PRAS_M0PR_lsb			0u
-#define HMATRIXB_PRAS_M0PR_msb			3u
+#define HMATRIXB_PRAS_M0PR_Lsb			0u
+#define HMATRIXB_PRAS_M0PR_Msb			3u
 	/* Master 1 Priority */
-#define HMATRIXB_PRAS_M1PR_lsb			4u
-#define HMATRIXB_PRAS_M1PR_msb			7u
+#define HMATRIXB_PRAS_M1PR_Lsb			4u
+#define HMATRIXB_PRAS_M1PR_Msb			7u
 	/* Master 2 Priority */
-#define HMATRIXB_PRAS_M2PR_lsb			8u
-#define HMATRIXB_PRAS_M2PR_msb			11u
+#define HMATRIXB_PRAS_M2PR_Lsb			8u
+#define HMATRIXB_PRAS_M2PR_Msb			11u
 	/* Master 3 Priority */
-#define HMATRIXB_PRAS_M3PR_lsb			12u
-#define HMATRIXB_PRAS_M3PR_msb			15u
+#define HMATRIXB_PRAS_M3PR_Lsb			12u
+#define HMATRIXB_PRAS_M3PR_Msb			15u
 	/* Master 4 Priority */
-#define HMATRIXB_PRAS_M4PR_lsb			16u
-#define HMATRIXB_PRAS_M4PR_msb			19u
+#define HMATRIXB_PRAS_M4PR_Lsb			16u
+#define HMATRIXB_PRAS_M4PR_Msb			19u
 	/* Master 5 Priority */
-#define HMATRIXB_PRAS_M5PR_lsb			20u
-#define HMATRIXB_PRAS_M5PR_msb			23u
+#define HMATRIXB_PRAS_M5PR_Lsb			20u
+#define HMATRIXB_PRAS_M5PR_Msb			23u
 	/* Master 6 Priority */
-#define HMATRIXB_PRAS_M6PR_lsb			24u
-#define HMATRIXB_PRAS_M6PR_msb			27u
+#define HMATRIXB_PRAS_M6PR_Lsb			24u
+#define HMATRIXB_PRAS_M6PR_Msb			27u
 	/* Master 7 Priority */
-#define HMATRIXB_PRAS_M7PR_lsb			28u
-#define HMATRIXB_PRAS_M7PR_msb			31u
+#define HMATRIXB_PRAS_M7PR_Lsb			28u
+#define HMATRIXB_PRAS_M7PR_Msb			31u
 
 	/* 0x84: Priority B for Slave */
 	uint64_t volatile PRBS[16];
 	/* Master 8 Priority */
-#define HMATRIXB_PRBS_M8PR_lsb			0u
-#define HMATRIXB_PRBS_M8PR_msb			3u
+#define HMATRIXB_PRBS_M8PR_Lsb			0u
+#define HMATRIXB_PRBS_M8PR_Msb			3u
 	/* Master 9 Priority */
-#define HMATRIXB_PRBS_M9PR_lsb			4u
-#define HMATRIXB_PRBS_M9PR_msb			7u
+#define HMATRIXB_PRBS_M9PR_Lsb			4u
+#define HMATRIXB_PRBS_M9PR_Msb			7u
 	/* Master 10 Priority */
-#define HMATRIXB_PRBS_M10PR_lsb			8u
-#define HMATRIXB_PRBS_M10PR_msb			11u
+#define HMATRIXB_PRBS_M10PR_Lsb			8u
+#define HMATRIXB_PRBS_M10PR_Msb			11u
 	/* Master 11 Priority */
-#define HMATRIXB_PRBS_M11PR_lsb			12u
-#define HMATRIXB_PRBS_M11PR_msb			15u
+#define HMATRIXB_PRBS_M11PR_Lsb			12u
+#define HMATRIXB_PRBS_M11PR_Msb			15u
 	/* Master 12 Priority */
-#define HMATRIXB_PRBS_M12PR_lsb			16u
-#define HMATRIXB_PRBS_M12PR_msb			19u
+#define HMATRIXB_PRBS_M12PR_Lsb			16u
+#define HMATRIXB_PRBS_M12PR_Msb			19u
 	/* Master 13 Priority */
-#define HMATRIXB_PRBS_M13PR_lsb			20u
-#define HMATRIXB_PRBS_M13PR_msb			23u
+#define HMATRIXB_PRBS_M13PR_Lsb			20u
+#define HMATRIXB_PRBS_M13PR_Msb			23u
 	/* Master 14 Priority */
-#define HMATRIXB_PRBS_M14PR_lsb			24u
-#define HMATRIXB_PRBS_M14PR_msb			27u
+#define HMATRIXB_PRBS_M14PR_Lsb			24u
+#define HMATRIXB_PRBS_M14PR_Msb			27u
 	/* Master 15 Priority */
-#define HMATRIXB_PRBS_M15PR_lsb			28u
-#define HMATRIXB_PRBS_M15PR_msb			31u
+#define HMATRIXB_PRBS_M15PR_Lsb			28u
+#define HMATRIXB_PRBS_M15PR_Msb			31u
 
 	/* 0x110: Special Function */
 	uint32_t volatile SFR[16];
 	/* Special Function Register */
-#define HMATRIXB_SFR_SFR_lsb			0u
-#define HMATRIXB_SFR_SFR_msb			31u
+#define HMATRIXB_SFR_SFR_Lsb			0u
+#define HMATRIXB_SFR_SFR_Msb			31u
 
 };
 
@@ -1445,14 +1445,14 @@ struct sdk_mtb {
 	/* Pointer Value Wraps */
 #define MTB_POSITION_WRAP			2u
 	/* Trace Packet Location Pointer */
-#define MTB_POSITION_POINTER_lsb		3u
-#define MTB_POSITION_POINTER_msb		31u
+#define MTB_POSITION_POINTER_Lsb		3u
+#define MTB_POSITION_POINTER_Msb		31u
 
 	/* 0x04: MTB Master */
 	uint32_t volatile MASTER;
 	/* Maximum Value of the Trace Buffer in SRAM */
-#define MTB_MASTER_MASK_lsb			0u
-#define MTB_MASTER_MASK_msb			4u
+#define MTB_MASTER_MASK_Lsb			0u
+#define MTB_MASTER_MASK_Msb			4u
 	/* Trace Start Input Enable */
 #define MTB_MASTER_TSTARTEN			5u
 	/* Trace Stop Input Enable */
@@ -1473,8 +1473,8 @@ struct sdk_mtb {
 	/* Auto Halt Request */
 #define MTB_FLOW_AUTOHALT			1u
 	/* Watermark value */
-#define MTB_FLOW_WATERMARK_lsb			3u
-#define MTB_FLOW_WATERMARK_msb			31u
+#define MTB_FLOW_WATERMARK_Lsb			3u
+#define MTB_FLOW_WATERMARK_Msb			31u
 
 	/* 0x0C: MTB Base */
 	uint32_t volatile const BASE;
@@ -1565,8 +1565,8 @@ struct sdk_nvmctrl {
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
 	/* Command */
-#define NVMCTRL_CTRLA_CMD_lsb			0u
-#define NVMCTRL_CTRLA_CMD_msb			6u
+#define NVMCTRL_CTRLA_CMD_Lsb			0u
+#define NVMCTRL_CTRLA_CMD_Msb			6u
 #define NVMCTRL_CTRLA_CMD_ER			0x2
 #define NVMCTRL_CTRLA_CMD_WP			0x4
 #define NVMCTRL_CTRLA_CMD_EAR			0x5
@@ -1581,8 +1581,8 @@ struct sdk_nvmctrl {
 #define NVMCTRL_CTRLA_CMD_SSB			0x45
 #define NVMCTRL_CTRLA_CMD_INVALL		0x46
 	/* Command Execution */
-#define NVMCTRL_CTRLA_CMDEX_lsb			8u
-#define NVMCTRL_CTRLA_CMDEX_msb			15u
+#define NVMCTRL_CTRLA_CMDEX_Lsb			8u
+#define NVMCTRL_CTRLA_CMDEX_Msb			15u
 #define NVMCTRL_CTRLA_CMDEX_KEY			0xA5
 
 	/* 0x02 */
@@ -1591,22 +1591,22 @@ struct sdk_nvmctrl {
 	/* 0x04: Control B */
 	uint32_t volatile CTRLB;
 	/* NVM Read Wait States */
-#define NVMCTRL_CTRLB_RWS_lsb			1u
-#define NVMCTRL_CTRLB_RWS_msb			4u
+#define NVMCTRL_CTRLB_RWS_Lsb			1u
+#define NVMCTRL_CTRLB_RWS_Msb			4u
 #define NVMCTRL_CTRLB_RWS_SINGLE		0x0
 #define NVMCTRL_CTRLB_RWS_HALF			0x1
 #define NVMCTRL_CTRLB_RWS_DUAL			0x2
 	/* Manual Write */
 #define NVMCTRL_CTRLB_MANW			7u
 	/* Power Reduction Mode during Sleep */
-#define NVMCTRL_CTRLB_SLEEPPRM_lsb		8u
-#define NVMCTRL_CTRLB_SLEEPPRM_msb		9u
+#define NVMCTRL_CTRLB_SLEEPPRM_Lsb		8u
+#define NVMCTRL_CTRLB_SLEEPPRM_Msb		9u
 #define NVMCTRL_CTRLB_SLEEPPRM_WAKEONACCESS	0x0
 #define NVMCTRL_CTRLB_SLEEPPRM_WAKEUPINSTANT	0x1
 #define NVMCTRL_CTRLB_SLEEPPRM_DISABLED		0x3
 	/* NVMCTRL Read Mode */
-#define NVMCTRL_CTRLB_READMODE_lsb		16u
-#define NVMCTRL_CTRLB_READMODE_msb		17u
+#define NVMCTRL_CTRLB_READMODE_Lsb		16u
+#define NVMCTRL_CTRLB_READMODE_Msb		17u
 #define NVMCTRL_CTRLB_READMODE_NO_MISS_PENALTY	0x0
 #define NVMCTRL_CTRLB_READMODE_LOW_POWER	0x1
 #define NVMCTRL_CTRLB_READMODE_DETERMINISTIC	0x2
@@ -1616,11 +1616,11 @@ struct sdk_nvmctrl {
 	/* 0x08: NVM Parameter */
 	uint32_t volatile PARAM;
 	/* NVM Pages */
-#define NVMCTRL_PARAM_NVMP_lsb			0u
-#define NVMCTRL_PARAM_NVMP_msb			15u
+#define NVMCTRL_PARAM_NVMP_Lsb			0u
+#define NVMCTRL_PARAM_NVMP_Msb			15u
 	/* Page Size */
-#define NVMCTRL_PARAM_PSZ_lsb			16u
-#define NVMCTRL_PARAM_PSZ_msb			18u
+#define NVMCTRL_PARAM_PSZ_Lsb			16u
+#define NVMCTRL_PARAM_PSZ_Msb			18u
 #define NVMCTRL_PARAM_PSZ_8			0x0
 #define NVMCTRL_PARAM_PSZ_16			0x1
 #define NVMCTRL_PARAM_PSZ_32			0x2
@@ -1681,14 +1681,14 @@ struct sdk_nvmctrl {
 	/* 0x1C: Address */
 	uint32_t volatile ADDR;
 	/* NVM Address */
-#define NVMCTRL_ADDR_ADDR_lsb			0u
-#define NVMCTRL_ADDR_ADDR_msb			21u
+#define NVMCTRL_ADDR_ADDR_Lsb			0u
+#define NVMCTRL_ADDR_ADDR_Msb			21u
 
 	/* 0x20: Lock Section */
 	uint16_t volatile LOCK;
 	/* Region Lock Bits */
-#define NVMCTRL_LOCK_LOCK_lsb			0u
-#define NVMCTRL_LOCK_LOCK_msb			15u
+#define NVMCTRL_LOCK_LOCK_Lsb			0u
+#define NVMCTRL_LOCK_LOCK_Msb			15u
 
 };
 
@@ -1703,14 +1703,14 @@ struct sdk_pac {
 	/* 0x00: Write Protection Clear */
 	uint32_t volatile WPCLR;
 	/* Write Protection Clear */
-#define PAC_WPCLR_WP_lsb			1u
-#define PAC_WPCLR_WP_msb			31u
+#define PAC_WPCLR_WP_Lsb			1u
+#define PAC_WPCLR_WP_Msb			31u
 
 	/* 0x04: Write Protection Set */
 	uint32_t volatile WPSET;
 	/* Write Protection Set */
-#define PAC_WPSET_WP_lsb			1u
-#define PAC_WPSET_WP_msb			31u
+#define PAC_WPSET_WP_Lsb			1u
+#define PAC_WPSET_WP_Msb			31u
 
 };
 
@@ -1730,8 +1730,8 @@ struct sdk_pm {
 	/* 0x01: Sleep Mode */
 	uint8_t volatile SLEEP;
 	/* Idle Mode Configuration */
-#define PM_SLEEP_IDLE_lsb			0u
-#define PM_SLEEP_IDLE_msb			1u
+#define PM_SLEEP_IDLE_Lsb			0u
+#define PM_SLEEP_IDLE_Msb			1u
 #define PM_SLEEP_IDLE_CPU			0x0
 #define PM_SLEEP_IDLE_AHB			0x1
 #define PM_SLEEP_IDLE_APB			0x2
@@ -1747,8 +1747,8 @@ struct sdk_pm {
 	/* 0x08: CPU Clock Select */
 	uint8_t volatile CPUSEL;
 	/* CPU Prescaler Selection */
-#define PM_CPUSEL_CPUDIV_lsb			0u
-#define PM_CPUSEL_CPUDIV_msb			2u
+#define PM_CPUSEL_CPUDIV_Lsb			0u
+#define PM_CPUSEL_CPUDIV_Msb			2u
 #define PM_CPUSEL_CPUDIV_DIV1			0x0
 #define PM_CPUSEL_CPUDIV_DIV2			0x1
 #define PM_CPUSEL_CPUDIV_DIV4			0x2
@@ -1761,8 +1761,8 @@ struct sdk_pm {
 	/* 0x09: APBA Clock Select */
 	uint8_t volatile APBASEL;
 	/* APBA Prescaler Selection */
-#define PM_APBASEL_APBADIV_lsb			0u
-#define PM_APBASEL_APBADIV_msb			2u
+#define PM_APBASEL_APBADIV_Lsb			0u
+#define PM_APBASEL_APBADIV_Msb			2u
 #define PM_APBASEL_APBADIV_DIV1			0x0
 #define PM_APBASEL_APBADIV_DIV2			0x1
 #define PM_APBASEL_APBADIV_DIV4			0x2
@@ -1775,8 +1775,8 @@ struct sdk_pm {
 	/* 0x0A: APBB Clock Select */
 	uint8_t volatile APBBSEL;
 	/* APBB Prescaler Selection */
-#define PM_APBBSEL_APBBDIV_lsb			0u
-#define PM_APBBSEL_APBBDIV_msb			2u
+#define PM_APBBSEL_APBBDIV_Lsb			0u
+#define PM_APBBSEL_APBBDIV_Msb			2u
 #define PM_APBBSEL_APBBDIV_DIV1			0x0
 #define PM_APBBSEL_APBBDIV_DIV2			0x1
 #define PM_APBBSEL_APBBDIV_DIV4			0x2
@@ -1789,8 +1789,8 @@ struct sdk_pm {
 	/* 0x0B: APBC Clock Select */
 	uint8_t volatile APBCSEL;
 	/* APBC Prescaler Selection */
-#define PM_APBCSEL_APBCDIV_lsb			0u
-#define PM_APBCSEL_APBCDIV_msb			2u
+#define PM_APBCSEL_APBCDIV_Lsb			0u
+#define PM_APBCSEL_APBCDIV_Msb			2u
 #define PM_APBCSEL_APBCDIV_DIV1			0x0
 #define PM_APBCSEL_APBCDIV_DIV2			0x1
 #define PM_APBCSEL_APBCDIV_DIV4			0x2
@@ -1923,68 +1923,68 @@ struct sdk_port {
 	/* 0x00: Data Direction */
 	uint32_t volatile DIR;
 	/* Port Data Direction */
-#define PORT_DIR_DIR_lsb			0u
-#define PORT_DIR_DIR_msb			31u
+#define PORT_DIR_DIR_Lsb			0u
+#define PORT_DIR_DIR_Msb			31u
 
 	/* 0x04: Data Direction Clear */
 	uint32_t volatile DIRCLR;
 	/* Port Data Direction Clear */
-#define PORT_DIRCLR_DIRCLR_lsb			0u
-#define PORT_DIRCLR_DIRCLR_msb			31u
+#define PORT_DIRCLR_DIRCLR_Lsb			0u
+#define PORT_DIRCLR_DIRCLR_Msb			31u
 
 	/* 0x08: Data Direction Set */
 	uint32_t volatile DIRSET;
 	/* Port Data Direction Set */
-#define PORT_DIRSET_DIRSET_lsb			0u
-#define PORT_DIRSET_DIRSET_msb			31u
+#define PORT_DIRSET_DIRSET_Lsb			0u
+#define PORT_DIRSET_DIRSET_Msb			31u
 
 	/* 0x0C: Data Direction Toggle */
 	uint32_t volatile DIRTGL;
 	/* Port Data Direction Toggle */
-#define PORT_DIRTGL_DIRTGL_lsb			0u
-#define PORT_DIRTGL_DIRTGL_msb			31u
+#define PORT_DIRTGL_DIRTGL_Lsb			0u
+#define PORT_DIRTGL_DIRTGL_Msb			31u
 
 	/* 0x10: Data Output Value */
 	uint32_t volatile OUT;
 	/* Port Data Output Value */
-#define PORT_OUT_OUT_lsb			0u
-#define PORT_OUT_OUT_msb			31u
+#define PORT_OUT_OUT_Lsb			0u
+#define PORT_OUT_OUT_Msb			31u
 
 	/* 0x14: Data Output Value Clear */
 	uint32_t volatile OUTCLR;
 	/* Port Data Output Value Clear */
-#define PORT_OUTCLR_OUTCLR_lsb			0u
-#define PORT_OUTCLR_OUTCLR_msb			31u
+#define PORT_OUTCLR_OUTCLR_Lsb			0u
+#define PORT_OUTCLR_OUTCLR_Msb			31u
 
 	/* 0x18: Data Output Value Set */
 	uint32_t volatile OUTSET;
 	/* Port Data Output Value Set */
-#define PORT_OUTSET_OUTSET_lsb			0u
-#define PORT_OUTSET_OUTSET_msb			31u
+#define PORT_OUTSET_OUTSET_Lsb			0u
+#define PORT_OUTSET_OUTSET_Msb			31u
 
 	/* 0x1C: Data Output Value Toggle */
 	uint32_t volatile OUTTGL;
 	/* Port Data Output Value Toggle */
-#define PORT_OUTTGL_OUTTGL_lsb			0u
-#define PORT_OUTTGL_OUTTGL_msb			31u
+#define PORT_OUTTGL_OUTTGL_Lsb			0u
+#define PORT_OUTTGL_OUTTGL_Msb			31u
 
 	/* 0x20: Data Input Value */
 	uint32_t volatile const IN;
 	/* Port Data Input Value */
-#define PORT_IN_IN_lsb				0u
-#define PORT_IN_IN_msb				31u
+#define PORT_IN_IN_Lsb				0u
+#define PORT_IN_IN_Msb				31u
 
 	/* 0x24: Control */
 	uint32_t volatile CTRL;
 	/* Input Sampling Mode */
-#define PORT_CTRL_SAMPLING_lsb			0u
-#define PORT_CTRL_SAMPLING_msb			31u
+#define PORT_CTRL_SAMPLING_Lsb			0u
+#define PORT_CTRL_SAMPLING_Msb			31u
 
 	/* 0x28: Write Configuration */
 	uint32_t volatile WRCONFIG;
 	/* Pin Mask for Multiple Pin Configuration */
-#define PORT_WRCONFIG_PINMASK_lsb		0u
-#define PORT_WRCONFIG_PINMASK_msb		15u
+#define PORT_WRCONFIG_PINMASK_Lsb		0u
+#define PORT_WRCONFIG_PINMASK_Msb		15u
 	/* Peripheral Multiplexer Enable */
 #define PORT_WRCONFIG_PMUXEN			16u
 	/* Input Enable */
@@ -1994,8 +1994,8 @@ struct sdk_port {
 	/* Output Driver Strength Selection */
 #define PORT_WRCONFIG_DRVSTR			22u
 	/* Peripheral Multiplexing */
-#define PORT_WRCONFIG_PMUX_lsb			24u
-#define PORT_WRCONFIG_PMUX_msb			27u
+#define PORT_WRCONFIG_PMUX_Lsb			24u
+#define PORT_WRCONFIG_PMUX_Msb			27u
 	/* Write PMUX */
 #define PORT_WRCONFIG_WRPMUX			28u
 	/* Write PINCFG */
@@ -2010,8 +2010,8 @@ struct sdk_port {
 	uint8_t volatile PMUX[16];
 #define PORT_PMUX(pin, x)			((x) << (pin) % 2 * 4)
 	/* Peripheral Multiplexing */
-#define PORT_PMUX_lsb				0u
-#define PORT_PMUX_msb				3u
+#define PORT_PMUX_Lsb				0u
+#define PORT_PMUX_Msb				3u
 #define PORT_PMUX_A				0x0
 #define PORT_PMUX_EIC				0x0
 #define PORT_PMUX_B				0x1
@@ -2055,16 +2055,16 @@ struct sdk_rtc_mode0 {
 	/* Enable */
 #define RTC_MODE0_CTRL_ENABLE			1u
 	/* Operating Mode */
-#define RTC_MODE0_CTRL_MODE_lsb			2u
-#define RTC_MODE0_CTRL_MODE_msb			3u
+#define RTC_MODE0_CTRL_MODE_Lsb			2u
+#define RTC_MODE0_CTRL_MODE_Msb			3u
 #define RTC_MODE0_CTRL_MODE_COUNT32		0x0
 #define RTC_MODE0_CTRL_MODE_COUNT16		0x1
 #define RTC_MODE0_CTRL_MODE_CLOCK		0x2
 	/* Clear on Match */
 #define RTC_MODE0_CTRL_MATCHCLR			7u
 	/* Prescaler */
-#define RTC_MODE0_CTRL_PRESCALER_lsb		8u
-#define RTC_MODE0_CTRL_PRESCALER_msb		11u
+#define RTC_MODE0_CTRL_PRESCALER_Lsb		8u
+#define RTC_MODE0_CTRL_PRESCALER_Msb		11u
 #define RTC_MODE0_CTRL_PRESCALER_DIV1		0x0
 #define RTC_MODE0_CTRL_PRESCALER_DIV2		0x1
 #define RTC_MODE0_CTRL_PRESCALER_DIV4		0x2
@@ -2080,8 +2080,8 @@ struct sdk_rtc_mode0 {
 	/* 0x02: Read Request */
 	uint16_t volatile READREQ;
 	/* Address */
-#define RTC_MODE0_READREQ_ADDR_lsb		0u
-#define RTC_MODE0_READREQ_ADDR_msb		5u
+#define RTC_MODE0_READREQ_ADDR_Lsb		0u
+#define RTC_MODE0_READREQ_ADDR_Msb		5u
 	/* Read Continuously */
 #define RTC_MODE0_READREQ_RCONT			14u
 	/* Read Request */
@@ -2153,8 +2153,8 @@ struct sdk_rtc_mode0 {
 	/* 0x0C: Frequency Correction */
 	uint8_t volatile FREQCORR;
 	/* Correction Value */
-#define RTC_MODE0_FREQCORR_VALUE_lsb		0u
-#define RTC_MODE0_FREQCORR_VALUE_msb		6u
+#define RTC_MODE0_FREQCORR_VALUE_Lsb		0u
+#define RTC_MODE0_FREQCORR_VALUE_Msb		6u
 	/* Correction Sign */
 #define RTC_MODE0_FREQCORR_SIGN			7u
 
@@ -2164,8 +2164,8 @@ struct sdk_rtc_mode0 {
 	/* 0x10: MODE0 Counter Value */
 	uint32_t volatile COUNT;
 	/* Counter Value */
-#define RTC_MODE0_COUNT_COUNT_lsb		0u
-#define RTC_MODE0_COUNT_COUNT_msb		31u
+#define RTC_MODE0_COUNT_COUNT_Lsb		0u
+#define RTC_MODE0_COUNT_COUNT_Msb		31u
 
 	/* 0x14 */
 	uint8_t RESERVED2[0x18-0x14];
@@ -2173,8 +2173,8 @@ struct sdk_rtc_mode0 {
 	/* 0x18: MODE0 Compare n Value */
 	uint32_t volatile COMP;
 	/* Compare Value */
-#define RTC_MODE0_COMP_COMP_lsb			0u
-#define RTC_MODE0_COMP_COMP_msb			31u
+#define RTC_MODE0_COMP_COMP_Lsb			0u
+#define RTC_MODE0_COMP_COMP_Msb			31u
 
 };
 
@@ -2191,14 +2191,14 @@ struct sdk_rtc_mode1 {
 	/* Enable */
 #define RTC_MODE1_CTRL_ENABLE			1u
 	/* Operating Mode */
-#define RTC_MODE1_CTRL_MODE_lsb			2u
-#define RTC_MODE1_CTRL_MODE_msb			3u
+#define RTC_MODE1_CTRL_MODE_Lsb			2u
+#define RTC_MODE1_CTRL_MODE_Msb			3u
 #define RTC_MODE1_CTRL_MODE_COUNT32		0x0
 #define RTC_MODE1_CTRL_MODE_COUNT16		0x1
 #define RTC_MODE1_CTRL_MODE_CLOCK		0x2
 	/* Prescaler */
-#define RTC_MODE1_CTRL_PRESCALER_lsb		8u
-#define RTC_MODE1_CTRL_PRESCALER_msb		11u
+#define RTC_MODE1_CTRL_PRESCALER_Lsb		8u
+#define RTC_MODE1_CTRL_PRESCALER_Msb		11u
 #define RTC_MODE1_CTRL_PRESCALER_DIV1		0x0
 #define RTC_MODE1_CTRL_PRESCALER_DIV2		0x1
 #define RTC_MODE1_CTRL_PRESCALER_DIV4		0x2
@@ -2214,8 +2214,8 @@ struct sdk_rtc_mode1 {
 	/* 0x02: Read Request */
 	uint16_t volatile READREQ;
 	/* Address */
-#define RTC_MODE1_READREQ_ADDR_lsb		0u
-#define RTC_MODE1_READREQ_ADDR_msb		5u
+#define RTC_MODE1_READREQ_ADDR_Lsb		0u
+#define RTC_MODE1_READREQ_ADDR_Msb		5u
 	/* Read Continuously */
 #define RTC_MODE1_READREQ_RCONT			14u
 	/* Read Request */
@@ -2295,8 +2295,8 @@ struct sdk_rtc_mode1 {
 	/* 0x0C: Frequency Correction */
 	uint8_t volatile FREQCORR;
 	/* Correction Value */
-#define RTC_MODE1_FREQCORR_VALUE_lsb		0u
-#define RTC_MODE1_FREQCORR_VALUE_msb		6u
+#define RTC_MODE1_FREQCORR_VALUE_Lsb		0u
+#define RTC_MODE1_FREQCORR_VALUE_Msb		6u
 	/* Correction Sign */
 #define RTC_MODE1_FREQCORR_SIGN			7u
 
@@ -2306,8 +2306,8 @@ struct sdk_rtc_mode1 {
 	/* 0x10: MODE1 Counter Value */
 	uint16_t volatile COUNT;
 	/* Counter Value */
-#define RTC_MODE1_COUNT_COUNT_lsb		0u
-#define RTC_MODE1_COUNT_COUNT_msb		15u
+#define RTC_MODE1_COUNT_COUNT_Lsb		0u
+#define RTC_MODE1_COUNT_COUNT_Msb		15u
 
 	/* 0x12 */
 	uint8_t RESERVED5[0x14-0x12];
@@ -2315,8 +2315,8 @@ struct sdk_rtc_mode1 {
 	/* 0x14: MODE1 Counter Period */
 	uint16_t volatile PER;
 	/* Counter Period */
-#define RTC_MODE1_PER_PER_lsb			0u
-#define RTC_MODE1_PER_PER_msb			15u
+#define RTC_MODE1_PER_PER_Lsb			0u
+#define RTC_MODE1_PER_PER_Msb			15u
 
 	/* 0x16 */
 	uint8_t RESERVED6[0x18-0x16];
@@ -2324,8 +2324,8 @@ struct sdk_rtc_mode1 {
 	/* 0x18: MODE1 Compare n Value */
 	uint16_t volatile COMP[2];
 	/* Compare Value */
-#define RTC_MODE1_COMP_COMP_lsb			0u
-#define RTC_MODE1_COMP_COMP_msb			15u
+#define RTC_MODE1_COMP_COMP_Lsb			0u
+#define RTC_MODE1_COMP_COMP_Msb			15u
 
 };
 
@@ -2342,8 +2342,8 @@ struct sdk_rtc_mode2 {
 	/* Enable */
 #define RTC_MODE2_CTRL_ENABLE			1u
 	/* Operating Mode */
-#define RTC_MODE2_CTRL_MODE_lsb			2u
-#define RTC_MODE2_CTRL_MODE_msb			3u
+#define RTC_MODE2_CTRL_MODE_Lsb			2u
+#define RTC_MODE2_CTRL_MODE_Msb			3u
 #define RTC_MODE2_CTRL_MODE_COUNT32		0x0
 #define RTC_MODE2_CTRL_MODE_COUNT16		0x1
 #define RTC_MODE2_CTRL_MODE_CLOCK		0x2
@@ -2352,8 +2352,8 @@ struct sdk_rtc_mode2 {
 	/* Clear on Match */
 #define RTC_MODE2_CTRL_MATCHCLR			7u
 	/* Prescaler */
-#define RTC_MODE2_CTRL_PRESCALER_lsb		8u
-#define RTC_MODE2_CTRL_PRESCALER_msb		11u
+#define RTC_MODE2_CTRL_PRESCALER_Lsb		8u
+#define RTC_MODE2_CTRL_PRESCALER_Msb		11u
 #define RTC_MODE2_CTRL_PRESCALER_DIV1		0x0
 #define RTC_MODE2_CTRL_PRESCALER_DIV2		0x1
 #define RTC_MODE2_CTRL_PRESCALER_DIV4		0x2
@@ -2369,8 +2369,8 @@ struct sdk_rtc_mode2 {
 	/* 0x02: Read Request */
 	uint16_t volatile READREQ;
 	/* Address */
-#define RTC_MODE2_READREQ_ADDR_lsb		0u
-#define RTC_MODE2_READREQ_ADDR_msb		5u
+#define RTC_MODE2_READREQ_ADDR_Lsb		0u
+#define RTC_MODE2_READREQ_ADDR_Msb		5u
 	/* Read Continuously */
 #define RTC_MODE2_READREQ_RCONT			14u
 	/* Read Request */
@@ -2442,8 +2442,8 @@ struct sdk_rtc_mode2 {
 	/* 0x0C: Frequency Correction */
 	uint8_t volatile FREQCORR;
 	/* Correction Value */
-#define RTC_MODE2_FREQCORR_VALUE_lsb		0u
-#define RTC_MODE2_FREQCORR_VALUE_msb		6u
+#define RTC_MODE2_FREQCORR_VALUE_Lsb		0u
+#define RTC_MODE2_FREQCORR_VALUE_Msb		6u
 	/* Correction Sign */
 #define RTC_MODE2_FREQCORR_SIGN			7u
 
@@ -2453,25 +2453,25 @@ struct sdk_rtc_mode2 {
 	/* 0x10: MODE2 Clock Value */
 	uint32_t volatile CLOCK;
 	/* Second */
-#define RTC_MODE2_CLOCK_SECOND_lsb		0u
-#define RTC_MODE2_CLOCK_SECOND_msb		5u
+#define RTC_MODE2_CLOCK_SECOND_Lsb		0u
+#define RTC_MODE2_CLOCK_SECOND_Msb		5u
 	/* Minute */
-#define RTC_MODE2_CLOCK_MINUTE_lsb		6u
-#define RTC_MODE2_CLOCK_MINUTE_msb		11u
+#define RTC_MODE2_CLOCK_MINUTE_Lsb		6u
+#define RTC_MODE2_CLOCK_MINUTE_Msb		11u
 	/* Hour */
-#define RTC_MODE2_CLOCK_HOUR_lsb		12u
-#define RTC_MODE2_CLOCK_HOUR_msb		16u
+#define RTC_MODE2_CLOCK_HOUR_Lsb		12u
+#define RTC_MODE2_CLOCK_HOUR_Msb		16u
 #define RTC_MODE2_CLOCK_HOUR_AM			0x0
 #define RTC_MODE2_CLOCK_HOUR_PM			0x10
 	/* Day */
-#define RTC_MODE2_CLOCK_DAY_lsb			17u
-#define RTC_MODE2_CLOCK_DAY_msb			21u
+#define RTC_MODE2_CLOCK_DAY_Lsb			17u
+#define RTC_MODE2_CLOCK_DAY_Msb			21u
 	/* Month */
-#define RTC_MODE2_CLOCK_MONTH_lsb		22u
-#define RTC_MODE2_CLOCK_MONTH_msb		25u
+#define RTC_MODE2_CLOCK_MONTH_Lsb		22u
+#define RTC_MODE2_CLOCK_MONTH_Msb		25u
 	/* Year */
-#define RTC_MODE2_CLOCK_YEAR_lsb		26u
-#define RTC_MODE2_CLOCK_YEAR_msb		31u
+#define RTC_MODE2_CLOCK_YEAR_Lsb		26u
+#define RTC_MODE2_CLOCK_YEAR_Msb		31u
 
 	/* 0x14 */
 	uint8_t RESERVED9[0x18-0x14];
@@ -2479,31 +2479,31 @@ struct sdk_rtc_mode2 {
 	/* 0x18: MODE2 Alarm n Value */
 	uint32_t volatile ALARM;
 	/* Second */
-#define RTC_MODE2_ALARM_SECOND_lsb		0u
-#define RTC_MODE2_ALARM_SECOND_msb		5u
+#define RTC_MODE2_ALARM_SECOND_Lsb		0u
+#define RTC_MODE2_ALARM_SECOND_Msb		5u
 	/* Minute */
-#define RTC_MODE2_ALARM_MINUTE_lsb		6u
-#define RTC_MODE2_ALARM_MINUTE_msb		11u
+#define RTC_MODE2_ALARM_MINUTE_Lsb		6u
+#define RTC_MODE2_ALARM_MINUTE_Msb		11u
 	/* Hour */
-#define RTC_MODE2_ALARM_HOUR_lsb		12u
-#define RTC_MODE2_ALARM_HOUR_msb		16u
+#define RTC_MODE2_ALARM_HOUR_Lsb		12u
+#define RTC_MODE2_ALARM_HOUR_Msb		16u
 #define RTC_MODE2_ALARM_HOUR_AM			0x0
 #define RTC_MODE2_ALARM_HOUR_PM			0x10
 	/* Day */
-#define RTC_MODE2_ALARM_DAY_lsb			17u
-#define RTC_MODE2_ALARM_DAY_msb			21u
+#define RTC_MODE2_ALARM_DAY_Lsb			17u
+#define RTC_MODE2_ALARM_DAY_Msb			21u
 	/* Month */
-#define RTC_MODE2_ALARM_MONTH_lsb		22u
-#define RTC_MODE2_ALARM_MONTH_msb		25u
+#define RTC_MODE2_ALARM_MONTH_Lsb		22u
+#define RTC_MODE2_ALARM_MONTH_Msb		25u
 	/* Year */
-#define RTC_MODE2_ALARM_YEAR_lsb		26u
-#define RTC_MODE2_ALARM_YEAR_msb		31u
+#define RTC_MODE2_ALARM_YEAR_Lsb		26u
+#define RTC_MODE2_ALARM_YEAR_Msb		31u
 
 	/* 0x1C: MODE2 Alarm n Mask */
 	uint8_t volatile MASK;
 	/* Alarm Mask Selection */
-#define RTC_MODE2_MASK_SEL_lsb			0u
-#define RTC_MODE2_MASK_SEL_msb			2u
+#define RTC_MODE2_MASK_SEL_Lsb			0u
+#define RTC_MODE2_MASK_SEL_Msb			2u
 #define RTC_MODE2_MASK_SEL_OFF			0x0
 #define RTC_MODE2_MASK_SEL_SS			0x1
 #define RTC_MODE2_MASK_SEL_MMSS			0x2
@@ -2523,8 +2523,8 @@ struct sdk_sercom {
 	/* 0x00: SERCOM Control A */
 	uint32_t volatile CTRLA;
 	/* Operating Mode */
-#define SERCOM_CTRLA_MODE_lsb			2u
-#define SERCOM_CTRLA_MODE_msb			4u
+#define SERCOM_CTRLA_MODE_Lsb			2u
+#define SERCOM_CTRLA_MODE_Msb			4u
 #define SERCOM_CTRLA_MODE_USART_EXT_CLK		0x0
 #define SERCOM_CTRLA_MODE_USART_INT_CLK		0x1
 #define SERCOM_CTRLA_MODE_SPI_SLAVE		0x2
@@ -2547,16 +2547,16 @@ struct sdk_i2cm {
 	/* Enable */
 #define I2CM_CTRLA_ENABLE			1u
 	/* Operating Mode */
-#define I2CM_CTRLA_MODE_lsb			2u
-#define I2CM_CTRLA_MODE_msb			4u
+#define I2CM_CTRLA_MODE_Lsb			2u
+#define I2CM_CTRLA_MODE_Msb			4u
 #define I2CM_CTRLA_MODE_I2C_MASTER		0x5
 	/* Run in Standby */
 #define I2CM_CTRLA_RUNSTDBY			7u
 	/* Pin Usage */
 #define I2CM_CTRLA_PINOUT			16u
 	/* SDA Hold Time */
-#define I2CM_CTRLA_SDAHOLD_lsb			20u
-#define I2CM_CTRLA_SDAHOLD_msb			21u
+#define I2CM_CTRLA_SDAHOLD_Lsb			20u
+#define I2CM_CTRLA_SDAHOLD_Msb			21u
 #define I2CM_CTRLA_SDAHOLD_DIS			0x0
 #define I2CM_CTRLA_SDAHOLD_75_NS		0x1
 #define I2CM_CTRLA_SDAHOLD_450_NS		0x2
@@ -2566,16 +2566,16 @@ struct sdk_i2cm {
 	/* Slave SCL Low Extend Timeout */
 #define I2CM_CTRLA_SEXTTOEN			23u
 	/* Transfer Speed */
-#define I2CM_CTRLA_SPEED_lsb			24u
-#define I2CM_CTRLA_SPEED_msb			25u
+#define I2CM_CTRLA_SPEED_Lsb			24u
+#define I2CM_CTRLA_SPEED_Msb			25u
 #define I2CM_CTRLA_SPEED_400_KHZ_MAX		0x0
 #define I2CM_CTRLA_SPEED_1000_KHZ_MAX		0x1
 #define I2CM_CTRLA_SPEED_3400_KHZ_MAX		0x2
 	/* SCL Clock Stretch Mode */
 #define I2CM_CTRLA_SCLSM			27u
 	/* Inactive Time-Out */
-#define I2CM_CTRLA_INACTOUT_lsb			28u
-#define I2CM_CTRLA_INACTOUT_msb			29u
+#define I2CM_CTRLA_INACTOUT_Lsb			28u
+#define I2CM_CTRLA_INACTOUT_Msb			29u
 #define I2CM_CTRLA_INACTOUT_DIS			0x0
 #define I2CM_CTRLA_INACTOUT_55_US		0x1
 #define I2CM_CTRLA_INACTOUT_105_US		0x2
@@ -2590,8 +2590,8 @@ struct sdk_i2cm {
 	/* Quick Command Enable */
 #define I2CM_CTRLB_QCEN				9u
 	/* Command */
-#define I2CM_CTRLB_CMD_lsb			16u
-#define I2CM_CTRLB_CMD_msb			17u
+#define I2CM_CTRLB_CMD_Lsb			16u
+#define I2CM_CTRLB_CMD_Msb			17u
 #define I2CM_CTRLB_CMD_ACK_START		0x1
 #define I2CM_CTRLB_CMD_ACK_READ			0x2
 #define I2CM_CTRLB_CMD_ACK_STOP			0x3
@@ -2604,17 +2604,17 @@ struct sdk_i2cm {
 	/* 0x0C: I2CM Baud Rate */
 	uint32_t volatile BAUD;
 	/* Baud Rate Value */
-#define I2CM_BAUD_BAUD_lsb			0u
-#define I2CM_BAUD_BAUD_msb			7u
+#define I2CM_BAUD_BAUD_Lsb			0u
+#define I2CM_BAUD_BAUD_Msb			7u
 	/* Baud Rate Value Low */
-#define I2CM_BAUD_BAUDLOW_lsb			8u
-#define I2CM_BAUD_BAUDLOW_msb			15u
+#define I2CM_BAUD_BAUDLOW_Lsb			8u
+#define I2CM_BAUD_BAUDLOW_Msb			15u
 	/* High Speed Baud Rate Value */
-#define I2CM_BAUD_HSBAUD_lsb			16u
-#define I2CM_BAUD_HSBAUD_msb			23u
+#define I2CM_BAUD_HSBAUD_Lsb			16u
+#define I2CM_BAUD_HSBAUD_Msb			23u
 	/* High Speed Baud Rate Value Low */
-#define I2CM_BAUD_HSBAUDLOW_lsb			24u
-#define I2CM_BAUD_HSBAUDLOW_msb			31u
+#define I2CM_BAUD_HSBAUDLOW_Lsb			24u
+#define I2CM_BAUD_HSBAUDLOW_Msb			31u
 
 
 	/* 0x10 */
@@ -2665,8 +2665,8 @@ struct sdk_i2cm {
 	/* Received Not Acknowledge */
 #define I2CM_STATUS_RXNACK			2u
 	/* Bus State */
-#define I2CM_STATUS_BUSSTATE_lsb		4u
-#define I2CM_STATUS_BUSSTATE_msb		5u
+#define I2CM_STATUS_BUSSTATE_Lsb		4u
+#define I2CM_STATUS_BUSSTATE_Msb		5u
 #define I2CM_STATUS_BUSSTATE_UNKNOWN		0x0
 #define I2CM_STATUS_BUSSTATE_IDLE		0x1
 #define I2CM_STATUS_BUSSTATE_OWNER		0x2
@@ -2697,8 +2697,8 @@ struct sdk_i2cm {
 	/* 0x24: I2CM Address */
 	uint32_t volatile ADDR;
 	/* Address Value */
-#define I2CM_ADDR_ADDR_lsb			0u
-#define I2CM_ADDR_ADDR_msb			10u
+#define I2CM_ADDR_ADDR_Lsb			0u
+#define I2CM_ADDR_ADDR_Msb			10u
 	/* Length Enable */
 #define I2CM_ADDR_LENEN				13u
 	/* High Speed Mode */
@@ -2706,14 +2706,14 @@ struct sdk_i2cm {
 	/* Ten Bit Addressing Enable */
 #define I2CM_ADDR_TENBITEN			15u
 	/* Length */
-#define I2CM_ADDR_LEN_lsb			16u
-#define I2CM_ADDR_LEN_msb			23u
+#define I2CM_ADDR_LEN_Lsb			16u
+#define I2CM_ADDR_LEN_Msb			23u
 
 	/* 0x28: I2CM Data */
 	uint8_t volatile DATA;
 	/* Data Value */
-#define I2CM_DATA_DATA_lsb			0u
-#define I2CM_DATA_DATA_msb			7u
+#define I2CM_DATA_DATA_Lsb			0u
+#define I2CM_DATA_DATA_Msb			7u
 
 	/* 0x29 */
 	uint8_t RESERVED6[0x30-0x29];
@@ -2739,16 +2739,16 @@ struct sdk_i2cs {
 	/* Enable */
 #define I2CS_CTRLA_ENABLE			1u
 	/* Operating Mode */
-#define I2CS_CTRLA_MODE_lsb			2u
-#define I2CS_CTRLA_MODE_msb			4u
+#define I2CS_CTRLA_MODE_Lsb			2u
+#define I2CS_CTRLA_MODE_Msb			4u
 #define I2CS_CTRLA_MODE_I2C_SLAVE		0x4
 	/* Run during Standby */
 #define I2CS_CTRLA_RUNSTDBY			7u
 	/* Pin Usage */
 #define I2CS_CTRLA_PINOUT			16u
 	/* SDA Hold Time */
-#define I2CS_CTRLA_SDAHOLD_lsb			20u
-#define I2CS_CTRLA_SDAHOLD_msb			21u
+#define I2CS_CTRLA_SDAHOLD_Lsb			20u
+#define I2CS_CTRLA_SDAHOLD_Msb			21u
 #define I2CS_CTRLA_SDAHOLD_DIS			0x0
 #define I2CS_CTRLA_SDAHOLD_75NS			0x1
 #define I2CS_CTRLA_SDAHOLD_450NS		0x2
@@ -2756,8 +2756,8 @@ struct sdk_i2cs {
 	/* Slave SCL Low Extend Timeout */
 #define I2CS_CTRLA_SEXTTOEN			23u
 	/* Transfer Speed */
-#define I2CS_CTRLA_SPEED_lsb			24u
-#define I2CS_CTRLA_SPEED_msb			25u
+#define I2CS_CTRLA_SPEED_Lsb			24u
+#define I2CS_CTRLA_SPEED_Msb			25u
 #define I2CS_CTRLA_SPEED_400_KHZ_MAX		0x0
 #define I2CS_CTRLA_SPEED_1000_KHZ_MAX		0x1
 #define I2CS_CTRLA_SPEED_3400_KHZ_MAX		0x2
@@ -2775,11 +2775,11 @@ struct sdk_i2cs {
 	/* Automatic Address Acknowledge */
 #define I2CS_CTRLB_AACKEN			10u
 	/* Address Mode */
-#define I2CS_CTRLB_AMODE_lsb			14u
-#define I2CS_CTRLB_AMODE_msb			15u
+#define I2CS_CTRLB_AMODE_Lsb			14u
+#define I2CS_CTRLB_AMODE_Msb			15u
 	/* Command */
-#define I2CS_CTRLB_CMD_lsb			16u
-#define I2CS_CTRLB_CMD_msb			17u
+#define I2CS_CTRLB_CMD_Lsb			16u
+#define I2CS_CTRLB_CMD_Msb			17u
 	/* Acknowledge Action */
 #define I2CS_CTRLB_ACKACT			18u
 
@@ -2864,19 +2864,19 @@ struct sdk_i2cs {
 	/* General Call Address Enable */
 #define I2CS_ADDR_GENCEN			0u
 	/* Address Value */
-#define I2CS_ADDR_ADDR_lsb			1u
-#define I2CS_ADDR_ADDR_msb			10u
+#define I2CS_ADDR_ADDR_Lsb			1u
+#define I2CS_ADDR_ADDR_Msb			10u
 	/* Ten Bit Addressing Enable */
 #define I2CS_ADDR_TENBITEN			15u
 	/* Address Mask */
-#define I2CS_ADDR_ADDRMASK_lsb			17u
-#define I2CS_ADDR_ADDRMASK_msb			26u
+#define I2CS_ADDR_ADDRMASK_Lsb			17u
+#define I2CS_ADDR_ADDRMASK_Msb			26u
 
 	/* 0x28: I2CS Data */
 	uint8_t volatile DATA;
 	/* Data Value */
-#define I2CS_DATA_DATA_lsb			0u
-#define I2CS_DATA_DATA_msb			7u
+#define I2CS_DATA_DATA_Lsb			0u
+#define I2CS_DATA_DATA_Msb			7u
 
 };
 
@@ -2894,8 +2894,8 @@ struct sdk_spi {
 	/* Enable */
 #define SPI_CTRLA_ENABLE			1u
 	/* Operating Mode */
-#define SPI_CTRLA_MODE_lsb			2u
-#define SPI_CTRLA_MODE_msb			4u
+#define SPI_CTRLA_MODE_Lsb			2u
+#define SPI_CTRLA_MODE_Msb			4u
 #define SPI_CTRLA_MODE_SPI_SLAVE		0x2
 #define SPI_CTRLA_MODE_SPI_MASTER		0x3
 	/* Run during Standby */
@@ -2903,22 +2903,22 @@ struct sdk_spi {
 	/* Immediate Buffer Overflow Notification */
 #define SPI_CTRLA_IBON				8u
 	/* Data Out Pinout */
-#define SPI_CTRLA_DOPO_lsb			16u
-#define SPI_CTRLA_DOPO_msb			17u
+#define SPI_CTRLA_DOPO_Lsb			16u
+#define SPI_CTRLA_DOPO_Msb			17u
 #define SPI_CTRLA_DOPO_MOSI0_SCK1_SS2		0x0
 #define SPI_CTRLA_DOPO_MOSI2_SCK3_SS1		0x1
 #define SPI_CTRLA_DOPO_MOSI3_SCK1_SS2		0x2
 #define SPI_CTRLA_DOPO_MOSI0_SCK3_SS1		0x3
 	/* Data In Pinout */
-#define SPI_CTRLA_DIPO_lsb			20u
-#define SPI_CTRLA_DIPO_msb			21u
+#define SPI_CTRLA_DIPO_Lsb			20u
+#define SPI_CTRLA_DIPO_Msb			21u
 #define SPI_CTRLA_DIPO_MISO0			0x0
 #define SPI_CTRLA_DIPO_MISO1			0x1
 #define SPI_CTRLA_DIPO_MISO2			0x2
 #define SPI_CTRLA_DIPO_MISO3			0x3
 	/* Frame Format */
-#define SPI_CTRLA_FORM_lsb			24u
-#define SPI_CTRLA_FORM_msb			27u
+#define SPI_CTRLA_FORM_Lsb			24u
+#define SPI_CTRLA_FORM_Msb			27u
 #define SPI_CTRLA_FORM_SPI			0x0
 #define SPI_CTRLA_FORM_SPI_ADDR			0x1
 	/* Clock Phase */
@@ -2931,8 +2931,8 @@ struct sdk_spi {
 	/* 0x04: SPI Control B */
 	uint32_t volatile CTRLB;
 	/* Character Size */
-#define SPI_CTRLB_CHSIZE_lsb			0u
-#define SPI_CTRLB_CHSIZE_msb			2u
+#define SPI_CTRLB_CHSIZE_Lsb			0u
+#define SPI_CTRLB_CHSIZE_Msb			2u
 #define SPI_CTRLB_CHSIZE_8BIT			0x0
 #define SPI_CTRLB_CHSIZE_9BIT			0x1
 	/* Data Preload Enable */
@@ -2942,8 +2942,8 @@ struct sdk_spi {
 	/* Master Slave Select Enable */
 #define SPI_CTRLB_MSSEN				13u
 	/* Address Mode */
-#define SPI_CTRLB_AMODE_lsb			14u
-#define SPI_CTRLB_AMODE_msb			15u
+#define SPI_CTRLB_AMODE_Lsb			14u
+#define SPI_CTRLB_AMODE_Msb			15u
 	/* Receiver Enable */
 #define SPI_CTRLB_RXEN				17u
 
@@ -2953,8 +2953,8 @@ struct sdk_spi {
 	/* 0x0C: SPI Baud Rate */
 	uint8_t volatile BAUD;
 	/* Baud Rate Value */
-#define SPI_BAUD_BAUD_lsb			0u
-#define SPI_BAUD_BAUD_msb			7u
+#define SPI_BAUD_BAUD_Lsb			0u
+#define SPI_BAUD_BAUD_Msb			7u
 
 	/* 0x0D */
 	uint8_t RESERVED13[0x14-0x0D];
@@ -3027,17 +3027,17 @@ struct sdk_spi {
 	/* 0x24: SPI Address */
 	uint32_t volatile ADDR;
 	/* Address Value */
-#define SPI_ADDR_ADDR_lsb			0u
-#define SPI_ADDR_ADDR_msb			7u
+#define SPI_ADDR_ADDR_Lsb			0u
+#define SPI_ADDR_ADDR_Msb			7u
 	/* Address Mask */
-#define SPI_ADDR_ADDRMASK_lsb			16u
-#define SPI_ADDR_ADDRMASK_msb			23u
+#define SPI_ADDR_ADDRMASK_Lsb			16u
+#define SPI_ADDR_ADDRMASK_Msb			23u
 
 	/* 0x28: SPI Data */
 	uint32_t volatile DATA;
 	/* Data Value */
-#define SPI_DATA_DATA_lsb			0u
-#define SPI_DATA_DATA_msb			8u
+#define SPI_DATA_DATA_Lsb			0u
+#define SPI_DATA_DATA_Msb			8u
 
 	/* 0x2C */
 	uint8_t RESERVED18[0x30-0x2C];
@@ -3063,8 +3063,8 @@ struct sdk_usart {
 	/* Enable */
 #define USART_CTRLA_ENABLE			1u
 	/* Operating Mode */
-#define USART_CTRLA_MODE_lsb			2u
-#define USART_CTRLA_MODE_msb			4u
+#define USART_CTRLA_MODE_Lsb			2u
+#define USART_CTRLA_MODE_Msb			4u
 #define USART_CTRLA_MODE_USART_EXT_CLK		0x0
 #define USART_CTRLA_MODE_USART_INT_CLK		0x1
 	/* Run during Standby */
@@ -3072,32 +3072,32 @@ struct sdk_usart {
 	/* Immediate Buffer Overflow Notification */
 #define USART_CTRLA_IBON			8u
 	/* Sample */
-#define USART_CTRLA_SAMPR_lsb			13u
-#define USART_CTRLA_SAMPR_msb			15u
+#define USART_CTRLA_SAMPR_Lsb			13u
+#define USART_CTRLA_SAMPR_Msb			15u
 #define USART_CTRLA_SAMPR_16_ARITHMETIC		0x0
 #define USART_CTRLA_SAMPR_16_FRACTIONAL		0x1
 #define USART_CTRLA_SAMPR_8_ARITHMETIC		0x2
 #define USART_CTRLA_SAMPR_8_FRACTIONAL		0x3
 #define USART_CTRLA_SAMPR_3_ARITHMETIC		0x4
 	/* Transmit Data Pinout */
-#define USART_CTRLA_TXPO_lsb			16u
-#define USART_CTRLA_TXPO_msb			17u
+#define USART_CTRLA_TXPO_Lsb			16u
+#define USART_CTRLA_TXPO_Msb			17u
 #define USART_CTRLA_TXPO_TX0_CK1		0x0
 #define USART_CTRLA_TXPO_TX2_CK3		0x1
 #define USART_CTRLA_TXPO_TX0_RTS2_CTS3		0x2
 	/* Receive Data Pinout */
-#define USART_CTRLA_RXPO_lsb			20u
-#define USART_CTRLA_RXPO_msb			21u
+#define USART_CTRLA_RXPO_Lsb			20u
+#define USART_CTRLA_RXPO_Msb			21u
 #define USART_CTRLA_RXPO_RX0			0x0
 #define USART_CTRLA_RXPO_RX1			0x1
 #define USART_CTRLA_RXPO_RX2			0x2
 #define USART_CTRLA_RXPO_RX3			0x3
 	/* Sample Adjustment */
-#define USART_CTRLA_SAMPA_lsb			22u
-#define USART_CTRLA_SAMPA_msb			23u
+#define USART_CTRLA_SAMPA_Lsb			22u
+#define USART_CTRLA_SAMPA_Msb			23u
 	/* Frame Format */
-#define USART_CTRLA_FORM_lsb			24u
-#define USART_CTRLA_FORM_msb			27u
+#define USART_CTRLA_FORM_Lsb			24u
+#define USART_CTRLA_FORM_Msb			27u
 #define USART_CTRLA_FORM_NORMAL_NOPARITY	0x0
 #define USART_CTRLA_FORM_NORMAL_PARITY		0x1
 #define USART_CTRLA_FORM_AUTOBAUD_NOPARITY	0x2
@@ -3112,8 +3112,8 @@ struct sdk_usart {
 	/* 0x04: USART Control B */
 	uint32_t volatile CTRLB;
 	/* Character Size */
-#define USART_CTRLB_CHSIZE_lsb			0u
-#define USART_CTRLB_CHSIZE_msb			2u
+#define USART_CTRLB_CHSIZE_Lsb			0u
+#define USART_CTRLB_CHSIZE_Msb			2u
 #define USART_CTRLB_CHSIZE_8BITS		0x0
 #define USART_CTRLB_CHSIZE_9BITS		0x1
 #define USART_CTRLB_CHSIZE_5BITS		0x5
@@ -3139,20 +3139,20 @@ struct sdk_usart {
 
 	/* 0x0C: USART Baud Rate */
 	uint16_t volatile BAUD;
-#define USART_BAUD_lsb				0u
-#define USART_BAUD_msb				15u
+#define USART_BAUD_Lsb				0u
+#define USART_BAUD_Msb				15u
 	/* integer part */
-#define USART_BAUD_IP_lsb			0u
-#define USART_BAUD_IP_msb			12u
+#define USART_BAUD_IP_Lsb			0u
+#define USART_BAUD_IP_Msb			12u
 	/* Fractional Part */
-#define USART_BAUD_FP_lsb			13u
-#define USART_BAUD_FP_msb			15u
+#define USART_BAUD_FP_Lsb			13u
+#define USART_BAUD_FP_Msb			15u
 
 	/* 0x0E: USART Receive Pulse Length */
 	uint8_t volatile RXPL;
 	/* Receive Pulse Length */
-#define USART_RXPL_RXPL_lsb			0u
-#define USART_RXPL_RXPL_msb			7u
+#define USART_RXPL_RXPL_Lsb			0u
+#define USART_RXPL_RXPL_Msb			7u
 
 	/* 0x0F */
 	uint8_t RESERVED20[0x14-0x0F];
@@ -3247,8 +3247,8 @@ struct sdk_usart {
 	/* 0x28: USART Data */
 	uint16_t volatile DATA;
 	/* Data Value */
-#define USART_DATA_DATA_lsb			0u
-#define USART_DATA_DATA_msb			8u
+#define USART_DATA_DATA_Lsb			0u
+#define USART_DATA_DATA_Msb			8u
 
 	/* 0x2A */
 	uint8_t RESERVED25[0x30-0x2A];
@@ -3409,8 +3409,8 @@ struct sdk_sysctrl {
 	/* On Demand Control */
 #define SYSCTRL_XOSC_ONDEMAND			7u
 	/* Oscillator Gain */
-#define SYSCTRL_XOSC_GAIN_lsb			8u
-#define SYSCTRL_XOSC_GAIN_msb			10u
+#define SYSCTRL_XOSC_GAIN_Lsb			8u
+#define SYSCTRL_XOSC_GAIN_Msb			10u
 #define SYSCTRL_XOSC_GAIN_0			0x0
 #define SYSCTRL_XOSC_GAIN_1			0x1
 #define SYSCTRL_XOSC_GAIN_2			0x2
@@ -3419,8 +3419,8 @@ struct sdk_sysctrl {
 	/* Automatic Amplitude Gain Control */
 #define SYSCTRL_XOSC_AMPGC			11u
 	/* Start-Up Time */
-#define SYSCTRL_XOSC_STARTUP_lsb		12u
-#define SYSCTRL_XOSC_STARTUP_msb		15u
+#define SYSCTRL_XOSC_STARTUP_Lsb		12u
+#define SYSCTRL_XOSC_STARTUP_Msb		15u
 
 	/* 0x12 */
 	uint8_t RESERVED0[0x14-0x12];
@@ -3442,8 +3442,8 @@ struct sdk_sysctrl {
 	/* On Demand Control */
 #define SYSCTRL_XOSC32K_ONDEMAND		7u
 	/* Oscillator Start-Up Time */
-#define SYSCTRL_XOSC32K_STARTUP_lsb		8u
-#define SYSCTRL_XOSC32K_STARTUP_msb		10u
+#define SYSCTRL_XOSC32K_STARTUP_Lsb		8u
+#define SYSCTRL_XOSC32K_STARTUP_Msb		10u
 	/* Write Lock */
 #define SYSCTRL_XOSC32K_WRTLOCK			12u
 
@@ -3463,19 +3463,19 @@ struct sdk_sysctrl {
 	/* On Demand Control */
 #define SYSCTRL_OSC32K_ONDEMAND			7u
 	/* Oscillator Start-Up Time */
-#define SYSCTRL_OSC32K_STARTUP_lsb		8u
-#define SYSCTRL_OSC32K_STARTUP_msb		10u
+#define SYSCTRL_OSC32K_STARTUP_Lsb		8u
+#define SYSCTRL_OSC32K_STARTUP_Msb		10u
 	/* Write Lock */
 #define SYSCTRL_OSC32K_WRTLOCK			12u
 	/* Oscillator Calibration */
-#define SYSCTRL_OSC32K_CALIB_lsb		16u
-#define SYSCTRL_OSC32K_CALIB_msb		22u
+#define SYSCTRL_OSC32K_CALIB_Lsb		16u
+#define SYSCTRL_OSC32K_CALIB_Msb		22u
 
 	/* 0x1C: 32kHz Ultra Low Power Internal Oscillator (OSCULP32K) Control */
 	uint8_t volatile OSCULP32K;
 	/* Oscillator Calibration */
-#define SYSCTRL_OSCULP32K_CALIB_lsb		0u
-#define SYSCTRL_OSCULP32K_CALIB_msb		4u
+#define SYSCTRL_OSCULP32K_CALIB_Lsb		0u
+#define SYSCTRL_OSCULP32K_CALIB_Msb		4u
 	/* Write Lock */
 #define SYSCTRL_OSCULP32K_WRTLOCK		7u
 
@@ -3491,18 +3491,18 @@ struct sdk_sysctrl {
 	/* On Demand Control */
 #define SYSCTRL_OSC8M_ONDEMAND			7u
 	/* Oscillator Prescaler */
-#define SYSCTRL_OSC8M_PRESC_lsb			8u
-#define SYSCTRL_OSC8M_PRESC_msb			9u
+#define SYSCTRL_OSC8M_PRESC_Lsb			8u
+#define SYSCTRL_OSC8M_PRESC_Msb			9u
 #define SYSCTRL_OSC8M_PRESC_0			0x0
 #define SYSCTRL_OSC8M_PRESC_1			0x1
 #define SYSCTRL_OSC8M_PRESC_2			0x2
 #define SYSCTRL_OSC8M_PRESC_3			0x3
 	/* Oscillator Calibration */
-#define SYSCTRL_OSC8M_CALIB_lsb			16u
-#define SYSCTRL_OSC8M_CALIB_msb			27u
+#define SYSCTRL_OSC8M_CALIB_Lsb			16u
+#define SYSCTRL_OSC8M_CALIB_Msb			27u
 	/* Oscillator Frequency Range */
-#define SYSCTRL_OSC8M_FRANGE_lsb		30u
-#define SYSCTRL_OSC8M_FRANGE_msb		31u
+#define SYSCTRL_OSC8M_FRANGE_Lsb		30u
+#define SYSCTRL_OSC8M_FRANGE_Msb		31u
 #define SYSCTRL_OSC8M_FRANGE_0			0x0
 #define SYSCTRL_OSC8M_FRANGE_1			0x1
 #define SYSCTRL_OSC8M_FRANGE_2			0x2
@@ -3539,26 +3539,26 @@ struct sdk_sysctrl {
 	/* 0x28: DFLL48M Value */
 	uint32_t volatile DFLLVAL;
 	/* Fine Value */
-#define SYSCTRL_DFLLVAL_FINE_lsb		0u
-#define SYSCTRL_DFLLVAL_FINE_msb		9u
+#define SYSCTRL_DFLLVAL_FINE_Lsb		0u
+#define SYSCTRL_DFLLVAL_FINE_Msb		9u
 	/* Coarse Value */
-#define SYSCTRL_DFLLVAL_COARSE_lsb		10u
-#define SYSCTRL_DFLLVAL_COARSE_msb		15u
+#define SYSCTRL_DFLLVAL_COARSE_Lsb		10u
+#define SYSCTRL_DFLLVAL_COARSE_Msb		15u
 	/* Multiplication Ratio Difference */
-#define SYSCTRL_DFLLVAL_DIFF_lsb		16u
-#define SYSCTRL_DFLLVAL_DIFF_msb		31u
+#define SYSCTRL_DFLLVAL_DIFF_Lsb		16u
+#define SYSCTRL_DFLLVAL_DIFF_Msb		31u
 
 	/* 0x2C: DFLL48M Multiplier */
 	uint32_t volatile DFLLMUL;
 	/* DFLL Multiply Factor */
-#define SYSCTRL_DFLLMUL_MUL_lsb			0u
-#define SYSCTRL_DFLLMUL_MUL_msb			15u
+#define SYSCTRL_DFLLMUL_MUL_Lsb			0u
+#define SYSCTRL_DFLLMUL_MUL_Msb			15u
 	/* Fine Maximum Step */
-#define SYSCTRL_DFLLMUL_FSTEP_lsb		16u
-#define SYSCTRL_DFLLMUL_FSTEP_msb		25u
+#define SYSCTRL_DFLLMUL_FSTEP_Lsb		16u
+#define SYSCTRL_DFLLMUL_FSTEP_Msb		25u
 	/* Coarse Maximum Step */
-#define SYSCTRL_DFLLMUL_CSTEP_lsb		26u
-#define SYSCTRL_DFLLMUL_CSTEP_msb		31u
+#define SYSCTRL_DFLLMUL_CSTEP_Lsb		26u
+#define SYSCTRL_DFLLMUL_CSTEP_Msb		31u
 
 	/* 0x30: DFLL48M Synchronization */
 	uint8_t volatile DFLLSYNC;
@@ -3575,8 +3575,8 @@ struct sdk_sysctrl {
 	/* Hysteresis */
 #define SYSCTRL_BOD33_HYST			2u
 	/* BOD33 Action */
-#define SYSCTRL_BOD33_ACTION_lsb		3u
-#define SYSCTRL_BOD33_ACTION_msb		4u
+#define SYSCTRL_BOD33_ACTION_Lsb		3u
+#define SYSCTRL_BOD33_ACTION_Msb		4u
 #define SYSCTRL_BOD33_ACTION_NONE		0x0
 #define SYSCTRL_BOD33_ACTION_RESET		0x1
 #define SYSCTRL_BOD33_ACTION_INTERRUPT		0x2
@@ -3587,8 +3587,8 @@ struct sdk_sysctrl {
 	/* Clock Enable */
 #define SYSCTRL_BOD33_CEN			9u
 	/* Prescaler Select */
-#define SYSCTRL_BOD33_PSEL_lsb			12u
-#define SYSCTRL_BOD33_PSEL_msb			15u
+#define SYSCTRL_BOD33_PSEL_Lsb			12u
+#define SYSCTRL_BOD33_PSEL_Msb			15u
 #define SYSCTRL_BOD33_PSEL_DIV2			0x0
 #define SYSCTRL_BOD33_PSEL_DIV4			0x1
 #define SYSCTRL_BOD33_PSEL_DIV8			0x2
@@ -3606,8 +3606,8 @@ struct sdk_sysctrl {
 #define SYSCTRL_BOD33_PSEL_DIV32K		0xE
 #define SYSCTRL_BOD33_PSEL_DIV64K		0xF
 	/* BOD33 Threshold Level */
-#define SYSCTRL_BOD33_LEVEL_lsb			16u
-#define SYSCTRL_BOD33_LEVEL_msb			21u
+#define SYSCTRL_BOD33_LEVEL_Lsb			16u
+#define SYSCTRL_BOD33_LEVEL_Msb			21u
 
 	/* 0x38 */
 	uint8_t RESERVED5[0x40-0x38];
@@ -3619,8 +3619,8 @@ struct sdk_sysctrl {
 	/* Bandgap Output Enable */
 #define SYSCTRL_VREF_BGOUTEN			2u
 	/* Bandgap Voltage Generator Calibration */
-#define SYSCTRL_VREF_CALIB_lsb			16u
-#define SYSCTRL_VREF_CALIB_msb			26u
+#define SYSCTRL_VREF_CALIB_Lsb			16u
+#define SYSCTRL_VREF_CALIB_Msb			26u
 
 	/* 0x44: DPLL Control A */
 	uint8_t volatile DPLLCTRLA;
@@ -3637,17 +3637,17 @@ struct sdk_sysctrl {
 	/* 0x48: DPLL Ratio Control */
 	uint32_t volatile DPLLRATIO;
 	/* Loop Divider Ratio */
-#define SYSCTRL_DPLLRATIO_LDR_lsb		0u
-#define SYSCTRL_DPLLRATIO_LDR_msb		11u
+#define SYSCTRL_DPLLRATIO_LDR_Lsb		0u
+#define SYSCTRL_DPLLRATIO_LDR_Msb		11u
 	/* Loop Divider Ratio Fractional Part */
-#define SYSCTRL_DPLLRATIO_LDRFRAC_lsb		16u
-#define SYSCTRL_DPLLRATIO_LDRFRAC_msb		19u
+#define SYSCTRL_DPLLRATIO_LDRFRAC_Lsb		16u
+#define SYSCTRL_DPLLRATIO_LDRFRAC_Msb		19u
 
 	/* 0x4C: DPLL Control B */
 	uint32_t volatile DPLLCTRLB;
 	/* Proportional Integral Filter Selection */
-#define SYSCTRL_DPLLCTRLB_FILTER_lsb		0u
-#define SYSCTRL_DPLLCTRLB_FILTER_msb		1u
+#define SYSCTRL_DPLLCTRLB_FILTER_Lsb		0u
+#define SYSCTRL_DPLLCTRLB_FILTER_Msb		1u
 #define SYSCTRL_DPLLCTRLB_FILTER_DEFAULT	0x0
 #define SYSCTRL_DPLLCTRLB_FILTER_LBFILT		0x1
 #define SYSCTRL_DPLLCTRLB_FILTER_HBFILT		0x2
@@ -3657,14 +3657,14 @@ struct sdk_sysctrl {
 	/* Wake Up Fast */
 #define SYSCTRL_DPLLCTRLB_WUF			3u
 	/* Reference Clock Selection */
-#define SYSCTRL_DPLLCTRLB_REFCLK_lsb		4u
-#define SYSCTRL_DPLLCTRLB_REFCLK_msb		5u
+#define SYSCTRL_DPLLCTRLB_REFCLK_Lsb		4u
+#define SYSCTRL_DPLLCTRLB_REFCLK_Msb		5u
 #define SYSCTRL_DPLLCTRLB_REFCLK_REF0		0x0
 #define SYSCTRL_DPLLCTRLB_REFCLK_REF1		0x1
 #define SYSCTRL_DPLLCTRLB_REFCLK_GCLK		0x2
 	/* Lock Time */
-#define SYSCTRL_DPLLCTRLB_LTIME_lsb		8u
-#define SYSCTRL_DPLLCTRLB_LTIME_msb		10u
+#define SYSCTRL_DPLLCTRLB_LTIME_Lsb		8u
+#define SYSCTRL_DPLLCTRLB_LTIME_Msb		10u
 #define SYSCTRL_DPLLCTRLB_LTIME_NONE		0x0
 #define SYSCTRL_DPLLCTRLB_LTIME_8_MS		0x4
 #define SYSCTRL_DPLLCTRLB_LTIME_9_MS		0x5
@@ -3673,8 +3673,8 @@ struct sdk_sysctrl {
 	/* Lock Bypass */
 #define SYSCTRL_DPLLCTRLB_LBYPASS		12u
 	/* Clock Divider */
-#define SYSCTRL_DPLLCTRLB_DIV_lsb		16u
-#define SYSCTRL_DPLLCTRLB_DIV_msb		26u
+#define SYSCTRL_DPLLCTRLB_DIV_Lsb		16u
+#define SYSCTRL_DPLLCTRLB_DIV_Msb		26u
 
 	/* 0x50: DPLL Status */
 	uint8_t volatile const DPLLSTATUS;
@@ -3706,19 +3706,19 @@ struct sdk_tc_count8 {
 	/* Enable */
 #define TC_COUNT8_CTRLA_ENABLE			1u
 	/* TC Mode */
-#define TC_COUNT8_CTRLA_MODE_lsb		2u
-#define TC_COUNT8_CTRLA_MODE_msb		3u
+#define TC_COUNT8_CTRLA_MODE_Lsb		2u
+#define TC_COUNT8_CTRLA_MODE_Msb		3u
 #define TC_COUNT8_CTRLA_MODE_COUNT8		0x1
 	/* Waveform Generation Operation */
-#define TC_COUNT8_CTRLA_WAVEGEN_lsb		5u
-#define TC_COUNT8_CTRLA_WAVEGEN_msb		6u
+#define TC_COUNT8_CTRLA_WAVEGEN_Lsb		5u
+#define TC_COUNT8_CTRLA_WAVEGEN_Msb		6u
 #define TC_COUNT8_CTRLA_WAVEGEN_NFRQ		0x0
 #define TC_COUNT8_CTRLA_WAVEGEN_MFRQ		0x1
 #define TC_COUNT8_CTRLA_WAVEGEN_NPWM		0x2
 #define TC_COUNT8_CTRLA_WAVEGEN_MPWM		0x3
 	/* Prescaler */
-#define TC_COUNT8_CTRLA_PRESCALER_lsb		8u
-#define TC_COUNT8_CTRLA_PRESCALER_msb		10u
+#define TC_COUNT8_CTRLA_PRESCALER_Lsb		8u
+#define TC_COUNT8_CTRLA_PRESCALER_Msb		10u
 #define TC_COUNT8_CTRLA_PRESCALER_DIV1		0x0
 #define TC_COUNT8_CTRLA_PRESCALER_DIV2		0x1
 #define TC_COUNT8_CTRLA_PRESCALER_DIV4		0x2
@@ -3730,8 +3730,8 @@ struct sdk_tc_count8 {
 	/* Run in Standby */
 #define TC_COUNT8_CTRLA_RUNSTDBY		11u
 	/* Prescaler and Counter Synchronization */
-#define TC_COUNT8_CTRLA_PRESCSYNC_lsb		12u
-#define TC_COUNT8_CTRLA_PRESCSYNC_msb		13u
+#define TC_COUNT8_CTRLA_PRESCSYNC_Lsb		12u
+#define TC_COUNT8_CTRLA_PRESCSYNC_Msb		13u
 #define TC_COUNT8_CTRLA_PRESCSYNC_GCLK		0x0
 #define TC_COUNT8_CTRLA_PRESCSYNC_PRESC		0x1
 #define TC_COUNT8_CTRLA_PRESCSYNC_RESYNC	0x2
@@ -3739,8 +3739,8 @@ struct sdk_tc_count8 {
 	/* 0x02: Read Request */
 	uint16_t volatile READREQ;
 	/* Address */
-#define TC_COUNT8_READREQ_ADDR_lsb		0u
-#define TC_COUNT8_READREQ_ADDR_msb		4u
+#define TC_COUNT8_READREQ_ADDR_Lsb		0u
+#define TC_COUNT8_READREQ_ADDR_Msb		4u
 	/* Read Continuously */
 #define TC_COUNT8_READREQ_RCONT			14u
 	/* Read Request */
@@ -3753,8 +3753,8 @@ struct sdk_tc_count8 {
 	/* One-Shot */
 #define TC_COUNT8_CTRLBCLR_ONESHOT		2u
 	/* Command */
-#define TC_COUNT8_CTRLBCLR_CMD_lsb		6u
-#define TC_COUNT8_CTRLBCLR_CMD_msb		7u
+#define TC_COUNT8_CTRLBCLR_CMD_Lsb		6u
+#define TC_COUNT8_CTRLBCLR_CMD_Msb		7u
 #define TC_COUNT8_CTRLBCLR_CMD_NONE		0x0
 #define TC_COUNT8_CTRLBCLR_CMD_RETRIGGER	0x1
 #define TC_COUNT8_CTRLBCLR_CMD_STOP		0x2
@@ -3766,8 +3766,8 @@ struct sdk_tc_count8 {
 	/* One-Shot */
 #define TC_COUNT8_CTRLBSET_ONESHOT		2u
 	/* Command */
-#define TC_COUNT8_CTRLBSET_CMD_lsb		6u
-#define TC_COUNT8_CTRLBSET_CMD_msb		7u
+#define TC_COUNT8_CTRLBSET_CMD_Lsb		6u
+#define TC_COUNT8_CTRLBSET_CMD_Msb		7u
 #define TC_COUNT8_CTRLBSET_CMD_NONE		0x0
 #define TC_COUNT8_CTRLBSET_CMD_RETRIGGER	0x1
 #define TC_COUNT8_CTRLBSET_CMD_STOP		0x2
@@ -3797,8 +3797,8 @@ struct sdk_tc_count8 {
 	/* 0x0A: Event Control */
 	uint16_t volatile EVCTRL;
 	/* Event Action */
-#define TC_COUNT8_EVCTRL_EVACT_lsb		0u
-#define TC_COUNT8_EVCTRL_EVACT_msb		2u
+#define TC_COUNT8_EVCTRL_EVACT_Lsb		0u
+#define TC_COUNT8_EVCTRL_EVACT_Msb		2u
 #define TC_COUNT8_EVCTRL_EVACT_OFF		0x0
 #define TC_COUNT8_EVCTRL_EVACT_RETRIGGER	0x1
 #define TC_COUNT8_EVCTRL_EVACT_COUNT		0x2
@@ -3867,8 +3867,8 @@ struct sdk_tc_count8 {
 	/* 0x10: COUNT8 Counter Value */
 	uint8_t volatile COUNT;
 	/* Counter Value */
-#define TC_COUNT8_COUNT_COUNT_lsb		0u
-#define TC_COUNT8_COUNT_COUNT_msb		7u
+#define TC_COUNT8_COUNT_COUNT_Lsb		0u
+#define TC_COUNT8_COUNT_COUNT_Msb		7u
 
 	/* 0x11 */
 	uint8_t RESERVED2[0x14-0x11];
@@ -3876,8 +3876,8 @@ struct sdk_tc_count8 {
 	/* 0x14: COUNT8 Period Value */
 	uint8_t volatile PER;
 	/* Period Value */
-#define TC_COUNT8_PER_PER_lsb			0u
-#define TC_COUNT8_PER_PER_msb			7u
+#define TC_COUNT8_PER_PER_Lsb			0u
+#define TC_COUNT8_PER_PER_Msb			7u
 
 	/* 0x15 */
 	uint8_t RESERVED3[0x18-0x15];
@@ -3885,8 +3885,8 @@ struct sdk_tc_count8 {
 	/* 0x18: COUNT8 Compare/Capture */
 	uint8_t volatile CC[2];
 	/* Compare/Capture Value */
-#define TC_COUNT8_CC_CC_lsb			0u
-#define TC_COUNT8_CC_CC_msb			7u
+#define TC_COUNT8_CC_CC_Lsb			0u
+#define TC_COUNT8_CC_CC_Msb			7u
 
 };
 
@@ -3904,19 +3904,19 @@ struct sdk_tc_count16 {
 	/* Enable */
 #define TC_COUNT16_CTRLA_ENABLE			1u
 	/* TC Mode */
-#define TC_COUNT16_CTRLA_MODE_lsb		2u
-#define TC_COUNT16_CTRLA_MODE_msb		3u
+#define TC_COUNT16_CTRLA_MODE_Lsb		2u
+#define TC_COUNT16_CTRLA_MODE_Msb		3u
 #define TC_COUNT16_CTRLA_MODE_COUNT16		0x0
 	/* Waveform Generation Operation */
-#define TC_COUNT16_CTRLA_WAVEGEN_lsb		5u
-#define TC_COUNT16_CTRLA_WAVEGEN_msb		6u
+#define TC_COUNT16_CTRLA_WAVEGEN_Lsb		5u
+#define TC_COUNT16_CTRLA_WAVEGEN_Msb		6u
 #define TC_COUNT16_CTRLA_WAVEGEN_NFRQ		0x0
 #define TC_COUNT16_CTRLA_WAVEGEN_MFRQ		0x1
 #define TC_COUNT16_CTRLA_WAVEGEN_NPWM		0x2
 #define TC_COUNT16_CTRLA_WAVEGEN_MPWM		0x3
 	/* Prescaler */
-#define TC_COUNT16_CTRLA_PRESCALER_lsb		8u
-#define TC_COUNT16_CTRLA_PRESCALER_msb		10u
+#define TC_COUNT16_CTRLA_PRESCALER_Lsb		8u
+#define TC_COUNT16_CTRLA_PRESCALER_Msb		10u
 #define TC_COUNT16_CTRLA_PRESCALER_DIV1		0x0
 #define TC_COUNT16_CTRLA_PRESCALER_DIV2		0x1
 #define TC_COUNT16_CTRLA_PRESCALER_DIV4		0x2
@@ -3928,8 +3928,8 @@ struct sdk_tc_count16 {
 	/* Run in Standby */
 #define TC_COUNT16_CTRLA_RUNSTDBY		11u
 	/* Prescaler and Counter Synchronization */
-#define TC_COUNT16_CTRLA_PRESCSYNC_lsb		12u
-#define TC_COUNT16_CTRLA_PRESCSYNC_msb		13u
+#define TC_COUNT16_CTRLA_PRESCSYNC_Lsb		12u
+#define TC_COUNT16_CTRLA_PRESCSYNC_Msb		13u
 #define TC_COUNT16_CTRLA_PRESCSYNC_GCLK		0x0
 #define TC_COUNT16_CTRLA_PRESCSYNC_PRESC	0x1
 #define TC_COUNT16_CTRLA_PRESCSYNC_RESYNC	0x2
@@ -3937,8 +3937,8 @@ struct sdk_tc_count16 {
 	/* 0x02: Read Request */
 	uint16_t volatile READREQ;
 	/* Address */
-#define TC_COUNT16_READREQ_ADDR_lsb		0u
-#define TC_COUNT16_READREQ_ADDR_msb		4u
+#define TC_COUNT16_READREQ_ADDR_Lsb		0u
+#define TC_COUNT16_READREQ_ADDR_Msb		4u
 	/* Read Continuously */
 #define TC_COUNT16_READREQ_RCONT		14u
 	/* Read Request */
@@ -3951,8 +3951,8 @@ struct sdk_tc_count16 {
 	/* One-Shot */
 #define TC_COUNT16_CTRLBCLR_ONESHOT		2u
 	/* Command */
-#define TC_COUNT16_CTRLBCLR_CMD_lsb		6u
-#define TC_COUNT16_CTRLBCLR_CMD_msb		7u
+#define TC_COUNT16_CTRLBCLR_CMD_Lsb		6u
+#define TC_COUNT16_CTRLBCLR_CMD_Msb		7u
 #define TC_COUNT16_CTRLBCLR_CMD_NONE		0x0
 #define TC_COUNT16_CTRLBCLR_CMD_RETRIGGER	0x1
 #define TC_COUNT16_CTRLBCLR_CMD_STOP		0x2
@@ -3964,8 +3964,8 @@ struct sdk_tc_count16 {
 	/* One-Shot */
 #define TC_COUNT16_CTRLBSET_ONESHOT		2u
 	/* Command */
-#define TC_COUNT16_CTRLBSET_CMD_lsb		6u
-#define TC_COUNT16_CTRLBSET_CMD_msb		7u
+#define TC_COUNT16_CTRLBSET_CMD_Lsb		6u
+#define TC_COUNT16_CTRLBSET_CMD_Msb		7u
 #define TC_COUNT16_CTRLBSET_CMD_NONE		0x0
 #define TC_COUNT16_CTRLBSET_CMD_RETRIGGER	0x1
 #define TC_COUNT16_CTRLBSET_CMD_STOP		0x2
@@ -3995,8 +3995,8 @@ struct sdk_tc_count16 {
 	/* 0x0A: Event Control */
 	uint16_t volatile EVCTRL;
 	/* Event Action */
-#define TC_COUNT16_EVCTRL_EVACT_lsb		0u
-#define TC_COUNT16_EVCTRL_EVACT_msb		2u
+#define TC_COUNT16_EVCTRL_EVACT_Lsb		0u
+#define TC_COUNT16_EVCTRL_EVACT_Msb		2u
 #define TC_COUNT16_EVCTRL_EVACT_OFF		0x0
 #define TC_COUNT16_EVCTRL_EVACT_RETRIGGER	0x1
 #define TC_COUNT16_EVCTRL_EVACT_COUNT		0x2
@@ -4065,8 +4065,8 @@ struct sdk_tc_count16 {
 	/* 0x10: COUNT16 Counter Value */
 	uint16_t volatile COUNT;
 	/* Count Value */
-#define TC_COUNT16_COUNT_COUNT_lsb		0u
-#define TC_COUNT16_COUNT_COUNT_msb		15u
+#define TC_COUNT16_COUNT_COUNT_Lsb		0u
+#define TC_COUNT16_COUNT_COUNT_Msb		15u
 
 	/* 0x12 */
 	uint8_t RESERVED6[0x18-0x12];
@@ -4074,8 +4074,8 @@ struct sdk_tc_count16 {
 	/* 0x18: COUNT16 Compare/Capture */
 	uint16_t volatile CC[2];
 	/* Compare/Capture Value */
-#define TC_COUNT16_CC_CC_lsb			0u
-#define TC_COUNT16_CC_CC_msb			15u
+#define TC_COUNT16_CC_CC_Lsb			0u
+#define TC_COUNT16_CC_CC_Msb			15u
 
 };
 
@@ -4093,19 +4093,19 @@ struct sdk_tc_count32 {
 	/* Enable */
 #define TC_COUNT32_CTRLA_ENABLE			1u
 	/* TC Mode */
-#define TC_COUNT32_CTRLA_MODE_lsb		2u
-#define TC_COUNT32_CTRLA_MODE_msb		3u
+#define TC_COUNT32_CTRLA_MODE_Lsb		2u
+#define TC_COUNT32_CTRLA_MODE_Msb		3u
 #define TC_COUNT32_CTRLA_MODE_COUNT32		0x2
 	/* Waveform Generation Operation */
-#define TC_COUNT32_CTRLA_WAVEGEN_lsb		5u
-#define TC_COUNT32_CTRLA_WAVEGEN_msb		6u
+#define TC_COUNT32_CTRLA_WAVEGEN_Lsb		5u
+#define TC_COUNT32_CTRLA_WAVEGEN_Msb		6u
 #define TC_COUNT32_CTRLA_WAVEGEN_NFRQ		0x0
 #define TC_COUNT32_CTRLA_WAVEGEN_MFRQ		0x1
 #define TC_COUNT32_CTRLA_WAVEGEN_NPWM		0x2
 #define TC_COUNT32_CTRLA_WAVEGEN_MPWM		0x3
 	/* Prescaler */
-#define TC_COUNT32_CTRLA_PRESCALER_lsb		8u
-#define TC_COUNT32_CTRLA_PRESCALER_msb		10u
+#define TC_COUNT32_CTRLA_PRESCALER_Lsb		8u
+#define TC_COUNT32_CTRLA_PRESCALER_Msb		10u
 #define TC_COUNT32_CTRLA_PRESCALER_DIV1		0x0
 #define TC_COUNT32_CTRLA_PRESCALER_DIV2		0x1
 #define TC_COUNT32_CTRLA_PRESCALER_DIV4		0x2
@@ -4117,8 +4117,8 @@ struct sdk_tc_count32 {
 	/* Run in Standby */
 #define TC_COUNT32_CTRLA_RUNSTDBY		11u
 	/* Prescaler and Counter Synchronization */
-#define TC_COUNT32_CTRLA_PRESCSYNC_lsb		12u
-#define TC_COUNT32_CTRLA_PRESCSYNC_msb		13u
+#define TC_COUNT32_CTRLA_PRESCSYNC_Lsb		12u
+#define TC_COUNT32_CTRLA_PRESCSYNC_Msb		13u
 #define TC_COUNT32_CTRLA_PRESCSYNC_GCLK		0x0
 #define TC_COUNT32_CTRLA_PRESCSYNC_PRESC	0x1
 #define TC_COUNT32_CTRLA_PRESCSYNC_RESYNC	0x2
@@ -4126,8 +4126,8 @@ struct sdk_tc_count32 {
 	/* 0x02: Read Request */
 	uint16_t volatile READREQ;
 	/* Address */
-#define TC_COUNT32_READREQ_ADDR_lsb		0u
-#define TC_COUNT32_READREQ_ADDR_msb		4u
+#define TC_COUNT32_READREQ_ADDR_Lsb		0u
+#define TC_COUNT32_READREQ_ADDR_Msb		4u
 	/* Read Continuously */
 #define TC_COUNT32_READREQ_RCONT		14u
 	/* Read Request */
@@ -4140,8 +4140,8 @@ struct sdk_tc_count32 {
 	/* One-Shot */
 #define TC_COUNT32_CTRLBCLR_ONESHOT		2u
 	/* Command */
-#define TC_COUNT32_CTRLBCLR_CMD_lsb		6u
-#define TC_COUNT32_CTRLBCLR_CMD_msb		7u
+#define TC_COUNT32_CTRLBCLR_CMD_Lsb		6u
+#define TC_COUNT32_CTRLBCLR_CMD_Msb		7u
 #define TC_COUNT32_CTRLBCLR_CMD_NONE		0x0
 #define TC_COUNT32_CTRLBCLR_CMD_RETRIGGER	0x1
 #define TC_COUNT32_CTRLBCLR_CMD_STOP		0x2
@@ -4153,8 +4153,8 @@ struct sdk_tc_count32 {
 	/* One-Shot */
 #define TC_COUNT32_CTRLBSET_ONESHOT		2u
 	/* Command */
-#define TC_COUNT32_CTRLBSET_CMD_lsb		6u
-#define TC_COUNT32_CTRLBSET_CMD_msb		7u
+#define TC_COUNT32_CTRLBSET_CMD_Lsb		6u
+#define TC_COUNT32_CTRLBSET_CMD_Msb		7u
 #define TC_COUNT32_CTRLBSET_CMD_NONE		0x0
 #define TC_COUNT32_CTRLBSET_CMD_RETRIGGER	0x1
 #define TC_COUNT32_CTRLBSET_CMD_STOP		0x2
@@ -4184,8 +4184,8 @@ struct sdk_tc_count32 {
 	/* 0x0A: Event Control */
 	uint16_t volatile EVCTRL;
 	/* Event Action */
-#define TC_COUNT32_EVCTRL_EVACT_lsb		0u
-#define TC_COUNT32_EVCTRL_EVACT_msb		2u
+#define TC_COUNT32_EVCTRL_EVACT_Lsb		0u
+#define TC_COUNT32_EVCTRL_EVACT_Msb		2u
 #define TC_COUNT32_EVCTRL_EVACT_OFF		0x0
 #define TC_COUNT32_EVCTRL_EVACT_RETRIGGER	0x1
 #define TC_COUNT32_EVCTRL_EVACT_COUNT		0x2
@@ -4254,8 +4254,8 @@ struct sdk_tc_count32 {
 	/* 0x10: COUNT32 Counter Value */
 	uint32_t volatile COUNT;
 	/* Count Value */
-#define TC_COUNT32_COUNT_COUNT_lsb		0u
-#define TC_COUNT32_COUNT_COUNT_msb		31u
+#define TC_COUNT32_COUNT_COUNT_Lsb		0u
+#define TC_COUNT32_COUNT_COUNT_Msb		31u
 
 	/* 0x14 */
 	uint8_t RESERVED9[0x18-0x14];
@@ -4263,8 +4263,8 @@ struct sdk_tc_count32 {
 	/* 0x18: COUNT32 Compare/Capture */
 	uint32_t volatile CC[2];
 	/* Compare/Capture Value */
-#define TC_COUNT32_CC_CC_lsb			0u
-#define TC_COUNT32_CC_CC_msb			31u
+#define TC_COUNT32_CC_CC_Lsb			0u
+#define TC_COUNT32_CC_CC_Msb			31u
 
 };
 
@@ -4286,8 +4286,8 @@ struct sdk_wdt {
 	/* 0x01: Configuration */
 	uint8_t volatile CONFIG;
 	/* Time-Out Period */
-#define WDT_CONFIG_PER_lsb			0u
-#define WDT_CONFIG_PER_msb			3u
+#define WDT_CONFIG_PER_Lsb			0u
+#define WDT_CONFIG_PER_Msb			3u
 #define WDT_CONFIG_PER_8			0x0
 #define WDT_CONFIG_PER_16			0x1
 #define WDT_CONFIG_PER_32			0x2
@@ -4301,8 +4301,8 @@ struct sdk_wdt {
 #define WDT_CONFIG_PER_8K			0xA
 #define WDT_CONFIG_PER_16K			0xB
 	/* Window Mode Time-Out Period */
-#define WDT_CONFIG_WINDOW_lsb			4u
-#define WDT_CONFIG_WINDOW_msb			7u
+#define WDT_CONFIG_WINDOW_Lsb			4u
+#define WDT_CONFIG_WINDOW_Msb			7u
 #define WDT_CONFIG_WINDOW_8			0x0
 #define WDT_CONFIG_WINDOW_16			0x1
 #define WDT_CONFIG_WINDOW_32			0x2
@@ -4319,8 +4319,8 @@ struct sdk_wdt {
 	/* 0x02: Early Warning Interrupt Control */
 	uint8_t volatile EWCTRL;
 	/* Early Warning Interrupt Time Offset */
-#define WDT_EWCTRL_EWOFFSET_lsb			0u
-#define WDT_EWCTRL_EWOFFSET_msb			3u
+#define WDT_EWCTRL_EWOFFSET_Lsb			0u
+#define WDT_EWCTRL_EWOFFSET_Msb			3u
 #define WDT_EWCTRL_EWOFFSET_8			0x0
 #define WDT_EWCTRL_EWOFFSET_16			0x1
 #define WDT_EWCTRL_EWOFFSET_32			0x2
@@ -4360,7 +4360,7 @@ struct sdk_wdt {
 	/* 0x08: Clear */
 	uint8_t volatile CLEAR;
 	/* Watchdog Clear */
-#define WDT_CLEAR_CLEAR_lsb			0u
-#define WDT_CLEAR_CLEAR_msb			7u
+#define WDT_CLEAR_CLEAR_Lsb			0u
+#define WDT_CLEAR_CLEAR_Msb			7u
 
 };
