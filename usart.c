@@ -15,27 +15,25 @@ usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo
 
 	usart->CTRLA = 0
 	/* asynchronous usart with internal clock */
-	 | BITS(USART_CTRLA_MODE, USART_CTRLA_MODE_USART_INT_CLK)
+	 | USART_CTRLA_MODE_USART_INT_CLK
 	/* most common way to use usart: least significant bit first */
-	 | BIT(USART_CTRLA_DORD)
+	 | USART_CTRLA_DORD
 	/* set to fractionnal baud rate for better accuracy */
-	 | BITS(USART_CTRLA_SAMPR, USART_CTRLA_SAMPR_16_FRACTIONAL)
-	/* pinout mapping for the `tx` pin */
-	 | BITS(USART_CTRLA_TXPO, txpo)
-	/* pinout mapping for the `rx` pin */
-	 | BITS(USART_CTRLA_RXPO, rxpo);
+	 | USART_CTRLA_SAMPR_16_FRACTIONAL
+	/* pinout mapping for the `tx` and `tx` pins */
+	 | txpo | rxpo;
 
 	/* set the baud rate integer part (IP) and fractional part (FP) */
 	usart->BAUD = 0
-	 | BITS(USART_BAUD_IP, clock_hz / 16 / baud_hz / 8)
-	 | BITS(USART_BAUD_FP, clock_hz / 16 / baud_hz % 8);
+	 | (clock_hz / 16 / baud_hz / 8 << USART_BAUD_IP_Pos)
+	 | (clock_hz / 16 / baud_hz % 8 << USART_BAUD_FP_Pos);
 
 	/* enable the receiver and transmitter */
-	usart->CTRLB |= BIT(USART_CTRLB_RXEN) | BIT(USART_CTRLB_TXEN);
-	while (usart->SYNCBUSY & BIT(USART_SYNCBUSY_CTRLB));
+	usart->CTRLB |= USART_CTRLB_RXEN | USART_CTRLB_TXEN;
+	while (usart->SYNCBUSY & USART_SYNCBUSY_CTRLB);
 
 	/* enable the USART *after* it is configured (#25.6.2) */
-	usart->CTRLA |= BIT(USART_CTRLA_ENABLE);
+	usart->CTRLA |= USART_CTRLA_ENABLE;
 	while (usart->SYNCBUSY & USART_SYNCBUSY_ENABLE);
 }
 
@@ -48,8 +46,8 @@ usart_queue_tx(struct sdk_usart *usart, uint8_t const *mem, size_t sz)
 	tx->mem = (uint8_t *)mem;
 	tx->sz = sz;
 
-	usart->INTENSET = BIT(USART_INTENSET_DRE);
-	NVIC->ISER = BIT(9 + sercom_get_id(usart));
+	usart->INTENSET = USART_INTENSET_DRE;
+	NVIC->ISER = (1u << (9 + sercom_get_id(usart)));
 }
 
 void
@@ -69,7 +67,7 @@ usart_queue_rx(struct sdk_usart *usart, uint8_t *mem, size_t sz)
 	rx->mem = mem;
 	rx->sz = sz;
 
-	usart->INTENSET = BIT(USART_INTENSET_RXC);
+	usart->INTENSET = USART_INTENSET_RXC;
 }
 
 void
@@ -86,8 +84,8 @@ usart_interrupt_tx_data_register_empty(struct sdk_usart *usart)
 	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	if (tx->sz == 0) {
-		usart->INTENCLR = BIT(USART_INTENSET_DRE);
-		usart->INTENSET = BIT(USART_INTENSET_TXC);
+		usart->INTENCLR = USART_INTENSET_DRE;
+		usart->INTENSET = USART_INTENSET_TXC;
 	} else {
 		usart->DATA = *tx->mem++;
 		tx->sz--;
@@ -100,7 +98,7 @@ usart_interrupt_tx_complete(struct sdk_usart *usart)
 	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	if (tx->sz == 0) {
-		usart->INTENCLR = BIT(USART_INTENSET_TXC);
+		usart->INTENCLR = USART_INTENSET_TXC;
 		tx->done = 1;
 	}
 }
@@ -148,18 +146,18 @@ usart_interrupt(struct sdk_usart *usart)
 {
 	uint32_t reg = usart->INTFLAG;
 
-	if (reg & BIT(USART_INTFLAG_DRE))
+	if (reg & USART_INTFLAG_DRE)
 		usart_interrupt_tx_data_register_empty(usart);
-	if (reg & BIT(USART_INTFLAG_TXC))
+	if (reg & USART_INTFLAG_TXC)
 		usart_interrupt_tx_complete(usart);
-	if (reg & BIT(USART_INTFLAG_RXC))
+	if (reg & USART_INTFLAG_RXC)
 		usart_interrupt_rx_complete(usart);
-	if (reg & BIT(USART_INTFLAG_RXS))
+	if (reg & USART_INTFLAG_RXS)
 		usart_interrupt_rx_start(usart);
-	if (reg & BIT(USART_INTFLAG_CTSIC))
+	if (reg & USART_INTFLAG_CTSIC)
 		usart_interrupt_rx_clear_to_send(usart);
-	if (reg & BIT(USART_INTFLAG_RXBRK))
+	if (reg & USART_INTFLAG_RXBRK)
 		usart_interrupt_rx_break(usart);
-	if (reg & BIT(USART_INTFLAG_ERROR))
+	if (reg & USART_INTFLAG_ERROR)
 		usart_interrupt_error(usart);
 }

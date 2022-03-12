@@ -1,11 +1,7 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
-#define FF(o)			(0xFFFFFFFFu >> (31 - (o)))
-#define MASK(fld)		(FF(fld##_Msb) ^ FF(fld##_Lsb) ^ BIT(fld##_Lsb))
-#define BIT(fld)		(1u << (fld))
-#define BITS(fld, val)		((val) << fld##_Lsb)
-#define FIELD(reg, fld)		(((reg) & FF(fld##_Msb)) >> fld##_Lsb)
+#define FIELD(reg, fld)		(((reg) & fld##_Msk) >> fld##_Pos)
 
 /*** USART ***/
 
@@ -29,30 +25,30 @@ void usart_interrupt(struct sdk_usart *usart);
 
 /*** I²C Master ***/
 
-/* set `i2cm` to I²C Master mode */
-void i2cm_set_master(struct sdk_i2cm *i2cm);
+/* set `i2c_master` to I²C Master mode */
+void i2c_master_set_master(struct sdk_i2c_master *i2c_master);
 
-/* configure and init `i2cm` */
-void i2cm_init(struct sdk_i2cm *i2cm, uint32_t baud_hz, uint8_t pin_clk, uint8_t pin_sda);
+/* configure and init `i2c_master` */
+void i2c_master_init(struct sdk_i2c_master *i2c_master, uint32_t baud_hz, uint8_t pin_clk, uint8_t pin_sda);
 
-/* receive `i2cm` interrupt from SERCOM0 or SERCOM1 */
-void i2cm_interrupt(struct sdk_i2cm *i2cm);
+/* receive `i2c_master` interrupt from SERCOM0 or SERCOM1 */
+void i2c_master_interrupt(struct sdk_i2c_master *i2c_master);
 
-/* queue a transmission of `buf` of size `sz` to `addr` over `i2cm` */
-void i2cm_queue_tx(struct sdk_i2cm *i2cm, uint8_t addr, uint8_t const *mem, size_t sz);
+/* queue a transmission of `buf` of size `sz` to `addr` over `i2c_master` */
+void i2c_master_queue_tx(struct sdk_i2c_master *i2c_master, uint8_t addr, uint8_t const *mem, size_t sz);
 
-/* queue a transmission of `buf` of size `sz` to `addr` over `i2cm` */
-void i2cm_queue_rx(struct sdk_i2cm *i2cm, uint8_t addr, uint8_t *mem, size_t sz);
+/* queue a transmission of `buf` of size `sz` to `addr` over `i2c_master` */
+void i2c_master_queue_rx(struct sdk_i2c_master *i2c_master, uint8_t addr, uint8_t *mem, size_t sz);
 
-/* wait for `i2cm` to complete transmission or reception */
-int i2cm_wait(struct sdk_i2cm *i2cm);
+/* wait for `i2c_master` to complete transmission or reception */
+int i2c_master_wait(struct sdk_i2c_master *i2c_master);
 
 /*** SPI Master ***/
 
-/* configure and init `i2cm` */
-void spim_init(struct sdk_spi *spim, uint32_t baud_hz, uint8_t pin_sck,
+/* configure and init `i2c_master` */
+void spi_master_init(struct sdk_spi *spi_master, uint32_t baud_hz, uint8_t pin_sck,
 	uint8_t pin_miso, uint8_t pin_mosi, uint8_t pin_ss,
-	uint8_t dipo, uint8_t dopo);
+	uint32_t dipo, uint32_t dopo);
 
 /*** CLOCK ***/
 
@@ -60,7 +56,7 @@ void spim_init(struct sdk_spi *spim, uint32_t baud_hz, uint8_t pin_sck,
 uint32_t clock_get_hz(uint8_t clkid);
 
 /* init a clock generator `genid`, plugging it a source `srcid` divided by `div` */
-void clock_init_generator(uint8_t genid, uint8_t srcid, uint16_t div);
+void clock_init_generator(uint8_t genid, uint32_t srcid, uint32_t div);
 
 /* output the signal of clock `genid` to an external pin directly */
 void clock_enable_generator_output(uint8_t genid);
@@ -73,7 +69,7 @@ void clock_init(uint8_t clkid, uint8_t genid);
 static inline void
 power_on_sercom(uint8_t id)
 {
-	PM->APBCMASK |= BIT(PM_APBCMASK_SERCOM0 + id);
+	PM->APBCMASK |= PM_APBCMASK_SERCOM0 << id;
 }
 
 static inline void
@@ -93,15 +89,19 @@ power_on_dfll48m(void)
 static inline void
 port_set_pmux(uint8_t pin, uint8_t pmux)
 {
-	/* associate the pin to the chosen module */
-	PORT->PMUX[pin/2] = (PORT->PMUX[pin/2] & ~PORT_PMUX(pin, 0xFu))
-	 | PORT_PMUX(pin, pmux);
+	if (pin % 2 == 0) {
+		/* even */
+		PORT->PMUX[pin/2] = (PORT->PMUX[pin/2] & ~0x0F) | (pmux << 0);
+	} else {
+		/* odd */
+		PORT->PMUX[pin/2] = (PORT->PMUX[pin/2] & ~0xF0) | (pmux << 4);
+	}
 }
 
 static inline void
 port_set_output(uint8_t pin)
 {
-	PORT->DIRSET |= BIT(pin);
+	PORT->DIRSET |= (1 << pin);
 }
 
 /*** SERCOM ***/

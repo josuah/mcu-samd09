@@ -10,7 +10,7 @@ __isr_sercom(struct sdk_sercom *sercom)
 		usart_interrupt((struct sdk_usart *)sercom);
 		break;
 	case SERCOM_CTRLA_MODE_I2C_MASTER:
-		i2cm_interrupt((struct sdk_i2cm *)sercom);
+		i2c_master_interrupt((struct sdk_i2c_master *)sercom);
 		break;
 	case SERCOM_CTRLA_MODE_USART_EXT_CLK:
 	case SERCOM_CTRLA_MODE_SPI_SLAVE:
