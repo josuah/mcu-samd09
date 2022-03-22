@@ -3705,9 +3705,7 @@ struct sdk_tc_count8 {
 	/* TC Mode */
 #define TC_COUNT8_CTRLA_MODE_Msk				(0x3u << 2)
 #define TC_COUNT8_CTRLA_MODE_Pos				2
-#define TC_COUNT8_CTRLA_MODE_COUNT16				(0x0u << 2)
 #define TC_COUNT8_CTRLA_MODE_COUNT8				(0x1u << 2)
-#define TC_COUNT8_CTRLA_MODE_COUNT32				(0x2u << 2)
 	/* Waveform Generation Operation */
 #define TC_COUNT8_CTRLA_WAVEGEN_Msk				(0x3u << 5)
 #define TC_COUNT8_CTRLA_WAVEGEN_Pos				5
@@ -3882,7 +3880,7 @@ struct sdk_tc_count8 {
 	uint8_t RESERVED3[0x18u-0x15u];
 
 	/* 0x18: COUNT8 Compare/Capture */
-	uint16_t volatile CC[2];
+	uint8_t volatile CC[4];
 	/* Compare/Capture Value */
 #define TC_COUNT8_CC_CC_Msk					(0xFFu << 0)
 #define TC_COUNT8_CC_CC_Pos					0
@@ -3893,7 +3891,7 @@ struct sdk_tc_count8 {
 #define TC1_COUNT16 ((struct sdk_tc_count16 *)TC1_BASE)
 #define TC2_COUNT16 ((struct sdk_tc_count16 *)TC2_BASE)
 
-struct sdk_tc16 {
+struct sdk_tc_count16 {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -3905,8 +3903,6 @@ struct sdk_tc16 {
 #define TC_COUNT16_CTRLA_MODE_Msk				(0x3u << 2)
 #define TC_COUNT16_CTRLA_MODE_Pos				2
 #define TC_COUNT16_CTRLA_MODE_COUNT16				(0x0u << 2)
-#define TC_COUNT16_CTRLA_MODE_COUNT8				(0x1u << 2)
-#define TC_COUNT16_CTRLA_MODE_COUNT32				(0x2u << 2)
 	/* Waveform Generation Operation */
 #define TC_COUNT16_CTRLA_WAVEGEN_Msk				(0x3u << 5)
 #define TC_COUNT16_CTRLA_WAVEGEN_Pos				5
@@ -4072,13 +4068,16 @@ struct sdk_tc16 {
 	uint8_t RESERVED6[0x18u-0x12u];
 
 	/* 0x18: COUNT16 Compare/Capture */
-	uint32_t volatile CC[2];
+	uint16_t volatile CC[4];
 	/* Compare/Capture Value */
 #define TC_COUNT16_CC_CC_Msk					(0xFFFFu << 0)
 #define TC_COUNT16_CC_CC_Pos					0
 
 };
 
+
+#define TC1_COUNT32 ((struct sdk_tc_count32 *)TC1_BASE)
+#define TC2_COUNT32 ((struct sdk_tc_count32 *)TC2_BASE)
 
 struct sdk_tc_count32 {
 
@@ -4091,8 +4090,6 @@ struct sdk_tc_count32 {
 	/* TC Mode */
 #define TC_COUNT32_CTRLA_MODE_Msk				(0x3u << 2)
 #define TC_COUNT32_CTRLA_MODE_Pos				2
-#define TC_COUNT32_CTRLA_MODE_COUNT16				(0x0u << 2)
-#define TC_COUNT32_CTRLA_MODE_COUNT8				(0x1u << 2)
 #define TC_COUNT32_CTRLA_MODE_COUNT32				(0x2u << 2)
 	/* Waveform Generation Operation */
 #define TC_COUNT32_CTRLA_WAVEGEN_Msk				(0x3u << 5)
@@ -4259,7 +4256,7 @@ struct sdk_tc_count32 {
 	uint8_t RESERVED9[0x18u-0x14u];
 
 	/* 0x18: COUNT32 Compare/Capture */
-	uint64_t volatile CC[2];
+	uint32_t volatile CC[4];
 	/* Compare/Capture Value */
 #define TC_COUNT32_CC_CC_Msk					(0xFFFFFFFFu << 0)
 #define TC_COUNT32_CC_CC_Pos					0

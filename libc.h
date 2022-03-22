@@ -17,6 +17,10 @@ typedef signed char	int8_t;
 typedef signed short	int16_t;
 typedef signed int	int32_t;
 typedef signed long	int64_t;
+#define UINT8_MAX	0xFFu
+#define UINT16_MAX	0xFFFFul
+#define UINT32_MAX	0xFFFFFFFFul
+#define UINT64_MAX	0xFFFFFFFFFFFFFFFFull
 
 /* <string.h> */
 

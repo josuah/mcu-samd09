@@ -64,6 +64,17 @@ void clock_enable_generator_output(uint8_t genid);
 /* init a clock channel `clkid`, plugging it a clock generator `genid` */
 void clock_init(uint8_t clkid, uint8_t genid);
 
+/*** PWM ***/
+
+/* setup a timer/counter of resolution 8 `tc` for use with PWM on `pin` */
+void pwm_init(struct sdk_tc_count8 *tc);
+
+/* setup `pin` for use as a counter output */
+void pwm_init_counter(uint8_t pin);
+
+/* set `tc` duration of time with pin "up" out of UINT8_MAX to `duty_cycle` */
+void pwm_set_duty_cycle(struct sdk_tc_count8 *tc, uint8_t counter_id, uint8_t duty_cycle);
+
 /*** POWER ***/
 
 static inline void
@@ -119,6 +130,17 @@ static inline uint32_t
 sercom_get_clock_hz(uint8_t id)
 {
 	return clock_get_hz(GCLK_CLKCTRL_ID_SERCOM0_CORE + id);
+}
+
+/*** Timer/Counter ***/
+
+static inline uint8_t
+tc_get_id(void *ptr)
+{
+	if (ptr == (void *)TC1_BASE) return 1;
+	if (ptr == (void *)TC2_BASE) return 2;
+	assert(!"unknown timer/counter");
+	return 0xFF;
 }
 
 #endif

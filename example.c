@@ -10,18 +10,20 @@
 int
 main(void)
 {
-	power_on_osc8m();
 	power_on_sercom(0);
 
-	port_set_output(27);
-
 	clock_init_generator(GCLK_GENCTRL_ID_GCLKGEN0, GCLK_GENCTRL_SRC_OSC8M, 1);
-	clock_init(GCLK_CLKCTRL_ID_SERCOM0_CORE, GCLK_GENCTRL_ID_GCLKGEN0);
+	clock_init(GCLK_CLKCTRL_ID_TC1_TC2, GCLK_GENCTRL_ID_GCLKGEN0);
 
-	spi_master_init(SPI0, 100, SPI0_SCK, SPI0_MISO, SPI0_MOSI, SPI0_SS,
-	 SPI_CTRLA_DIPO_MISO2, SPI_CTRLA_DOPO_MOSI0_SCK1_SS2);
+	pwm_init(TC1_COUNT8);
+	pwm_init_counter(4);
 
-	SPI0->DATA = 0x09;
+	for (;;) {
+		for (uint16_t i = 0x10; i < 0xFFF; i++)
+			pwm_set_duty_cycle(TC1_COUNT8, 0, i * UINT8_MAX / 0xFFF);
+		for (uint16_t i = 0xFFF; i > 0x10; i--)
+			pwm_set_duty_cycle(TC1_COUNT8, 0, i * UINT8_MAX / 0xFFF);
+	}
 
 	return 0;
 }
