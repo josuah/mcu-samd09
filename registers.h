@@ -8,9 +8,9 @@
 #define SERCOM1_BASE 0x42000C00
 
 
-#define NVIC ((struct sdk_nvic *)0xE000E100)
+#define NVIC ((struct mcu_nvic *)0xE000E100)
 
-struct sdk_nvic {
+struct mcu_nvic {
 
 	/* 0x00: Interrupt Set Enable Register */
 	uint32_t volatile ISER;
@@ -42,9 +42,9 @@ struct sdk_nvic {
 };
 
 
-#define ADC ((struct sdk_adc *)0x42002000)
+#define ADC ((struct mcu_adc *)0x42002000)
 
-struct sdk_adc {
+struct mcu_adc {
 
 	/* 0x00: Control A */
 	uint8_t volatile CTRLA;
@@ -313,9 +313,9 @@ struct sdk_adc {
 };
 
 
-#define DMAC ((struct sdk_dmac *)0x41004800)
+#define DMAC ((struct mcu_dmac *)0x41004800)
 
-struct sdk_dmac {
+struct mcu_dmac {
 
 	/* 0x00: Control */
 	uint16_t volatile CTRL;
@@ -643,9 +643,9 @@ struct sdk_dmac {
 };
 
 
-#define DSU ((struct sdk_dsu *)0x41002000)
+#define DSU ((struct mcu_dsu *)0x41002000)
 
-struct sdk_dsu {
+struct mcu_dsu {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -869,9 +869,9 @@ struct sdk_dsu {
 };
 
 
-#define EIC ((struct sdk_eic *)0x40001800)
+#define EIC ((struct mcu_eic *)0x40001800)
 
-struct sdk_eic {
+struct mcu_eic {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -1093,9 +1093,9 @@ struct sdk_eic {
 };
 
 
-#define EVSYS ((struct sdk_evsys *)0x42000400)
+#define EVSYS ((struct mcu_evsys *)0x42000400)
 
-struct sdk_evsys {
+struct mcu_evsys {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -1255,9 +1255,9 @@ struct sdk_evsys {
 };
 
 
-#define GCLK ((struct sdk_gclk *)0x40000C00)
+#define GCLK ((struct mcu_gclk *)0x40000C00)
 
-struct sdk_gclk {
+struct mcu_gclk {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -1357,9 +1357,9 @@ struct sdk_gclk {
 };
 
 
-#define HMATRIX ((struct sdk_hmatrix *)0x41007000)
+#define HMATRIX ((struct mcu_hmatrix *)0x41007000)
 
-struct sdk_hmatrix {
+struct mcu_hmatrix {
 
 	/* 0x0C */
 	uint8_t RESERVED0[0x80u-0x0Cu];
@@ -1427,9 +1427,9 @@ struct sdk_hmatrix {
 };
 
 
-#define MTB ((struct sdk_mtb *)0x41006000)
+#define MTB ((struct mcu_mtb *)0x41006000)
 
-struct sdk_mtb {
+struct mcu_mtb {
 
 	/* 0x00: MTB Position */
 	uint32_t volatile POSITION;
@@ -1548,9 +1548,9 @@ struct sdk_mtb {
 };
 
 
-#define NVMCTRL ((struct sdk_nvmctrl *)0x41004000)
+#define NVMCTRL ((struct mcu_nvmctrl *)0x41004000)
 
-struct sdk_nvmctrl {
+struct mcu_nvmctrl {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -1683,11 +1683,11 @@ struct sdk_nvmctrl {
 };
 
 
-#define PAC0 ((struct sdk_pac0 *)0x40000000)
-#define PAC1 ((struct sdk_pac1 *)0x41000000)
-#define PAC2 ((struct sdk_pac2 *)0x42000000)
+#define PAC0 ((struct mcu_pac0 *)0x40000000)
+#define PAC1 ((struct mcu_pac1 *)0x41000000)
+#define PAC2 ((struct mcu_pac2 *)0x42000000)
 
-struct sdk_pac0 {
+struct mcu_pac0 {
 
 	/* 0x00: Write Protection Clear */
 	uint32_t volatile WPCLR;
@@ -1704,9 +1704,9 @@ struct sdk_pac0 {
 };
 
 
-#define PM ((struct sdk_pm *)0x40000400)
+#define PM ((struct mcu_pm *)0x40000400)
 
-struct sdk_pm {
+struct mcu_pm {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;
@@ -1902,9 +1902,9 @@ struct sdk_pm {
 };
 
 
-#define PORT ((struct sdk_port *)0x41004400)
+#define PORT ((struct mcu_port *)0x41004400)
 
-struct sdk_port {
+struct mcu_port {
 
 	/* 0x00: Data Direction */
 	uint32_t volatile DIR;
@@ -2026,9 +2026,9 @@ struct sdk_port {
 };
 
 
-#define RTC_COUNT32 ((struct sdk_rtc_count32 *)RTC_BASE)
+#define RTC_COUNT32 ((struct mcu_rtc_count32 *)RTC_BASE)
 
-struct sdk_rtc_count32 {
+struct mcu_rtc_count32 {
 
 	/* 0x00: MODE0 Control */
 	uint16_t volatile CTRL;
@@ -2161,9 +2161,9 @@ struct sdk_rtc_count32 {
 };
 
 
-#define RTC_COUNT16 ((struct sdk_rtc_count16 *)RTC_BASE)
+#define RTC_COUNT16 ((struct mcu_rtc_count16 *)RTC_BASE)
 
-struct sdk_rtc_count16 {
+struct mcu_rtc_count16 {
 
 	/* 0x00: MODE1 Control */
 	uint16_t volatile CTRL;
@@ -2311,9 +2311,9 @@ struct sdk_rtc_count16 {
 };
 
 
-#define RTC_COUNT16 ((struct sdk_rtc_count16 *)RTC_BASE)
+#define RTC_COUNT16 ((struct mcu_rtc_count16 *)RTC_BASE)
 
-struct sdk_rtc_clock {
+struct mcu_rtc_clock {
 
 	/* 0x00: MODE2 Control */
 	uint16_t volatile CTRL;
@@ -2495,10 +2495,10 @@ struct sdk_rtc_clock {
 };
 
 
-#define SERCOM0 ((struct sdk_sercom *)SERCOM0_BASE)
-#define SERCOM1 ((struct sdk_sercom *)SERCOM1_BASE)
+#define SERCOM0 ((struct mcu_sercom *)SERCOM0_BASE)
+#define SERCOM1 ((struct mcu_sercom *)SERCOM1_BASE)
 
-struct sdk_sercom {
+struct mcu_sercom {
 
 	/* 0x00: I2C Master Control A */
 	uint32_t volatile CTRLA;
@@ -2519,10 +2519,10 @@ struct sdk_sercom {
 };
 
 
-#define I2C0_MASTER ((struct sdk_i2c_master *)SERCOM0_BASE)
-#define I2C1_MASTER ((struct sdk_i2c_master *)SERCOM1_BASE)
+#define I2C0_MASTER ((struct mcu_i2c_master *)SERCOM0_BASE)
+#define I2C1_MASTER ((struct mcu_i2c_master *)SERCOM1_BASE)
 
-struct sdk_i2c_master {
+struct mcu_i2c_master {
 
 	/* 0x00: I2C Master Control A */
 	uint32_t volatile CTRLA;
@@ -2714,10 +2714,10 @@ struct sdk_i2c_master {
 };
 
 
-#define I2C0_SLAVE ((struct sdk_i2c_slave *)SERCOM0_BASE)
-#define I2C1_SLAVE ((struct sdk_i2c_slave *)SERCOM1_BASE)
+#define I2C0_SLAVE ((struct mcu_i2c_slave *)SERCOM0_BASE)
+#define I2C1_SLAVE ((struct mcu_i2c_slave *)SERCOM1_BASE)
 
-struct sdk_i2c_slave {
+struct mcu_i2c_slave {
 
 	/* 0x00: I2C Slave Control A */
 	uint32_t volatile CTRLA;
@@ -2866,10 +2866,10 @@ struct sdk_i2c_slave {
 };
 
 
-#define SPI0 ((struct sdk_spi *)SERCOM0_BASE)
-#define SPI1 ((struct sdk_spi *)SERCOM1_BASE)
+#define SPI0 ((struct mcu_spi *)SERCOM0_BASE)
+#define SPI1 ((struct mcu_spi *)SERCOM1_BASE)
 
-struct sdk_spi {
+struct mcu_spi {
 
 	/* 0x00: SPI Control A */
 	uint32_t volatile CTRLA;
@@ -3039,10 +3039,10 @@ struct sdk_spi {
 };
 
 
-#define USART0 ((struct sdk_usart *)SERCOM0_BASE)
-#define USART1 ((struct sdk_usart *)SERCOM1_BASE)
+#define USART0 ((struct mcu_usart *)SERCOM0_BASE)
+#define USART1 ((struct mcu_usart *)SERCOM1_BASE)
 
-struct sdk_usart {
+struct mcu_usart {
 
 	/* 0x00: USART Control A */
 	uint32_t volatile CTRLA;
@@ -3263,9 +3263,9 @@ struct sdk_usart {
 };
 
 
-#define SYSCTRL ((struct sdk_sysctrl *)0x40000800)
+#define SYSCTRL ((struct mcu_sysctrl *)0x40000800)
 
-struct sdk_sysctrl {
+struct mcu_sysctrl {
 
 	/* 0x00: Interrupt Enable Clear */
 	uint32_t volatile INTENCLR;
@@ -3691,10 +3691,10 @@ struct sdk_sysctrl {
 };
 
 
-#define TC1_COUNT8 ((struct sdk_tc_count8 *)TC1_BASE)
-#define TC2_COUNT8 ((struct sdk_tc_count8 *)TC1_BASE)
+#define TC1_COUNT8 ((struct mcu_tc_count8 *)TC1_BASE)
+#define TC2_COUNT8 ((struct mcu_tc_count8 *)TC1_BASE)
 
-struct sdk_tc_count8 {
+struct mcu_tc_count8 {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -3888,10 +3888,10 @@ struct sdk_tc_count8 {
 };
 
 
-#define TC1_COUNT16 ((struct sdk_tc_count16 *)TC1_BASE)
-#define TC2_COUNT16 ((struct sdk_tc_count16 *)TC2_BASE)
+#define TC1_COUNT16 ((struct mcu_tc_count16 *)TC1_BASE)
+#define TC2_COUNT16 ((struct mcu_tc_count16 *)TC2_BASE)
 
-struct sdk_tc_count16 {
+struct mcu_tc_count16 {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -4076,10 +4076,10 @@ struct sdk_tc_count16 {
 };
 
 
-#define TC1_COUNT32 ((struct sdk_tc_count32 *)TC1_BASE)
-#define TC2_COUNT32 ((struct sdk_tc_count32 *)TC2_BASE)
+#define TC1_COUNT32 ((struct mcu_tc_count32 *)TC1_BASE)
+#define TC2_COUNT32 ((struct mcu_tc_count32 *)TC2_BASE)
 
-struct sdk_tc_count32 {
+struct mcu_tc_count32 {
 
 	/* 0x00: Control A */
 	uint16_t volatile CTRLA;
@@ -4264,9 +4264,9 @@ struct sdk_tc_count32 {
 };
 
 
-#define WDT ((struct sdk_wdt *)0x40001000)
+#define WDT ((struct mcu_wdt *)0x40001000)
 
-struct sdk_wdt {
+struct mcu_wdt {
 
 	/* 0x00: Control */
 	uint8_t volatile CTRL;

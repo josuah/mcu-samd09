@@ -2,14 +2,14 @@
 #include "registers.h"
 #include "functions.h"
 
-static struct sdk_i2c_master_ctx {
+static struct mcu_i2c_master_ctx {
 	uint8_t *buf;
 	size_t sz;
 	uint8_t volatile status;
 } i2c_master_ctx[2];
 
 void
-i2c_master_init(struct sdk_i2c_master *i2c_master, uint32_t baud_hz, uint8_t pin_scl, uint8_t pin_sda)
+i2c_master_init(struct mcu_i2c_master *i2c_master, uint32_t baud_hz, uint8_t pin_scl, uint8_t pin_sda)
 {
 	uint8_t pincfg;
 	uint32_t baud;
@@ -85,7 +85,7 @@ i2c_master_init(struct sdk_i2c_master *i2c_master, uint32_t baud_hz, uint8_t pin
 }
 
 static inline void
-i2c_master_interrupt_error(struct sdk_i2c_master *i2c_master, struct sdk_i2c_master_ctx *ctx)
+i2c_master_interrupt_error(struct mcu_i2c_master *i2c_master, struct mcu_i2c_master_ctx *ctx)
 {
 	if (FIELD(i2c_master->STATUS, I2C_MASTER_STATUS_BUSSTATE)
 	 == I2C_MASTER_STATUS_BUSSTATE_BUSY) {
@@ -97,7 +97,7 @@ i2c_master_interrupt_error(struct sdk_i2c_master *i2c_master, struct sdk_i2c_mas
 }
 
 static inline void
-i2c_master_interrupt_master_on_bus(struct sdk_i2c_master *i2c_master, struct sdk_i2c_master_ctx *ctx)
+i2c_master_interrupt_master_on_bus(struct mcu_i2c_master *i2c_master, struct mcu_i2c_master_ctx *ctx)
 {
 	if (ctx->sz == 0) {
 		i2c_master->CTRLB = (i2c_master->CTRLB & ~I2C_MASTER_CTRLB_CMD_Msk)
@@ -110,7 +110,7 @@ i2c_master_interrupt_master_on_bus(struct sdk_i2c_master *i2c_master, struct sdk
 }
 
 static inline void
-i2c_master_interrupt_slave_on_bus(struct sdk_i2c_master *i2c_master, struct sdk_i2c_master_ctx *ctx)
+i2c_master_interrupt_slave_on_bus(struct mcu_i2c_master *i2c_master, struct mcu_i2c_master_ctx *ctx)
 {
 	if (ctx->sz == 0) {
 		i2c_master->CTRLB &= ~I2C_MASTER_CTRLB_ACKACT;
@@ -124,9 +124,9 @@ i2c_master_interrupt_slave_on_bus(struct sdk_i2c_master *i2c_master, struct sdk_
 }
 
 void
-i2c_master_interrupt(struct sdk_i2c_master *i2c_master)
+i2c_master_interrupt(struct mcu_i2c_master *i2c_master)
 {
-	struct sdk_i2c_master_ctx *ctx = &i2c_master_ctx[sercom_get_id(i2c_master)];
+	struct mcu_i2c_master_ctx *ctx = &i2c_master_ctx[sercom_get_id(i2c_master)];
 	uint8_t reg = i2c_master->INTFLAG;
 
 	if (reg & I2C_MASTER_INTFLAG_ERROR)
@@ -138,9 +138,9 @@ i2c_master_interrupt(struct sdk_i2c_master *i2c_master)
 }
 
 static inline void
-i2c_master_queue(struct sdk_i2c_master *i2c_master, uint8_t addr, uint8_t *buf, size_t sz, uint8_t rw)
+i2c_master_queue(struct mcu_i2c_master *i2c_master, uint8_t addr, uint8_t *buf, size_t sz, uint8_t rw)
 {
-	struct sdk_i2c_master_ctx *ctx = &i2c_master_ctx[sercom_get_id(i2c_master)];
+	struct mcu_i2c_master_ctx *ctx = &i2c_master_ctx[sercom_get_id(i2c_master)];
 
 	ctx->status = 1;
 	ctx->buf = buf;
@@ -153,21 +153,21 @@ i2c_master_queue(struct sdk_i2c_master *i2c_master, uint8_t addr, uint8_t *buf, 
 }
 
 void
-i2c_master_queue_tx(struct sdk_i2c_master *i2c_master, uint8_t addr, uint8_t const *buf, size_t sz)
+i2c_master_queue_tx(struct mcu_i2c_master *i2c_master, uint8_t addr, uint8_t const *buf, size_t sz)
 {
 	i2c_master_queue(i2c_master, addr, (uint8_t *)buf, sz, 0);
 }
 
 void
-i2c_master_queue_rx(struct sdk_i2c_master *i2c_master, uint8_t addr, uint8_t *buf, size_t sz)
+i2c_master_queue_rx(struct mcu_i2c_master *i2c_master, uint8_t addr, uint8_t *buf, size_t sz)
 {
 	i2c_master_queue(i2c_master, addr, buf, sz, 1);
 }
 
 int
-i2c_master_wait(struct sdk_i2c_master *i2c_master)
+i2c_master_wait(struct mcu_i2c_master *i2c_master)
 {
-	struct sdk_i2c_master_ctx *ctx = &i2c_master_ctx[sercom_get_id(i2c_master)];
+	struct mcu_i2c_master_ctx *ctx = &i2c_master_ctx[sercom_get_id(i2c_master)];
 
 	while (ctx->status > 0);
 	return ctx->status;

@@ -3,7 +3,7 @@
 #include "functions.h"
 
 void
-pwm_init(struct sdk_tc_count8 *tc)
+pwm_init(struct mcu_tc_count8 *tc)
 {
 	switch (tc_get_id(tc)) {
 	case 1:
@@ -54,7 +54,7 @@ pwm_init_counter(uint8_t pin)
 }
 
 void
-pwm_set_duty_cycle(struct sdk_tc_count8 *tc, uint8_t counter_id, uint8_t duty_cycle)
+pwm_set_duty_cycle(struct mcu_tc_count8 *tc, uint8_t counter_id, uint8_t duty_cycle)
 {
 	assert(counter_id < 4);
 	tc->CC[counter_id] = duty_cycle;

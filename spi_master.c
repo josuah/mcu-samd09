@@ -3,7 +3,7 @@
 #include "functions.h"
 
 void
-spi_master_init(struct sdk_spi *spi_master, uint32_t baud_hz, uint8_t pin_sck,
+spi_master_init(struct mcu_spi *spi_master, uint32_t baud_hz, uint8_t pin_sck,
 	uint8_t pin_miso, uint8_t pin_mosi, uint8_t pin_ss,
 	uint32_t dipo, uint32_t dopo)
 {

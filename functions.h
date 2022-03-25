@@ -6,47 +6,47 @@
 /*** USART ***/
 
 /* init the usart, to call last before sending data */
-void usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo);
+void usart_init(struct mcu_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo);
 
 /* queue a transmission of `buf` of size `sz` over `usart` TX pin */
-void usart_queue_tx(struct sdk_usart *usart, uint8_t const *buf, size_t sz);
+void usart_queue_tx(struct mcu_usart *usart, uint8_t const *buf, size_t sz);
 
 /* queue a reception to `buf` of size `sz` over `usart` RX pin */
-void usart_queue_rx(struct sdk_usart *usart, uint8_t *buf, size_t sz);
+void usart_queue_rx(struct mcu_usart *usart, uint8_t *buf, size_t sz);
 
 /* wait for `usart` transmission to complete */
-void usart_wait_tx(struct sdk_usart *usart);
+void usart_wait_tx(struct mcu_usart *usart);
 
 /* wait for `usart` reception to complete */
-void usart_wait_rx(struct sdk_usart *usart);
+void usart_wait_rx(struct mcu_usart *usart);
 
 /* interrupt coming from a generic SERCOM interface */
-void usart_interrupt(struct sdk_usart *usart);
+void usart_interrupt(struct mcu_usart *usart);
 
 /*** I²C Master ***/
 
 /* set `i2c_master` to I²C Master mode */
-void i2c_master_set_master(struct sdk_i2c_master *i2c_master);
+void i2c_master_set_master(struct mcu_i2c_master *i2c_master);
 
 /* configure and init `i2c_master` */
-void i2c_master_init(struct sdk_i2c_master *i2c_master, uint32_t baud_hz, uint8_t pin_clk, uint8_t pin_sda);
+void i2c_master_init(struct mcu_i2c_master *i2c_master, uint32_t baud_hz, uint8_t pin_clk, uint8_t pin_sda);
 
 /* receive `i2c_master` interrupt from SERCOM0 or SERCOM1 */
-void i2c_master_interrupt(struct sdk_i2c_master *i2c_master);
+void i2c_master_interrupt(struct mcu_i2c_master *i2c_master);
 
 /* queue a transmission of `buf` of size `sz` to `addr` over `i2c_master` */
-void i2c_master_queue_tx(struct sdk_i2c_master *i2c_master, uint8_t addr, uint8_t const *mem, size_t sz);
+void i2c_master_queue_tx(struct mcu_i2c_master *i2c_master, uint8_t addr, uint8_t const *mem, size_t sz);
 
 /* queue a transmission of `buf` of size `sz` to `addr` over `i2c_master` */
-void i2c_master_queue_rx(struct sdk_i2c_master *i2c_master, uint8_t addr, uint8_t *mem, size_t sz);
+void i2c_master_queue_rx(struct mcu_i2c_master *i2c_master, uint8_t addr, uint8_t *mem, size_t sz);
 
 /* wait for `i2c_master` to complete transmission or reception */
-int i2c_master_wait(struct sdk_i2c_master *i2c_master);
+int i2c_master_wait(struct mcu_i2c_master *i2c_master);
 
 /*** SPI Master ***/
 
 /* configure and init `i2c_master` */
-void spi_master_init(struct sdk_spi *spi_master, uint32_t baud_hz, uint8_t pin_sck,
+void spi_master_init(struct mcu_spi *spi_master, uint32_t baud_hz, uint8_t pin_sck,
 	uint8_t pin_miso, uint8_t pin_mosi, uint8_t pin_ss,
 	uint32_t dipo, uint32_t dopo);
 
@@ -67,13 +67,13 @@ void clock_init(uint8_t clkid, uint8_t genid);
 /*** PWM ***/
 
 /* setup a timer/counter of resolution 8 `tc` for use with PWM on `pin` */
-void pwm_init(struct sdk_tc_count8 *tc);
+void pwm_init(struct mcu_tc_count8 *tc);
 
 /* setup `pin` for use as a counter output */
 void pwm_init_counter(uint8_t pin);
 
 /* set `tc` duration of time with pin "up" out of UINT8_MAX to `duty_cycle` */
-void pwm_set_duty_cycle(struct sdk_tc_count8 *tc, uint8_t counter_id, uint8_t duty_cycle);
+void pwm_set_duty_cycle(struct mcu_tc_count8 *tc, uint8_t counter_id, uint8_t duty_cycle);
 
 /*** POWER ***/
 

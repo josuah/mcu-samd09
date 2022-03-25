@@ -2,14 +2,14 @@
 #include "registers.h"
 #include "functions.h"
 
-static struct sdk_usart_buffer {
+static struct mcu_usart_buffer {
 	uint8_t *mem;
 	size_t sz;
 	int volatile done;
 } usart_rx[2], usart_tx[2];
 
 void
-usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo)
+usart_init(struct mcu_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo)
 {
 	uint32_t clock_hz = sercom_get_clock_hz(sercom_get_id(usart));
 
@@ -38,9 +38,9 @@ usart_init(struct sdk_usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo
 }
 
 void
-usart_queue_tx(struct sdk_usart *usart, uint8_t const *mem, size_t sz)
+usart_queue_tx(struct mcu_usart *usart, uint8_t const *mem, size_t sz)
 {
-	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	tx->done = 0;
 	tx->mem = (uint8_t *)mem;
@@ -51,17 +51,17 @@ usart_queue_tx(struct sdk_usart *usart, uint8_t const *mem, size_t sz)
 }
 
 void
-usart_wait_tx(struct sdk_usart *usart)
+usart_wait_tx(struct mcu_usart *usart)
 {
-	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	while (!tx->done);
 }
 
 void
-usart_queue_rx(struct sdk_usart *usart, uint8_t *mem, size_t sz)
+usart_queue_rx(struct mcu_usart *usart, uint8_t *mem, size_t sz)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	rx->done = 0;
 	rx->mem = mem;
@@ -71,17 +71,17 @@ usart_queue_rx(struct sdk_usart *usart, uint8_t *mem, size_t sz)
 }
 
 void
-usart_wait_rx(struct sdk_usart *usart)
+usart_wait_rx(struct mcu_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	while (!rx->done);
 }
 
 static inline void
-usart_interrupt_tx_data_register_empty(struct sdk_usart *usart)
+usart_interrupt_tx_data_register_empty(struct mcu_usart *usart)
 {
-	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	if (tx->sz == 0) {
 		usart->INTENCLR = USART_INTENSET_DRE;
@@ -93,9 +93,9 @@ usart_interrupt_tx_data_register_empty(struct sdk_usart *usart)
 }
 
 static inline void
-usart_interrupt_tx_complete(struct sdk_usart *usart)
+usart_interrupt_tx_complete(struct mcu_usart *usart)
 {
-	struct sdk_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *tx = &usart_tx[sercom_get_id(usart)];
 
 	if (tx->sz == 0) {
 		usart->INTENCLR = USART_INTENSET_TXC;
@@ -104,45 +104,45 @@ usart_interrupt_tx_complete(struct sdk_usart *usart)
 }
 
 static inline void
-usart_interrupt_rx_complete(struct sdk_usart *usart)
+usart_interrupt_rx_complete(struct mcu_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	(void)rx;
 }
 
 static inline void
-usart_interrupt_rx_start(struct sdk_usart *usart)
+usart_interrupt_rx_start(struct mcu_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	(void)rx;
 }
 
 static inline void
-usart_interrupt_rx_clear_to_send(struct sdk_usart *usart)
+usart_interrupt_rx_clear_to_send(struct mcu_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	(void)rx;
 }
 
 static inline void
-usart_interrupt_rx_break(struct sdk_usart *usart)
+usart_interrupt_rx_break(struct mcu_usart *usart)
 {
-	struct sdk_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
+	struct mcu_usart_buffer *rx = &usart_rx[sercom_get_id(usart)];
 
 	(void)rx;
 }
 
 static inline void
-usart_interrupt_error(struct sdk_usart *usart)
+usart_interrupt_error(struct mcu_usart *usart)
 {
 	(void)usart;
 }
 
 void
-usart_interrupt(struct sdk_usart *usart)
+usart_interrupt(struct mcu_usart *usart)
 {
 	uint32_t reg = usart->INTFLAG;
 

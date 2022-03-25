@@ -2,15 +2,30 @@
 #include "registers.h"
 #include "functions.h"
 
+extern int main(void);
+extern char __data_start, __data_end, __data_load_start;
+extern char __bss_start, __bss_end, __stack_top;
+
+void
+__reset_handler(void)
+{
+	volatile char *dst, *src = &__data_load_start;
+
+	for (dst = &__data_start; dst < &__data_end; *dst++ = *src++);
+	for (dst = &__bss_start; dst < &__bss_end; *dst++ = 0);
+	main();
+	for (int volatile i = 0 ;; i++);
+}
+
 static inline void
-__isr_sercom(struct sdk_sercom *sercom)
+__isr_sercom(struct mcu_sercom *sercom)
 {
 	switch (FIELD(sercom->CTRLA, SERCOM_CTRLA_MODE)) {
 	case SERCOM_CTRLA_MODE_USART_INT_CLK:
-		usart_interrupt((struct sdk_usart *)sercom);
+		usart_interrupt((struct mcu_usart *)sercom);
 		break;
 	case SERCOM_CTRLA_MODE_I2C_MASTER:
-		i2c_master_interrupt((struct sdk_i2c_master *)sercom);
+		i2c_master_interrupt((struct mcu_i2c_master *)sercom);
 		break;
 	case SERCOM_CTRLA_MODE_USART_EXT_CLK:
 	case SERCOM_CTRLA_MODE_SPI_SLAVE:
@@ -32,20 +47,6 @@ __isr_sercom1(void)
 	__isr_sercom(SERCOM1);
 }
 
-void
-__reset_handler(void)
-{
-	extern int main(void);
-	extern char __data_start, __data_end, __data_load_start;
-	extern char __bss_start, __bss_end;
-	volatile char *dst, *src = &__data_load_start;
-
-	for (dst = &__data_start; dst < &__data_end; *dst++ = *src++);
-	for (dst = &__bss_start; dst < &__bss_end; *dst++ = 0);
-	main();
-	for (int volatile i = 0;; i++);
-}
-
 /* so that the debugger can immediately see which fault was triggered */
 void __null_handler(void)		{ for (int volatile i = 0;; i++); }
 void __isr_hard_fault(void)		{ for (int volatile i = 0;; i++); }
@@ -55,7 +56,6 @@ void __isr_bus_fault(void)		{ for (int volatile i = 0;; i++); }
 void __isr_usage_fault(void)		{ for (int volatile i = 0;; i++); }
 void __isr_secure_fault(void)		{ for (int volatile i = 0;; i++); }
 
-extern char __stack_top;
 void *__stack_pointer = &__stack_top;	/* 0x00 */
 
 void (*__vectors[])(void) = {
