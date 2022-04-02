@@ -67,7 +67,7 @@ void clock_init(uint8_t clkid, uint8_t genid);
 /*** PWM ***/
 
 /* setup a timer/counter of resolution 8 `tc` for use with PWM on `pin` */
-void pwm_init(struct mcu_tc_count8 *tc);
+void pwm_init(struct mcu_tc_count8 *tc, uint32_t ctrla_prescaler);
 
 /* setup `pin` for use as a counter output */
 void pwm_init_counter(uint8_t pin);

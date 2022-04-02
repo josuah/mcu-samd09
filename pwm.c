@@ -3,7 +3,7 @@
 #include "functions.h"
 
 void
-pwm_init(struct mcu_tc_count8 *tc)
+pwm_init(struct mcu_tc_count8 *tc, uint32_t ctrla_prescaler)
 {
 	switch (tc_get_id(tc)) {
 	case 1:
@@ -21,7 +21,7 @@ pwm_init(struct mcu_tc_count8 *tc)
 	/* normal PWM mode */
 	 | TC_COUNT8_CTRLA_WAVEGEN_NPWM
 	/* do not divide the input generic clock */
-	 | TC_COUNT8_CTRLA_PRESCALER_DIV1
+	 | ctrla_prescaler
 	/* stick to the prescaler signal on wraparound */
 	 | TC_COUNT8_CTRLA_PRESCSYNC_PRESC;
 
