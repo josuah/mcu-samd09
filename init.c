@@ -20,7 +20,7 @@ __reset_handler(void)
 static inline void
 __isr_sercom(struct mcu_sercom *sercom)
 {
-	switch (FIELD(sercom->CTRLA, SERCOM_CTRLA_MODE)) {
+	switch (sercom->CTRLA & SERCOM_CTRLA_MODE_Msk) {
 	case SERCOM_CTRLA_MODE_USART_INT_CLK:
 		usart_interrupt((struct mcu_usart *)sercom);
 		break;
@@ -31,6 +31,8 @@ __isr_sercom(struct mcu_sercom *sercom)
 	case SERCOM_CTRLA_MODE_SPI_SLAVE:
 	case SERCOM_CTRLA_MODE_SPI_MASTER:
 	case SERCOM_CTRLA_MODE_I2C_SLAVE:
+		PORT->DIRSET = 1u << 27;
+		PORT->OUTSET = 1u << 27;
 		break;
 	}
 }

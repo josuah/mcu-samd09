@@ -41,26 +41,23 @@ i2c_master_init(struct mcu_i2c_master *i2c_master, uint32_t baud_hz, uint8_t pin
 	 | I2C_MASTER_CTRLA_SEXTTOEN
 	/* time-out and reset ourself when a slave stretches SCL for 10ms */
 	 | I2C_MASTER_CTRLA_MEXTTOEN
-	/* default speed mode to standard speed */
-	 | I2C_MASTER_CTRLA_SPEED_400_KHZ_MAX
 	/* set SERCOM generic serial to I²C Master mode */
 	 | I2C_MASTER_CTRLA_MODE_I2C_MASTER
+	/* default speed mode to standard speed */
+	 | I2C_MASTER_CTRLA_SPEED_400_KHZ_MAX
 	/* default for SDA pin hold time */
 	 | I2C_MASTER_CTRLA_SDAHOLD_450_NS;
 
 	i2c_master->CTRLB = 0
-	/* this code only supports "smart mode" */
+	/* this code only supports "smart mode" where hardware does more */
 	 | I2C_MASTER_CTRLB_SMEN;
 
 	/* the rising time of the clock has been ignored below, it varies
 	 * depending on the capacitance of the bus */
 	baud = sercom_get_clock_hz(sercom_get_id(i2c_master)) / (baud_hz * 2) - 1;
 
-	i2c_master->BAUD = 0
-	/* set the baud rate for high-speed mode */
-//	 | (baud << I2C_MASTER_BAUD_HSBAUD_Pos)
 	/* set the baud rate for normal mode */
-	 | (baud << I2C_MASTER_BAUD_BAUD_Pos);
+	i2c_master->BAUD = baud << I2C_MASTER_BAUD_BAUD_Pos;
 
 	i2c_master->INTENSET = 0
 	/* master-on-bus interrupt: when writing */
