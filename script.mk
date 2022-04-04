@@ -16,6 +16,7 @@ SDK_OBJ = \
 	${SDK}/libc.o \
 	${SDK}/pwm.o \
 	${SDK}/spi_master.o \
+	${SDK}/systick.o \
 	${SDK}/usart.o
 SDK_CFLAGS = -ffunction-sections -fdata-sections
 SDK_LDFLAGS = -Map=firmware.map --gc-sections -T${SDK}/script.ld -nostdlib -static

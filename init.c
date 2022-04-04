@@ -31,8 +31,6 @@ __isr_sercom(struct mcu_sercom *sercom)
 	case SERCOM_CTRLA_MODE_SPI_SLAVE:
 	case SERCOM_CTRLA_MODE_SPI_MASTER:
 	case SERCOM_CTRLA_MODE_I2C_SLAVE:
-		PORT->DIRSET = 1u << 27;
-		PORT->OUTSET = 1u << 27;
 		break;
 	}
 }
@@ -47,6 +45,12 @@ static void
 __isr_sercom1(void)
 {
 	__isr_sercom(SERCOM1);
+}
+
+static void
+__isr_systick(void)
+{
+	systick_interrupt();
 }
 
 /* so that the debugger can immediately see which fault was triggered */
@@ -75,7 +79,7 @@ void (*__vectors[])(void) = {
 	&__null_handler,		/* 0x30 -4 ARM DebugMonitor */
 	&__null_handler,		/* 0x34 -3 Reserved */
 	&__null_handler,		/* 0x38 -2 ARM PendSV */
-	&__null_handler,		/* 0x3C -1 ARM SysTick */
+	&__isr_systick,			/* 0x3C -1 ARM SysTick */
 	&__null_handler,		/* 0x40 #0 PM */
 	&__null_handler,		/* 0x44 #1 SYSCTRL */
 	&__null_handler,		/* 0x48 #2 WDT */

@@ -8,6 +8,40 @@
 #define SERCOM1_BASE 0x42000C00
 
 
+#define SYSTICK ((struct mcu_systick *)0xE000E010)
+
+struct mcu_systick {
+
+	/* 0x00: SysTick Control and Status Register */
+	uint32_t volatile CSR;
+	/* Enable SysTick Timer */
+#define SYSTICK_CSR_ENABLE                                      (1u << 0)
+	/* Generate Tick Interrupt */
+#define SYSTICK_CSR_TICKINT                                     (1u << 1)
+	/* Source to count from */
+#define SYSTICK_CSR_CLKSOURCE                                   (1u << 2)
+	/* SysTick counted to zero */
+#define SYSTICK_CSR_COUNTFLAG                                   (1u << 16)
+
+	/* 0x04: SysTick Reload Value Register */
+	uint32_t volatile RVR;
+
+	/* 0x08: SysTick Current Value Register */
+	uint32_t volatile CVR;
+
+	/* 0x0C: SysTick Calibration Value Register */
+	uint32_t volatile CALIB;
+	/* Reload value to use for 10ms timing */
+#define SYSTICK_CALIB_TENMS_Msk                                 (0xFFFFFFu << 0)
+#define SYSTICK_CALIB_TENMS_Pos                                 0
+	/* Clock Skew */
+#define SYSTICK_CALIB_SKEW                                      (1u << 30)
+	/* No Ref */
+#define SYSTICK_CALIB_NOREF                                     (1u << 31)
+
+};
+
+
 #define NVIC ((struct mcu_nvic *)0xE000E100)
 
 struct mcu_nvic {
@@ -1319,7 +1353,6 @@ struct mcu_gclk {
 #define GCLK_GENCTRL_ID_GCLKGEN3				(0x3u << 0)
 #define GCLK_GENCTRL_ID_GCLKGEN4				(0x4u << 0)
 #define GCLK_GENCTRL_ID_GCLKGEN5				(0x5u << 0)
-
 	/* Source Select */
 #define GCLK_GENCTRL_SRC_Msk					(0x1Fu << 8)
 #define GCLK_GENCTRL_SRC_Pos					8

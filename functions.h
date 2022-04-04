@@ -3,6 +3,7 @@
 
 #define FIELD(reg, fld)		(((reg) & fld##_Msk) >> fld##_Pos)
 
+
 /*** USART ***/
 
 /* init the usart, to call last before sending data */
@@ -23,9 +24,10 @@ void usart_wait_rx(struct mcu_usart *usart);
 /* interrupt coming from a generic SERCOM interface */
 void usart_interrupt(struct mcu_usart *usart);
 
-/*** I²C Master ***/
 
-/* set `i2c_master` to I²C Master mode */
+/*** I²C MASTER ***/
+
+/* set `i2c_master` to I²C master mode */
 void i2c_master_set_master(struct mcu_i2c_master *i2c_master);
 
 /* configure and init `i2c_master` */
@@ -43,17 +45,22 @@ void i2c_master_queue_rx(struct mcu_i2c_master *i2c_master, uint8_t addr, uint8_
 /* wait for `i2c_master` to complete transmission or reception */
 int i2c_master_wait(struct mcu_i2c_master *i2c_master);
 
-/*** SPI Master ***/
+
+/*** SPI MASTER ***/
 
 /* configure and init `i2c_master` */
 void spi_master_init(struct mcu_spi *spi_master, uint32_t baud_hz, uint8_t pin_sck,
 	uint8_t pin_miso, uint8_t pin_mosi, uint8_t pin_ss,
 	uint32_t dipo, uint32_t dopo);
 
+
 /*** CLOCK ***/
 
 /* give the clock-rate for selected clock channel `clkid` */ 
-uint32_t clock_get_hz(uint8_t clkid);
+uint32_t clock_get_channel_hz(uint8_t clkid);
+
+/* give the clock-rate for selected clock generator `genid` */ 
+uint32_t clock_get_generator_hz(uint8_t genid);
 
 /* init a clock generator `genid`, plugging it a source `srcid` divided by `div` */
 void clock_init_generator(uint8_t genid, uint32_t srcid, uint32_t div);
@@ -63,6 +70,7 @@ void clock_enable_generator_output(uint8_t genid);
 
 /* init a clock channel `clkid`, plugging it a clock generator `genid` */
 void clock_init(uint8_t clkid, uint8_t genid);
+
 
 /*** PWM ***/
 
@@ -74,6 +82,22 @@ void pwm_init_counter(uint8_t pin);
 
 /* set `tc` duration of time with pin "up" out of UINT8_MAX to `duty_cycle` */
 void pwm_set_duty_cycle(struct mcu_tc_count8 *tc, uint8_t counter_id, uint8_t duty_cycle);
+
+
+/*** SYSTICK ***/
+
+/* start a timer counting milliseconds, to be setup after system clock */
+void systick_init(void);
+
+/* receive interrupt to update the systick timer */
+void systick_interrupt(void);
+
+/* return the runtime in milliseconds */
+uint64_t systick_get_runtime_ms(void);
+
+/* busy wait `duration_ms` milliseconds */
+void systick_sleep_ms(uint64_t duration_ms);
+
 
 /*** POWER ***/
 
@@ -95,6 +119,7 @@ power_on_dfll48m(void)
 	SYSCTRL->OSC8M |= SYSCTRL_DFLLCTRL_ENABLE;
 }
 
+
 /*** PORT ***/
 
 static inline void
@@ -109,11 +134,6 @@ port_set_pmux(uint8_t pin, uint8_t pmux)
 	}
 }
 
-static inline void
-port_set_output(uint8_t pin)
-{
-	PORT->DIRSET |= (1 << pin);
-}
 
 /*** SERCOM ***/
 
@@ -129,10 +149,11 @@ sercom_get_id(void *ptr)
 static inline uint32_t
 sercom_get_clock_hz(uint8_t id)
 {
-	return clock_get_hz(GCLK_CLKCTRL_ID_SERCOM0_CORE + id);
+	return clock_get_channel_hz(GCLK_CLKCTRL_ID_SERCOM0_CORE + id);
 }
 
-/*** Timer/Counter ***/
+
+/*** TIMER/COUNTER ***/
 
 static inline uint8_t
 tc_get_id(void *ptr)

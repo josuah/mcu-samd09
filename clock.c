@@ -2,10 +2,8 @@
 #include "registers.h"
 #include "functions.h"
 
-static inline uint32_t clock_get_generator_hz(uint8_t genid);
-
 static inline uint32_t
-clock_source_get_hz(uint32_t srcid)
+clock_get_source_hz(uint32_t srcid)
 {
 	switch (srcid) {
 	case GCLK_GENCTRL_SRC_XOSC:
@@ -26,29 +24,28 @@ clock_source_get_hz(uint32_t srcid)
 		return 48000000;
 	case GCLK_GENCTRL_SRC_DPLL96M:
 		return 96000000;
+	default:
+		assert(!"unknown clock value");
 	}
+	assert(!"unknown clock source");
 	return 0;
 }
 
-static inline uint8_t
+static inline uint32_t
 clock_get_generator_source(uint8_t genid)
 {
 	*(uint8_t *)&GCLK->GENCTRL = genid;
-	return FIELD(GCLK->GENCTRL, GCLK_GENCTRL_SRC);
+	return GCLK->GENCTRL & GCLK_GENCTRL_SRC_Msk;
 }
 
 static inline uint8_t
 clock_get_generator_div(uint8_t genid)
 {
-	*(uint8_t *)&GCLK->GENDIV = genid;
-	return FIELD(GCLK->GENDIV, GCLK_GENDIV_DIV);
-}
+	uint8_t div;
 
-static inline uint32_t
-clock_get_generator_hz(uint8_t genid)
-{
-	return clock_source_get_hz(clock_get_generator_source(genid))
-	 / clock_get_generator_div(genid);
+	*(uint8_t *)&GCLK->GENDIV = genid;
+	div = FIELD(GCLK->GENDIV, GCLK_GENDIV_DIV);
+	return div ? div : 1;
 }
 
 static inline uint8_t
@@ -59,7 +56,14 @@ clock_get_generator(uint8_t clkid)
 }
 
 uint32_t
-clock_get_hz(uint8_t clkid)
+clock_get_generator_hz(uint8_t genid)
+{
+	return clock_get_source_hz(clock_get_generator_source(genid))
+	 / clock_get_generator_div(genid);
+}
+
+uint32_t
+clock_get_channel_hz(uint8_t clkid)
 {
 	return clock_get_generator_hz(clock_get_generator(clkid));
 }
