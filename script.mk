@@ -7,17 +7,9 @@ LD = arm-none-eabi-ld
 AR = arm-none-eabi-ar
 GDB = arm-none-eabi-gdb
 OPENOCD = openocd -c 'set CPUTAPID 0x0bc11477' -f interface/stlink.cfg -f target/at91samdXX.cfg
-SDK_OBJ = \
-	${SDK}/arm32_aeabi_divmod.o \
-	${SDK}/arm32_aeabi_divmod_a32.o \
-	${SDK}/clock.o \
-	${SDK}/i2c_master.o \
-	${SDK}/init.o \
-	${SDK}/libc.o \
-	${SDK}/pwm.o \
-	${SDK}/spi_master.o \
-	${SDK}/systick.o \
-	${SDK}/usart.o
+SDK_OBJ = ${SDK}/libc.o ${SDK}/init.o ${SDK}/arm32_aeabi_divmod.o \
+        ${SDK}/clock.o ${SDK}/pwm.o ${SDK}/usart.o ${SDK}/i2c_master.o \
+	${SDK}/spi_master.o ${SDK}/systick.o
 SDK_CFLAGS = -ffunction-sections -fdata-sections
 SDK_LDFLAGS = -Map=firmware.map --gc-sections -T${SDK}/script.ld -nostdlib -static
 SDK_CPPFLAGS = -I${SDK}
@@ -34,9 +26,6 @@ ocd:
 gdb:
 	${GDB} -x ${SDK}/script.gdb
 
-firmware.elf: ${SDK_OBJ} ${OBJ}
-	${LD} ${SDK_LDFLAGS} ${LDFLAGS} -o $@ ${SDK_OBJ} ${OBJ}
-
 flash.avrdude: firmware.hex
 	${AVRDUDE} -qu -P ${PORT} -U flash:w:firmware.hex
 
@@ -49,13 +38,13 @@ flash.mount: firmware.uf2
 flash.openocd: firmware.hex
 	${OPENOCD} -c 'program firmware.hex verify reset exit'
 
+firmware.elf: ${SDK_OBJ} ${OBJ}
+	${LD} ${SDK_LDFLAGS} ${LDFLAGS} -o $@ ${SDK_OBJ} ${OBJ}
+
 .SUFFIXES: .c .s .S .o .elf .bin .asm .hex .uf2
 
 .c.o:
-.S.o:
-
-.c.s:
-	${CC} ${SDK_CPPFLAGS} ${CPPFLAGS} ${SDK_CFLAGS} ${CFLAGS} -S -o $@ $<
+	${CC} ${SDK_CPPFLAGS} ${CPPFLAGS} ${SDK_CFLAGS} ${CFLAGS} -c -o $@ $<
 
 .S.s:
 	${CPP} ${SDK_CPPFLAGS} ${CPPFLAGS} -o $@ $<
