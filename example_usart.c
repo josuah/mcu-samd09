@@ -1,6 +1,5 @@
 #include "libc.h"
-#include "registers.h"
-#include "functions.h"
+#include "libsamd09.h"
 
 #define USART0_RX	17
 #define USART0_TX	22

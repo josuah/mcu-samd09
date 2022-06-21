@@ -1,7 +1,6 @@
 #include "libc.h"
+#include "libsamd09.h"
 #include "libssd1306.h"
-#include "registers.h"
-#include "functions.h"
 
 #define I2C1_MASTER_SCL 23
 #define I2C1_MASTER_SDA 22

@@ -1,6 +1,5 @@
 #include "libc.h"
-#include "registers.h"
-#include "functions.h"
+#include "libsamd09.h"
 
 #define SPI0_SS		10
 #define SPI0_MISO	11
