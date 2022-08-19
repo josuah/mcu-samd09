@@ -105,6 +105,76 @@ void (*__vectors[])(void) = {
 };
 
 
+/// POWER ///
+
+
+static inline void
+power_on_sercom(uint8_t id)
+{
+	PM->APBCMASK |= PM_APBCMASK_SERCOM0 << id;
+}
+
+static inline void
+power_on_osc8m(void)
+{
+	SYSCTRL->OSC8M |= SYSCTRL_OSC8M_ENABLE;
+}
+
+static inline void
+power_on_dfll48m(void)
+{
+	SYSCTRL->OSC8M |= SYSCTRL_DFLLCTRL_ENABLE;
+}
+
+
+/// PORT ///
+
+
+static inline void
+port_set_pmux(uint8_t pin, uint8_t pmux)
+{
+	if (pin % 2 == 0) {
+		/* even */
+		PORT->PMUX[pin/2] = (PORT->PMUX[pin/2] & ~0x0F) | (pmux << 0);
+	} else {
+		/* odd */
+		PORT->PMUX[pin/2] = (PORT->PMUX[pin/2] & ~0xF0) | (pmux << 4);
+	}
+}
+
+
+/// SERCOM ///
+
+
+static inline uint8_t
+sercom_get_id(void *ptr)
+{
+	if (ptr == SERCOM0) return 0;
+	if (ptr == SERCOM1) return 1;
+	assert(!"unknown sercom");
+	return 0xFF;
+}
+
+static inline uint32_t
+sercom_get_clock_hz(uint8_t id)
+{
+	return clock_get_channel_hz(GCLK_CLKCTRL_ID_SERCOM0_CORE + id);
+}
+
+
+/// TIMER/COUNTER ///
+
+
+static inline uint8_t
+tc_get_id(void *ptr)
+{
+	if (ptr == (void *)TC1_BASE) return 1;
+	if (ptr == (void *)TC2_BASE) return 2;
+	assert(!"unknown timer/counter");
+	return 0xFF;
+}
+
+
 /// CLOCK ///
 
 

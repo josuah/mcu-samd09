@@ -1,6 +1,8 @@
 #ifndef LIBSAMD09_H
 #define LIBSAMD09_H
 
+/* functions declarations at the end */
+
 
 #define RTC_BASE 0x40001400
 #define TC1_BASE 0x42001800
@@ -4395,13 +4397,12 @@ struct wdt {
 };
 
 
-/*** LIBSAMD09 ***/
-
+/* MACROS */
 
 #define FIELD(reg, fld)		(((reg) & fld##_Msk) >> fld##_Pos)
 
 
-/*** USART ***/
+/* USART */
 
 /* init the usart, to call last before sending data */
 void usart_init(struct usart *usart, uint32_t baud_hz, uint8_t txpo, uint8_t rxpo);
@@ -4422,7 +4423,7 @@ void usart_wait_rx(struct usart *usart);
 void usart_interrupt(struct usart *usart);
 
 
-/*** I²C MASTER ***/
+/* I²C MASTER */
 
 /* set `i2c_master` to I²C master mode */
 void i2c_master_set_master(struct i2c_master *i2c_master);
@@ -4443,7 +4444,7 @@ void i2c_master_queue_rx(struct i2c_master *i2c_master, uint8_t addr, uint8_t *m
 int i2c_master_wait(struct i2c_master *i2c_master);
 
 
-/*** SPI MASTER ***/
+/* SPI MASTER */
 
 /* configure and init `i2c_master` */
 void spi_master_init(struct spi *spi_master, uint32_t baud_hz, uint8_t pin_sck,
@@ -4451,7 +4452,7 @@ void spi_master_init(struct spi *spi_master, uint32_t baud_hz, uint8_t pin_sck,
 	uint32_t dipo, uint32_t dopo);
 
 
-/*** CLOCK ***/
+/* CLOCK */
 
 /* give the clock-rate for selected clock channel `clkid` */ 
 uint32_t clock_get_channel_hz(uint8_t clkid);
@@ -4469,7 +4470,7 @@ void clock_enable_generator_output(uint8_t genid);
 void clock_init(uint8_t clkid, uint8_t genid);
 
 
-/*** PWM ***/
+/* PWM */
 
 /* setup a timer/counter of resolution 8 `tc` for use with PWM on `pin` */
 void pwm_init(struct tc_count8 *tc, uint32_t ctrla_prescaler);
@@ -4481,7 +4482,7 @@ void pwm_init_counter(uint8_t pin);
 void pwm_set_duty_cycle(struct tc_count8 *tc, uint8_t counter_id, uint8_t duty_cycle);
 
 
-/*** SYSTICK ***/
+/* SYSTICK */
 
 /* start a timer counting milliseconds, to be setup after system clock */
 void systick_init(void);
@@ -4495,70 +4496,5 @@ uint64_t systick_get_runtime_ms(void);
 /* busy wait `duration_ms` milliseconds */
 void systick_sleep_ms(uint64_t duration_ms);
 
-
-/*** POWER ***/
-
-static inline void
-power_on_sercom(uint8_t id)
-{
-	PM->APBCMASK |= PM_APBCMASK_SERCOM0 << id;
-}
-
-static inline void
-power_on_osc8m(void)
-{
-	SYSCTRL->OSC8M |= SYSCTRL_OSC8M_ENABLE;
-}
-
-static inline void
-power_on_dfll48m(void)
-{
-	SYSCTRL->OSC8M |= SYSCTRL_DFLLCTRL_ENABLE;
-}
-
-
-/*** PORT ***/
-
-static inline void
-port_set_pmux(uint8_t pin, uint8_t pmux)
-{
-	if (pin % 2 == 0) {
-		/* even */
-		PORT->PMUX[pin/2] = (PORT->PMUX[pin/2] & ~0x0F) | (pmux << 0);
-	} else {
-		/* odd */
-		PORT->PMUX[pin/2] = (PORT->PMUX[pin/2] & ~0xF0) | (pmux << 4);
-	}
-}
-
-
-/*** SERCOM ***/
-
-static inline uint8_t
-sercom_get_id(void *ptr)
-{
-	if (ptr == SERCOM0) return 0;
-	if (ptr == SERCOM1) return 1;
-	assert(!"unknown sercom");
-	return 0xFF;
-}
-
-static inline uint32_t
-sercom_get_clock_hz(uint8_t id)
-{
-	return clock_get_channel_hz(GCLK_CLKCTRL_ID_SERCOM0_CORE + id);
-}
-
-
-/*** TIMER/COUNTER ***/
-
-static inline uint8_t
-tc_get_id(void *ptr)
-{
-	if (ptr == (void *)TC1_BASE) return 1;
-	if (ptr == (void *)TC2_BASE) return 2;
-	assert(!"unknown timer/counter");
-	return 0xFF;
-}
 
 #endif
